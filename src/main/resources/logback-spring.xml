@@ -21,7 +21,8 @@
     <appender name="infoFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${logDir}/${appName}/info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <maxHistory>15</maxHistory>
+            <fileNamePattern>${logDir}/${appName}/info.log.%d{yyyy-MM-dd}.zip</fileNamePattern>
+            <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${pattern}</pattern>
@@ -33,7 +34,7 @@
         <file>${logDir}/${appName}/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${logDir}/${appName}/error.log.%d{yyyy-MM-dd}.zip</fileNamePattern>
-            <maxHistory>15</maxHistory>
+            <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${pattern}</pattern>
