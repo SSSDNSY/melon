@@ -1,14 +1,13 @@
 package fun.sssdnsy.melon;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author fun.pengzh
@@ -16,10 +15,8 @@ import static org.junit.Assert.assertEquals;
  * @desc
  * @since 2022-07-24
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(
-        properties = "spring.datasource.type=com.zaxxer.hikari.HikariDataSource"
-)
+@Slf4j
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class HikariIntegrationTest {
 
     @Autowired
@@ -27,6 +24,8 @@ public class HikariIntegrationTest {
 
     @Test
     public void hikariConnectionPoolIsConfigured() {
-        assertEquals("com.zaxxer.hikari.HikariDataSource", dataSource.getClass().getName());
+        String name = dataSource.getClass().getName();
+        log.info(name);
+        assertEquals("com.zaxxer.hikari.HikariDataSource", name);
     }
 }

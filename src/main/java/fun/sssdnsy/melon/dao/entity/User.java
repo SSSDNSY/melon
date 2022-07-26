@@ -29,17 +29,16 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Email
-    @Column(unique = true, nullable = false)
-    private String email;
-
     @Column(unique = true)
     private String password;
 
     private String salt;
 
-    @Column(nullable = false)
+    @Email
+    @Column(unique = true, nullable = false)
+    private String email;
 
+    @Column(nullable = false)
     private String mobile;
 
     @Column(unique = true, nullable = false)

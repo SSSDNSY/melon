@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="5 seconds" debug="true">
+
     <!-- 定义日志的根目录 -->
     <property scope="system" name="logDir" value="/apps/logs"/>
     <!-- 定义日志文件名称 -->
-    <property scope="system" name="appName" value="melon"></property>
+    <property scope="system" name="appName" value="melon"/>
     <!-- 定义日志编码 -->
-    <property scope="system" name="charset" value="UTF-8"></property>
+    <property scope="system" name="charset" value="UTF-8"/>
     <property scope="system" name="consolePattern"
               value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%file: %line] %msg%n"/>
     <property scope="system" name="pattern"
@@ -70,7 +71,7 @@
             <appender-ref ref="asyncErrorLog"/>
         </root>
         <logger name="org.mybatis" level="DEBUG"/>
-        <logger name="fun.sssdnsy.melon" level="INFO"/>
+        <logger name="fun.sssdnsy.melon" level="DEBUG"/>
         <logger name="org.jboss.logging" level="INFO"/>
         <logger name="org.springframework" level="INFO" additivity="false"></logger>
     </springProfile>

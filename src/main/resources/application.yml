@@ -13,6 +13,12 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      connection-timeout: 20000
+      pool-name: HikariCP
+      auto-commit: true
       minimum-idle: 10
-      idle-timeout: 300000
+      maximum-pool-size: 30
+      connection-timeout: 10000
+      idle-timeout: 30000
+      max-lifetime: 900000
+      connection-test-query: select 1
+      validation-timeout: 1000

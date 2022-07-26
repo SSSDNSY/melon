@@ -9,18 +9,19 @@
         <!-- lookup parent from repository -->
         <relativePath/>
     </parent>
-
+    <!--  项目  -->
     <groupId>fun.sssdnsy</groupId>
     <artifactId>melon</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>melon</name>
-    <description>&quot;melon&quot; is Front-End Admin Template project ,Its build with Spring Boot and AdminLTE
-    </description>
-
+    <description>melon is Front-End Admin Template project ,Its build with Spring Boot and AdminLTE</description>
+    <!--  属性  -->
     <properties>
         <java.version>8</java.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <AdminLTE.version>3.2.0</AdminLTE.version>
     </properties>
-
+    <!--  环境  -->
     <profiles>
         <profile>
             <id>dev</id>
@@ -44,7 +45,7 @@
             </build>
         </profile>
     </profiles>
-
+    <!--  依赖  -->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,26 +77,26 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.2</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybatis-plus.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -112,26 +113,18 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <!-- AdminLTE -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>AdminLTE</artifactId>
-            <version>3.2.0</version>
+            <version>${AdminLTE.version}</version>
         </dependency>
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-
+    <!--  构建  -->
     <build>
         <finalName>${name}</finalName>
         <plugins>
@@ -150,6 +143,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @desc Application
  * @since 2022-07-24
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"fun.sssdnsy.melon"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
