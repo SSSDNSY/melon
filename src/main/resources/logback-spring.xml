@@ -65,15 +65,13 @@
     </appender>
 
     <springProfile name="dev">
-        <root level="INFO">
+        <root level="DEBUG">
             <appender-ref ref="consoleLog"/>
             <appender-ref ref="asyncInfoLog"/>
             <appender-ref ref="asyncErrorLog"/>
         </root>
         <logger name="org.mybatis" level="DEBUG"/>
         <logger name="fun.sssdnsy.melon" level="DEBUG"/>
-        <logger name="org.jboss.logging" level="INFO"/>
-        <logger name="org.springframework" level="INFO" additivity="false"></logger>
     </springProfile>
 
     <springProfile name="prod">
@@ -82,7 +80,6 @@
             <appender-ref ref="asyncInfoLog"/>
             <appender-ref ref="asyncErrorLog"/>
         </root>
-        <logger name="org.springframework" level="debug" additivity="false"></logger>
     </springProfile>
 
 </configuration>
