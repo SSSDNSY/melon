@@ -1,6 +1,5 @@
 package fun.sssdnsy.melon.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -9,12 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @class PagesController
  * @since 2022-07-28
  */
-@Controller
 public class PagesController {
 
     @GetMapping(value = {"/", "/home"})
     public String Home() {
         return "home";
+    }
+
+    @GetMapping(value = {"/error"})
+    public String error() {
+        return "" + (1 / 0);
     }
 
 

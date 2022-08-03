@@ -70,8 +70,6 @@
             <appender-ref ref="asyncInfoLog"/>
             <appender-ref ref="asyncErrorLog"/>
         </root>
-        <logger name="org.mybatis" level="DEBUG"/>
-        <logger name="fun.sssdnsy.melon" level="DEBUG"/>
     </springProfile>
 
     <springProfile name="prod">
@@ -81,5 +79,4 @@
             <appender-ref ref="asyncErrorLog"/>
         </root>
     </springProfile>
-
 </configuration>
