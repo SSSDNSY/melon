@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html layout:decorate="~{common/layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List User</title>
+</head>
+<body>
+
+
+<div layout:fragment="content">
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>User List</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Simple Tables</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Bordered Table</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table class="display" id="userTable" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Stats</th>
+                                    <th>CreateTime</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Stats</th>
+                                    <th>CreateTime</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div><!-- /.card-body -->
+                    </div><!-- /.card -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Main content -->
+
+
+</div>
+
+
+<th:block layout:fragment="script">
+    <script>
+        console.log("User List: dataTables.js");
+        var user = {};
+        $(function () {
+            $('#userTable').DataTable({
+                processing: true,
+                ajax: '/user/list',
+                columns: [
+                    {data: 'id'},
+                    {data: 'username'},
+                    {data: 'email'},
+                    {data: 'mobile'},
+                    {data: 'createTime'},
+                ],
+            });
+
+        });
+    </script>
+</th:block>
+
+</body>
+</html>

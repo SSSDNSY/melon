@@ -34,7 +34,7 @@ public class ExceptionHandleAdvice {
         return ResultUtil.fail("url参数异常，请检查参数类型是否匹配");
     }
 
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = Throwable.class)
     @ResponseBody
     public ResultDto handle(Throwable e) {
         if (e instanceof BaseException) {
