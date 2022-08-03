@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorate="layout">
+<html layout:decorate="~{common/layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <title>500</title>
 </head>
 <body>
-<section layout:fragment="header">
-    <h1>
-        Error 500 : Internal Server Error
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Error</a></li>
-        <li class="active">500</li>
-    </ol>
-</section>
+
 
 <div layout:fragment="content">
+
+    <section>
+        <h1>
+            Error 500 : Internal Server Error
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Error</a></li>
+            <li class="active">500</li>
+        </ol>
+    </section>
 
     <div class="error-page">
         <h2 class="headline text-red">500</h2>
@@ -26,7 +28,7 @@
 
             <p>
                 We will work on fixing that right away.
-                Meanwhile, you may <a href="../../index.html">return to dashboard</a> or try using the search form.
+                Meanwhile, you may <a href="/">return to dashboard</a> or try using the search form.
             </p>
 
             <form class="search-form">
@@ -34,7 +36,8 @@
                     <input type="text" name="search" class="form-control" placeholder="Search">
 
                     <div class="input-group-btn">
-                        <button type="submit" name="submit" class="btn btn-danger btn-flat"><i class="fa fa-search"></i>
+                        <button class="btn btn-danger btn-flat" name="submit" type="submit"><i
+                                class="fa fa-search"></i>
                         </button>
                     </div>
                 </div>
@@ -44,7 +47,6 @@
     </div>
     <!-- /.error-page -->
 </div>
-
 
 </body>
 </html>
