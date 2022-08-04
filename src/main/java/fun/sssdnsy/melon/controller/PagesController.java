@@ -17,7 +17,7 @@ public class PagesController {
      *
      * @return
      */
-    @GetMapping(value = {"", "/", "/home", "index"})
+    @GetMapping(value = {"/", "/home", "index"})
     public String Home() {
         return "index";
     }

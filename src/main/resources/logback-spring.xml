@@ -65,7 +65,7 @@
     </appender>
 
     <springProfile name="dev">
-        <root level="INFO">
+        <root level="Debug">
             <appender-ref ref="consoleLog"/>
             <appender-ref ref="asyncInfoLog"/>
             <appender-ref ref="asyncErrorLog"/>

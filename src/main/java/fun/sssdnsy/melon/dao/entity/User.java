@@ -1,5 +1,6 @@
 package fun.sssdnsy.melon.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,6 +47,7 @@ public class User {
 
     private String createUserId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8:00")
     @Column(nullable = false)
     private Date createTime;
 

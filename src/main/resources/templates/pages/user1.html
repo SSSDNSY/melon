@@ -65,12 +65,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                 <!--   <div class="col-sm-12 col-md-6">
                                         <div class="dataTables_filter" id="userTable_filter"><label>Search:<input
                                                 aria-controls="userTable" class="form-control form-control-sm"
                                                 placeholder=""
                                                 type="search"></label></div>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -120,19 +120,34 @@
     <script>
         console.log("User List: dataTables.js");
         $(document).ready(function () {
-            $('#userTable').DataTable({
+            let table = $('#userTable').DataTable({
+                "serverSide": true,
                 'paging': true,
                 'processing': true,
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                "ordering": true,
                 "info": true,
-                "searching": false,
+                "search": true,
                 "autoWidth": false,
                 'ajax': {
-                    url: '/user/list',
-                    method: 'GET',
-                    dataSrc: 'data'
+                    'url': '/user/page',
+                    'method': 'POST',
+                    "contentType": "application/json",
+                    'data': function () {
+                        let param = {
+                            'size': 10,
+                            'page': 0,
+                            "sort": {"direction": "ASC", "properties": ["id"]}
+                        }
+                        return JSON.stringify(param)
+                    },
+                    'dataFilter': function (data) {
+                        let json = jQuery.parseJSON(data);
+                        json.recordsTotal = json.data.totalElements;
+                        json.recordsFiltered = json.recordsTotal;
+                        json.data = json.data.content;
+                        return JSON.stringify(json); // return JSON string
+                    }
                 },
                 'columns': [
                     {data: 'id'},
@@ -142,7 +157,9 @@
                     {data: 'status'},
                     {data: 'createTime'},
                 ],
-            }).buttons().container().appendTo('#userTable_wrapper .col-md-6:eq(0)');
+            });
+            var info = table.page.info();
+            table.buttons().container().appendTo('#userTable_wrapper .col-md-6:eq(0)');
         });
 
     </script>

@@ -16,7 +16,13 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.formLogin().disable();
+        http.authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .and()
+                .formLogin()
+                .disable()
+                .csrf()
+                .disable();
         return http.build();
     }
 
