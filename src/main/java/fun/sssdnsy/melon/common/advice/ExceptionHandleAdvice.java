@@ -44,7 +44,7 @@ public class ExceptionHandleAdvice {
             e = ((UndeclaredThrowableException) e).getUndeclaredThrowable();
         }
         log.error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e);
-        return ResultUtil.fail(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+        return ResultUtil.fail(e.getMessage());
     }
 
 }

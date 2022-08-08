@@ -7,18 +7,16 @@
     <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">ITAdventure</title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
-    <style th:replace="/common/style"></style>
-    <div th:replace="/common/script"></div>
-
+    <style th:replace="/fragment/style"></style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
 <div class="wrapper">
 
-    <div th:replace="/common/header"></div>
+    <div th:replace="/fragment/header"></div>
 
-    <div th:replace="/common/menu"></div>
+    <div th:replace="/fragment/menu"></div>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -29,7 +27,8 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <div th:replace="/common/footer"></div>
+    <div th:replace="/fragment/footer"></div>
+    <div th:replace="/fragment/script"></div>
 
     <div layout:fragment="script">
 

@@ -2,11 +2,14 @@ package fun.sssdnsy.melon.controller;
 
 import fun.sssdnsy.melon.dao.entity.User;
 import fun.sssdnsy.melon.dao.repository.UserRepository;
+import fun.sssdnsy.melon.pojo.condition.UserCondtion;
 import fun.sssdnsy.melon.pojo.dto.ResultDto;
 import fun.sssdnsy.melon.util.ResultUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +21,7 @@ import java.util.List;
  * @since 2022-07-26
  */
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
     @Autowired
@@ -28,8 +32,8 @@ public class UserController {
         return ResultUtil.success(userRepository.findById(id).get());
     }
 
-    @PostMapping(path = "/user/page")
-    public ResultDto<Page<User>> page(@RequestBody PageRequest pageRequest) {
+    @GetMapping(path = "/user/page")
+    public ResultDto<Page<User>> page(UserCondtion pageRequest) {
         return ResultUtil.success(userRepository.findAll(pageRequest));
     }
 

@@ -20,6 +20,7 @@
         <java.version>8</java.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <AdminLTE.version>3.2.0</AdminLTE.version>
+        <webjars-locator.version>0.45</webjars-locator.version>
     </properties>
     <!--  环境  -->
     <profiles>
@@ -118,6 +119,11 @@
             <groupId>org.webjars</groupId>
             <artifactId>AdminLTE</artifactId>
             <version>${AdminLTE.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>${webjars-locator.version}</version>
         </dependency>
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>

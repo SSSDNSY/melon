@@ -19,7 +19,7 @@ public class UserCondtion extends PageRequest {
     private String name;
 
     public UserCondtion(int page, int size, Sort sort, String id, String name) {
-        super(page, size, sort);
+        super(page, size, Sort.unsorted());
         this.id = id;
         this.name = name;
     }
