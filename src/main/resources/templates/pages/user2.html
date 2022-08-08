@@ -77,11 +77,11 @@
 <th:block layout:fragment="script">
     <script>
         console.log("User List: dataTables.js");
-        var user = {};
+        var userEntity = {};
         $(function () {
             $('#userTable').DataTable({
                 processing: true,
-                ajax: '/user/list',
+                ajax: '/userEntity/list',
                 columns: [
                     {data: 'id'},
                     {data: 'username'},

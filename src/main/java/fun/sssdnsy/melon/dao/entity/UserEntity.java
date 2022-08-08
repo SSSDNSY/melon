@@ -1,5 +1,7 @@
 package fun.sssdnsy.melon.dao.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,10 +23,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "t_user")
-public class User {
+@TableName("t_user")
+public class UserEntity {
 
     @Id
     @GeneratedValue
+    @TableId
     private Long id;
 
     @Column(unique = true, nullable = false)

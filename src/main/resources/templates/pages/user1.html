@@ -117,7 +117,7 @@
 
         function buildAjax(url, method) {
             let ajaxObj = {
-                'url': url || '/user/page',
+                'url': url || '/userEntity/page',
                 'method': method || 'GET',
                 'dataType': 'json',
                 'data': {
@@ -140,7 +140,7 @@
 
         $(function () {
             let userEditor = new $.fn.dataTable.Editor({
-                ajax: "/user/save",
+                ajax: "/userEntity/save",
                 table: "#users",
                 fields: [
                     {label: "username:", name: "username"},
@@ -168,7 +168,7 @@
                     {extend: "remove", editor: userEditor}],
                 "info": true,
                 "search": true,
-                'ajax': buildAjax("/user/page", "GET"),
+                'ajax': buildAjax("/userEntity/page", "GET"),
                 'columns': [
                     {data: 'id'},
                     {data: 'username'},

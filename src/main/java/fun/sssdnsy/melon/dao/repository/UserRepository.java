@@ -1,6 +1,6 @@
 package fun.sssdnsy.melon.dao.repository;
 
-import fun.sssdnsy.melon.dao.entity.User;
+import fun.sssdnsy.melon.dao.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @desc
  * @since 2022-07-25
  */
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
 }

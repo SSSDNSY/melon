@@ -1,5 +1,6 @@
 package fun.sssdnsy.melon;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2022-07-24
  */
 @SpringBootApplication
+@MapperScan("fun.sssdnsy.melon.dao.mapper")
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

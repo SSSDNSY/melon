@@ -1,6 +1,6 @@
 package fun.sssdnsy.melon.api;
 
-import fun.sssdnsy.melon.dao.entity.User;
+import fun.sssdnsy.melon.dao.entity.UserEntity;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ public class ApiControllerTest {
         HttpHeaders headers = new HttpHeaders();
         headers.set("test", "CN");
 
-        HttpEntity<User> requestEntity = new HttpEntity<>(null, headers);
+        HttpEntity<UserEntity> requestEntity = new HttpEntity<>(null, headers);
 
         restTemplate.exchange(uri, HttpMethod.GET, requestEntity, String.class);
     }

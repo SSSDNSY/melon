@@ -19,6 +19,7 @@
     <properties>
         <java.version>8</java.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <mybatis-generator.version>3.5.3</mybatis-generator.version>
         <AdminLTE.version>3.2.0</AdminLTE.version>
         <webjars-locator.version>0.45</webjars-locator.version>
     </properties>
@@ -98,6 +99,16 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>
             <version>${mybatis-plus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter-test</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-generator.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
