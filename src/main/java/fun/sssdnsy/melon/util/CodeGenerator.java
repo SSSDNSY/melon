@@ -6,7 +6,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.baomidou.mybatisplus.generator.config.TemplateConfig;
+import com.baomidou.mybatisplus.generator.config.TemplateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.fill.Column;
 import com.baomidou.mybatisplus.generator.fill.Property;
 
@@ -22,7 +25,7 @@ import java.util.List;
 public class CodeGenerator {
 
     public static void main(String[] args) {
-        new DataSourceConfig.Builder("jdbc:mysql://127.0.0.1:3306/mybatis-plus", "root", "123456")
+        new DataSourceConfig.Builder("jdbc:mysql://127.0.0.1:3306/test", "root", "123456")
                 .build();
 
         FastAutoGenerator.create("jdbc:mysql://127.0.0.1:3306/test", "root", "imi123")
@@ -41,6 +44,13 @@ public class CodeGenerator {
                             .xml("mapper")
                             .controller("controller")
                             .pathInfo(Collections.singletonMap(OutputFile.xml, "E:\\source\\melon\\src\\main\\resources\\")); // 设置mapperXml生成路径
+                }).templateConfig(build->{
+                     build.entity("/templates/entity.java")
+                            .service("/templates/service.java")
+                            .serviceImpl("/templates/serviceImpl.java")
+                            .mapper("/templates/mapper.java")
+                            .controller("/templates/controller.java")
+                            .build();
                 })
                 .strategyConfig((scanner, builder) -> {
 
@@ -88,7 +98,9 @@ public class CodeGenerator {
                             .formatMapperFileName("%sDao")
                             .build();
 
-                }).execute();
+                })
+                .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
+                .execute();
 
     }
 
