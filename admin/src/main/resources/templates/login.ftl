@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  	<title>配置管理中心</title>
+  	<title>MELON</title>
   	<#import "./common/common.macro.ftl" as netCommon>
 	<@netCommon.commonStyle />
     <link rel="stylesheet" href="${request.contextPath}/static/adminlte/plugins/iCheck/square/blue.css">
@@ -9,11 +9,11 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<a><b>XXL</b>CONF</a>
+			<a><b>MELON</b>ADMIN</a>
 		</div>
 		<form id="loginForm" method="post" >
 			<div class="login-box-body">
-				<p class="login-box-msg">配置管理中心</p>
+				<p class="login-box-msg">登录</p>
 				<div class="form-group has-feedback">
 	            	<input type="text" name="userName" class="form-control" placeholder="请输入登陆账号" value="admin" maxlength="50" >
 	            	<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
