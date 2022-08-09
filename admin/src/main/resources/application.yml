@@ -5,11 +5,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/test?Unicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://127.0.0.1:3306/test?createDatabaseIfNotExist=true&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: root_pwd
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.zaxxer.hikari.HikariDataSource
+    password: imi123
   mvc:
     static-path-pattern: /static/**
   web:
