@@ -22,6 +22,7 @@
         <mybatis-generator.version>3.5.2</mybatis-generator.version>
         <AdminLTE.version>3.2.0</AdminLTE.version>
         <webjars-locator.version>0.45</webjars-locator.version>
+        <freemarker.version>2.3.28</freemarker.version>
     </properties>
     <!--  环境  -->
     <profiles>
@@ -109,6 +110,11 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>${mybatis-generator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
