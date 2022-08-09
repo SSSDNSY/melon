@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>配置管理中心</title>
+<title>用户管理</title>
 
 <#import "../common/common.macro.ftl" as netCommon>
 <@netCommon.commonStyle />

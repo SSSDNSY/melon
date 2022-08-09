@@ -26,12 +26,13 @@ public class LoginService {
     @Resource
     private UserDao userDao;
 
-    private String makeToken(User user){
+    private String makeToken(User user) {
         String tokenJson = JacksonUtil.writeValueAsString(user);
         String tokenHex = new BigInteger(tokenJson.getBytes()).toString(16);
         return tokenHex;
     }
-    private User parseToken(String tokenHex){
+
+    private User parseToken(String tokenHex) {
         User user = null;
         if (tokenHex != null) {
             String tokenJson = new String(new BigInteger(tokenHex, 16).toByteArray());      // username_password(md5)
@@ -49,7 +50,7 @@ public class LoginService {
      * @param ifRemember
      * @return
      */
-    public ReturnT<String> login(HttpServletResponse response, String usernameParam, String passwordParam, boolean ifRemember){
+    public ReturnT<String> login(HttpServletResponse response, String usernameParam, String passwordParam, boolean ifRemember) {
 
         User user = userDao.load(usernameParam);
         if (user == null) {
@@ -74,7 +75,7 @@ public class LoginService {
      * @param request
      * @param response
      */
-    public void logout(HttpServletRequest request, HttpServletResponse response){
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
         CookieUtil.remove(request, response, LOGIN_IDENTITY);
     }
 
@@ -84,7 +85,7 @@ public class LoginService {
      * @param request
      * @return
      */
-    public User ifLogin(HttpServletRequest request){
+    public User ifLogin(HttpServletRequest request) {
         String cookieToken = CookieUtil.getValue(request, LOGIN_IDENTITY);
         if (cookieToken != null) {
             User cookieUser = parseToken(cookieToken);
