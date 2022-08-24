@@ -521,7 +521,7 @@
                         }
                     }
                 ],
-                color: ['#00A65A', '#c23632', '#F39C12']
+                color: ['#00A65A', '#c23632', '#F49C12']
             };
             var pieChart = echarts.init(document.getElementById('pieChart'));
             pieChart.setOption(option);
