@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html layout:decorate="~{common/layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List User</title>
+</head>
+<body>
+
+
+<div layout:fragment="content">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>User List</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item "><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">user1</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User1 DataTable with default features</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="dataTables_wrapper dt-bootstrap4" id="userTable_wrapper">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-bordered table-striped dataTable dtr-inline"
+                                               id="userTable">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="1" rowspan="1">id</th>
+                                                <th colspan="1" rowspan="1">userName</th>
+                                                <th colspan="1" rowspan="1" style="">mobile</th>
+                                                <th colspan="1" rowspan="1" style="">email</th>
+                                                <th colspan="1" rowspan="1" style="">status</th>
+                                                <th colspan="1" rowspan="1" style="">createTime</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th colspan="1" rowspan="1">id</th>
+                                                <th colspan="1" rowspan="1">userName</th>
+                                                <th colspan="1" rowspan="1" style="">mobile</th>
+                                                <th colspan="1" rowspan="1" style="">email</th>
+                                                <th colspan="1" rowspan="1" style="">status</th>
+                                                <th colspan="1" rowspan="1" style="">createTime</th>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Main content -->
+
+</div>
+
+<th:block layout:fragment="script">
+    <script>
+        console.log("User List: dataTables.js");
+        $(document).ready(function () {
+            let userTable = $('#userTable').DataTable({
+                "serverSide": true,
+                'paging': true,
+                'processing': true,
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                "info": true,
+                "search": true,
+                "autoWidth": false,
+                'ajax': {
+                    'url': '/user/page',
+                    'method': 'POST',
+                    "contentType": "application/json",
+                    'data': function () {
+                        let param = {
+                            'size': 10,
+                            'page': 0,
+                            "sort": {"direction": "ASC", "properties": ["id"]}
+                        }
+                        return JSON.stringify(param)
+                    },
+                    'dataFilter': function (data) {
+                        let json = jQuery.parseJSON(data);
+                        json.recordsTotal = json.data.totalElements;
+                        json.recordsFiltered = json.recordsTotal;
+                        json.data = json.data.content;
+                        return JSON.stringify(json); // return JSON string
+                    }
+                },
+                'columns': [
+                    {data: 'id'},
+                    {data: 'username'},
+                    {data: 'mobile'},
+                    {data: 'email'},
+                    {data: 'status'},
+                    {data: 'createTime'},
+                ],
+            });
+            userTable.buttons().container().appendTo('#userTable_wrapper .col-sm-12:eq(0)', userTable.table().container());
+            //.buttons().container().appendTo($('#example1_wrapper .col-sm-6:eq(0)', userTable.table().container()));
+            var info = userTable.page.info();
+
+        });
+
+    </script>
+</th:block>
+
+</body>
+</html>
