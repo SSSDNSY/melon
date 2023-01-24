@@ -1,4 +1,4 @@
-![](https://img2.baidu.com/it/u=3627379547,3066283573&fm=253&fmt=auto&app=138&f=PNG?w=200&h=229)
+![](https://cdn.pixabay.com/photo/2017/10/14/15/50/fruit-2850840__340.png)
 
 # Melon
 
