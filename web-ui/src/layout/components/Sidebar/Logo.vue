@@ -35,7 +35,7 @@
   },
   data() {
     return {
-      title: '若依管理系统',
+      title: 'Melon管理系统',
       logo: logoImg
     }
   }
