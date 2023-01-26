@@ -1,4 +1,4 @@
-package fun.sssdnsy.web.config;
+package fun.sssdnsy.web.swagger;
 
 
 import fun.sssdnsy.config.Config;
