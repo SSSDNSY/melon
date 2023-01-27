@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xxl.conf.admin.dao.XxlConfNodeLogDao">
-	
-	<resultMap id="xxlConfNodeLog" type="com.xxl.conf.admin.core.model.XxlConfNodeLog" >
+<mapper namespace="fun.sssdnsy.mapper.XxlConfNodeLogDao">
+
+	<resultMap id="xxlConfNodeLog" type="fun.sssdnsy.domain.XxlConfNodeLog" >
 		<result column="env" property="env" />
 		<result column="key" property="key" />
 		<result column="title" property="title" />
@@ -28,7 +28,7 @@
 		ORDER BY t.addtime DESC
 	</select>
 
-	<insert id="add" parameterType="com.xxl.conf.admin.core.model.XxlConfNodeLog" >
+	<insert id="add" parameterType="fun.sssdnsy.domain.XxlConfNodeLog" >
 		INSERT INTO xxl_conf_node_log(
 			`env`,
 			`key`,
@@ -60,6 +60,6 @@
 				) t1
 			)
 	</delete>
-	
-	
+
+
 </mapper>

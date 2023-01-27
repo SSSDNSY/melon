@@ -1,16 +1,20 @@
 package fun.sssdnsy.web.controller.config;
 
+import fun.sssdnsy.annotation.Log;
+import fun.sssdnsy.constant.UserConstants;
 import fun.sssdnsy.core.controller.BaseController;
+import fun.sssdnsy.core.domain.AjaxResult;
+import fun.sssdnsy.core.page.TableDataInfo;
 import fun.sssdnsy.domain.XxlConfProject;
-import fun.sssdnsy.mapper.XxlConfNodeDao;
-import fun.sssdnsy.mapper.XxlConfProjectDao;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import fun.sssdnsy.enums.BusinessType;
+import fun.sssdnsy.service.IXxlConfProjectService;
+import fun.sssdnsy.utils.poi.ExcelUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -23,85 +27,74 @@ import java.util.List;
 @RequestMapping("/config/project")
 public class ProjectController extends BaseController {
 
-    @Resource
-    private XxlConfProjectDao xxlConfProjectDao;
-    @Resource
-    private XxlConfNodeDao xxlConfNodeDao;
+    @Autowired
+    private IXxlConfProjectService confProjectService;
 
-    @RequestMapping
-
-    public String index(Model model) {
-
-        List<XxlConfProject> list = xxlConfProjectDao.findAll();
-        model.addAttribute("list", list);
-
-        return "project/project.index";
+    /**
+     * 获取参数配置列表
+     */
+    @GetMapping("/list")
+    public TableDataInfo list(XxlConfProject project) {
+        startPage();
+        List<XxlConfProject> list = confProjectService.selectConfigList(project);
+        return getDataTable(list);
     }
 
-    @RequestMapping("/save")
-    @ResponseBody
-    public ReturnT<String> save(XxlConfProject xxlConfProject) {
-
-        // valid
-        if (StringUtils.isBlank(xxlConfProject.getAppname())) {
-            return new ReturnT<String>(500, "AppName不可为空");
-        }
-        if (xxlConfProject.getAppname().length() < 4 || xxlConfProject.getAppname().length() > 100) {
-            return new ReturnT<String>(500, "Appname长度限制为4~100");
-        }
-        if (StringUtils.isBlank(xxlConfProject.getTitle())) {
-            return new ReturnT<String>(500, "请输入项目名称");
-        }
-
-        // valid repeat
-        XxlConfProject existProject = xxlConfProjectDao.load(xxlConfProject.getAppname());
-        if (existProject != null) {
-            return new ReturnT<String>(500, "Appname已存在，请勿重复添加");
-        }
-
-        int ret = xxlConfProjectDao.save(xxlConfProject);
-        return (ret > 0) ? ReturnT.SUCCESS : ReturnT.FAIL;
+    @Log(title = "参数管理", businessType = BusinessType.EXPORT)
+    @PreAuthorize("@ss.hasPermi('config:project:export')")
+    @PostMapping("/export")
+    public void export(HttpServletResponse response, XxlConfProject project) {
+        List<XxlConfProject> list = confProjectService.selectConfigList(project);
+        ExcelUtil<XxlConfProject> util = new ExcelUtil<XxlConfProject>(XxlConfProject.class);
+        util.exportExcel(response, list, "参数数据");
     }
 
-    @RequestMapping("/update")
-
-    @ResponseBody
-    public ReturnT<String> update(XxlConfProject xxlConfProject) {
-
-        // valid
-        if (StringUtils.isBlank(xxlConfProject.getAppname())) {
-            return new ReturnT<String>(500, "AppName不可为空");
-        }
-        if (StringUtils.isBlank(xxlConfProject.getTitle())) {
-            return new ReturnT<String>(500, "请输入项目名称");
-        }
-
-        int ret = xxlConfProjectDao.update(xxlConfProject);
-        return (ret > 0) ? ReturnT.SUCCESS : ReturnT.FAIL;
+    /**
+     * 根据参数编号获取详细信息
+     */
+    @GetMapping(value = "/{appName}")
+    public AjaxResult getInfo(@PathVariable String appName) {
+        return success(confProjectService.selectConfigByName(appName));
     }
 
-    @RequestMapping("/remove")
 
-    @ResponseBody
-    public ReturnT<String> remove(String appname) {
-
-        if (StringUtils.isBlank(appname)) {
-            return new ReturnT<String>(500, "参数AppName非法");
+    /**
+     * 新增参数配置
+     */
+    @Log(title = "参数管理", businessType = BusinessType.INSERT)
+    @PostMapping
+    public AjaxResult add(@Validated @RequestBody XxlConfProject project) {
+        if (confProjectService.checkConfigKeyUnique(project)) {
+            return error("新增参数'" + project.getConfigName() + "'失败，参数键名已存在");
         }
-
-        // valid
-        int list_count = xxlConfNodeDao.pageListCount(0, 10, null, appname, null);
-        if (list_count > 0) {
-            return new ReturnT<String>(500, "拒绝删除，该项目下存在配置数据");
-        }
-
-        List<XxlConfProject> allList = xxlConfProjectDao.findAll();
-        if (allList.size() == 1) {
-            return new ReturnT<String>(500, "拒绝删除, 需要至少预留一个项目");
-        }
-
-        int ret = xxlConfProjectDao.delete(appname);
-        return (ret > 0) ? ReturnT.SUCCESS : ReturnT.FAIL;
+        project.setCreateBy(getUsername());
+        return toAjax(confProjectService.insertConfig(project));
     }
+
+    /**
+     * 修改参数配置
+     */
+    @PreAuthorize("@ss.hasPermi('config:project:edit')")
+    @Log(title = "参数管理", businessType = BusinessType.UPDATE)
+    @PutMapping
+    public AjaxResult edit(@Validated @RequestBody XxlConfProject config) {
+        if (confProjectService.checkConfigKeyUnique(config)) {
+            return error("修改参数'" + config.getConfigName() + "'失败，参数键名已存在");
+        }
+        config.setUpdateBy(getUsername());
+        return toAjax(confProjectService.updateConfig(config));
+    }
+
+    /**
+     * 删除参数配置
+     */
+    @PreAuthorize("@ss.hasPermi('config:project:remove')")
+    @Log(title = "参数管理", businessType = BusinessType.DELETE)
+    @DeleteMapping("/{configIds}")
+    public AjaxResult remove(@PathVariable Long[] configIds) {
+        confProjectService.deleteConfigByName(configIds);
+        return success();
+    }
+
 
 }

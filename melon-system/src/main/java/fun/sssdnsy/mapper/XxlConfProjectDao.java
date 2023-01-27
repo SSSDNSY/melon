@@ -12,6 +12,8 @@ import java.util.List;
 @Mapper
 public interface XxlConfProjectDao {
 
+    List<XxlConfProject> list(XxlConfProject xxlConfProject);
+
     List<XxlConfProject> findAll();
 
     int save(XxlConfProject xxlConfProject);

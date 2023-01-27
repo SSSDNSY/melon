@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xxl.conf.admin.dao.XxlConfNodeDao">
-	
-	<resultMap id="xxlConfNode" type="com.xxl.conf.admin.core.model.XxlConfNode" >
+<mapper namespace="fun.sssdnsy.mapper.XxlConfNodeDao">
+
+	<resultMap id="xxlConfNode" type="fun.sssdnsy.domain.XxlConfNode" >
 		<result column="env" property="env" jdbcType="VARCHAR" />
 		<result column="key" property="key" jdbcType="VARCHAR" />
 		<result column="appname" property="appname" jdbcType="VARCHAR" />
 	    <result column="title" property="title" jdbcType="VARCHAR" />
 	    <result column="value" property="value" jdbcType="VARCHAR" />
-		<association column="{env=env,key=key}" property="logList"  select="com.xxl.conf.admin.dao.XxlConfNodeLogDao.findByKey"/>
+		<association column="{env=env,key=key}" property="logList"  select="fun.sssdnsy.mapper.XxlConfNodeLogDao.findByKey"/>
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -58,8 +58,8 @@
 		DELETE FROM xxl_conf_node
 		WHERE `env` = #{env} AND `key` = #{key}
 	</delete>
-	
-	<insert id="insert" parameterType="com.xxl.conf.admin.core.model.XxlConfNode" >
+
+	<insert id="insert" parameterType="fun.sssdnsy.domain.XxlConfNode" >
 		INSERT INTO xxl_conf_node(
 			`env`,
 			`key`,
@@ -75,18 +75,18 @@
 			#{value}
 		)
 	</insert>
-	
+
 	<select id="load" parameterType="java.lang.String" resultMap="xxlConfNode">
 		SELECT <include refid="Base_Column_List" />
 		FROM xxl_conf_node AS t
 		WHERE t.`env` = #{env} AND t.`key` = #{key}
 	</select>
-	
-	<update id="update" parameterType="com.xxl.conf.admin.core.model.XxlConfNode" >
-		UPDATE xxl_conf_node 
+
+	<update id="update" parameterType="fun.sssdnsy.domain.XxlConfNode" >
+		UPDATE xxl_conf_node
 		SET `title` = #{title},
 			`value` = #{value}
 		WHERE `env` = #{env} AND `key` = #{key}
 	</update>
-	
+
 </mapper>
