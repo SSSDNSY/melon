@@ -14,13 +14,15 @@ public interface XxlConfProjectDao {
 
     List<XxlConfProject> list(XxlConfProject xxlConfProject);
 
+    String getOne(String appname);
+
     List<XxlConfProject> findAll();
 
     int save(XxlConfProject xxlConfProject);
 
     int update(XxlConfProject xxlConfProject);
 
-    int delete(@Param("appname") String appname);
+    int delete(@Param("appname") String[] appname);
 
     XxlConfProject load(@Param("appname") String appname);
 

@@ -3,6 +3,7 @@ package fun.sssdnsy.service.impl;
 import fun.sssdnsy.domain.XxlConfProject;
 import fun.sssdnsy.mapper.XxlConfProjectDao;
 import fun.sssdnsy.service.IXxlConfProjectService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,27 +28,27 @@ public class XxlConfProjectServiceImpl implements IXxlConfProjectService {
 
     @Override
     public String selectConfigByName(String appName) {
-        return null;
+        return projectDao.getOne(appName);
     }
 
     @Override
     public boolean checkConfigKeyUnique(XxlConfProject project) {
-        return false;
+        return StringUtils.isNotBlank(selectConfigByName(project.getAppname()));
     }
 
     @Override
     public int insertConfig(XxlConfProject project) {
-        return 0;
+        return projectDao.save(project);
     }
 
     @Override
-    public int updateConfig(XxlConfProject config) {
-        return 0;
+    public int updateConfig(XxlConfProject project) {
+        return projectDao.update(project);
     }
 
     @Override
-    public void deleteConfigByName(Long[] configIds) {
-
+    public void deleteConfigByName(String[] appNames) {
+        projectDao.delete(appNames);
     }
 
 }

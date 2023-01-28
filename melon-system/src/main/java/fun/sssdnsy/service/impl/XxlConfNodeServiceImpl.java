@@ -44,12 +44,11 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     private XxlConfNodeMsgDao xxlConfNodeMsgDao;
 
 
-    @Value("${xxl.conf.confdata.filepath}")
-    private String confDataFilePath;
-    @Value("${xxl.conf.access.token}")
-    private String accessToken;
+    @Value("${melon.conf.file-path}")
+    private String dataFilePath;
 
-    private int confBeatTime = 30;
+    @Value("${melon.conf.beat-time}")
+    private int beatTime = 30;
 
 
     @Override
@@ -451,8 +450,8 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
                         }
 
                         // clean old message;
-                        if ((System.currentTimeMillis() / 1000) % confBeatTime == 0) {
-                            xxlConfNodeMsgDao.cleanMessage(confBeatTime);
+                        if ((System.currentTimeMillis() / 1000) % beatTime == 0) {
+                            xxlConfNodeMsgDao.cleanMessage(beatTime);
                             readedMessageIds.clear();
                         }
                     } catch (Exception e) {
@@ -484,8 +483,8 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
                     // align to beattime
                     try {
-                        long sleepSecond = confBeatTime - (System.currentTimeMillis() / 1000) % confBeatTime;
-                        if (sleepSecond > 0 && sleepSecond < confBeatTime) {
+                        long sleepSecond = beatTime - (System.currentTimeMillis() / 1000) % beatTime;
+                        if (sleepSecond > 0 && sleepSecond < beatTime) {
                             TimeUnit.SECONDS.sleep(sleepSecond);
                         }
                     } catch (Exception e) {
@@ -528,7 +527,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
                         }
                     }
                     try {
-                        TimeUnit.SECONDS.sleep(confBeatTime);
+                        TimeUnit.SECONDS.sleep(beatTime);
                     } catch (Exception e) {
                         if (!executorStoped) {
                             logger.error(e.getMessage(), e);
@@ -565,7 +564,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
     private String parseConfDataFileName(String env, String key) {
         // fileName
-        String fileName = confDataFilePath
+        String fileName = dataFilePath
                 .concat(File.separator).concat(env)
                 .concat(File.separator).concat(key)
                 .concat(".properties");
@@ -612,7 +611,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
     // clean
     public void cleanFileConfData(List<String> confDataFileList) {
-        filterChildPath(new File(confDataFilePath), confDataFileList);
+        filterChildPath(new File(dataFilePath), confDataFileList);
     }
 
     public void filterChildPath(File parentPath, final List<String> confDataFileList) {

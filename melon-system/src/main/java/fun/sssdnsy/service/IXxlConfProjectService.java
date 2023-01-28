@@ -22,5 +22,5 @@ public interface IXxlConfProjectService {
 
     int updateConfig(XxlConfProject config);
 
-    void deleteConfigByName(Long[] configIds);
+    void deleteConfigByName(String[] configIds);
 }

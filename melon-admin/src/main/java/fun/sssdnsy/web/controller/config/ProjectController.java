@@ -1,7 +1,6 @@
 package fun.sssdnsy.web.controller.config;
 
 import fun.sssdnsy.annotation.Log;
-import fun.sssdnsy.constant.UserConstants;
 import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.core.page.TableDataInfo;
@@ -65,9 +64,8 @@ public class ProjectController extends BaseController {
     @PostMapping
     public AjaxResult add(@Validated @RequestBody XxlConfProject project) {
         if (confProjectService.checkConfigKeyUnique(project)) {
-            return error("新增参数'" + project.getConfigName() + "'失败，参数键名已存在");
+            return error("新增参数'" + project.getAppname() + "'失败，参数键名已存在");
         }
-        project.setCreateBy(getUsername());
         return toAjax(confProjectService.insertConfig(project));
     }
 
@@ -79,9 +77,8 @@ public class ProjectController extends BaseController {
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody XxlConfProject config) {
         if (confProjectService.checkConfigKeyUnique(config)) {
-            return error("修改参数'" + config.getConfigName() + "'失败，参数键名已存在");
+            return error("修改参数'" + config.getAppname() + "'失败，参数键名已存在");
         }
-        config.setUpdateBy(getUsername());
         return toAjax(confProjectService.updateConfig(config));
     }
 
@@ -91,7 +88,7 @@ public class ProjectController extends BaseController {
     @PreAuthorize("@ss.hasPermi('config:project:remove')")
     @Log(title = "参数管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{configIds}")
-    public AjaxResult remove(@PathVariable Long[] configIds) {
+    public AjaxResult remove(@PathVariable String[] configIds) {
         confProjectService.deleteConfigByName(configIds);
         return success();
     }

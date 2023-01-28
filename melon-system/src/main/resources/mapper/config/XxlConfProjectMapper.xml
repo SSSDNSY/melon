@@ -16,6 +16,7 @@
     <select id="list" parameterType="java.util.Map" resultMap="xxlConfProject">
         SELECT
         <include refid="Base_Column_List"/>
+        FROM xxl_conf_project AS t
         <where>
             1=1
             <if test="appname != null and appname != ''">
@@ -25,8 +26,19 @@
                 AND title = #{title}
             </if>
         </where>
-        FROM xxl_conf_project AS t
         ORDER BY t.appname
+    </select>
+
+    <select id="getOne" parameterType="java.util.Map" resultMap="xxlConfProject">
+        SELECT
+        appname
+        FROM xxl_conf_project AS t
+        <where>
+            1=1
+            <if test="appname != null and appname != ''">
+                AND appname like concat('%', #{appname}, '%')
+            </if>
+        </where>
     </select>
 
     <select id="findAll" parameterType="java.util.Map" resultMap="xxlConfProject">
@@ -48,9 +60,12 @@
 	</update>
 
     <delete id="delete" parameterType="java.lang.String">
-		DELETE FROM xxl_conf_project
-		WHERE appname = #{appname}
-	</delete>
+        DELETE FROM xxl_conf_project
+        WHERE appname in
+        <foreach item="appname" collection="array" open="(" separator="," close=")">
+            #{appname}
+        </foreach>
+    </delete>
 
     <select id="load" parameterType="java.lang.String" resultMap="xxlConfProject">
         SELECT
