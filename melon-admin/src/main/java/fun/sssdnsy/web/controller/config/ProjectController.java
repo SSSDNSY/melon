@@ -87,9 +87,9 @@ public class ProjectController extends BaseController {
      */
     @PreAuthorize("@ss.hasPermi('config:project:remove')")
     @Log(title = "参数管理", businessType = BusinessType.DELETE)
-    @DeleteMapping("/{configIds}")
-    public AjaxResult remove(@PathVariable String[] configIds) {
-        confProjectService.deleteConfigByName(configIds);
+    @DeleteMapping("/{appname}")
+    public AjaxResult remove(@PathVariable  String appname) {
+        confProjectService.deleteConfigByName(new String[]{appname});
         return success();
     }
 

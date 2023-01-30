@@ -31,7 +31,7 @@
 
     <select id="getOne" parameterType="java.util.Map" resultMap="xxlConfProject">
         SELECT
-        appname
+        <include refid="Base_Column_List"/>
         FROM xxl_conf_project AS t
         <where>
             1=1
@@ -62,7 +62,7 @@
     <delete id="delete" parameterType="java.lang.String">
         DELETE FROM xxl_conf_project
         WHERE appname in
-        <foreach item="appname" collection="array" open="(" separator="," close=")">
+        <foreach item="appname" collection="appname" open="(" separator="," close=")">
             #{appname}
         </foreach>
     </delete>

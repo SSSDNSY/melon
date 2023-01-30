@@ -6,7 +6,7 @@
 
     <parent>
         <artifactId>melon</artifactId>
-        <groupId>fun.sssdnsy</groupId>
+        <groupId>fun.pengzh</groupId>
         <version>1.0.0</version>
     </parent>
     <artifactId>melon-admin</artifactId>
@@ -47,19 +47,19 @@
 
         <!-- 核心模块-->
         <dependency>
-            <groupId>fun.sssdnsy</groupId>
+            <groupId>fun.pengzh</groupId>
             <artifactId>melon-framework</artifactId>
         </dependency>
 
         <!-- 定时任务-->
         <dependency>
-            <groupId>fun.sssdnsy</groupId>
+            <groupId>fun.pengzh</groupId>
             <artifactId>melon-quartz</artifactId>
         </dependency>
 
         <!-- 代码生成-->
         <dependency>
-            <groupId>fun.sssdnsy</groupId>
+            <groupId>fun.pengzh</groupId>
             <artifactId>melon-generator</artifactId>
         </dependency>
 

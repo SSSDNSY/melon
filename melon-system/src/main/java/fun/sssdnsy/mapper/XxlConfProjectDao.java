@@ -14,7 +14,7 @@ public interface XxlConfProjectDao {
 
     List<XxlConfProject> list(XxlConfProject xxlConfProject);
 
-    String getOne(String appname);
+    XxlConfProject getOne(String appname);
 
     List<XxlConfProject> findAll();
 

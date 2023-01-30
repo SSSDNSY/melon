@@ -14,7 +14,7 @@ public interface IXxlConfProjectService {
 
     List<XxlConfProject> selectConfigList(XxlConfProject project);
 
-    String selectConfigByName(String appName);
+    XxlConfProject selectConfigByName(String appName);
 
     boolean checkConfigKeyUnique(XxlConfProject project);
 

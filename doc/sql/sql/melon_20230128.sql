@@ -329,6 +329,19 @@ insert into sys_menu values('1057', '生成删除', '116', '3', '#', '', '', 1, 
 insert into sys_menu values('1058', '导入代码', '116', '4', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import',            '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1059', '预览代码', '116', '5', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview',           '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1060', '生成代码', '116', '6', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code',              '#', 'admin', sysdate(), '', null, '');
+-- 配置中心菜单
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2000, '配置管理', 0, 4, 'config', '', '', 1, 0, 'M', '0', '0', '', 'component', 'admin', '2023-01-25 12:00:23', 'admin', '2023-01-25 13:18:04', '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2001, '配置列表', 2000, 1, 'config', 'config/conf/index', '', 1, 0, 'C', '0', '0', '', 'code', 'admin', '2023-01-25 12:02:03', 'admin', '2023-01-25 13:18:46', '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2002, '环境管理', 2000, 2, 'env', 'config/env/index', '', 1, 0, 'C', '0', '0', '', 'swagger', 'admin', '2023-01-25 13:13:34', 'admin', '2023-01-25 13:14:35', '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2003, '项目管理', 2000, 3, 'project', 'config/project/index', '', 1, 0, 'C', '0', '0', '', 'example', 'admin', '2023-01-25 13:14:09', '', NULL, '');
 
 
 -- ----------------------------

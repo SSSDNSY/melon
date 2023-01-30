@@ -33,11 +33,11 @@
     <el-table
       v-if="refreshTable"
       v-loading="loading"
-      :data="list.slice((pageNum-1)*pageSize,pageNum*pageSize)"
+      :data="list"
     >
       <el-table-column label="序号" type="index" align="center">
         <template slot-scope="scope">
-          <span>{{(pageNum - 1) * pageSize + scope.$index + 1}}</span>
+          <span>{{(queryParams.pageNum - 1) * queryParams.pageSize + scope.$index + 1}}</span>
         </template>
       </el-table-column>
       <el-table-column prop="appname" label="项目英文名称" :show-overflow-tooltip="true"></el-table-column>
@@ -69,8 +69,13 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="pageNum" :limit.sync="pageSize"/>
-
+    <pagination
+      v-show="total>0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
     <!-- 添加或修改项目对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="680px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
@@ -96,7 +101,7 @@
 </template>
 
 <script>
-  import {listProject} from "@/api/config/project";
+  import {listProject,getProject,saveProject,delProject} from "@/api/config/project";
   import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
   export default {
@@ -118,10 +123,10 @@
         refreshTable: true,
         //分页数据
         total: 0,
-        pageNum: 1,
-        pageSize: 10,
         // 查询参数
         queryParams: {
+          pageNum: 1,
+          pageSize: 10,
           appname: undefined,
           title: undefined
         },
@@ -177,6 +182,7 @@
       },
       /** 搜索按钮操作 */
       handleQuery() {
+        this.queryParams.pageNum = 1;
         this.getList();
       },
       /** 重置按钮操作 */

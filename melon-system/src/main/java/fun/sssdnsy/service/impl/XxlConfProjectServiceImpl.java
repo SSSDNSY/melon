@@ -27,13 +27,14 @@ public class XxlConfProjectServiceImpl implements IXxlConfProjectService {
     }
 
     @Override
-    public String selectConfigByName(String appName) {
+    public XxlConfProject selectConfigByName(String appName) {
         return projectDao.getOne(appName);
     }
 
     @Override
     public boolean checkConfigKeyUnique(XxlConfProject project) {
-        return StringUtils.isNotBlank(selectConfigByName(project.getAppname()));
+        XxlConfProject xxlConfProject = selectConfigByName(project.getAppname());
+        return xxlConfProject != null && StringUtils.isNotBlank(xxlConfProject.getAppname());
     }
 
     @Override
