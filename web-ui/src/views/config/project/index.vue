@@ -204,14 +204,8 @@
         this.$refs["form"].validate(valid => {
           if (valid) {
             if (this.form.appname != undefined) {
-              updateProject(this.form).then(response => {
-                this.$modal.msgSuccess("修改成功");
-                this.open = false;
-                this.getList();
-              });
-            } else {
-              addProject(this.form).then(response => {
-                this.$modal.msgSuccess("新增成功");
+              saveProject(this.form).then(response => {
+                this.$modal.msgSuccess("保存成功");
                 this.open = false;
                 this.getList();
               });

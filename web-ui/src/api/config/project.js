@@ -19,20 +19,11 @@ export function getProject(configId) {
 }
 
 
-// 新增参数配置
-export function addProject(data) {
+// 保存参数配置
+export function saveProject(data) {
   return request({
     url: '/config/project',
     method: 'post',
-    data: data
-  })
-}
-
-// 修改参数配置
-export function updateProject(data) {
-  return request({
-    url: '/config/project',
-    method: 'put',
     data: data
   })
 }

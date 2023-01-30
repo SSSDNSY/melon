@@ -5,12 +5,16 @@ package fun.sssdnsy.enums;
  *
  * @author sssdnsy
  */
-public enum BusinessType
-{
+public enum BusinessType {
     /**
      * 其它
      */
     OTHER,
+
+    /**
+     * 保存
+     */
+    SAVE,
 
     /**
      * 新增

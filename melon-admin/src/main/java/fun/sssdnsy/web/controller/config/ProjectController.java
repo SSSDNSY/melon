@@ -58,13 +58,13 @@ public class ProjectController extends BaseController {
 
 
     /**
-     * 新增参数配置
+     * 保存参数配置
      */
-    @Log(title = "参数管理", businessType = BusinessType.INSERT)
+    @Log(title = "参数管理", businessType = BusinessType.SAVE)
     @PostMapping
-    public AjaxResult add(@Validated @RequestBody XxlConfProject project) {
+    public AjaxResult save(@Validated @RequestBody XxlConfProject project) {
         if (confProjectService.checkConfigKeyUnique(project)) {
-            return error("新增参数'" + project.getAppname() + "'失败，参数键名已存在");
+            return toAjax(confProjectService.updateConfig(project));
         }
         return toAjax(confProjectService.insertConfig(project));
     }
@@ -75,11 +75,11 @@ public class ProjectController extends BaseController {
     @PreAuthorize("@ss.hasPermi('config:project:edit')")
     @Log(title = "参数管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@Validated @RequestBody XxlConfProject config) {
-        if (confProjectService.checkConfigKeyUnique(config)) {
-            return error("修改参数'" + config.getAppname() + "'失败，参数键名已存在");
+    public AjaxResult edit(@Validated @RequestBody XxlConfProject project) {
+        if (confProjectService.checkConfigKeyUnique(project)) {
+            return error("修改参数'" + project.getAppname() + "'失败，参数键名已存在");
         }
-        return toAjax(confProjectService.updateConfig(config));
+        return toAjax(confProjectService.updateConfig(project));
     }
 
     /**
