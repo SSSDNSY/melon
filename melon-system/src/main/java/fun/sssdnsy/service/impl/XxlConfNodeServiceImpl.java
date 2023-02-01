@@ -404,6 +404,36 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         return null;
     }
 
+    @Override
+    public List<XxlConfNode> selectConfigList(XxlConfNode confNode) {
+        return null;
+    }
+
+    @Override
+    public XxlConfNode selectConfigByName(String appName) {
+        return null;
+    }
+
+    @Override
+    public boolean checkConfigKeyUnique(XxlConfNode confNode) {
+        return false;
+    }
+
+    @Override
+    public int insertConfig(XxlConfNode confNode) {
+        return 0;
+    }
+
+    @Override
+    public int updateConfig(XxlConfNode config) {
+        return 0;
+    }
+
+    @Override
+    public void deleteConfigByName(String[] configIds) {
+
+    }
+
 
     // ---------------------- start stop ----------------------
 
