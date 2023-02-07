@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # 修改APP_NAME为GiteeGo应用名
 APP_NAME=melon-admin
@@ -7,7 +7,7 @@ APP_NAME=melon-admin
 PROG_NAME=$0
 ACTION=$1
 APP_START_TIMEOUT=20    # 等待应用启动的时间
-APP_PORT=8081         # 应用端口
+APP_PORT=8080         # 应用端口
 HEALTH_CHECK_URL=http://127.0.0.1:${APP_PORT}  # 应用健康检查URL
 HEALTH_CHECK_FILE_DIR=/root/jar/status   # 脚本会在这个目录下生成nginx-status文件
 APP_HOME=/root/jar/${APP_NAME}        # 从output.tar.gz中解压出来的jar包放到这个目录下

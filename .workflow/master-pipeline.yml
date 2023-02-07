@@ -57,7 +57,7 @@ stages:
           - '# 使用场景：先将制品包解压缩到指定目录中，再执行启动脚本deploy.sh，脚本示例地址：https://gitee.com/gitee-go/spring-boot-maven-deploy-case/blob/master/deploy.sh'
           - ' mkdir -p /root/jar'
           - ' tar zxvf ~/gitee_go/deploy/melon-admin.tar.gz -C /root/jar'
-          - ' sh /root/deploy.sh restart'
+          - ' sh /root/jar/bin/deploy.sh restart'
           - ''
         notify: []
         strategy:
