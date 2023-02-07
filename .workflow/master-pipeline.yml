@@ -19,6 +19,10 @@ stages:
         jdkVersion: 8
         mavenVersion: 3.3.9
         commands:
+          - rm -f target
+          - ''
+          - mkdir target
+          - ''
           - mvn -B clean package -Dmaven.test.skip=true
         artifacts:
           - name: BUILD_ARTIFACT
