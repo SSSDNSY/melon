@@ -24,6 +24,8 @@ stages:
           - name: BUILD_ARTIFACT
             path:
               - ./target
+        caches:
+          - ~/.m2
         strategy: {}
       - step: build@maven
         name: build_admin
