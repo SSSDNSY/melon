@@ -32,9 +32,9 @@ rebel.xml
 nbproject/private/
 build/*
 nbbuild/
-dist/
-nbdist/
 .nb-gradle/
+
+node_modules/
 
 ######################################################################
 # Others
