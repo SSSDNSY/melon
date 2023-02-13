@@ -9,6 +9,7 @@ ACTION=$1
 APP_START_TIMEOUT=30    # 等待应用启动的时间
 APP_PORT=8080         # 应用端口
 HEALTH_CHECK_URL=http://127.0.0.1:8080  # 应用健康检查URL
+HEALTH_CHECK_TEXT="欢迎使用Melon后台管理框架，当前版本：v1.0.0，请通过前端地址访问。"  # 应用健康检查URL
 HEALTH_CHECK_FILE_DIR=/root/jar/status   # 脚本会在这个目录下生成nginx-status文件
 APP_HOME=/root/jar/${APP_NAME}        # 从output.tar.gz中解压出来的jar包放到这个目录下
 JAR_NAME=${APP_HOME}/target/${APP_NAME}.jar    # jar包的名字
@@ -33,14 +34,11 @@ health_check() {
                 exit 1
             fi
 
-            status_code=`/usr/bin/curl -L -o /dev/null --connect-timeout 5 -s -w %{http_code}  ${HEALTH_CHECK_URL}`
-            if [ "$?" != "0" ]; then
-                echo -n -e "\rapplication not started"
-            else
-                echo "code is $status_code"
-                if [ "$status_code" == "200" ];then
-                    break
-                fi
+            ConsulResult=$(curl -s --connect-timeout 500 --max-time 2  ${HEALTH_CHECK_URL} )
+
+            if [ $HEALTH_CHECK_TEXT = $ConsulResult ]; then
+                echo "app is started ！"
+                break
             fi
 
             sleep 1
