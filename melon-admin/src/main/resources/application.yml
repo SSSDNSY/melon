@@ -1,3 +1,5 @@
+### 主配置文件
+
 # 项目相关配置
 melon:
   # 名称
@@ -61,7 +63,8 @@ spring:
     # 国际化资源文件路径
     basename: i18n/messages
   profiles:
-    active: druid
+    active: dev
+    include: oauth
   # 文件上传
   servlet:
     multipart:

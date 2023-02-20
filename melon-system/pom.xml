@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>melon-system</artifactId>
+    <groupId>fun.pengzh</groupId>
+    <version>1.0.0</version>
 
     <description>
         system系统模块

@@ -5,7 +5,7 @@
   "author": "sssdnsy",
   "license": "GNU",
   "scripts": {
-    "dev": "vue-cli-service serve",
+    "dev": "vue-cli-service serve --mode development --port 8081",
     "build:dev": "vue-cli-service build --mode development --port 8080",
     "build:stage": "vue-cli-service build --mode staging --port 8080",
     "build:prod": "vue-cli-service build --mode production --port 8080",

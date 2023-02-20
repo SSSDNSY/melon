@@ -57,3 +57,16 @@ export function getCodeImg() {
     timeout: 20000
   })
 }
+
+
+// 获取验证码
+export function getGiteeCode() {
+  return request({
+    url: '/oauth/gitee/getGiteeCode',
+    headers: {
+      isToken: false
+    },
+    method: 'get',
+    timeout: 20000
+  })
+}

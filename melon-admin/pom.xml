@@ -9,6 +9,9 @@
         <groupId>fun.pengzh</groupId>
         <version>1.0.0</version>
     </parent>
+
+    <groupId>fun.pengzh</groupId>
+    <version>1.0.0</version>
     <artifactId>melon-admin</artifactId>
     <packaging>jar</packaging>
 
@@ -49,18 +52,21 @@
         <dependency>
             <groupId>fun.pengzh</groupId>
             <artifactId>melon-framework</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <!-- 定时任务-->
         <dependency>
             <groupId>fun.pengzh</groupId>
             <artifactId>melon-quartz</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <!-- 代码生成-->
         <dependency>
             <groupId>fun.pengzh</groupId>
             <artifactId>melon-generator</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <!-- 监控 -->
@@ -68,6 +74,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+        <!-- httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5</version>
+        </dependency>
+
     </dependencies>
 
     <build>
