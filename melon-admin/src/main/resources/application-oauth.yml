@@ -3,8 +3,6 @@ gitee:
   clientId: 3a19b0430710fdd5cf0531bb03a40527a6678d71b831b8722b493dcb4148a645
   clientSecret: 6a428157e0f1e92e78b9f3ea9f32edaffb649a499e77dd329c75cf99ee3cf834
   accessToken: https://gitee.com/oauth/token
-  redirectURI: http://127.0.0.1:8080/oauth/callback/gitee
+  redirectURI: http://127.0.0.1:8080/melon/oauth/callback/gitee
   authorizeURL: https://gitee.com/oauth/authorize
   userInfo: https://gitee.com/api/v5/user
-
-

@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -99,12 +98,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 // CSRF禁用，因为不使用session
                 .csrf().disable()
+//                .oauth2Login()
+//                .and()
                 // 禁用HTTP响应标头
-                .headers().cacheControl().disable().and()
+//                .headers().cacheControl().disable().and()
+                // 基于token，所以不需要session
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 // 认证失败处理类
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                // 基于token，所以不需要session
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 注册register 验证码captchaImage Oauth 允许匿名访问

@@ -71,10 +71,11 @@
           <img
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAvFJREFUWEe1l1uIjkEYx3+bKyUUq4RyinCh2CQlwpXNMYQruzmvw41yLJS1RSk5LkqhiEVOyYXDBWHZUKSUzYVSIofCrf5fM9vsmHnf+b59PfVefDPP/J//zDfP8/ynivKsPzAHGAH0BfqY5V+BL8A74BrwKRW2KtFxOTAbmJXofwO4DpzK888jMB9YD0zNA4rMPwAOAVdi67MIHAYaKgzsLzsCrAthxQjcBaYVFNzC3AOm+5ghAueBxQUHt3AXgCUutk9gF7DzPwW3sLsBxSmZS2ANcNQLXgfcBmqApeZL4XcJOAO8NsfuZ8Na4JhLoCfwBBjloQ8BPjhj44HJZkzjdm4wYL+nwGNnzWjgjYf7FpgI/LQnsB3YE9jaIOBjypYzfHoD3wLzO4BGS+A9MDTgtAjQcXbF5gJXAwDtwDARmAncikQogsBC4GIEv1YEjgOrAg4nIuOVnEYzsDKwsFkEdGkmeJO/gB6VRMpY8xmo9uZbRSD0/+t2KwOKtPuBntIuAt+BXl6kZ4FT6SoZ9QPlv2s/ROA30D2Qp8rfIk2FZ7UH+EcEXgJjA5EkOCQ0irJHwCQP7JUIKM8XBKJI+UhUFGHDgReBi90iAnuBrYEoaskziohuNhJSU00isAw4HQm0IkVW5ZCUqroc8akTgXFAK9At4rQZ2FfhSWRtTpA1thccBDaYINJxMlcHngVayrgTErDzzOnGuJcqrSUw0lRE1QOlywFgSuD4Vc1EJKYVleu60P0STkwao80VJI3ANrNQIkRNSr817ppSye337pzS+WFCGe/oMy6BAcAdYIxB1F8iSa12utGMqURLJWVZiqYs7V4gviZU9VPrFAk5yLFcawK2ZCzq1OJDqtgloeolJSttZ81e0liM/cCmyOQ/+iL2LnBJuFidFG0kyElATznfguIm62UkPaid2PQUYAoBv+vpnahLdzNEOO9tqDWqByJSm0hA7wrp/ufGPxjYkkkhYH3rAQnJvDsgwgOBcym39y/8togjtPtXzgAAAABJRU5ErkJggg=="
             width="22" height="22" title="GitHub" style="vertical-align: middle; margin-left: .8em;">
-          <img
-            @click="oauthGitee"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAtRJREFUWEfFV01rE1EUPWdiQQRbxLoRtM0k06KuRBdulLpUkpQKreBC3BXF/gIFFSz+gKKi24JoC0IzoduKLnThx0q0TjpJ1Z0VaUURbObKTD6YTOcrsSFZhXc/zpn37rnvPiLmb05V+3bKjhwooxSoQvQT2GuHC/CdgjUhTAgX/nAzP2Ga63FSM8qpMKAdkgSmCFwQoC/K37YTWBfgESuYyawaH8JiQgkUUtptEUwB6I0D7OOzQWIms2JcD4oPJJBXtTkC420CN4UJMJ8zjQm/XL4ECqpWEmBwO8DrOQiUM6aR9ObcQkBXtW8A+rcT3JVrLWsa+9y5mwjoqvYcwMkOgdfTvsiaxinXzlT/1gruWiA4OUvL0pUEXp4tFr/GJVlIpY6JKK+bvpqYrhemswM1qb0KqnaKTGRKxfm4oF4/XdXEs7bBCk7YEnUI6Kp2D8Bl3yqldTyzsvKmXfBafi8Be/l+1jSucGF4eLfyt7IKcI8XRAQPcyVj0r1eSKbHK8SRuIQS4IAAl7b6yw+rJzFAPTU0BpGnfglF5GKuVJyt2/SktgRiJC54pB95jnoy/RjkeT/nTSuRHCt/LDvbOJgegcKlyKStOIg8oZ7U3oI46heXNY2GTBfU9E0FvNFK/khfwTvmVe0zgQOtErAgtxQLz6JAmOCQCB74HjHwhbqq/QKwq1UCsOR0tlyMJBCiAtv0u/sEOnEE3p3xaUTOhotzBJ0oQs/xBBGAXYRhMmxXBVaP0ju6vPyz0T+2tuKqyZFhSCNqj4DczZrFq3XwfGroDEUWfdViN6KwVuwmYDciSwnvgrYsvecf3D9qrbgmE9/LyE0gSu9+9sV0+nDF4vuA2OplZBuDruP/IeA3B7iINF/HDonqBNw0kJCYlIp8aunrFe4XyEGCd4Li6B1IXNXavZHMRaJ7Q2mdRFfH8oZ+u/kwaexEN59mDRLdfJy6ZdSp5/k/afF2RPisToMAAAAASUVORK5CYII="
-            width="22" height="22" title="Gitee" style="vertical-align: middle; margin-left: .8em;">
+          <a href="https://gitee.com/oauth/authorize?client_id=3a19b0430710fdd5cf0531bb03a40527a6678d71b831b8722b493dcb4148a645&redirect_uri=http://127.0.0.1:8080/melon/oauth/callback/gitee&response_type=code&state=1">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAtRJREFUWEfFV01rE1EUPWdiQQRbxLoRtM0k06KuRBdulLpUkpQKreBC3BXF/gIFFSz+gKKi24JoC0IzoduKLnThx0q0TjpJ1Z0VaUURbObKTD6YTOcrsSFZhXc/zpn37rnvPiLmb05V+3bKjhwooxSoQvQT2GuHC/CdgjUhTAgX/nAzP2Ga63FSM8qpMKAdkgSmCFwQoC/K37YTWBfgESuYyawaH8JiQgkUUtptEUwB6I0D7OOzQWIms2JcD4oPJJBXtTkC420CN4UJMJ8zjQm/XL4ECqpWEmBwO8DrOQiUM6aR9ObcQkBXtW8A+rcT3JVrLWsa+9y5mwjoqvYcwMkOgdfTvsiaxinXzlT/1gruWiA4OUvL0pUEXp4tFr/GJVlIpY6JKK+bvpqYrhemswM1qb0KqnaKTGRKxfm4oF4/XdXEs7bBCk7YEnUI6Kp2D8Bl3yqldTyzsvKmXfBafi8Be/l+1jSucGF4eLfyt7IKcI8XRAQPcyVj0r1eSKbHK8SRuIQS4IAAl7b6yw+rJzFAPTU0BpGnfglF5GKuVJyt2/SktgRiJC54pB95jnoy/RjkeT/nTSuRHCt/LDvbOJgegcKlyKStOIg8oZ7U3oI46heXNY2GTBfU9E0FvNFK/khfwTvmVe0zgQOtErAgtxQLz6JAmOCQCB74HjHwhbqq/QKwq1UCsOR0tlyMJBCiAtv0u/sEOnEE3p3xaUTOhotzBJ0oQs/xBBGAXYRhMmxXBVaP0ju6vPyz0T+2tuKqyZFhSCNqj4DczZrFq3XwfGroDEUWfdViN6KwVuwmYDciSwnvgrYsvecf3D9qrbgmE9/LyE0gSu9+9sV0+nDF4vuA2OplZBuDruP/IeA3B7iINF/HDonqBNw0kJCYlIp8aunrFe4XyEGCd4Li6B1IXNXavZHMRaJ7Q2mdRFfH8oZ+u/kwaexEN59mDRLdfJy6ZdSp5/k/afF2RPisToMAAAAASUVORK5CYII="
+              width="22" height="22" title="Gitee" style="vertical-align: middle; margin-left: .8em;">
+          </a>
         </div>
       </el-form-item>
     </el-form>
@@ -86,7 +87,7 @@
 </template>
 
 <script>
-  import {getCodeImg,getGiteeCode} from "@/api/login";
+  import {getCodeImg, getGiteeCode} from "@/api/login";
   import Cookies from "js-cookie";
   import {decrypt, encrypt} from '@/utils/jsencrypt'
 
@@ -100,7 +101,8 @@
           password: "admin123",
           rememberMe: false,
           code: "",
-          uuid: ""
+          uuid: "",
+          giteeAuthUrl: ""
         },
         loginRules: {
           username: [
@@ -168,20 +170,16 @@
               this.$router.push({path: this.redirect || "/"}).catch(() => {
               });
             }).catch(() => {
-              this.loading = false;
-              if (this.captchaEnabled) {
-                this.getCode();
-              }
             });
           }
         });
       },
-      oauthGitee(){
-        getGiteeCode().then(() => {
-          this.$router.push({path: this.redirect || "/"}).catch(() => {
+      oauthGitee() {
+        getGiteeCode().then((d) => {
+          console.log(d)
+          this.$router.push({path: d.data}).catch(() => {
           });
         }).catch(() => {
-          this.loading = false;
           if (this.captchaEnabled) {
             this.getCode();
           }
@@ -238,13 +236,13 @@
     width: 33%;
     height: 38px;
     float: right;
+  }
 
   img {
     cursor: pointer;
     vertical-align: middle;
   }
 
-  }
   .el-login-footer {
     height: 40px;
     line-height: 40px;

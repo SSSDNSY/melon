@@ -170,6 +170,14 @@ public class BaseController
     }
 
     /**
+     * 页面转发
+     */
+    public String forward(String url)
+    {
+        return StringUtils.format("forward:{}", url);
+    }
+
+    /**
      * 获取用户缓存信息
      */
     public LoginUser getLoginUser()

@@ -439,7 +439,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        startThead();
+//        startThead();
     }
 
     @Override
@@ -467,8 +467,8 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
             public void run() {
                 while (!executorStoped) {
                     try {
-                        // new message, filter readed
-                        List<XxlConfNodeMsg> messageList = xxlConfNodeMsgDao.findMsg(readedMessageIds);
+                        // new message, filter readed TODO
+                        List<XxlConfNodeMsg> messageList = null;// xxlConfNodeMsgDao.findMsg(readedMessageIds);
                         if (messageList != null && messageList.size() > 0) {
                             for (XxlConfNodeMsg message : messageList) {
                                 readedMessageIds.add(message.getId());
@@ -506,66 +506,66 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
          *
          *  clean deleted conf-data file
          */
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                while (!executorStoped) {
-
-                    // align to beattime
-                    try {
-                        long sleepSecond = beatTime - (System.currentTimeMillis() / 1000) % beatTime;
-                        if (sleepSecond > 0 && sleepSecond < beatTime) {
-                            TimeUnit.SECONDS.sleep(sleepSecond);
-                        }
-                    } catch (Exception e) {
-                        if (!executorStoped) {
-                            logger.error(e.getMessage(), e);
-                        }
-                    }
-
-                    try {
-
-                        // sync registry-data, db + file
-                        int offset = 0;
-                        int pagesize = 1000;
-                        List<String> confDataFileList = new ArrayList<>();
-
-                        List<XxlConfNode> confNodeList = xxlConfNodeDao.pageList(offset, pagesize, null, null, null);
-                        while (confNodeList != null && confNodeList.size() > 0) {
-
-                            for (XxlConfNode confNoteItem : confNodeList) {
-
-                                // sync file
-                                String confDataFile = setFileConfData(confNoteItem.getEnv(), confNoteItem.getKey(), confNoteItem.getValue());
-
-                                // collect confDataFile
-                                confDataFileList.add(confDataFile);
-                            }
-
-
-                            offset += 1000;
-                            confNodeList = xxlConfNodeDao.pageList(offset, pagesize, null, null, null);
-                        }
-
-                        // clean old registry-data file
-                        cleanFileConfData(confDataFileList);
-
-                        logger.debug(">>>>>>>>>>> xxl-conf, sync totel conf data success, sync conf count = {}", confDataFileList.size());
-                    } catch (Exception e) {
-                        if (!executorStoped) {
-                            logger.error(e.getMessage(), e);
-                        }
-                    }
-                    try {
-                        TimeUnit.SECONDS.sleep(beatTime);
-                    } catch (Exception e) {
-                        if (!executorStoped) {
-                            logger.error(e.getMessage(), e);
-                        }
-                    }
-                }
-            }
-        });
+//        executorService.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (!executorStoped) {
+//
+//                    // align to beattime
+//                    try {
+//                        long sleepSecond = beatTime - (System.currentTimeMillis() / 1000) % beatTime;
+//                        if (sleepSecond > 0 && sleepSecond < beatTime) {
+//                            TimeUnit.SECONDS.sleep(sleepSecond);
+//                        }
+//                    } catch (Exception e) {
+//                        if (!executorStoped) {
+//                            logger.error(e.getMessage(), e);
+//                        }
+//                    }
+//
+//                    try {
+//
+//                        // sync registry-data, db + file
+//                        int offset = 0;
+//                        int pagesize = 1000;
+//                        List<String> confDataFileList = new ArrayList<>();
+//
+//                        List<XxlConfNode> confNodeList = xxlConfNodeDao.pageList(offset, pagesize, null, null, null);
+//                        while (confNodeList != null && confNodeList.size() > 0) {
+//
+//                            for (XxlConfNode confNoteItem : confNodeList) {
+//
+//                                // sync file
+//                                String confDataFile = setFileConfData(confNoteItem.getEnv(), confNoteItem.getKey(), confNoteItem.getValue());
+//
+//                                // collect confDataFile
+//                                confDataFileList.add(confDataFile);
+//                            }
+//
+//
+//                            offset += 1000;
+//                            confNodeList = xxlConfNodeDao.pageList(offset, pagesize, null, null, null);
+//                        }
+//
+//                        // clean old registry-data file
+//                        cleanFileConfData(confDataFileList);
+//
+//                        logger.debug(">>>>>>>>>>> xxl-conf, sync totel conf data success, sync conf count = {}", confDataFileList.size());
+//                    } catch (Exception e) {
+//                        if (!executorStoped) {
+//                            logger.error(e.getMessage(), e);
+//                        }
+//                    }
+//                    try {
+//                        TimeUnit.SECONDS.sleep(beatTime);
+//                    } catch (Exception e) {
+//                        if (!executorStoped) {
+//                            logger.error(e.getMessage(), e);
+//                        }
+//                    }
+//                }
+//            }
+//        });
 
 
     }
