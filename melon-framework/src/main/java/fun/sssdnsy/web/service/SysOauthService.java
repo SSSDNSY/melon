@@ -1,15 +1,5 @@
 package fun.sssdnsy.web.service;
 
-import javax.annotation.Resource;
-
-import fun.sssdnsy.service.ISysConfigService;
-import fun.sssdnsy.service.ISysUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
 import fun.sssdnsy.constant.CacheConstants;
 import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.core.domain.entity.SysUser;
@@ -19,14 +9,24 @@ import fun.sssdnsy.exception.ServiceException;
 import fun.sssdnsy.exception.user.CaptchaException;
 import fun.sssdnsy.exception.user.CaptchaExpireException;
 import fun.sssdnsy.exception.user.UserPasswordNotMatchException;
+import fun.sssdnsy.manager.AsyncManager;
+import fun.sssdnsy.manager.factory.AsyncFactory;
+import fun.sssdnsy.security.context.AuthenticationContextHolder;
+import fun.sssdnsy.service.ISysConfigService;
+import fun.sssdnsy.service.ISysUserService;
 import fun.sssdnsy.utils.DateUtils;
 import fun.sssdnsy.utils.MessageUtils;
 import fun.sssdnsy.utils.ServletUtils;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.ip.IpUtils;
-import fun.sssdnsy.manager.AsyncManager;
-import fun.sssdnsy.manager.factory.AsyncFactory;
-import fun.sssdnsy.security.context.AuthenticationContextHolder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * 登录校验方法
@@ -34,8 +34,7 @@ import fun.sssdnsy.security.context.AuthenticationContextHolder;
  * @author sssdnsy
  */
 @Component
-public class SysLoginService
-{
+public class SysOauthService {
     @Autowired
     private TokenService tokenService;
 
@@ -54,44 +53,30 @@ public class SysLoginService
     /**
      * 登录验证
      *
-     * @param username 用户名
-     * @param password 密码
-     * @param code 验证码
-     * @param uuid 唯一标识
      * @return 结果
      */
-    public String login(String username, String password, String code, String uuid)
-    {
-        boolean captchaEnabled = configService.selectCaptchaEnabled();
-        // 验证码开关
-        if (captchaEnabled)
-        {
-            validateCaptcha(username, code, uuid);
-        }
+    public String login(SysUser sysUser) {
+
+        String username = "";
+        String password = "";
+        String code;
+        String uuid;
         // 用户验证
         Authentication authentication = null;
-        try
-        {
+        try {
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
             AuthenticationContextHolder.setContext(authenticationToken);
             // 该方法会去调用 UserDetailsServiceImpl.loadUserByUsername
             authentication = authenticationManager.authenticate(authenticationToken);
-        }
-        catch (Exception e)
-        {
-            if (e instanceof BadCredentialsException)
-            {
+        } catch (Exception e) {
+            if (e instanceof BadCredentialsException) {
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
                 throw new UserPasswordNotMatchException();
-            }
-            else
-            {
+            } else {
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, e.getMessage()));
                 throw new ServiceException(e.getMessage());
             }
-        }
-        finally
-        {
+        } finally {
             AuthenticationContextHolder.clearContext();
         }
         AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
@@ -105,22 +90,19 @@ public class SysLoginService
      * 校验验证码
      *
      * @param username 用户名
-     * @param code 验证码
-     * @param uuid 唯一标识
+     * @param code     验证码
+     * @param uuid     唯一标识
      * @return 结果
      */
-    public void validateCaptcha(String username, String code, String uuid)
-    {
+    public void validateCaptcha(String username, String code, String uuid) {
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
         String captcha = redisCache.getCacheObject(verifyKey);
         redisCache.deleteObject(verifyKey);
-        if (captcha == null)
-        {
+        if (captcha == null) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
             throw new CaptchaExpireException();
         }
-        if (!code.equalsIgnoreCase(captcha))
-        {
+        if (!code.equalsIgnoreCase(captcha)) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
             throw new CaptchaException();
         }
@@ -131,8 +113,7 @@ public class SysLoginService
      *
      * @param userId 用户ID
      */
-    public void recordLoginInfo(Long userId)
-    {
+    public void recordLoginInfo(Long userId) {
         SysUser sysUser = new SysUser();
         sysUser.setUserId(userId);
         sysUser.setLoginIp(IpUtils.getIpAddr(ServletUtils.getRequest()));

@@ -4,9 +4,15 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import fun.sssdnsy.config.oauth.GiteeConfig;
 import fun.sssdnsy.core.controller.BaseController;
+import fun.sssdnsy.core.domain.R;
+import fun.sssdnsy.core.domain.entity.SysUser;
+import fun.sssdnsy.service.ISysDeptService;
+import fun.sssdnsy.service.ISysPostService;
+import fun.sssdnsy.service.ISysRoleService;
+import fun.sssdnsy.service.ISysUserService;
 import fun.sssdnsy.utils.uuid.IdUtils;
+import fun.sssdnsy.web.service.SysOauthService;
 import nonapi.io.github.classgraph.utils.URLPathEncoder;
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -15,18 +21,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
-import org.springframework.http.MediaType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-
-import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 
 /**
  * @author pengzh
@@ -37,8 +41,22 @@ import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 @RequestMapping("/oauth")
 public class OauthController extends BaseController {
 
-    @Resource
+    private static final Logger log = LoggerFactory.getLogger(OauthController.class);
+
+    @Autowired
     private GiteeConfig giteeConfig;
+
+    @Autowired
+    private ISysUserService userService;
+
+    @Autowired
+    private ISysRoleService roleService;
+
+    @Autowired
+    private ISysDeptService deptService;
+
+    @Autowired
+    private SysOauthService oauthService;
 
     /**
      * 获得跳转到Gitee登录页的url,前台直接a连接访问
@@ -91,10 +109,10 @@ public class OauthController extends BaseController {
             //获取到accessToken
 
             String json = EntityUtils.toString(response.getEntity());
-            System.out.println("获取到的token为：" + json);
+            log.info("获取到的token为：" + json);
             JSONObject jsonObject = JSON.parseObject(json);
             String accessToken = jsonObject.getString("access_token");
-            System.out.println("获取到的access_token：" + accessToken);
+            log.info("获取到的access_token：", accessToken);
 
             //gitee还需要再去请求user去获取数据
             //  GiteeUser giteeUser =  giteeComponent.getGiteeUser(json);
@@ -104,24 +122,26 @@ public class OauthController extends BaseController {
             HttpResponse responseUser = httpClientUser.execute(httpPostUser);
 
             String user = EntityUtils.toString(responseUser.getEntity());
-            System.out.println("gitee用户信息" + user);
+            log.info("gitee用户信息", user);
 
             JSONObject jsonObjectUser = JSON.parseObject(user);
             String id = jsonObjectUser.getString("id");
-            System.out.println(id);
+            log.info(id);
             String name = jsonObjectUser.getString("name");
-            System.out.println(name);
+            log.info(name);
             String bio = jsonObjectUser.getString("bio");
-            System.out.println(bio);
-
+            log.info(bio);
+            SysUser sysUser = new SysUser();
+            sysUser.setNickName(name);
+            sysUser.setUserName(name);
             //知道当前是哪个社交用户登录成功
             //1、当前用户如果是第一次进网站，就自动注册进来（为当前社交用户生成一个会员信息账号,以后这个社交账号就对应指定的会员）
             //登录或者注册这个社交用户
-//            R r = memberFeignService.oauth2Login(giteeUser);
+             oauthService.login(sysUser);
             if (true) {
 //                MemberRespVo memberRespVo = r.getData(new TypeReference<MemberRespVo>() {
 //                });
-                logger.info("登录成功，用户信息：" + jsonObjectUser);
+                logger.info("登录成功，用户信息：", jsonObjectUser);
                 //TODO 1、默认发的令牌 session=dadas,作用域只是当前域，（解决子域与父域session共享问题）
                 //TODO 2、使用json的序列化方式来序列化对象数据到redis中
                 //session.setAttribute(AuthServerConstant.SESSION_LOGIN_KEY, memberRespVo);
