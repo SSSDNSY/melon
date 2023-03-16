@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">若依后台管理系统</h3>
+      <h3 class="title">MELON</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-  import {getCodeImg, getGiteeCode} from "@/api/login";
+  import {getCodeImg, getGiteeCode,callbackGitee} from "@/api/login";
   import Cookies from "js-cookie";
   import {decrypt, encrypt} from '@/utils/jsencrypt'
 
@@ -174,10 +174,13 @@
           }
         });
       },
-      oauthGitee() {
-        getGiteeCode().then((d) => {
+      handlerOauth() {
+        callbackGitee().then((d) => {
           console.log(d)
-          this.$router.push({path: d.data}).catch(() => {
+          this.$store.dispatch("Oauth", this.loginForm).then(() => {
+            this.$router.push({path: this.redirect || "/"}).catch(() => {
+            });
+          }).catch(() => {
           });
         }).catch(() => {
           if (this.captchaEnabled) {
@@ -185,6 +188,7 @@
           }
         });
       }
+
     }
   };
 </script>
