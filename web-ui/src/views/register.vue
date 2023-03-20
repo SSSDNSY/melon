@@ -61,7 +61,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-register-footer">
-      <span>Copyright © 2018-2022 melon All Rights Reserved.</span>
+      <span>Copyright © 2023-???? melon All Rights Reserved.</span>
     </div>
   </div>
 </template>

@@ -46,8 +46,9 @@ const user = {
       })
     },
     Oauth({commit}, data) {
-      setToken(data.token)
-      commit('SET_TOKEN', data.token)
+      console.log("oauth token data 2 "+data)
+      setToken(data)
+      commit('SET_TOKEN', data)
     },
 
     // 获取用户信息

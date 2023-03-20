@@ -1,24 +1,22 @@
 package fun.sssdnsy.web.service;
 
-import fun.sssdnsy.constant.CacheConstants;
+import com.alibaba.fastjson2.JSONObject;
 import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.core.domain.entity.SysUser;
 import fun.sssdnsy.core.domain.model.LoginUser;
-import fun.sssdnsy.core.redis.RedisCache;
 import fun.sssdnsy.exception.ServiceException;
-import fun.sssdnsy.exception.user.CaptchaException;
-import fun.sssdnsy.exception.user.CaptchaExpireException;
 import fun.sssdnsy.exception.user.UserPasswordNotMatchException;
 import fun.sssdnsy.manager.AsyncManager;
 import fun.sssdnsy.manager.factory.AsyncFactory;
 import fun.sssdnsy.security.context.AuthenticationContextHolder;
-import fun.sssdnsy.service.ISysConfigService;
 import fun.sssdnsy.service.ISysUserService;
 import fun.sssdnsy.utils.DateUtils;
 import fun.sssdnsy.utils.MessageUtils;
+import fun.sssdnsy.utils.SecurityUtils;
 import fun.sssdnsy.utils.ServletUtils;
-import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.ip.IpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -35,6 +33,10 @@ import javax.annotation.Resource;
  */
 @Component
 public class SysOauthService {
+
+    private static final Logger log = LoggerFactory.getLogger(SysOauthService.class);
+    public static final String INIT_PASSWORD = "admin123";
+
     @Autowired
     private TokenService tokenService;
 
@@ -42,27 +44,44 @@ public class SysOauthService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private RedisCache redisCache;
-
-    @Autowired
     private ISysUserService userService;
 
-    @Autowired
-    private ISysConfigService configService;
 
     /**
      * 登录验证
      *
      * @return 结果
      */
-    public String login(SysUser sysUser) {
+    public String checkIn(JSONObject userInfo) {
 
-        String username = "";
-        String password = "";
-        String code;
-        String uuid;
-        // 用户验证
+        SysUser sysUser = parseSysUserFromUserInfo(userInfo);
+        SysUser dbUser = userService.selectUserById(sysUser.getUserId());
+
         Authentication authentication = null;
+        LoginUser loginUser = null;
+        String username = null;
+        String password = INIT_PASSWORD;
+        if (dbUser != null) {  //已注册
+            username = dbUser.getUserName();
+
+        } else { //未注册
+            genPassword4SocialUser(sysUser);
+            username = sysUser.getUserName();
+            userService.insertUser(sysUser);
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.REGISTER, MessageUtils.message("user.register.success")));
+        }
+        authentication = getAuthentication(username, password);
+
+        AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
+        loginUser = (LoginUser) authentication.getPrincipal();
+        recordLoginInfo(loginUser.getUserId());
+
+        // 生成token
+        return tokenService.createToken(loginUser);
+    }
+
+    public Authentication getAuthentication(String username, String password) {
+        Authentication authentication;
         try {
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
             AuthenticationContextHolder.setContext(authenticationToken);
@@ -79,34 +98,35 @@ public class SysOauthService {
         } finally {
             AuthenticationContextHolder.clearContext();
         }
-        AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
-        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-        recordLoginInfo(loginUser.getUserId());
-        // 生成token
-        return tokenService.createToken(loginUser);
+        return authentication;
     }
 
-    /**
-     * 校验验证码
-     *
-     * @param username 用户名
-     * @param code     验证码
-     * @param uuid     唯一标识
-     * @return 结果
-     */
-    public void validateCaptcha(String username, String code, String uuid) {
-        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
-        String captcha = redisCache.getCacheObject(verifyKey);
-        redisCache.deleteObject(verifyKey);
-        if (captcha == null) {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
-            throw new CaptchaExpireException();
-        }
-        if (!code.equalsIgnoreCase(captcha)) {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
-            throw new CaptchaException();
-        }
+    private SysUser parseSysUserFromUserInfo(JSONObject userInfo) {
+        SysUser sysUser = new SysUser();
+        sysUser.setUserId(userInfo.getLong("id"));
+        sysUser.setNickName(userInfo.getString("name"));
+        sysUser.setUserName(userInfo.getString("name"));
+        sysUser.setAvatar(userInfo.getString("avatar_url"));
+        sysUser.setLoginIp(IpUtils.getIpAddr(ServletUtils.getRequest()));
+        sysUser.setLoginDate(DateUtils.getNowDate());
+        sysUser.setRoleIds(new Long[]{1l});
+        sysUser.setPostIds(new Long[]{4l});
+        sysUser.setCreateBy("sys");
+        sysUser.setCreateTime(userInfo.getDate("created_at"));
+        sysUser.setUpdateBy("sys");
+        sysUser.setUpdateTime(userInfo.getDate("updated_at"));
+        sysUser.setRemark(userInfo.getString("remark"));
+        return sysUser;
     }
+
+    private void genPassword4SocialUser(SysUser sysUser) {
+        //String password =RandomStringUtils.randomAscii(16);
+        String password = INIT_PASSWORD;
+        String encryptPassword = SecurityUtils.encryptPassword(password);
+        sysUser.setPassword(encryptPassword);
+        log.info(">>> create user:[{}],password:[{}],password:[{}]", sysUser.getUserName(), password, encryptPassword);
+    }
+
 
     /**
      * 记录登录信息

@@ -71,7 +71,8 @@
           <img
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAvFJREFUWEe1l1uIjkEYx3+bKyUUq4RyinCh2CQlwpXNMYQruzmvw41yLJS1RSk5LkqhiEVOyYXDBWHZUKSUzYVSIofCrf5fM9vsmHnf+b59PfVefDPP/J//zDfP8/ynivKsPzAHGAH0BfqY5V+BL8A74BrwKRW2KtFxOTAbmJXofwO4DpzK888jMB9YD0zNA4rMPwAOAVdi67MIHAYaKgzsLzsCrAthxQjcBaYVFNzC3AOm+5ghAueBxQUHt3AXgCUutk9gF7DzPwW3sLsBxSmZS2ANcNQLXgfcBmqApeZL4XcJOAO8NsfuZ8Na4JhLoCfwBBjloQ8BPjhj44HJZkzjdm4wYL+nwGNnzWjgjYf7FpgI/LQnsB3YE9jaIOBjypYzfHoD3wLzO4BGS+A9MDTgtAjQcXbF5gJXAwDtwDARmAncikQogsBC4GIEv1YEjgOrAg4nIuOVnEYzsDKwsFkEdGkmeJO/gB6VRMpY8xmo9uZbRSD0/+t2KwOKtPuBntIuAt+BXl6kZ4FT6SoZ9QPlv2s/ROA30D2Qp8rfIk2FZ7UH+EcEXgJjA5EkOCQ0irJHwCQP7JUIKM8XBKJI+UhUFGHDgReBi90iAnuBrYEoaskziohuNhJSU00isAw4HQm0IkVW5ZCUqroc8akTgXFAK9At4rQZ2FfhSWRtTpA1thccBDaYINJxMlcHngVayrgTErDzzOnGuJcqrSUw0lRE1QOlywFgSuD4Vc1EJKYVleu60P0STkwao80VJI3ANrNQIkRNSr817ppSye337pzS+WFCGe/oMy6BAcAdYIxB1F8iSa12utGMqURLJWVZiqYs7V4gviZU9VPrFAk5yLFcawK2ZCzq1OJDqtgloeolJSttZ81e0liM/cCmyOQ/+iL2LnBJuFidFG0kyElATznfguIm62UkPaid2PQUYAoBv+vpnahLdzNEOO9tqDWqByJSm0hA7wrp/ufGPxjYkkkhYH3rAQnJvDsgwgOBcym39y/8togjtPtXzgAAAABJRU5ErkJggg=="
             width="22" height="22" title="GitHub" style="vertical-align: middle; margin-left: .8em;">
-          <a href="https://gitee.com/oauth/authorize?client_id=3a19b0430710fdd5cf0531bb03a40527a6678d71b831b8722b493dcb4148a645&redirect_uri=http://127.0.0.1:8080/melon/oauth/callback/gitee&response_type=code&state=1">
+          <!--      <a href="https://gitee.com/oauth/authorize?client_id=3a19b0430710fdd5cf0531bb03a40527a6678d71b831b8722b493dcb4148a645&redirect_uri=http://127.0.0.1:8080/melon/oauth/callback/gitee&response_type=code&state=1">-->
+          <a :href="oauthUrl" >
             <img
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAtRJREFUWEfFV01rE1EUPWdiQQRbxLoRtM0k06KuRBdulLpUkpQKreBC3BXF/gIFFSz+gKKi24JoC0IzoduKLnThx0q0TjpJ1Z0VaUURbObKTD6YTOcrsSFZhXc/zpn37rnvPiLmb05V+3bKjhwooxSoQvQT2GuHC/CdgjUhTAgX/nAzP2Ga63FSM8qpMKAdkgSmCFwQoC/K37YTWBfgESuYyawaH8JiQgkUUtptEUwB6I0D7OOzQWIms2JcD4oPJJBXtTkC420CN4UJMJ8zjQm/XL4ECqpWEmBwO8DrOQiUM6aR9ObcQkBXtW8A+rcT3JVrLWsa+9y5mwjoqvYcwMkOgdfTvsiaxinXzlT/1gruWiA4OUvL0pUEXp4tFr/GJVlIpY6JKK+bvpqYrhemswM1qb0KqnaKTGRKxfm4oF4/XdXEs7bBCk7YEnUI6Kp2D8Bl3yqldTyzsvKmXfBafi8Be/l+1jSucGF4eLfyt7IKcI8XRAQPcyVj0r1eSKbHK8SRuIQS4IAAl7b6yw+rJzFAPTU0BpGnfglF5GKuVJyt2/SktgRiJC54pB95jnoy/RjkeT/nTSuRHCt/LDvbOJgegcKlyKStOIg8oZ7U3oI46heXNY2GTBfU9E0FvNFK/khfwTvmVe0zgQOtErAgtxQLz6JAmOCQCB74HjHwhbqq/QKwq1UCsOR0tlyMJBCiAtv0u/sEOnEE3p3xaUTOhotzBJ0oQs/xBBGAXYRhMmxXBVaP0ju6vPyz0T+2tuKqyZFhSCNqj4DczZrFq3XwfGroDEUWfdViN6KwVuwmYDciSwnvgrYsvecf3D9qrbgmE9/LyE0gSu9+9sV0+nDF4vuA2OplZBuDruP/IeA3B7iINF/HDonqBNw0kJCYlIp8aunrFe4XyEGCd4Li6B1IXNXavZHMRaJ7Q2mdRFfH8oZ+u/kwaexEN59mDRLdfJy6ZdSp5/k/afF2RPisToMAAAAASUVORK5CYII="
               width="22" height="22" title="Gitee" style="vertical-align: middle; margin-left: .8em;">
@@ -81,186 +82,205 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2018-2022 melon All Rights Reserved.</span>
+      <span>Copyright © 2023-???? melon All Rights Reserved.</span>
     </div>
   </div>
 </template>
 
 <script>
-  import {getCodeImg, getGiteeCode,callbackGitee} from "@/api/login";
-  import Cookies from "js-cookie";
-  import {decrypt, encrypt} from '@/utils/jsencrypt'
+import {getCodeImg, getGiteeCode} from "@/api/login";
+import Cookies from "js-cookie";
+import {decrypt, encrypt} from '@/utils/jsencrypt'
 
-  export default {
-    name: "Login",
-    data() {
-      return {
-        codeUrl: "",
-        loginForm: {
-          username: "admin",
-          password: "admin123",
-          rememberMe: false,
-          code: "",
-          uuid: "",
-          giteeAuthUrl: ""
-        },
-        loginRules: {
-          username: [
-            {required: true, trigger: "blur", message: "请输入您的账号"}
-          ],
-          password: [
-            {required: true, trigger: "blur", message: "请输入您的密码"}
-          ],
-          code: [{required: true, trigger: "change", message: "请输入验证码"}]
-        },
-        loading: false,
-        // 验证码开关
-        captchaEnabled: true,
-        // 注册开关
-        register: false,
-        redirect: undefined
+export default {
+  name: "Login",
+  data() {
+    return {
+      codeUrl: "",
+      oauthUrl: "",
+      loginForm: {
+        username: "admin",
+        password: "admin123",
+        rememberMe: false,
+        code: "",
+        uuid: "",
+        giteeAuthUrl: ""
+      },
+      loginRules: {
+        username: [
+          {required: true, trigger: "blur", message: "请输入您的账号"}
+        ],
+        password: [
+          {required: true, trigger: "blur", message: "请输入您的密码"}
+        ],
+        code: [{required: true, trigger: "change", message: "请输入验证码"}]
+      },
+      loading: false,
+      // 验证码开关
+      captchaEnabled: true,
+      // 注册开关
+      register: false,
+      redirect: undefined
+    };
+  },
+  watch: {
+    $route: {
+      handler: function (route) {
+        console.info("watch handler")
+        this.redirect = route.query && route.query.redirect;
+      },
+      immediate: true
+    }
+  },
+  created() {
+    console.info("created")
+    this.getCode();
+    this.getOauthUrl();
+    this.getCookie();
+    this.getOauth2Toekn();
+  },
+  activated() {
+    console.info("activated")
+    this.getOauth2Toekn();
+  },
+  methods: {
+    getCode() {
+      getCodeImg().then(res => {
+        this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled;
+        if (this.captchaEnabled) {
+          this.codeUrl = "data:image/gif;base64," + res.img;
+          this.loginForm.uuid = res.uuid;
+        }
+      });
+    },
+    getOauthUrl() {
+      getGiteeCode().then(res => {
+        //console.log("获取到oauth的地址为：", res);
+        this.oauthUrl = res.msg;
+      });
+    },
+    getCookie() {
+      const username = Cookies.get("username");
+      const password = Cookies.get("password");
+      const rememberMe = Cookies.get('rememberMe')
+      const oauth2Toekn = Cookies.get('oauth2Toekn')
+      this.loginForm = {
+        username: username === undefined ? this.loginForm.username : username,
+        password: password === undefined ? this.loginForm.password : decrypt(password),
+        rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
       };
     },
-    watch: {
-      $route: {
-        handler: function (route) {
-          this.redirect = route.query && route.query.redirect;
-        },
-        immediate: true
+    getOauth2Toekn() {
+      const token = Cookies.get('oauth2Token');
+      console.log("oauth token data 1 "+token)
+      if (token != undefined) {
+        this.handlerOauth(token);
       }
     },
-    created() {
-      this.getCode();
-      this.getCookie();
-    },
-    methods: {
-      getCode() {
-        getCodeImg().then(res => {
-          this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled;
-          if (this.captchaEnabled) {
-            this.codeUrl = "data:image/gif;base64," + res.img;
-            this.loginForm.uuid = res.uuid;
+    handleLogin() {
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true;
+          if (this.loginForm.rememberMe) {
+            Cookies.set("username", this.loginForm.username, {expires: 30});
+            Cookies.set("password", encrypt(this.loginForm.password), {expires: 30});
+            Cookies.set('rememberMe', this.loginForm.rememberMe, {expires: 30});
+          } else {
+            Cookies.remove("username");
+            Cookies.remove("password");
+            Cookies.remove('rememberMe');
           }
-        });
-      },
-      getCookie() {
-        const username = Cookies.get("username");
-        const password = Cookies.get("password");
-        const rememberMe = Cookies.get('rememberMe')
-        this.loginForm = {
-          username: username === undefined ? this.loginForm.username : username,
-          password: password === undefined ? this.loginForm.password : decrypt(password),
-          rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
-        };
-      },
-      handleLogin() {
-        this.$refs.loginForm.validate(valid => {
-          if (valid) {
-            this.loading = true;
-            if (this.loginForm.rememberMe) {
-              Cookies.set("username", this.loginForm.username, {expires: 30});
-              Cookies.set("password", encrypt(this.loginForm.password), {expires: 30});
-              Cookies.set('rememberMe', this.loginForm.rememberMe, {expires: 30});
-            } else {
-              Cookies.remove("username");
-              Cookies.remove("password");
-              Cookies.remove('rememberMe');
-            }
-            this.$store.dispatch("Login", this.loginForm).then(() => {
-              this.$router.push({path: this.redirect || "/"}).catch(() => {
-              });
-            }).catch(() => {
-            });
-          }
-        });
-      },
-      handlerOauth() {
-        callbackGitee().then((d) => {
-          console.log(d)
-          this.$store.dispatch("Oauth", this.loginForm).then(() => {
+          this.$store.dispatch("Login", this.loginForm).then(() => {
             this.$router.push({path: this.redirect || "/"}).catch(() => {
             });
           }).catch(() => {
           });
-        }).catch(() => {
-          if (this.captchaEnabled) {
-            this.getCode();
-          }
+        }
+      });
+    },
+    handlerOauth(token) {
+      this.$store.dispatch("Oauth", token).then(() => {
+        console.log("handlerOauth...")
+        this.$router.push({path: this.redirect || "/"}).catch(() => {
         });
-      }
-
+      }).catch(() => {
+      });
     }
-  };
+
+  }
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-  .login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-image: url("../assets/images/login-background.jpg");
-    background-size: cover;
-  }
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-image: url("../assets/images/login-background.jpg");
+  background-size: cover;
+}
 
-  .title {
-    margin: 0px auto 30px auto;
-    text-align: center;
-    color: #707070;
-  }
+.title {
+  margin: 0px auto 30px auto;
+  text-align: center;
+  color: #707070;
+}
 
-  .login-form {
-    border-radius: 6px;
-    background: #ffffff;
-    width: 400px;
-    padding: 25px 25px 5px 25px;
+.login-form {
+  border-radius: 6px;
+  background: #ffffff;
+  width: 400px;
+  padding: 25px 25px 5px 25px;
 
   .el-input {
     height: 38px;
 
-  input {
-    height: 38px;
-  }
+    input {
+      height: 38px;
+    }
 
   }
+
   .input-icon {
     height: 39px;
     width: 14px;
     margin-left: .8em;
   }
 
-  }
-  .login-tip {
-    font-size: 13px;
-    text-align: center;
-    color: #bfbfbf;
-  }
+}
 
-  .login-code {
-    width: 33%;
-    height: 38px;
-    float: right;
-  }
+.login-tip {
+  font-size: 13px;
+  text-align: center;
+  color: #bfbfbf;
+}
 
-  img {
-    cursor: pointer;
-    vertical-align: middle;
-  }
+.login-code {
+  width: 33%;
+  height: 38px;
+  float: right;
+}
 
-  .el-login-footer {
-    height: 40px;
-    line-height: 40px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    font-family: Arial;
-    font-size: 12px;
-    letter-spacing: 1px;
-  }
+img {
+  cursor: pointer;
+  vertical-align: middle;
+}
 
-  .login-code-img {
-    height: 38px;
-  }
+.el-login-footer {
+  height: 40px;
+  line-height: 40px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-family: Arial;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.login-code-img {
+  height: 38px;
+}
 </style>
