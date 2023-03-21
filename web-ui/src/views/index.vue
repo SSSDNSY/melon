@@ -25,7 +25,7 @@
       </el-col>
     </el-row>
 
-    
+
   </div>
 </template>
 
@@ -68,6 +68,9 @@ export default {
     return {
       lineChartData: lineChartData.newVisitis
     }
+  },
+  created() {
+    console.log("index created.");
   },
   methods: {
     handleSetLineChartData(type) {

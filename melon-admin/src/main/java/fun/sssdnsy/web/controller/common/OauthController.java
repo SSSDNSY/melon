@@ -122,7 +122,6 @@ public class OauthController extends BaseController {
 
         JSONObject jsonObjectUser = JSON.parseObject(user);
 
-
         //登录或者注册这个社交用户
         token = oauthService.checkIn(jsonObjectUser);
         setTokenCookie(token);
@@ -136,7 +135,7 @@ public class OauthController extends BaseController {
         Cookie cookie = new Cookie("oauth2Token", token);
         cookie.setPath("/");
         cookie.setMaxAge(tokenExpireTime*60);
-        cookie.setHttpOnly(true);
+        cookie.setHttpOnly(false);
         httpServletResponse.addCookie(cookie);
     }
 

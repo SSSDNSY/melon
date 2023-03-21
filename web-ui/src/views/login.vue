@@ -128,20 +128,19 @@ export default {
       handler: function (route) {
         console.info("watch handler")
         this.redirect = route.query && route.query.redirect;
+        this.getOauth2Token();
       },
       immediate: true
     }
   },
   created() {
-    console.info("created")
+    this.getAuthCookies("created")
     this.getCode();
     this.getOauthUrl();
     this.getCookie();
-    this.getOauth2Toekn();
   },
-  activated() {
-    console.info("activated")
-    this.getOauth2Toekn();
+  updated(){
+    this.getOauth2Token("updated");
   },
   methods: {
     getCode() {
@@ -163,16 +162,20 @@ export default {
       const username = Cookies.get("username");
       const password = Cookies.get("password");
       const rememberMe = Cookies.get('rememberMe')
-      const oauth2Toekn = Cookies.get('oauth2Toekn')
       this.loginForm = {
         username: username === undefined ? this.loginForm.username : username,
         password: password === undefined ? this.loginForm.password : decrypt(password),
         rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
       };
     },
-    getOauth2Toekn() {
+    getAuthCookies(tag){
       const token = Cookies.get('oauth2Token');
-      console.log("oauth token data 1 "+token)
+      console.log(tag," oauthToken cookie : ", token)
+      return token
+    },
+    getOauth2Token() {
+      const token = this.getAuthCookies("getOauth2Token")
+        //debugger
       if (token != undefined) {
         this.handlerOauth(token);
       }
