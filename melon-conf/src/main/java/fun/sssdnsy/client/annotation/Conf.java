@@ -17,4 +17,5 @@ public @interface Conf {
     String defaultValue() default "";
 
     boolean callback() default true;
+    
 }
