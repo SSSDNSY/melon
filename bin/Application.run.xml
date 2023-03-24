@@ -1,6 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" activateToolWindowBeforeRun="false" singleton="false" nameIsGenerated="true">
     <module name="melon-admin" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="Application" />
+    <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="fun.sssdnsy.*" />

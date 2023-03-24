@@ -18,6 +18,7 @@
         <module>melon-generator</module>
         <module>melon-quartz</module>
         <module>melon-system</module>
+        <module>melon-conf</module>
     </modules>
 
     <properties>
@@ -50,6 +51,7 @@
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
         <jwt.version>0.9.1</jwt.version>
+        <lombok.version>1.18.26</lombok.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -197,6 +199,11 @@
                 <version>${melon.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
