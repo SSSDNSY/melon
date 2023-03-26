@@ -4,25 +4,17 @@ import fun.sssdnsy.annotation.Log;
 import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.core.page.TableDataInfo;
-import fun.sssdnsy.domain.XxlConfNode;
 import fun.sssdnsy.domain.XxlConfProject;
 import fun.sssdnsy.enums.BusinessType;
-import fun.sssdnsy.mapper.XxlConfProjectDao;
-import fun.sssdnsy.service.IXxlConfNodeService;
 import fun.sssdnsy.service.IXxlConfProjectService;
 import fun.sssdnsy.utils.poi.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -97,7 +89,7 @@ public class ConfController extends BaseController {
     @PreAuthorize("@ss.hasPermi('config:project:remove')")
     @Log(title = "参数管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{appname}")
-    public AjaxResult remove(@PathVariable  String appname) {
+    public AjaxResult remove(@PathVariable String appname) {
         confProjectService.deleteConfigByName(new String[]{appname});
         return success();
     }

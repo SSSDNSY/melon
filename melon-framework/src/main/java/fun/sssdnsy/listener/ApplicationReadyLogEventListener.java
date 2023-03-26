@@ -47,9 +47,9 @@ public class ApplicationReadyLogEventListener implements ApplicationListener<App
 
         try {
             String ip = InetAddress.getLocalHost().getHostAddress();
-            LOG.info("\tInfoEndpoint : http://{}:{}{}monitor/info", new Object[]{ip, port, path});
-            LOG.info("\tEnvEndpoint : http://{}:{}{}monitor/env", new Object[]{ip, port, path});
-            LOG.info("\tHealthEndpoint : http://{}:{}{}monitor/health", new Object[]{ip, port, path});
+            LOG.info("\tInfoEndpoint : http://{}:{}{}/monitor/info", new Object[]{ip, port, path});
+            LOG.info("\tEnvEndpoint : http://{}:{}{}/monitor/env", new Object[]{ip, port, path});
+            LOG.info("\tHealthEndpoint : http://{}:{}{}/monitor/health", new Object[]{ip, port, path});
         } catch (UnknownHostException var8) {
             LOG.warn("UnknownHostException: {}", var8.getMessage());
         }

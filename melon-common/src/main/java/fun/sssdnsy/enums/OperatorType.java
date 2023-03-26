@@ -5,8 +5,7 @@ package fun.sssdnsy.enums;
  *
  * @author sssdnsy
  */
-public enum OperatorType
-{
+public enum OperatorType {
     /**
      * 其它
      */

@@ -1,15 +1,15 @@
 package fun.sssdnsy.service;
 
-import java.util.List;
 import fun.sssdnsy.domain.SysOperLog;
+
+import java.util.List;
 
 /**
  * 操作日志 服务层
  *
  * @author sssdnsy
  */
-public interface ISysOperLogService
-{
+public interface ISysOperLogService {
     /**
      * 新增操作日志
      *

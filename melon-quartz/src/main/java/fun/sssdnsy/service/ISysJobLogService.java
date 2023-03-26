@@ -1,15 +1,15 @@
 package fun.sssdnsy.service;
 
-import java.util.List;
 import fun.sssdnsy.domain.SysJobLog;
+
+import java.util.List;
 
 /**
  * 定时任务调度日志信息信息 服务层
  *
  * @author sssdnsy
  */
-public interface ISysJobLogService
-{
+public interface ISysJobLogService {
     /**
      * 获取quartz调度器日志的计划任务
      *

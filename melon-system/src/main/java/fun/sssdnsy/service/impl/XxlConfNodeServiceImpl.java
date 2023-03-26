@@ -49,7 +49,10 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
     @Value("${melon.conf.beat-time}")
     private int beatTime = 30;
-
+    private ExecutorService executorService = Executors.newCachedThreadPool();
+    private volatile boolean executorStoped = false;
+    private volatile List<Integer> readedMessageIds = Collections.synchronizedList(new ArrayList<Integer>());
+    private Map<String, List<DeferredResult>> confDeferredResultMap = new ConcurrentHashMap<>();
 
     @Override
     public boolean ifHasProjectPermission(String loginEnv, String appname) {
@@ -86,6 +89,68 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         return maps;
 
     }
+
+	/*@Override
+	public String syncConf(String appname,  String loginEnv) {
+
+		// valid
+		XxlConfEnv xxlConfEnv = xxlConfEnvDao.load(loginEnv);
+		if (xxlConfEnv == null) {
+			return new String( "配置Env非法");
+		}
+		XxlConfProject group = xxlConfProjectDao.load(appname);
+		if (group==null) {
+			return new String( "AppName非法");
+		}
+
+		// project permission
+		if (!ifHasProjectPermission( loginEnv, appname)) {
+			return new String( "您没有该项目的配置权限,请联系管理员开通");
+		}
+
+		List<XxlConfNode> confNodeList = xxlConfNodeDao.pageList(0, 10000, loginEnv, appname, null);
+		if (CollectionUtils.isEmpty(confNodeList)) {
+			return new String( "操作失败，该项目下不存在配置项");
+		}
+
+		// un sync node
+		List<XxlConfNode> unSyncConfNodeList = new ArrayList<>();
+		for (XxlConfNode node: confNodeList) {
+			String realNodeValue = xxlConfZKManager.get(node.getEnv(), node.getKey());
+			if (!node.getValue().equals(realNodeValue)) {
+				unSyncConfNodeList.add(node);
+			}
+		}
+
+		if (CollectionUtils.isEmpty(unSyncConfNodeList)) {
+			return new String( "操作失败，该项目下不存未同步的配置项");
+		}
+
+		// do sync
+		String logContent = "操作成功，共计同步 " + unSyncConfNodeList.size() + " 条配置：";
+		for (XxlConfNode node: unSyncConfNodeList) {
+
+			xxlConfZKManager.set(node.getEnv(), node.getKey(), node.getValue());
+
+			// node log
+			XxlConfNodeLog nodeLog = new XxlConfNodeLog();
+			nodeLog.setEnv(node.getEnv());
+			nodeLog.setKey(node.getKey());
+			nodeLog.setTitle(node.getTitle() + "(全量同步)" );
+			nodeLog.setValue(node.getValue());
+			nodeLog.setOptuser(loginUser.getUsername());
+			xxlConfNodeLogDao.add(nodeLog);
+			xxlConfNodeLogDao.deleteTimeout(node.getEnv(), node.getKey(), 10);
+
+			logContent += "<br>" + node.getKey();
+		}
+		logContent.substring(logContent.length() - 1);
+
+		return new String("SUCCESS".getCode(), logContent);
+	}*/
+
+
+    // ---------------------- rest api ----------------------
 
     @Override
     public String delete(String key, String loginEnv) {
@@ -248,68 +313,6 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         return "SUCCESS";
     }
 
-	/*@Override
-	public String syncConf(String appname,  String loginEnv) {
-
-		// valid
-		XxlConfEnv xxlConfEnv = xxlConfEnvDao.load(loginEnv);
-		if (xxlConfEnv == null) {
-			return new String( "配置Env非法");
-		}
-		XxlConfProject group = xxlConfProjectDao.load(appname);
-		if (group==null) {
-			return new String( "AppName非法");
-		}
-
-		// project permission
-		if (!ifHasProjectPermission( loginEnv, appname)) {
-			return new String( "您没有该项目的配置权限,请联系管理员开通");
-		}
-
-		List<XxlConfNode> confNodeList = xxlConfNodeDao.pageList(0, 10000, loginEnv, appname, null);
-		if (CollectionUtils.isEmpty(confNodeList)) {
-			return new String( "操作失败，该项目下不存在配置项");
-		}
-
-		// un sync node
-		List<XxlConfNode> unSyncConfNodeList = new ArrayList<>();
-		for (XxlConfNode node: confNodeList) {
-			String realNodeValue = xxlConfZKManager.get(node.getEnv(), node.getKey());
-			if (!node.getValue().equals(realNodeValue)) {
-				unSyncConfNodeList.add(node);
-			}
-		}
-
-		if (CollectionUtils.isEmpty(unSyncConfNodeList)) {
-			return new String( "操作失败，该项目下不存未同步的配置项");
-		}
-
-		// do sync
-		String logContent = "操作成功，共计同步 " + unSyncConfNodeList.size() + " 条配置：";
-		for (XxlConfNode node: unSyncConfNodeList) {
-
-			xxlConfZKManager.set(node.getEnv(), node.getKey(), node.getValue());
-
-			// node log
-			XxlConfNodeLog nodeLog = new XxlConfNodeLog();
-			nodeLog.setEnv(node.getEnv());
-			nodeLog.setKey(node.getKey());
-			nodeLog.setTitle(node.getTitle() + "(全量同步)" );
-			nodeLog.setValue(node.getValue());
-			nodeLog.setOptuser(loginUser.getUsername());
-			xxlConfNodeLogDao.add(nodeLog);
-			xxlConfNodeLogDao.deleteTimeout(node.getEnv(), node.getKey(), 10);
-
-			logContent += "<br>" + node.getKey();
-		}
-		logContent.substring(logContent.length() - 1);
-
-		return new String("SUCCESS".getCode(), logContent);
-	}*/
-
-
-    // ---------------------- rest api ----------------------
-
     @Override
     public Map<String, String> find(String accessToken, String env, List<String> keys) {
 
@@ -414,6 +417,9 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         return null;
     }
 
+
+    // ---------------------- start stop ----------------------
+
     @Override
     public boolean checkConfigKeyUnique(XxlConfNode confNode) {
         return false;
@@ -423,6 +429,9 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     public int insertConfig(XxlConfNode confNode) {
         return 0;
     }
+
+
+    // ---------------------- thread ----------------------
 
     @Override
     public int updateConfig(XxlConfNode config) {
@@ -434,9 +443,6 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
     }
 
-
-    // ---------------------- start stop ----------------------
-
     @Override
     public void afterPropertiesSet() throws Exception {
 //        startThead();
@@ -446,16 +452,6 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     public void destroy() throws Exception {
         stopThread();
     }
-
-
-    // ---------------------- thread ----------------------
-
-    private ExecutorService executorService = Executors.newCachedThreadPool();
-    private volatile boolean executorStoped = false;
-
-    private volatile List<Integer> readedMessageIds = Collections.synchronizedList(new ArrayList<Integer>());
-
-    private Map<String, List<DeferredResult>> confDeferredResultMap = new ConcurrentHashMap<>();
 
     public void startThead() throws Exception {
 

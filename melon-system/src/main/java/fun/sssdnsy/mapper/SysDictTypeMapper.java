@@ -1,15 +1,15 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
 import fun.sssdnsy.core.domain.entity.SysDictType;
+
+import java.util.List;
 
 /**
  * 字典表 数据层
  *
  * @author sssdnsy
  */
-public interface SysDictTypeMapper
-{
+public interface SysDictTypeMapper {
     /**
      * 根据条件分页查询字典类型
      *

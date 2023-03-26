@@ -1,18 +1,18 @@
 package fun.sssdnsy.service;
 
-import java.util.List;
-import java.util.Set;
 import fun.sssdnsy.core.domain.TreeSelect;
 import fun.sssdnsy.core.domain.entity.SysMenu;
 import fun.sssdnsy.domain.vo.RouterVo;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 菜单 业务层
  *
  * @author sssdnsy
  */
-public interface ISysMenuService
-{
+public interface ISysMenuService {
     /**
      * 根据用户查询系统菜单列表
      *
@@ -24,7 +24,7 @@ public interface ISysMenuService
     /**
      * 根据用户查询系统菜单列表
      *
-     * @param menu 菜单信息
+     * @param menu   菜单信息
      * @param userId 用户ID
      * @return 菜单列表
      */

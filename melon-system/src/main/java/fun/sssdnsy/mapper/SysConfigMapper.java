@@ -1,15 +1,15 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
 import fun.sssdnsy.domain.SysConfig;
+
+import java.util.List;
 
 /**
  * 参数配置 数据层
  *
  * @author sssdnsy
  */
-public interface SysConfigMapper
-{
+public interface SysConfigMapper {
     /**
      * 查询参数配置信息
      *

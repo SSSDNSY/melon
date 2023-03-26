@@ -1,7 +1,6 @@
 package fun.sssdnsy.mapper;
 
 import fun.sssdnsy.domain.XxlConfEnv;
-import fun.sssdnsy.domain.XxlConfProject;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,7 +22,7 @@ public interface XxlConfEnvDao {
 
     int update(XxlConfEnv xxlConfEnv);
 
-    int delete(@Param("env") String[]  env);
+    int delete(@Param("env") String[] env);
 
     XxlConfEnv load(@Param("env") String env);
 

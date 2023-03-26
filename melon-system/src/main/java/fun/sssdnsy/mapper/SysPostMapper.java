@@ -1,15 +1,15 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
 import fun.sssdnsy.domain.SysPost;
+
+import java.util.List;
 
 /**
  * 岗位信息 数据层
  *
  * @author sssdnsy
  */
-public interface SysPostMapper
-{
+public interface SysPostMapper {
     /**
      * 查询岗位数据集合
      *

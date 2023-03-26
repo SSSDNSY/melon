@@ -1,18 +1,17 @@
 package fun.sssdnsy.service;
 
-import java.util.List;
-
 import fun.sssdnsy.domain.SysJob;
-import org.quartz.SchedulerException;
 import fun.sssdnsy.exception.job.TaskException;
+import org.quartz.SchedulerException;
+
+import java.util.List;
 
 /**
  * 定时任务调度信息信息 服务层
  *
  * @author sssdnsy
  */
-public interface ISysJobService
-{
+public interface ISysJobService {
     /**
      * 获取quartz调度器的计划任务
      *

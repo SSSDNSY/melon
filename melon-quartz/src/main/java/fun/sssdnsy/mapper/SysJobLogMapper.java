@@ -1,15 +1,15 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
 import fun.sssdnsy.domain.SysJobLog;
+
+import java.util.List;
 
 /**
  * 调度任务日志信息 数据层
  *
  * @author sssdnsy
  */
-public interface SysJobLogMapper
-{
+public interface SysJobLogMapper {
     /**
      * 获取quartz调度器日志的计划任务
      *

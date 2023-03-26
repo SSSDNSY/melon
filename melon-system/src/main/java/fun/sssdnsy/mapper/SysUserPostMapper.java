@@ -1,15 +1,15 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
 import fun.sssdnsy.domain.SysUserPost;
+
+import java.util.List;
 
 /**
  * 用户与岗位关联表 数据层
  *
  * @author sssdnsy
  */
-public interface SysUserPostMapper
-{
+public interface SysUserPostMapper {
     /**
      * 通过用户ID删除用户和岗位关联
      *

@@ -1,15 +1,15 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
 import fun.sssdnsy.domain.SysRoleDept;
+
+import java.util.List;
 
 /**
  * 角色与部门关联表 数据层
  *
  * @author sssdnsy
  */
-public interface SysRoleDeptMapper
-{
+public interface SysRoleDeptMapper {
     /**
      * 通过角色ID删除角色和部门关联
      *

@@ -5,7 +5,6 @@ package fun.sssdnsy.core.domain.model;
  *
  * @author sssdnsy
  */
-public class RegisterBody extends LoginBody
-{
+public class RegisterBody extends LoginBody {
 
 }

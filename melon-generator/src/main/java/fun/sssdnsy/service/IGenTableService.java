@@ -1,16 +1,16 @@
 package fun.sssdnsy.service;
 
+import fun.sssdnsy.domain.GenTable;
+
 import java.util.List;
 import java.util.Map;
-import fun.sssdnsy.domain.GenTable;
 
 /**
  * 业务 服务层
  *
  * @author sssdnsy
  */
-public interface IGenTableService
-{
+public interface IGenTableService {
     /**
      * 查询业务列表
      *

@@ -5,8 +5,7 @@ package fun.sssdnsy.enums;
  *
  * @author sssdnsy
  */
-public enum DataSourceType
-{
+public enum DataSourceType {
     /**
      * 主库
      */

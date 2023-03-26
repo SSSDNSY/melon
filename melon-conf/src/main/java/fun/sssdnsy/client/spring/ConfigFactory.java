@@ -30,25 +30,73 @@ import java.lang.reflect.Field;
 @ToString
 public class ConfigFactory implements InstantiationAwareBeanPostProcessor, InitializingBean, DisposableBean, BeanNameAware, BeanFactoryAware {
 
-    private static Logger log = LoggerFactory.getLogger(ConfigFactory.class);
-
     private static final String placeHolderPrefix = "$Conf{";
-
     private static final String placeHolderSuffix = "}";
-
+    private static Logger log = LoggerFactory.getLogger(ConfigFactory.class);
+    private static BeanFactory beanFactory;
     private String envProp;
-
     private String adminAddress;
-
     private String env;
-
     private String accessToken;
-
     private String mirrorFile;
-
     private String beanName;
 
-    private static BeanFactory beanFactory;
+    public static void refreshBeanField(final BeanRefreshConfListener.BeanField beanField, final String value, Object bean) {
+        if (bean == null) {
+            bean = ConfigFactory.beanFactory.getBean(beanField.getBeanName());
+        }
+        if (bean == null) {
+            return;
+        }
+
+        BeanWrapper beanWrapper = new BeanWrapperImpl(bean);
+
+        PropertyDescriptor propertyDescriptor = null;
+        PropertyDescriptor[] propertyDescriptors = beanWrapper.getPropertyDescriptors();
+        if (propertyDescriptors != null && propertyDescriptors.length > 0) {
+            for (PropertyDescriptor item : propertyDescriptors) {
+                if (beanField.getProperty().equals(item.getName())) {
+                    propertyDescriptor = item;
+                }
+            }
+        }
+
+        if (propertyDescriptor != null && propertyDescriptor.getWriteMethod() != null) {
+            beanWrapper.setPropertyValue(beanField.getProperty(), value);
+            log.info(">>>>>>>>>>> Conf refreshBeanField[set] success, {}#{}:{}", beanField.getBeanName(), beanField.getProperty(), value);
+        } else {
+            final Object finalBean = bean;
+            ReflectionUtils.doWithFields(bean.getClass(), new ReflectionUtils.FieldCallback() {
+                @Override
+                public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
+                    if (beanField.getProperty().equals(field.getName())) {
+                        try {
+                            Object valueObje = FieldReflectionUtil.parseValue(field.getType(), value);
+                            field.setAccessible(true);
+                            field.set(finalBean, valueObje);
+                            log.info(">>>>>>>>>>> Conf refreshBeanField[filed] success, {}#{}:{}", beanField.getBeanName(), beanField.getProperty(), value);
+                        } catch (IllegalAccessException e) {
+                            throw new ConfException(e);
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    private static boolean xmlKeyValid(String originKey) {
+        boolean start = originKey.startsWith(placeHolderPrefix);
+        boolean end = originKey.endsWith(placeHolderSuffix);
+        return start && end;
+    }
+
+    private static String xmlKeyParse(String originKey) {
+        if (xmlKeyValid(originKey)) {
+            String key = originKey.substring(placeHolderPrefix.length(), originKey.length() - placeHolderSuffix.length());
+            return key;
+        }
+        return null;
+    }
 
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
@@ -107,49 +155,6 @@ public class ConfigFactory implements InstantiationAwareBeanPostProcessor, Initi
         return InstantiationAwareBeanPostProcessor.super.postProcessPropertyValues(pvs, pds, bean, beanName);
     }
 
-    public static void refreshBeanField(final BeanRefreshConfListener.BeanField beanField, final String value, Object bean) {
-        if (bean == null) {
-            bean = ConfigFactory.beanFactory.getBean(beanField.getBeanName());
-        }
-        if (bean == null) {
-            return;
-        }
-
-        BeanWrapper beanWrapper = new BeanWrapperImpl(bean);
-
-        PropertyDescriptor propertyDescriptor = null;
-        PropertyDescriptor[] propertyDescriptors = beanWrapper.getPropertyDescriptors();
-        if (propertyDescriptors != null && propertyDescriptors.length > 0) {
-            for (PropertyDescriptor item : propertyDescriptors) {
-                if (beanField.getProperty().equals(item.getName())) {
-                    propertyDescriptor = item;
-                }
-            }
-        }
-
-        if (propertyDescriptor != null && propertyDescriptor.getWriteMethod() != null) {
-            beanWrapper.setPropertyValue(beanField.getProperty(), value);
-            log.info(">>>>>>>>>>> Conf refreshBeanField[set] success, {}#{}:{}", beanField.getBeanName(), beanField.getProperty(), value);
-        } else {
-            final Object finalBean = bean;
-            ReflectionUtils.doWithFields(bean.getClass(), new ReflectionUtils.FieldCallback() {
-                @Override
-                public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
-                    if (beanField.getProperty().equals(field.getName())) {
-                        try {
-                            Object valueObje = FieldReflectionUtil.parseValue(field.getType(), value);
-                            field.setAccessible(true);
-                            field.set(finalBean, valueObje);
-                            log.info(">>>>>>>>>>> Conf refreshBeanField[filed] success, {}#{}:{}", beanField.getBeanName(), beanField.getProperty(), value);
-                        } catch (IllegalAccessException e) {
-                            throw new ConfException(e);
-                        }
-                    }
-                }
-            });
-        }
-    }
-
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = beanFactory;
@@ -168,20 +173,6 @@ public class ConfigFactory implements InstantiationAwareBeanPostProcessor, Initi
     @Override
     public void afterPropertiesSet() throws Exception {
         ConfBaseFactory.init(adminAddress, env, accessToken, mirrorFile);
-    }
-
-    private static boolean xmlKeyValid(String originKey) {
-        boolean start = originKey.startsWith(placeHolderPrefix);
-        boolean end = originKey.endsWith(placeHolderSuffix);
-        return start && end;
-    }
-
-    private static String xmlKeyParse(String originKey) {
-        if (xmlKeyValid(originKey)) {
-            String key = originKey.substring(placeHolderPrefix.length(), originKey.length() - placeHolderSuffix.length());
-            return key;
-        }
-        return null;
     }
 
 }

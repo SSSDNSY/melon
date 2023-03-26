@@ -5,8 +5,7 @@ package fun.sssdnsy.constant;
  *
  * @author sssdnsy
  */
-public class CacheConstants
-{
+public class CacheConstants {
     /**
      * 登录用户 redis key
      */

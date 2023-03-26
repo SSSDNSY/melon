@@ -1,16 +1,16 @@
 package fun.sssdnsy.service;
 
-import java.util.List;
 import fun.sssdnsy.core.domain.TreeSelect;
 import fun.sssdnsy.core.domain.entity.SysDept;
+
+import java.util.List;
 
 /**
  * 部门管理 服务层
  *
  * @author sssdnsy
  */
-public interface ISysDeptService
-{
+public interface ISysDeptService {
     /**
      * 查询部门管理数据
      *

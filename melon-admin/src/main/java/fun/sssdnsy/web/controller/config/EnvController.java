@@ -87,7 +87,7 @@ public class EnvController extends BaseController {
     @PreAuthorize("@ss.hasPermi('config:env:remove')")
     @Log(title = "参数管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{appname}")
-    public AjaxResult remove(@PathVariable  String appname) {
+    public AjaxResult remove(@PathVariable String appname) {
         confEnvService.deleteConfigByName(new String[]{appname});
         return success();
     }

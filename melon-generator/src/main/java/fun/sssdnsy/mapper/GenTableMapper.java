@@ -1,15 +1,15 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
 import fun.sssdnsy.domain.GenTable;
+
+import java.util.List;
 
 /**
  * 业务 数据层
  *
  * @author sssdnsy
  */
-public interface GenTableMapper
-{
+public interface GenTableMapper {
     /**
      * 查询业务列表
      *

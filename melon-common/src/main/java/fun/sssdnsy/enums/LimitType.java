@@ -6,8 +6,7 @@ package fun.sssdnsy.enums;
  * @author sssdnsy
  */
 
-public enum LimitType
-{
+public enum LimitType {
     /**
      * 默认策略全局限流
      */

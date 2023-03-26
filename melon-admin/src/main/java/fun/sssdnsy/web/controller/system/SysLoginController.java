@@ -5,10 +5,10 @@ import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.core.domain.entity.SysMenu;
 import fun.sssdnsy.core.domain.entity.SysUser;
 import fun.sssdnsy.core.domain.model.LoginBody;
+import fun.sssdnsy.service.ISysMenuService;
 import fun.sssdnsy.utils.SecurityUtils;
 import fun.sssdnsy.web.service.SysLoginService;
 import fun.sssdnsy.web.service.SysPermissionService;
-import fun.sssdnsy.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,8 +24,7 @@ import java.util.Set;
  * @author sssdnsy
  */
 @RestController
-public class SysLoginController
-{
+public class SysLoginController {
     @Autowired
     private SysLoginService loginService;
 
@@ -42,8 +41,7 @@ public class SysLoginController
      * @return 结果
      */
     @PostMapping("/login")
-    public AjaxResult login(@RequestBody LoginBody loginBody)
-    {
+    public AjaxResult login(@RequestBody LoginBody loginBody) {
         AjaxResult ajax = AjaxResult.success();
         // 生成令牌
         String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), loginBody.getCode(),
@@ -58,8 +56,7 @@ public class SysLoginController
      * @return 用户信息
      */
     @GetMapping("getInfo")
-    public AjaxResult getInfo()
-    {
+    public AjaxResult getInfo() {
         SysUser user = SecurityUtils.getLoginUser().getUser();
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(user);
@@ -78,8 +75,7 @@ public class SysLoginController
      * @return 路由信息
      */
     @GetMapping("getRouters")
-    public AjaxResult getRouters()
-    {
+    public AjaxResult getRouters() {
         Long userId = SecurityUtils.getUserId();
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
         return AjaxResult.success(menuService.buildMenus(menus));

@@ -1,16 +1,16 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import fun.sssdnsy.core.domain.entity.SysUser;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 用户表 数据层
  *
  * @author sssdnsy
  */
-public interface SysUserMapper
-{
+public interface SysUserMapper {
     /**
      * 根据条件分页查询用户列表
      *
@@ -71,7 +71,7 @@ public interface SysUserMapper
      * 修改用户头像
      *
      * @param userName 用户名
-     * @param avatar 头像地址
+     * @param avatar   头像地址
      * @return 结果
      */
     public int updateUserAvatar(@Param("userName") String userName, @Param("avatar") String avatar);

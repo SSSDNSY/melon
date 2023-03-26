@@ -4,10 +4,8 @@ package fun.sssdnsy.enums;
  * 操作状态
  *
  * @author sssdnsy
- *
  */
-public enum BusinessStatus
-{
+public enum BusinessStatus {
     /**
      * 成功
      */

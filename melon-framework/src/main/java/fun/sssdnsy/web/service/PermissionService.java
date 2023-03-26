@@ -1,13 +1,14 @@
 package fun.sssdnsy.web.service;
 
-import java.util.Set;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import fun.sssdnsy.core.domain.entity.SysRole;
 import fun.sssdnsy.core.domain.model.LoginUser;
+import fun.sssdnsy.security.context.PermissionContextHolder;
 import fun.sssdnsy.utils.SecurityUtils;
 import fun.sssdnsy.utils.StringUtils;
-import fun.sssdnsy.security.context.PermissionContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.Set;
 
 /**
  * RuoYi首创 自定义权限实现，ss取自SpringSecurity首字母
@@ -15,12 +16,15 @@ import fun.sssdnsy.security.context.PermissionContextHolder;
  * @author sssdnsy
  */
 @Service("ss")
-public class PermissionService
-{
-    /** 所有权限标识 */
+public class PermissionService {
+    /**
+     * 所有权限标识
+     */
     private static final String ALL_PERMISSION = "*:*:*";
 
-    /** 管理员角色权限标识 */
+    /**
+     * 管理员角色权限标识
+     */
     private static final String SUPER_ADMIN = "admin";
 
     private static final String ROLE_DELIMETER = ",";
@@ -33,15 +37,12 @@ public class PermissionService
      * @param permission 权限字符串
      * @return 用户是否具备某权限
      */
-    public boolean hasPermi(String permission)
-    {
-        if (StringUtils.isEmpty(permission))
-        {
+    public boolean hasPermi(String permission) {
+        if (StringUtils.isEmpty(permission)) {
             return false;
         }
         LoginUser loginUser = SecurityUtils.getLoginUser();
-        if (StringUtils.isNull(loginUser) || CollectionUtils.isEmpty(loginUser.getPermissions()))
-        {
+        if (StringUtils.isNull(loginUser) || CollectionUtils.isEmpty(loginUser.getPermissions())) {
             return false;
         }
         PermissionContextHolder.setContext(permission);
@@ -54,8 +55,7 @@ public class PermissionService
      * @param permission 权限字符串
      * @return 用户是否不具备某权限
      */
-    public boolean lacksPermi(String permission)
-    {
+    public boolean lacksPermi(String permission) {
         return hasPermi(permission) != true;
     }
 
@@ -65,23 +65,18 @@ public class PermissionService
      * @param permissions 以 PERMISSION_NAMES_DELIMETER 为分隔符的权限列表
      * @return 用户是否具有以下任意一个权限
      */
-    public boolean hasAnyPermi(String permissions)
-    {
-        if (StringUtils.isEmpty(permissions))
-        {
+    public boolean hasAnyPermi(String permissions) {
+        if (StringUtils.isEmpty(permissions)) {
             return false;
         }
         LoginUser loginUser = SecurityUtils.getLoginUser();
-        if (StringUtils.isNull(loginUser) || CollectionUtils.isEmpty(loginUser.getPermissions()))
-        {
+        if (StringUtils.isNull(loginUser) || CollectionUtils.isEmpty(loginUser.getPermissions())) {
             return false;
         }
         PermissionContextHolder.setContext(permissions);
         Set<String> authorities = loginUser.getPermissions();
-        for (String permission : permissions.split(PERMISSION_DELIMETER))
-        {
-            if (permission != null && hasPermissions(authorities, permission))
-            {
+        for (String permission : permissions.split(PERMISSION_DELIMETER)) {
+            if (permission != null && hasPermissions(authorities, permission)) {
                 return true;
             }
         }
@@ -94,22 +89,17 @@ public class PermissionService
      * @param role 角色字符串
      * @return 用户是否具备某角色
      */
-    public boolean hasRole(String role)
-    {
-        if (StringUtils.isEmpty(role))
-        {
+    public boolean hasRole(String role) {
+        if (StringUtils.isEmpty(role)) {
             return false;
         }
         LoginUser loginUser = SecurityUtils.getLoginUser();
-        if (StringUtils.isNull(loginUser) || CollectionUtils.isEmpty(loginUser.getUser().getRoles()))
-        {
+        if (StringUtils.isNull(loginUser) || CollectionUtils.isEmpty(loginUser.getUser().getRoles())) {
             return false;
         }
-        for (SysRole sysRole : loginUser.getUser().getRoles())
-        {
+        for (SysRole sysRole : loginUser.getUser().getRoles()) {
             String roleKey = sysRole.getRoleKey();
-            if (SUPER_ADMIN.equals(roleKey) || roleKey.equals(StringUtils.trim(role)))
-            {
+            if (SUPER_ADMIN.equals(roleKey) || roleKey.equals(StringUtils.trim(role))) {
                 return true;
             }
         }
@@ -122,8 +112,7 @@ public class PermissionService
      * @param role 角色名称
      * @return 用户是否不具备某角色
      */
-    public boolean lacksRole(String role)
-    {
+    public boolean lacksRole(String role) {
         return hasRole(role) != true;
     }
 
@@ -133,21 +122,16 @@ public class PermissionService
      * @param roles 以 ROLE_NAMES_DELIMETER 为分隔符的角色列表
      * @return 用户是否具有以下任意一个角色
      */
-    public boolean hasAnyRoles(String roles)
-    {
-        if (StringUtils.isEmpty(roles))
-        {
+    public boolean hasAnyRoles(String roles) {
+        if (StringUtils.isEmpty(roles)) {
             return false;
         }
         LoginUser loginUser = SecurityUtils.getLoginUser();
-        if (StringUtils.isNull(loginUser) || CollectionUtils.isEmpty(loginUser.getUser().getRoles()))
-        {
+        if (StringUtils.isNull(loginUser) || CollectionUtils.isEmpty(loginUser.getUser().getRoles())) {
             return false;
         }
-        for (String role : roles.split(ROLE_DELIMETER))
-        {
-            if (hasRole(role))
-            {
+        for (String role : roles.split(ROLE_DELIMETER)) {
+            if (hasRole(role)) {
                 return true;
             }
         }
@@ -158,11 +142,10 @@ public class PermissionService
      * 判断是否包含权限
      *
      * @param permissions 权限列表
-     * @param permission 权限字符串
+     * @param permission  权限字符串
      * @return 用户是否具备某权限
      */
-    private boolean hasPermissions(Set<String> permissions, String permission)
-    {
+    private boolean hasPermissions(Set<String> permissions, String permission) {
         return permissions.contains(ALL_PERMISSION) || permissions.contains(StringUtils.trim(permission));
     }
 }

@@ -1,15 +1,15 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
 import fun.sssdnsy.domain.GenTableColumn;
+
+import java.util.List;
 
 /**
  * 业务字段 数据层
  *
  * @author sssdnsy
  */
-public interface GenTableColumnMapper
-{
+public interface GenTableColumnMapper {
     /**
      * 根据表名称查询列信息
      *

@@ -1,15 +1,15 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
 import fun.sssdnsy.domain.SysRoleMenu;
+
+import java.util.List;
 
 /**
  * 角色与菜单关联表 数据层
  *
  * @author sssdnsy
  */
-public interface SysRoleMenuMapper
-{
+public interface SysRoleMenuMapper {
     /**
      * 查询菜单使用数量
      *

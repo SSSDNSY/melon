@@ -1,15 +1,15 @@
 package fun.sssdnsy.service;
 
-import java.util.List;
 import fun.sssdnsy.domain.SysConfig;
+
+import java.util.List;
 
 /**
  * 参数配置 服务层
  *
  * @author sssdnsy
  */
-public interface ISysConfigService
-{
+public interface ISysConfigService {
     /**
      * 查询参数配置信息
      *

@@ -12,9 +12,6 @@ import java.util.*;
  * @Since 2023-03-24
  */
 public class BasicJsonWriter {
-    private static Logger logger = LoggerFactory.getLogger(BasicJsonWriter.class);
-
-
     private static final String STR_SLASH = "\"";
     private static final String STR_SLASH_STR = "\":";
     private static final String STR_COMMA = ",";
@@ -22,8 +19,8 @@ public class BasicJsonWriter {
     private static final String STR_OBJECT_RIGHT = "}";
     private static final String STR_ARRAY_LEFT = "[";
     private static final String STR_ARRAY_RIGHT = "]";
-
     private static final Map<String, Field[]> cacheFields = new HashMap<>();
+    private static Logger logger = LoggerFactory.getLogger(BasicJsonWriter.class);
 
     /**
      * write object to json

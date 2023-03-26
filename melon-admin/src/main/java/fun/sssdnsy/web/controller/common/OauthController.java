@@ -5,9 +5,6 @@ import com.alibaba.fastjson2.JSONObject;
 import fun.sssdnsy.config.oauth.GiteeConfig;
 import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
-import fun.sssdnsy.service.ISysDeptService;
-import fun.sssdnsy.service.ISysRoleService;
-import fun.sssdnsy.service.ISysUserService;
 import fun.sssdnsy.utils.ServletUtils;
 import fun.sssdnsy.utils.uuid.IdUtils;
 import fun.sssdnsy.web.service.SysOauthService;
@@ -76,7 +73,7 @@ public class OauthController extends BaseController {
         // 拼接url
         StringBuilder url = new StringBuilder();
         url.append(authorizeURL);
-        url.append("?client_id=" +clientId);
+        url.append("?client_id=" + clientId);
         url.append("&response_type=code");
         // 转码
         url.append("&redirect_uri=" + redirectUri);
@@ -134,7 +131,7 @@ public class OauthController extends BaseController {
         HttpServletResponse httpServletResponse = ServletUtils.getResponse();
         Cookie cookie = new Cookie("oauth2Token", token);
         cookie.setPath("/");
-        cookie.setMaxAge(tokenExpireTime*60);
+        cookie.setMaxAge(tokenExpireTime * 60);
         cookie.setHttpOnly(false);
         httpServletResponse.addCookie(cookie);
     }

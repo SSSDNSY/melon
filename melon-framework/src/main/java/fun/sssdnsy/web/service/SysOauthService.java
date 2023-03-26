@@ -34,9 +34,8 @@ import javax.annotation.Resource;
 @Component
 public class SysOauthService {
 
-    private static final Logger log = LoggerFactory.getLogger(SysOauthService.class);
     public static final String INIT_PASSWORD = "admin123";
-
+    private static final Logger log = LoggerFactory.getLogger(SysOauthService.class);
     @Autowired
     private TokenService tokenService;
 
@@ -109,13 +108,13 @@ public class SysOauthService {
         sysUser.setAvatar(userInfo.getString("avatar_url"));
         sysUser.setLoginIp(IpUtils.getIpAddr(ServletUtils.getRequest()));
         sysUser.setLoginDate(DateUtils.getNowDate());
-        sysUser.setRoleIds(new Long[]{1l});
+        sysUser.setRoleIds(new Long[]{2l});
         sysUser.setPostIds(new Long[]{4l});
         sysUser.setCreateBy("sys");
         sysUser.setCreateTime(userInfo.getDate("created_at"));
         sysUser.setUpdateBy("sys");
         sysUser.setUpdateTime(userInfo.getDate("updated_at"));
-        sysUser.setRemark(userInfo.getString("remark"));
+        sysUser.setRemark("Gitee User");
         return sysUser;
     }
 

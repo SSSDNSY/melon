@@ -16,6 +16,51 @@ import java.util.Map;
 public class BasicJsonReader {
     private static Logger logger = LoggerFactory.getLogger(BasicJsonReader.class);
 
+    // append start
+    private static String[] split(String toSplit, String delimiter) {
+        if (toSplit != null && !toSplit.isEmpty() && delimiter != null && !delimiter.isEmpty()) {
+            int offset = toSplit.indexOf(delimiter);
+            if (offset < 0) {
+                return null;
+            } else {
+                String beforeDelimiter = toSplit.substring(0, offset);
+                String afterDelimiter = toSplit.substring(offset + delimiter.length());
+                return new String[]{beforeDelimiter, afterDelimiter};
+            }
+        } else {
+            return null;
+        }
+    }
+
+    private static String[] trimArrayElements(String[] array) {
+        if (array == null || array.length == 0) {
+            return new String[0];
+        } else {
+            String[] result = new String[array.length];
+
+            for (int i = 0; i < array.length; ++i) {
+                String element = array[i];
+                result[i] = element != null ? element.trim() : null;
+            }
+
+            return result;
+        }
+    }
+
+    // plugin util
+    private static String trimTrailingCharacter(String string, char c) {
+        if (string.length() > 0 && string.charAt(string.length() - 1) == c) {
+            return string.substring(0, string.length() - 1);
+        }
+        return string;
+    }
+
+    private static String trimLeadingCharacter(String string, char c) {
+        if (string.length() > 0 && string.charAt(0) == c) {
+            return string.substring(1);
+        }
+        return string;
+    }
 
     public Map<String, Object> parseMap(String json) {
         if (json != null) {
@@ -45,6 +90,7 @@ public class BasicJsonReader {
         }
         return list;
     }
+    // append end
 
     private Object parseInternal(String json) {
         if (json.startsWith("[")) {
@@ -58,14 +104,12 @@ public class BasicJsonReader {
         }
         try {
             return Long.valueOf(json);
-        }
-        catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             // ignore
         }
         try {
             return Double.valueOf(json);
-        }
-        catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             // ignore
         }
         return json;
@@ -82,38 +126,6 @@ public class BasicJsonReader {
         }
         return map;
     }
-
-    // append start
-    private static String[] split(String toSplit, String delimiter) {
-        if (toSplit!=null && !toSplit.isEmpty() && delimiter!=null && !delimiter.isEmpty()) {
-            int offset = toSplit.indexOf(delimiter);
-            if (offset < 0) {
-                return null;
-            } else {
-                String beforeDelimiter = toSplit.substring(0, offset);
-                String afterDelimiter = toSplit.substring(offset + delimiter.length());
-                return new String[]{beforeDelimiter, afterDelimiter};
-            }
-        } else {
-            return null;
-        }
-    }
-    private static String[] trimArrayElements(String[] array) {
-        if (array == null || array.length == 0) {
-            return new String[0];
-        } else {
-            String[] result = new String[array.length];
-
-            for(int i = 0; i < array.length; ++i) {
-                String element = array[i];
-                result[i] = element != null ? element.trim() : null;
-            }
-
-            return result;
-        }
-    }
-    // append end
-
 
     private List<String> tokenize(String json) {
         List<String> list = new ArrayList<String>();
@@ -149,11 +161,9 @@ public class BasicJsonReader {
             if (current == ',' && inObject == 0 && inList == 0 && !inValue) {
                 list.add(build.toString());
                 build.setLength(0);
-            }
-            else if (current == '\\') {
+            } else if (current == '\\') {
                 inEscape = true;
-            }
-            else {
+            } else {
                 build.append(current);
             }
             index++;
@@ -162,21 +172,6 @@ public class BasicJsonReader {
             list.add(build.toString());
         }
         return list;
-    }
-
-    // plugin util
-    private static String trimTrailingCharacter(String string, char c) {
-        if (string.length() > 0 && string.charAt(string.length() - 1) == c) {
-            return string.substring(0, string.length() - 1);
-        }
-        return string;
-    }
-
-    private static String trimLeadingCharacter(String string, char c) {
-        if (string.length() > 0 && string.charAt(0) == c) {
-            return string.substring(1);
-        }
-        return string;
     }
 
 }

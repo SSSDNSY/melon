@@ -5,8 +5,7 @@ package fun.sssdnsy.constant;
  *
  * @author sssdnsy
  */
-public class HttpStatus
-{
+public class HttpStatus {
     /**
      * 操作成功
      */

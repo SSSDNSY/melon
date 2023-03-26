@@ -1,17 +1,16 @@
 package fun.sssdnsy.mapper;
 
-import java.util.List;
-
 import fun.sssdnsy.domain.SysUserRole;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 用户与角色关联表 数据层
  *
  * @author sssdnsy
  */
-public interface SysUserRoleMapper
-{
+public interface SysUserRoleMapper {
     /**
      * 通过用户ID删除用户和角色关联
      *
@@ -55,7 +54,7 @@ public interface SysUserRoleMapper
     /**
      * 批量取消授权用户角色
      *
-     * @param roleId 角色ID
+     * @param roleId  角色ID
      * @param userIds 需要删除的用户数据ID
      * @return 结果
      */

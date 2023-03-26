@@ -1,12 +1,12 @@
 package fun.sssdnsy.service.impl;
 
-import java.util.List;
-
 import fun.sssdnsy.domain.SysNotice;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import fun.sssdnsy.mapper.SysNoticeMapper;
 import fun.sssdnsy.service.ISysNoticeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 公告 服务层实现
@@ -14,8 +14,7 @@ import fun.sssdnsy.service.ISysNoticeService;
  * @author sssdnsy
  */
 @Service
-public class SysNoticeServiceImpl implements ISysNoticeService
-{
+public class SysNoticeServiceImpl implements ISysNoticeService {
     @Autowired
     private SysNoticeMapper noticeMapper;
 
@@ -26,8 +25,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
      * @return 公告信息
      */
     @Override
-    public SysNotice selectNoticeById(Long noticeId)
-    {
+    public SysNotice selectNoticeById(Long noticeId) {
         return noticeMapper.selectNoticeById(noticeId);
     }
 
@@ -38,8 +36,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
      * @return 公告集合
      */
     @Override
-    public List<SysNotice> selectNoticeList(SysNotice notice)
-    {
+    public List<SysNotice> selectNoticeList(SysNotice notice) {
         return noticeMapper.selectNoticeList(notice);
     }
 
@@ -50,8 +47,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
      * @return 结果
      */
     @Override
-    public int insertNotice(SysNotice notice)
-    {
+    public int insertNotice(SysNotice notice) {
         return noticeMapper.insertNotice(notice);
     }
 
@@ -62,8 +58,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
      * @return 结果
      */
     @Override
-    public int updateNotice(SysNotice notice)
-    {
+    public int updateNotice(SysNotice notice) {
         return noticeMapper.updateNotice(notice);
     }
 
@@ -74,8 +69,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
      * @return 结果
      */
     @Override
-    public int deleteNoticeById(Long noticeId)
-    {
+    public int deleteNoticeById(Long noticeId) {
         return noticeMapper.deleteNoticeById(noticeId);
     }
 
@@ -86,8 +80,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
      * @return 结果
      */
     @Override
-    public int deleteNoticeByIds(Long[] noticeIds)
-    {
+    public int deleteNoticeByIds(Long[] noticeIds) {
         return noticeMapper.deleteNoticeByIds(noticeIds);
     }
 }
