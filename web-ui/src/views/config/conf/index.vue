@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
-      <el-form-item label="项目列表" prop="appname">
+      <el-form-item label="配置项列表" prop="appname">
         <el-input
           v-model="queryParams.appname"
-          placeholder="请输入项目英文名称"
+          placeholder="请输入配置项英文名称"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -40,8 +40,15 @@
           <span>{{(queryParams.pageNum - 1) * queryParams.pageSize + scope.$index + 1}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="appname" label="项目英文名称" :show-overflow-tooltip="true"></el-table-column>
-      <el-table-column prop="title" label="项目中文名称" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="env" label="环境" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="appname" label="项目名" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="title" label="描述" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="key" label="配置KEY" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="value" label="配置VALUE" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="createBy" label="创建者" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="createTime" label="创建时间" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="updateBy" label="更新人" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="updateTime" label="更新时间" :show-overflow-tooltip="true"></el-table-column>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -76,18 +83,33 @@
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
     />
-    <!-- 添加或修改项目对话框 -->
+    <!-- 添加或修改配置项对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="680px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-row>
           <el-col :span="24">
-            <el-form-item label="项目键" prop="appname">
-              <el-input v-model="form.appname" placeholder="请输入项目英文名称"/>
+            <el-form-item label="环境" prop="env">
+              <el-input v-model="form.env" placeholder="请输入配置项KEY"/>
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="项目值" prop="title">
-              <el-input v-model="form.title" placeholder="请输入项目中文名称"/>
+            <el-form-item label="项目" prop="appname">
+              <el-input v-model="form.appname" placeholder="请输入配置项目"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="描述" prop="title">
+              <el-input v-model="form.title" placeholder="请输入描述"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="配置键" prop="key">
+              <el-input v-model="form.key" placeholder="请输入配置项KEY"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="配置值" prop="value">
+              <el-input v-model="form.value" placeholder="请输入配置项VALUE"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -127,18 +149,30 @@
         queryParams: {
           pageNum: 1,
           pageSize: 10,
+          env: undefined,
           appname: undefined,
-          title: undefined
+          title: undefined,
+          key: undefined,
+          value: undefined
         },
         // 表单参数
         form: {},
         // 表单校验
         rules: {
+          env: [
+            {required: true, message: "环境名不能为空", trigger: "blur"}
+          ],
           appname: [
             {required: true, message: "英文名(KEY)不能为空", trigger: "blur"}
           ],
           title: [
             {required: true, message: "中文名(VALUE)不能为空", trigger: "blur"}
+          ],
+          key: [
+            {required: true, message: "KEY不能为空", trigger: "blur"}
+          ],
+          value: [
+            {required: true, message: "VALUE不能为空", trigger: "blur"}
           ]
         }
       };
@@ -155,10 +189,10 @@
       getList() {
         this.loading = true;
         listConf(this.queryParams).then(response => {
+          this.loading = false;
           console.log(response)
           this.list = response.rows;
           this.total = response.total;
-          this.loading = false;
         });
       },
       // 取消按钮
@@ -171,6 +205,10 @@
         this.form = {
           parentId: 0,
           appname: undefined,
+          env: undefined,
+          tile: undefined,
+          key: undefined,
+          value: undefined,
           icon: undefined,
           orderNum: undefined,
           isFrame: "1",
@@ -194,7 +232,7 @@
       handleAdd(row) {
         this.reset();
         this.open = true;
-        this.title = "添加项目";
+        this.title = "添加配置项";
       },
       /** 修改按钮操作 */
       handleUpdate(row) {
@@ -202,7 +240,7 @@
         getConf(row.appname).then(response => {
           this.form = response.data;
           this.open = true;
-          this.title = "修改项目";
+          this.title = "修改配置项";
         });
       },
       /** 提交按钮 */
@@ -221,7 +259,7 @@
       },
       /** 删除按钮操作 */
       handleDelete(row) {
-        this.$modal.confirm('是否确认删除名称为"' + row.appname + '"的数据项？').then(function () {
+        this.$modal.confirm('是否确认删除名称为"' + row.env + "." + row.key + '"的数据项？').then(function () {
           return delConf(row.appname);
         }).then(() => {
           this.getList();

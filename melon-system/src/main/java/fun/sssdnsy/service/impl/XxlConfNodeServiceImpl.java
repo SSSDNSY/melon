@@ -1,6 +1,9 @@
 package fun.sssdnsy.service.impl;
 
-import fun.sssdnsy.domain.*;
+import fun.sssdnsy.domain.XxlConfNode;
+import fun.sssdnsy.domain.XxlConfNodeLog;
+import fun.sssdnsy.domain.XxlConfNodeMsg;
+import fun.sssdnsy.domain.XxlConfProject;
 import fun.sssdnsy.mapper.*;
 import fun.sssdnsy.service.IXxlConfNodeService;
 import org.apache.commons.lang3.StringUtils;
@@ -27,154 +30,52 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class XxlConfNodeServiceImpl implements IXxlConfNodeService, InitializingBean, DisposableBean {
-    private static Logger logger = LoggerFactory.getLogger(XxlConfNodeServiceImpl.class);
 
+    private static Logger logger = LoggerFactory.getLogger(XxlConfNodeServiceImpl.class);
 
     @Resource
     private XxlConfNodeDao xxlConfNodeDao;
+
     @Resource
     private XxlConfProjectDao xxlConfProjectDao;
-    /*@Resource
-    private XxlConfZKManager xxlConfZKManager;*/
+
     @Resource
     private XxlConfNodeLogDao xxlConfNodeLogDao;
+
     @Resource
     private XxlConfEnvDao xxlConfEnvDao;
+
     @Resource
     private XxlConfNodeMsgDao xxlConfNodeMsgDao;
-
 
     @Value("${melon.conf.file-path}")
     private String dataFilePath;
 
     @Value("${melon.conf.beat-time}")
+
     private int beatTime = 30;
     private ExecutorService executorService = Executors.newCachedThreadPool();
     private volatile boolean executorStoped = false;
-    private volatile List<Integer> readedMessageIds = Collections.synchronizedList(new ArrayList<Integer>());
+    private volatile List<Integer> readedMessageIds = Collections.synchronizedList(new ArrayList());
     private Map<String, List<DeferredResult>> confDeferredResultMap = new ConcurrentHashMap<>();
 
     @Override
-    public boolean ifHasProjectPermission(String loginEnv, String appname) {
-        return false;
-
+    public List<XxlConfNode> list(XxlConfNode confNode) {
+        return xxlConfNodeDao.list(confNode.getAppname(), confNode.getKey(), confNode.getEnv());
     }
-
-    @Override
-    public Map<String, Object> pageList(int offset,
-                                        int pagesize,
-                                        String appname,
-                                        String key,
-
-                                        String loginEnv) {
-
-
-        // xxlConfNode in mysql
-        List<XxlConfNode> data = xxlConfNodeDao.pageList(offset, pagesize, loginEnv, appname, key);
-        int list_count = xxlConfNodeDao.pageListCount(offset, pagesize, loginEnv, appname, key);
-
-        // fill value in zk
-		/*if (CollectionUtils.isNotEmpty(data)) {
-			for (XxlConfNode node: data) {
-				String realNodeValue = xxlConfZKManager.get(node.getEnv(), node.getKey());
-				node.setZkValue(realNodeValue);
-			}
-		}*/
-
-        // package result
-        Map<String, Object> maps = new HashMap<String, Object>();
-        maps.put("data", data);
-        maps.put("recordsTotal", list_count);        // 总记录数
-        maps.put("recordsFiltered", list_count);    // 过滤后的总记录数
-        return maps;
-
-    }
-
-	/*@Override
-	public String syncConf(String appname,  String loginEnv) {
-
-		// valid
-		XxlConfEnv xxlConfEnv = xxlConfEnvDao.load(loginEnv);
-		if (xxlConfEnv == null) {
-			return new String( "配置Env非法");
-		}
-		XxlConfProject group = xxlConfProjectDao.load(appname);
-		if (group==null) {
-			return new String( "AppName非法");
-		}
-
-		// project permission
-		if (!ifHasProjectPermission( loginEnv, appname)) {
-			return new String( "您没有该项目的配置权限,请联系管理员开通");
-		}
-
-		List<XxlConfNode> confNodeList = xxlConfNodeDao.pageList(0, 10000, loginEnv, appname, null);
-		if (CollectionUtils.isEmpty(confNodeList)) {
-			return new String( "操作失败，该项目下不存在配置项");
-		}
-
-		// un sync node
-		List<XxlConfNode> unSyncConfNodeList = new ArrayList<>();
-		for (XxlConfNode node: confNodeList) {
-			String realNodeValue = xxlConfZKManager.get(node.getEnv(), node.getKey());
-			if (!node.getValue().equals(realNodeValue)) {
-				unSyncConfNodeList.add(node);
-			}
-		}
-
-		if (CollectionUtils.isEmpty(unSyncConfNodeList)) {
-			return new String( "操作失败，该项目下不存未同步的配置项");
-		}
-
-		// do sync
-		String logContent = "操作成功，共计同步 " + unSyncConfNodeList.size() + " 条配置：";
-		for (XxlConfNode node: unSyncConfNodeList) {
-
-			xxlConfZKManager.set(node.getEnv(), node.getKey(), node.getValue());
-
-			// node log
-			XxlConfNodeLog nodeLog = new XxlConfNodeLog();
-			nodeLog.setEnv(node.getEnv());
-			nodeLog.setKey(node.getKey());
-			nodeLog.setTitle(node.getTitle() + "(全量同步)" );
-			nodeLog.setValue(node.getValue());
-			nodeLog.setOptuser(loginUser.getUsername());
-			xxlConfNodeLogDao.add(nodeLog);
-			xxlConfNodeLogDao.deleteTimeout(node.getEnv(), node.getKey(), 10);
-
-			logContent += "<br>" + node.getKey();
-		}
-		logContent.substring(logContent.length() - 1);
-
-		return new String("SUCCESS".getCode(), logContent);
-	}*/
-
 
     // ---------------------- rest api ----------------------
 
     @Override
-    public String delete(String key, String loginEnv) {
-        if (StringUtils.isBlank(key)) {
-            return new String("参数缺失");
-        }
-        XxlConfNode existNode = xxlConfNodeDao.load(loginEnv, key);
-        if (existNode == null) {
-            return new String("参数非法");
-        }
+    public int delete(XxlConfNode confNode) {
 
-        // project permission
-        if (!ifHasProjectPermission(loginEnv, existNode.getAppname())) {
-            return new String("您没有该项目的配置权限,请联系管理员开通");
-        }
-
-        //xxlConfZKManager.delete(loginEnv, key);
-        xxlConfNodeDao.delete(loginEnv, key);
-        xxlConfNodeLogDao.deleteTimeout(loginEnv, key, 0);
-
+        String env = confNode.getEnv();
+        String key = confNode.getKey();
+        int deleteNum = xxlConfNodeDao.delete(env, key);
+        xxlConfNodeLogDao.deleteTimeout(env, key, 0);
         // conf msg
-        sendConfMsg(loginEnv, key, null);
-
-        return "SUCCESS";
+        sendConfMsg(env, key, null);
+        return deleteNum;
     }
 
     // conf broadcast msg
@@ -189,50 +90,17 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     }
 
     @Override
-    public String add(XxlConfNode xxlConfNode, String loginEnv) {
-
+    public int add(XxlConfNode xxlConfNode) {
+        int addNum = -1;
         // valid
         if (StringUtils.isBlank(xxlConfNode.getAppname())) {
-            return new String("AppName不可为空");
-        }
-
-        // project permission
-        if (!ifHasProjectPermission(loginEnv, xxlConfNode.getAppname())) {
-            return new String("您没有该项目的配置权限,请联系管理员开通");
+            return addNum;
         }
 
         // valid group
         XxlConfProject group = xxlConfProjectDao.load(xxlConfNode.getAppname());
         if (group == null) {
-            return new String("AppName非法");
-        }
-
-        // valid env
-        if (StringUtils.isBlank(xxlConfNode.getEnv())) {
-            return new String("配置Env不可为空");
-        }
-        XxlConfEnv xxlConfEnv = xxlConfEnvDao.load(xxlConfNode.getEnv());
-        if (xxlConfEnv == null) {
-            return new String("配置Env非法");
-        }
-
-        // valid key
-        if (StringUtils.isBlank(xxlConfNode.getKey())) {
-            return new String("配置Key不可为空");
-        }
-        xxlConfNode.setKey(xxlConfNode.getKey().trim());
-
-        XxlConfNode existNode = xxlConfNodeDao.load(xxlConfNode.getEnv(), xxlConfNode.getKey());
-        if (existNode != null) {
-            return new String("配置Key已存在，不可重复添加");
-        }
-        if (!xxlConfNode.getKey().startsWith(xxlConfNode.getAppname())) {
-            return new String("配置Key格式非法");
-        }
-
-        // valid title
-        if (StringUtils.isBlank(xxlConfNode.getTitle())) {
-            return new String("配置描述不可为空");
+            return addNum;
         }
 
         // value force null to ""
@@ -241,8 +109,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         }
 
         // add node
-        //xxlConfZKManager.set(xxlConfNode.getEnv(), xxlConfNode.getKey(), xxlConfNode.getValue());
-        xxlConfNodeDao.insert(xxlConfNode);
+        addNum = xxlConfNodeDao.insert(xxlConfNode);
 
         // node log
         XxlConfNodeLog nodeLog = new XxlConfNodeLog();
@@ -251,50 +118,26 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         nodeLog.setTitle(xxlConfNode.getTitle() + "(配置新增)");
         nodeLog.setValue(xxlConfNode.getValue());
         //TODO
-//        nodeLog.setOptuser(loginUser.getUsername());
         xxlConfNodeLogDao.add(nodeLog);
 
         // conf msg
         sendConfMsg(xxlConfNode.getEnv(), xxlConfNode.getKey(), xxlConfNode.getValue());
 
-        return "SUCCESS";
+        return addNum;
     }
 
     @Override
-    public String update(XxlConfNode xxlConfNode, String loginEnv) {
+    public int update(XxlConfNode xxlConfNode) {
 
-        // valid
-        if (StringUtils.isBlank(xxlConfNode.getKey())) {
-            return new String("配置Key不可为空");
-        }
         XxlConfNode existNode = xxlConfNodeDao.load(xxlConfNode.getEnv(), xxlConfNode.getKey());
-        if (existNode == null) {
-            return new String("配置Key非法");
-        }
-
-        // project permission
-        if (!ifHasProjectPermission(loginEnv, existNode.getAppname())) {
-            return new String("您没有该项目的配置权限,请联系管理员开通");
-        }
-
-        if (StringUtils.isBlank(xxlConfNode.getTitle())) {
-            return new String("配置描述不可为空");
-        }
 
         // value force null to ""
         if (xxlConfNode.getValue() == null) {
             xxlConfNode.setValue("");
         }
-
-        // update conf
-        //xxlConfZKManager.set(xxlConfNode.getEnv(), xxlConfNode.getKey(), xxlConfNode.getValue());
-
         existNode.setTitle(xxlConfNode.getTitle());
         existNode.setValue(xxlConfNode.getValue());
         int ret = xxlConfNodeDao.update(existNode);
-        if (ret < 1) {
-            return "FAIL";
-        }
 
         // node log
         XxlConfNodeLog nodeLog = new XxlConfNodeLog();
@@ -310,12 +153,12 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         // conf msg
         sendConfMsg(xxlConfNode.getEnv(), xxlConfNode.getKey(), xxlConfNode.getValue());
 
-        return "SUCCESS";
+        return ret;
     }
 
     @Override
-    public Map<String, String> find(String accessToken, String env, List<String> keys) {
-
+    public List<XxlConfNode> find(List<XxlConfNode> confNodeList) {
+        List<XxlConfNode> nodes = new ArrayList<>();
         // valid
 		/*for (String key: keys) {
 			if (key==null || key.trim().length()<4 || key.trim().length()>100) {
@@ -328,119 +171,35 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
         // result
         Map<String, String> result = new HashMap<String, String>();
-        for (String key : keys) {
+        for (XxlConfNode key : confNodeList) {
 
-            // get val
-            String value = null;
-            if (key == null || key.trim().length() < 4 || key.trim().length() > 100) {
-
-//              TODO      || !RegexUtil.matches(RegexUtil.abc_number_line_point_pattern, key)) {
-                // invalid key, pass
-            } else {
-                value = getFileConfData(env, key);
-            }
-
-            // parse null
-            if (value == null) {
-                value = "";
-            }
-
-            // put
-            result.put(key, value);
         }
 
-        return new HashMap<>(result);
+        return confNodeList;
     }
 
     @Override
-    public String monitor(String accessToken, String env, List<String> keys) {
-
-        // init
-//        DeferredResult deferredResult = new DeferredResult(confBeatTime * 1000L, new >("SUCCESS"_CODE, "Monitor timeout, no key updated."));
-
-        // valid
-//        if (this.accessToken != null && this.accessToken.trim().length() > 0 && !this.accessToken.equals(accessToken)) {
-//            deferredResult.setResult(new ("", "AccessToken Invalid."));
-//            return deferredResult;
-//        }
-//        if (env == null || env.trim().length() == 0) {
-//            deferredResult.setResult(new ("", "env Invalid."));
-//            return deferredResult;
-//        }
-//        if (keys == null || keys.size() == 0) {
-//            deferredResult.setResult(new ("", "keys Invalid."));
-//            return deferredResult;
-//        }
-		/*for (String key: keys) {
-			if (key==null || key.trim().length()<4 || key.trim().length()>100) {
-				deferredResult.setResult(new ("", "Key Invalid[4~100]"));
-				return deferredResult;
-			}
-			if (!RegexUtil.matches(RegexUtil.abc_number_line_point_pattern, key)) {
-				deferredResult.setResult(new ("", "Key format Invalid"));
-				return deferredResult;
-			}
-		}*/
-
-        // monitor by client
-        for (String key : keys) {
-
-
-            // invalid key, pass
-            if (key == null || key.trim().length() < 4 || key.trim().length() > 100) {
-                //TODO   || !RegexUtil.matches(RegexUtil.abc_number_line_point_pattern, key)) {
-                continue;
-            }
-
-            // monitor each key
-            String fileName = parseConfDataFileName(env, key);
-
-            List<DeferredResult> deferredResultList = confDeferredResultMap.get(fileName);
-            if (deferredResultList == null) {
-                deferredResultList = new ArrayList<>();
-                confDeferredResultMap.put(fileName, deferredResultList);
-            }
-
-//            deferredResultList.add(deferredResult);
-        }
+    public void monitor(List<XxlConfNode> confNodeList) {
         //TODO
-        return null;
     }
 
     @Override
-    public List<XxlConfNode> selectConfigList(XxlConfNode confNode) {
-        return null;
+    public XxlConfNode get(XxlConfNode confNode) {
+        return xxlConfNodeDao.load(confNode.getEnv(), confNode.getKey());
     }
 
     @Override
-    public XxlConfNode selectConfigByName(String appName) {
-        return null;
-    }
-
-
-    // ---------------------- start stop ----------------------
-
-    @Override
-    public boolean checkConfigKeyUnique(XxlConfNode confNode) {
-        return false;
+    public boolean exist(XxlConfNode confNode) {
+        return get(confNode) == null;
     }
 
     @Override
-    public int insertConfig(XxlConfNode confNode) {
-        return 0;
-    }
-
-
-    // ---------------------- thread ----------------------
-
-    @Override
-    public int updateConfig(XxlConfNode config) {
-        return 0;
-    }
-
-    @Override
-    public void deleteConfigByName(String[] configIds) {
-
+    public int delete(List<XxlConfNode> confNodeLis) {
+        int sum = 0;
+        for (XxlConfNode confNode : confNodeLis) {
+            sum += delete(confNode);
+        }
+        return sum;
     }
 
     @Override
@@ -562,8 +321,6 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 //                }
 //            }
 //        });
-
-
     }
 
     private void stopThread() {
@@ -571,8 +328,6 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         executorService.shutdownNow();
     }
 
-
-    // ---------------------- file opt ----------------------
 
     // get
     public String getFileConfData(String env, String key) {
@@ -657,10 +412,8 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
                 } else {
                     childFile.delete();
                 }
-
             }
         }
-
     }
 
 }

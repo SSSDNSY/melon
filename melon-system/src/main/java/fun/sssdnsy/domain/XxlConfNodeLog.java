@@ -1,65 +1,33 @@
 package fun.sssdnsy.domain;
 
-import java.util.Date;
+import fun.sssdnsy.core.domain.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
- * @author xuxueli 2018-03-01
+ * 配置日志
  */
-public class XxlConfNodeLog {
+@Getter
+@Setter
+@ToString
+public class XxlConfNodeLog extends BaseEntity {
 
+    /**
+     * 配置环境
+     */
     private String env;
-    private String key;            // 配置Key
-    private String title;        // 配置描述
-    private String value;        // 配置Value
-    private Date addtime;        // 操作时间
-    private String optuser;        // 操作人
+    /**
+     * 配置Key
+     */
+    private String key;
+    /**
+     * 配置描述
+     */
+    private String title;
+    /**
+     * 配置Value
+     */
+    private String value;
 
-
-    public String getEnv() {
-        return env;
-    }
-
-    public void setEnv(String env) {
-        this.env = env;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public Date getAddtime() {
-        return addtime;
-    }
-
-    public void setAddtime(Date addtime) {
-        this.addtime = addtime;
-    }
-
-    public String getOptuser() {
-        return optuser;
-    }
-
-    public void setOptuser(String optuser) {
-        this.optuser = optuser;
-    }
 }

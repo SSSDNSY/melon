@@ -17,8 +17,10 @@
 		t.`key`,
 		t.`title`,
 		t.`value`,
-		t.`addtime`,
-		t.`optuser`
+        t.`create_by`,
+		t.`create_time`,
+		t.`update_by`,
+		t.`update_time`
 	</sql>
 
     <select id="findByKey" parameterType="java.util.Map" resultMap="xxlConfNodeLog">

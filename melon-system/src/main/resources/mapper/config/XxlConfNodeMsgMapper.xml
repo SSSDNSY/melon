@@ -13,10 +13,13 @@
 
     <sql id="Base_Column_List">
 		t.`id`,
-		t.`addtime`,
 		t.`env`,
 		t.`key`,
-		t.`value`
+		t.`value`,
+        t.`create_by`,
+		t.`create_time`,
+		t.`update_by`,
+		t.`update_time`
 	</sql>
 
     <insert id="add" parameterType="fun.sssdnsy.domain.XxlConfNodeMsg" useGeneratedKeys="true" keyProperty="id">

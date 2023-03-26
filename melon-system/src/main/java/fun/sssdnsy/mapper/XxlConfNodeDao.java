@@ -12,21 +12,11 @@ import java.util.List;
 @Mapper
 public interface XxlConfNodeDao {
 
-    List<XxlConfNode> pageList(@Param("offset") int offset,
-                               @Param("pagesize") int pagesize,
-                               @Param("env") String env,
-                               @Param("appname") String appname,
-                               @Param("key") String key);
-
-    int pageListCount(@Param("offset") int offset,
-                      @Param("pagesize") int pagesize,
-                      @Param("env") String env,
-                      @Param("appname") String appname,
-                      @Param("key") String key);
+    List<XxlConfNode> list(@Param("env") String env, @Param("appname") String appname, @Param("key") String key);
 
     int delete(@Param("env") String env, @Param("key") String key);
 
-    void insert(XxlConfNode xxlConfNode);
+    int insert(XxlConfNode xxlConfNode);
 
     XxlConfNode load(@Param("env") String env, @Param("key") String key);
 

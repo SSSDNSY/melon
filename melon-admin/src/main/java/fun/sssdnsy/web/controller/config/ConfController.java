@@ -4,9 +4,9 @@ import fun.sssdnsy.annotation.Log;
 import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.core.page.TableDataInfo;
-import fun.sssdnsy.domain.XxlConfProject;
+import fun.sssdnsy.domain.XxlConfNode;
 import fun.sssdnsy.enums.BusinessType;
-import fun.sssdnsy.service.IXxlConfProjectService;
+import fun.sssdnsy.service.IXxlConfNodeService;
 import fun.sssdnsy.utils.poi.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,33 +28,34 @@ public class ConfController extends BaseController {
 
 
     @Autowired
-    private IXxlConfProjectService confProjectService;
+    private IXxlConfNodeService confNodeService;
 
     /**
-     * 获取参数配置列表
+     * 获取配置列表
      */
     @GetMapping("/list")
-    public TableDataInfo list(XxlConfProject project) {
+    public TableDataInfo list(XxlConfNode confNode) {
         startPage();
-        List<XxlConfProject> list = confProjectService.selectConfigList(project);
+        List<XxlConfNode> list = confNodeService.list(confNode);
         return getDataTable(list);
     }
 
     @Log(title = "参数管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('config:project:export')")
     @PostMapping("/export")
-    public void export(HttpServletResponse response, XxlConfProject project) {
-        List<XxlConfProject> list = confProjectService.selectConfigList(project);
-        ExcelUtil<XxlConfProject> util = new ExcelUtil<XxlConfProject>(XxlConfProject.class);
+    public void export(HttpServletResponse response, XxlConfNode confNode) {
+        List<XxlConfNode> list = confNodeService.list(confNode);
+        ExcelUtil<XxlConfNode> util = new ExcelUtil(XxlConfNode.class);
         util.exportExcel(response, list, "参数数据");
     }
 
     /**
-     * 根据参数编号获取详细信息
+     * 根据evn,key获取详细信息
      */
-    @GetMapping(value = "/{appName}")
-    public AjaxResult getInfo(@PathVariable String appName) {
-        return success(confProjectService.selectConfigByName(appName));
+    @GetMapping(value = "/{env}/{key}")
+    public AjaxResult getInfo(@PathVariable String env, @PathVariable String key) {
+        XxlConfNode confNode = XxlConfNode.builder().env(env).key(key).build();
+        return success(confNodeService.get(confNode));
     }
 
 
@@ -63,11 +64,11 @@ public class ConfController extends BaseController {
      */
     @Log(title = "参数管理", businessType = BusinessType.SAVE)
     @PostMapping
-    public AjaxResult save(@Validated @RequestBody XxlConfProject project) {
-        if (confProjectService.checkConfigKeyUnique(project)) {
-            return toAjax(confProjectService.updateConfig(project));
+    public AjaxResult save(@Validated @RequestBody XxlConfNode confNode) {
+        if (confNodeService.exist(confNode)) {
+            return toAjax(confNodeService.update(confNode));
         }
-        return toAjax(confProjectService.insertConfig(project));
+        return toAjax(confNodeService.add(confNode));
     }
 
     /**
@@ -76,11 +77,11 @@ public class ConfController extends BaseController {
     @PreAuthorize("@ss.hasPermi('config:project:edit')")
     @Log(title = "参数管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@Validated @RequestBody XxlConfProject project) {
-        if (confProjectService.checkConfigKeyUnique(project)) {
-            return error("修改参数'" + project.getAppname() + "'失败，参数键名已存在");
+    public AjaxResult edit(@Validated @RequestBody XxlConfNode confNode) {
+        if (confNodeService.exist(confNode)) {
+            return error("修改参数'" + confNode.getAppname() + "'失败，参数键名已存在");
         }
-        return toAjax(confProjectService.updateConfig(project));
+        return toAjax(confNodeService.update(confNode));
     }
 
     /**
@@ -88,10 +89,11 @@ public class ConfController extends BaseController {
      */
     @PreAuthorize("@ss.hasPermi('config:project:remove')")
     @Log(title = "参数管理", businessType = BusinessType.DELETE)
-    @DeleteMapping("/{appname}")
-    public AjaxResult remove(@PathVariable String appname) {
-        confProjectService.deleteConfigByName(new String[]{appname});
-        return success();
+    @DeleteMapping("/{env}/{key}")
+    public AjaxResult remove(@PathVariable String env, @PathVariable String key) {
+        XxlConfNode confNode = XxlConfNode.builder().env(env).key(key).build();
+        int delete = confNodeService.delete(confNode);
+        return delete > 0 ? success() : error();
     }
 
 }

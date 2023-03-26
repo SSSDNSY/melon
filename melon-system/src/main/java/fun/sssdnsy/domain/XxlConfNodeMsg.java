@@ -1,56 +1,33 @@
 package fun.sssdnsy.domain;
 
-import java.util.Date;
+import fun.sssdnsy.core.domain.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author xuxueli 2015-9-4 15:26:01
  */
-public class XxlConfNodeMsg {
-
+@Getter
+@Setter
+@ToString
+public class XxlConfNodeMsg extends BaseEntity {
+    /**
+     * id
+     */
     private int id;
-    private Date addtime;
+    /**
+     * 环境
+     */
     private String env;
+    /**
+     * 键
+     */
     private String key;
+    /**
+     * 值
+     */
     private String value;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getAddtime() {
-        return addtime;
-    }
-
-    public void setAddtime(Date addtime) {
-        this.addtime = addtime;
-    }
-
-    public String getEnv() {
-        return env;
-    }
-
-    public void setEnv(String env) {
-        this.env = env;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
 
 }

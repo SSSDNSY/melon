@@ -12,7 +12,11 @@
     <sql id="Base_Column_List">
 		t.`env`,
 		t.`title`,
-		t.`order`
+		t.`order`,
+        t.`create_by`,
+		t.`create_time`,
+		t.`update_by`,
+		t.`update_time`
 	</sql>
 
 

@@ -1,27 +1,25 @@
 package fun.sssdnsy.domain;
 
+import fun.sssdnsy.core.domain.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
- * Created by xuxueli on 16/10/8.
+ * 配置项目
  */
-public class XxlConfProject {
+@Getter
+@Setter
+@ToString
+public class XxlConfProject extends BaseEntity {
 
-    private String appname;     // 项目AppName
-    private String title;       // 项目名称
-
-    public String getAppname() {
-        return appname;
-    }
-
-    public void setAppname(String appname) {
-        this.appname = appname;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    /**
+     * 项目AppName
+     */
+    private String appname;
+    /**
+     * 项目名称
+     */
+    private String title;
 
 }

@@ -4,7 +4,6 @@ package fun.sssdnsy.service;
 import fun.sssdnsy.domain.XxlConfNode;
 
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -12,41 +11,24 @@ import java.util.Map;
  */
 public interface IXxlConfNodeService {
 
-    boolean ifHasProjectPermission(String loginEnv, String appname);
 
-    Map<String, Object> pageList(int offset,
-                                 int pagesize,
-                                 String appname,
-                                 String key,
+    List<XxlConfNode> find(List<XxlConfNode> confNodeList);
 
-                                 String loginEnv);
+    XxlConfNode get(XxlConfNode confNode);
 
-    String delete(String key, String loginEnv);
+    List<XxlConfNode> list(XxlConfNode confNode);
 
-    String add(XxlConfNode xxlConfNode, String loginEnv);
+    boolean exist(XxlConfNode confNode);
 
-    String update(XxlConfNode xxlConfNode, String loginEnv);
+    int delete(XxlConfNode confNode);
 
-    /*ReturnT<String syncConf(String appname,  String loginEnv);*/
+    int delete(List<XxlConfNode> confNodeList);
 
+    int add(XxlConfNode xxlConfNode);
 
-    // ---------------------- rest api ----------------------
+    int update(XxlConfNode xxlConfNode);
 
-    Map<String, String> find(String accessToken, String env, List<String> keys);
+    void monitor(List<XxlConfNode> confNodeList);
 
-    String monitor(String accessToken, String env, List<String> keys);
-
-
-    List<XxlConfNode> selectConfigList(XxlConfNode confNode);
-
-    XxlConfNode selectConfigByName(String appName);
-
-    boolean checkConfigKeyUnique(XxlConfNode confNode);
-
-    int insertConfig(XxlConfNode confNode);
-
-    int updateConfig(XxlConfNode config);
-
-    void deleteConfigByName(String[] configIds);
 
 }

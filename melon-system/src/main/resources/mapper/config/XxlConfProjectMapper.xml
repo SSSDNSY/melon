@@ -10,7 +10,11 @@
 
     <sql id="Base_Column_List">
 		t.`appname`,
-		t.`title`
+		t.`title`,
+        t.`create_by`,
+		t.`create_time`,
+		t.`update_by`,
+		t.`update_time`
 	</sql>
 
     <select id="list" parameterType="java.util.Map" resultMap="xxlConfProject">

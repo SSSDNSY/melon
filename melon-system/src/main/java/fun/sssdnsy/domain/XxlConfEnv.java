@@ -1,35 +1,29 @@
 package fun.sssdnsy.domain;
 
-/**
- * Created by xuxueli on 2018-05-30
- */
-public class XxlConfEnv {
+import fun.sssdnsy.core.domain.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-    private String env;         // Env
-    private String title;       // 环境名称
+/**
+ * 配置环境VO
+ */
+@Getter
+@Setter
+@ToString
+public class XxlConfEnv extends BaseEntity {
+
+    /**
+     * 环境
+     */
+    private String env;
+    /**
+     * 环境名称
+     */
+    private String title;
+    /**
+     * 环境排序值
+     */
     private int order;
 
-    public String getEnv() {
-        return env;
-    }
-
-    public void setEnv(String env) {
-        this.env = env;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getOrder() {
-        return order;
-    }
-
-    public void setOrder(int order) {
-        this.order = order;
-    }
 }
