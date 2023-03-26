@@ -55,6 +55,18 @@ INSERT INTO `xxl_conf_project` VALUES ('default', '示例项目');
 INSERT INTO `xxl_conf_node` VALUES ('test', 'default.key01', 'default', '测试配置01', '1'), ('test', 'default.key02', 'default', '测试配置02', '2'), ('test', 'default.key03', 'default', '测试配置03', '3');
 
 
+ALTER TABLE melon.xxl_conf_env
+COMMENT='配置中心-环境';
+ALTER TABLE melon.xxl_conf_node
+COMMENT='配置中心-配置项';
+ALTER TABLE melon.xxl_conf_node_log
+COMMENT='配置中心-配置日志';
+ALTER TABLE melon.xxl_conf_node_msg
+COMMENT='配置中心-配置消息';
+ALTER TABLE melon.xxl_conf_project
+COMMENT='配置中心-项目';
+
+
 -- ======================================================================================
 -- =============================RUO YI SQL=================================
 -- ======================================================================================
