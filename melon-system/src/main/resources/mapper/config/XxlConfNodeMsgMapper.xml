@@ -2,17 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fun.sssdnsy.mapper.XxlConfNodeMsgDao">
-
     <resultMap id="xxlConfNodeMsg" type="fun.sssdnsy.domain.XxlConfNodeMsg">
         <result column="id" property="id"/>
-        <result column="addtime" property="addtime"/>
         <result column="env" property="env"/>
         <result column="key" property="key"/>
         <result column="value" property="value"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		t.`id`,
+        t.`id`,
 		t.`env`,
 		t.`key`,
 		t.`value`,
@@ -20,22 +22,20 @@
 		t.`create_time`,
 		t.`update_by`,
 		t.`update_time`
-	</sql>
+    </sql>
 
     <insert id="add" parameterType="fun.sssdnsy.domain.XxlConfNodeMsg" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO xxl_conf_node_msg(
-			`addtime`,
-			`env`,
-			`key`,
-			`value`
-		)
-		VALUES(
-			now(),
-			#{env},
-			#{key},
-			#{value}
-		)
-	</insert>
+        INSERT INTO xxl_conf_node_msg(`create_by`,
+                                      `create_time`,
+                                      `env`,
+                                      `key`,
+                                      `value`)
+        VALUES (#{createBy},
+                now(),
+                #{env},
+                #{key},
+                #{value})
+    </insert>
 
     <select id="findMsg" parameterType="java.util.Map" resultMap="xxlConfNodeMsg">
         SELECT
@@ -52,8 +52,8 @@
 
 
     <delete id="cleanMessage" parameterType="java.util.Map">
-		DELETE FROM xxl_conf_node_msg
-		WHERE NOW() <![CDATA[ > ]]> DATE_ADD(addtime, Interval #{messageTimeout} SECOND)
-	</delete>
-
+        DELETE
+        FROM xxl_conf_node_msg
+        WHERE NOW() <![CDATA[ > ]]> DATE_ADD(addtime, Interval #{messageTimeout} SECOND)
+    </delete>
 </mapper>

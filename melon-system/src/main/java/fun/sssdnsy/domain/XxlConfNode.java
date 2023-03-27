@@ -1,10 +1,7 @@
 package fun.sssdnsy.domain;
 
 import fun.sssdnsy.core.domain.BaseEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,6 +12,8 @@ import java.util.List;
 @Setter
 @ToString
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class XxlConfNode extends BaseEntity {
 
     /**
@@ -39,7 +38,7 @@ public class XxlConfNode extends BaseEntity {
     private String value;
 
     /**
-     * // 配置变更Log
+     * 配置变更Log
      */
     private List<XxlConfNodeLog> logList;
 

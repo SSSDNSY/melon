@@ -2,19 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fun.sssdnsy.mapper.XxlConfNodeDao">
-
     <resultMap id="xxlConfNode" type="fun.sssdnsy.domain.XxlConfNode">
         <result column="env" property="env" jdbcType="VARCHAR"/>
         <result column="key" property="key" jdbcType="VARCHAR"/>
         <result column="appname" property="appname" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="value" property="value" jdbcType="VARCHAR"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <association column="{env=env,key=key}" property="logList"
                      select="fun.sssdnsy.mapper.XxlConfNodeLogDao.findByKey"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		t.`env`,
+        t.`env`,
 		t.`key`,
 		t.`appname`,
 		t.`title`,
@@ -23,7 +26,7 @@
 		t.`create_time`,
 		t.`update_by`,
 		t.`update_time`
-	</sql>
+    </sql>
 
     <select id="list" parameterType="java.util.Map" resultMap="xxlConfNode">
         SELECT
@@ -44,26 +47,28 @@
     </select>
 
     <delete id="delete" parameterType="java.util.Map">
-		DELETE FROM xxl_conf_node
-		WHERE `env` = #{env} AND `key` = #{key}
-	</delete>
+        DELETE
+        FROM xxl_conf_node
+        WHERE `env` = #{env}
+          AND `key` = #{key}
+    </delete>
 
     <insert id="insert" parameterType="fun.sssdnsy.domain.XxlConfNode">
-		INSERT INTO xxl_conf_node(
-			`env`,
-			`key`,
-			`appname`,
-			`title`,
-			`value`
-		)
-		VALUES(
-			#{env},
-			#{key},
-			#{appname},
-			#{title},
-			#{value}
-		)
-	</insert>
+        INSERT INTO xxl_conf_node(`env`,
+                                  `key`,
+                                  `appname`,
+                                  `title`,
+                                  `value`,
+                                  `create_time`,
+                                  `create_by`)
+        VALUES (#{env},
+                #{key},
+                #{appname},
+                #{title},
+                #{value},
+                now(),
+                #{createBy})
+    </insert>
 
     <select id="load" parameterType="java.lang.String" resultMap="xxlConfNode">
         SELECT
@@ -73,10 +78,11 @@
     </select>
 
     <update id="update" parameterType="fun.sssdnsy.domain.XxlConfNode">
-		UPDATE xxl_conf_node
-		SET `title` = #{title},
-			`value` = #{value}
-		WHERE `env` = #{env} AND `key` = #{key}
-	</update>
-
+        UPDATE xxl_conf_node
+        SET `title`      = #{title},
+            `value`      = #{value},
+            `update_time`=now(),
+            `update_by`=#{updateBy},
+            WHERE `env` = #{env} AND `key` = #{key}
+    </update>
 </mapper>
