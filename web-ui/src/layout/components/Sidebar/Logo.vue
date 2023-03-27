@@ -35,7 +35,7 @@
   },
   data() {
     return {
-      title: 'Melon管理系统',
+      title: 'SSSDNSY MELON',
       logo: logoImg
     }
   }
