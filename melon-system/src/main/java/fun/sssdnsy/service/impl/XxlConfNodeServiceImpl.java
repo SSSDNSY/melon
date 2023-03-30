@@ -213,7 +213,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
     @Override
     public void afterPropertiesSet() throws Exception {
-//        startThead();
+        startThead();
     }
 
     @Override
@@ -232,7 +232,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
                 while (!executorStoped) {
                     try {
                         // new message, filter readed TODO
-                        List<XxlConfNodeMsg> messageList = null;// xxlConfNodeMsgDao.findMsg(readedMessageIds);
+                        List<XxlConfNodeMsg> messageList =  xxlConfNodeMsgDao.findMsg(readedMessageIds);
                         if (messageList != null && messageList.size() > 0) {
                             for (XxlConfNodeMsg message : messageList) {
                                 readedMessageIds.add(message.getId());
