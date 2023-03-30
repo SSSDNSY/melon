@@ -78,7 +78,6 @@ public class SysDictDataController extends BaseController {
     @Log(title = "字典数据", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysDictData dict) {
-        dict.setCreateBy(getUsername());
         return toAjax(dictDataService.insertDictData(dict));
     }
 
@@ -89,7 +88,6 @@ public class SysDictDataController extends BaseController {
     @Log(title = "字典数据", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysDictData dict) {
-        dict.setUpdateBy(getUsername());
         return toAjax(dictDataService.updateDictData(dict));
     }
 

@@ -29,7 +29,7 @@ public class EnvController extends BaseController {
     private IXxlConfEnvService confEnvService;
 
     /**
-     * 获取参数配置列表
+     * 获取环境配置列表
      */
     @GetMapping("/list")
     public TableDataInfo list(XxlConfEnv env) {
@@ -38,17 +38,17 @@ public class EnvController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "参数管理", businessType = BusinessType.EXPORT)
+    @Log(title = "导出环境配置", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('config:env:export')")
     @PostMapping("/export")
     public void export(HttpServletResponse response, XxlConfEnv env) {
         List<XxlConfEnv> list = confEnvService.selectConfigList(env);
         ExcelUtil<XxlConfEnv> util = new ExcelUtil<XxlConfEnv>(XxlConfEnv.class);
-        util.exportExcel(response, list, "参数数据");
+        util.exportExcel(response, list, "导出环境配置");
     }
 
     /**
-     * 根据参数编号获取详细信息
+     * 根据参数编号获取环境配置详细信息
      */
     @GetMapping(value = "/{env}")
     public AjaxResult getInfo(@PathVariable String env) {
@@ -57,9 +57,9 @@ public class EnvController extends BaseController {
 
 
     /**
-     * 保存参数配置
+     * 保存环境配置
      */
-    @Log(title = "参数管理", businessType = BusinessType.SAVE)
+    @Log(title = "保存环境配置", businessType = BusinessType.SAVE)
     @PostMapping
     public AjaxResult save(@Validated @RequestBody XxlConfEnv env) {
         if (confEnvService.checkConfigKeyUnique(env)) {
@@ -69,23 +69,23 @@ public class EnvController extends BaseController {
     }
 
     /**
-     * 修改参数配置
+     * 修改环境配置
      */
     @PreAuthorize("@ss.hasPermi('config:env:edit')")
-    @Log(title = "参数管理", businessType = BusinessType.UPDATE)
+    @Log(title = "修改环境", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody XxlConfEnv env) {
         if (confEnvService.checkConfigKeyUnique(env)) {
-            return error("修改参数'" + env.getEnv() + "'失败，参数键名已存在");
+            return error("修改环境'" + env.getEnv() + "'失败，环境名已存在");
         }
         return toAjax(confEnvService.updateConfig(env));
     }
 
     /**
-     * 删除参数配置
+     * 删除环境配置
      */
     @PreAuthorize("@ss.hasPermi('config:env:remove')")
-    @Log(title = "参数管理", businessType = BusinessType.DELETE)
+    @Log(title = "删除环境配置", businessType = BusinessType.DELETE)
     @DeleteMapping("/{appname}")
     public AjaxResult remove(@PathVariable String appname) {
         confEnvService.deleteConfigByName(new String[]{appname});

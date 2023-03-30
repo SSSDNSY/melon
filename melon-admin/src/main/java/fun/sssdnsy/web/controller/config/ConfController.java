@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -34,14 +35,30 @@ public class ConfController extends BaseController {
      * 获取配置列表
      */
     @GetMapping("/list")
+    @PreAuthorize("@ss.hasPermi('config:conf:list')")
     public TableDataInfo list(XxlConfNode confNode) {
         startPage();
         List<XxlConfNode> list = confNodeService.list(confNode);
         return getDataTable(list);
     }
 
-    @Log(title = "参数管理", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('config:project:export')")
+
+    /**
+     * 查询环境、项目的下拉框
+     * @return
+     */
+    @GetMapping("/listEnvApp")
+    @PreAuthorize("@ss.hasPermi('config:conf:list')")
+    public AjaxResult listEnvApp() {
+        Map<String,List> dataMap = confNodeService.listEnvApp();
+        return success(dataMap);
+    }
+
+    /**
+     * 导出配置项
+     */
+    @Log(title = "导出配置项", businessType = BusinessType.EXPORT)
+    @PreAuthorize("@ss.hasPermi('config:conf:export')")
     @PostMapping("/export")
     public void export(HttpServletResponse response, XxlConfNode confNode) {
         List<XxlConfNode> list = confNodeService.list(confNode);
@@ -50,7 +67,7 @@ public class ConfController extends BaseController {
     }
 
     /**
-     * 根据evn,key获取详细信息
+     * 根据evn,key获取配置项详细信息
      */
     @GetMapping(value = "/{env}/{key}")
     public AjaxResult getInfo(@PathVariable String env, @PathVariable String key) {
@@ -60,9 +77,10 @@ public class ConfController extends BaseController {
 
 
     /**
-     * 保存参数配置
+     * 保存修改配置项
      */
-    @Log(title = "参数管理", businessType = BusinessType.SAVE)
+    @Log(title = "保存配置项", businessType = BusinessType.SAVE)
+    @PreAuthorize("@ss.hasPermi('config:conf:edit')")
     @PostMapping
     public AjaxResult save(@Validated @RequestBody XxlConfNode confNode) {
         if (confNodeService.exist(confNode)) {
@@ -72,23 +90,23 @@ public class ConfController extends BaseController {
     }
 
     /**
-     * 修改参数配置
+     * 修改配置项
      */
-    @PreAuthorize("@ss.hasPermi('config:project:edit')")
-    @Log(title = "参数管理", businessType = BusinessType.UPDATE)
+    @PreAuthorize("@ss.hasPermi('config:conf:edit')")
+    @Log(title = "修改配置项", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody XxlConfNode confNode) {
         if (confNodeService.exist(confNode)) {
-            return error("修改参数'" + confNode.getAppname() + "'失败，参数键名已存在");
+            return error("修改配置项'" + confNode.getAppname() + "'失败，参数键名已存在");
         }
         return toAjax(confNodeService.update(confNode));
     }
 
     /**
-     * 删除参数配置
+     * 删除配置项
      */
-    @PreAuthorize("@ss.hasPermi('config:project:remove')")
-    @Log(title = "参数管理", businessType = BusinessType.DELETE)
+    @PreAuthorize("@ss.hasPermi('config:conf:edit')")
+    @Log(title = "删除配置项", businessType = BusinessType.DELETE)
     @DeleteMapping("/{env}/{key}")
     public AjaxResult remove(@PathVariable String env, @PathVariable String key) {
         XxlConfNode confNode = XxlConfNode.builder().env(env).key(key).build();

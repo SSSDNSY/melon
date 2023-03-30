@@ -30,7 +30,7 @@ public class ProjectController extends BaseController {
     private IXxlConfProjectService confProjectService;
 
     /**
-     * 获取参数配置列表
+     * 获取项目配置列表
      */
     @GetMapping("/list")
     public TableDataInfo list(XxlConfProject project) {
@@ -39,17 +39,17 @@ public class ProjectController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "参数管理", businessType = BusinessType.EXPORT)
+    @Log(title = "项目配置管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('config:project:export')")
     @PostMapping("/export")
     public void export(HttpServletResponse response, XxlConfProject project) {
         List<XxlConfProject> list = confProjectService.selectConfigList(project);
         ExcelUtil<XxlConfProject> util = new ExcelUtil<XxlConfProject>(XxlConfProject.class);
-        util.exportExcel(response, list, "参数数据");
+        util.exportExcel(response, list, "项目配置数据");
     }
 
     /**
-     * 根据参数编号获取详细信息
+     * 根据参数编号获取项目配置详细信息
      */
     @GetMapping(value = "/{appName}")
     public AjaxResult getInfo(@PathVariable String appName) {
@@ -58,9 +58,9 @@ public class ProjectController extends BaseController {
 
 
     /**
-     * 保存参数配置
+     * 保存项目配置
      */
-    @Log(title = "参数管理", businessType = BusinessType.SAVE)
+    @Log(title = "保存项目配置", businessType = BusinessType.SAVE)
     @PostMapping
     public AjaxResult save(@Validated @RequestBody XxlConfProject project) {
         if (confProjectService.checkConfigKeyUnique(project)) {
@@ -70,23 +70,23 @@ public class ProjectController extends BaseController {
     }
 
     /**
-     * 修改参数配置
+     * 修改项目配置
      */
     @PreAuthorize("@ss.hasPermi('config:project:edit')")
-    @Log(title = "参数管理", businessType = BusinessType.UPDATE)
+    @Log(title = "修改项目", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody XxlConfProject project) {
         if (confProjectService.checkConfigKeyUnique(project)) {
-            return error("修改参数'" + project.getAppname() + "'失败，参数键名已存在");
+            return error("修改项目配置'" + project.getAppname() + "'失败，项目配置键名已存在");
         }
         return toAjax(confProjectService.updateConfig(project));
     }
 
     /**
-     * 删除参数配置
+     * 删除项目配置
      */
     @PreAuthorize("@ss.hasPermi('config:project:remove')")
-    @Log(title = "参数管理", businessType = BusinessType.DELETE)
+    @Log(title = "删除项目配置", businessType = BusinessType.DELETE)
     @DeleteMapping("/{appname}")
     public AjaxResult remove(@PathVariable String appname) {
         confProjectService.deleteConfigByName(new String[]{appname});

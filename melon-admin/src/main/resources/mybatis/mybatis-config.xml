@@ -17,4 +17,10 @@
         <!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
     </settings>
 
+    <!-- 插件 -->
+    <plugins>
+        <!-- 拦截器 -->
+        <plugin interceptor="fun.sssdnsy.interceptor.MybatisInterceptor"/>
+    </plugins>
+
 </configuration>
