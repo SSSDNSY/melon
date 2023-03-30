@@ -4,6 +4,7 @@ package fun.sssdnsy.service;
 import fun.sssdnsy.domain.XxlConfNode;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -30,5 +31,6 @@ public interface IXxlConfNodeService {
 
     void monitor(List<XxlConfNode> confNodeList);
 
+    Map<String, List> listEnvApp();
 
 }

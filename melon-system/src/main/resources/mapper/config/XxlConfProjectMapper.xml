@@ -53,13 +53,13 @@
     </select>
 
     <insert id="save" parameterType="fun.sssdnsy.domain.XxlConfProject">
-		INSERT INTO xxl_conf_project(appname, title)
-		VALUES(#{appname}, #{title})
+		INSERT INTO xxl_conf_project(appname, title,createBy,createTime)
+		VALUES(#{appname}, #{title}, #{createBy}, #{createTime})
 	</insert>
 
     <update id="update" parameterType="fun.sssdnsy.domain.XxlConfProject">
 		UPDATE xxl_conf_project
-		SET title = #{title}
+		SET title = #{title},updateBy=#{updateBy},updateTime=#{updateTime}
 		WHERE appname = #{appname}
 	</update>
 

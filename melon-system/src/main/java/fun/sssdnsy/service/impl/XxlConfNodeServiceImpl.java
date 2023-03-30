@@ -43,7 +43,10 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     private XxlConfNodeLogDao xxlConfNodeLogDao;
 
     @Resource
-    private XxlConfEnvDao xxlConfEnvDao;
+    private XxlConfEnvDao envDao;
+
+    @Resource
+    private XxlConfProjectDao projectDao;
 
     @Resource
     private XxlConfNodeMsgDao xxlConfNodeMsgDao;
@@ -64,7 +67,13 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         return xxlConfNodeDao.list(confNode.getAppname(), confNode.getKey(), confNode.getEnv());
     }
 
-    // ---------------------- rest api ----------------------
+    @Override
+    public Map<String, List> listEnvApp() {
+        Map<String, List> map = new HashMap<>(2);
+        map.put("env", envDao.findAll());
+        map.put("app", projectDao.findAll());
+        return map;
+    }
 
     @Override
     public int delete(XxlConfNode confNode) {
@@ -190,7 +199,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
     @Override
     public boolean exist(XxlConfNode confNode) {
-        return get(confNode) == null;
+        return get(confNode) != null;
     }
 
     @Override

@@ -43,7 +43,7 @@
                 #{key},
                 #{title},
                 #{value},
-                NOW(),
+                #{createTime},
                 #{createBy})
     </insert>
 

@@ -10,10 +10,19 @@ export function listConf(query) {
   })
 }
 
-// 查询详细
-export function getConf(confId) {
+// 查询环境、项目的下拉框
+export function listEnvApp(query) {
   return request({
-    url: '/config/conf/' + confId,
+    url: '/config/conf/listEnvApp',
+    method: 'get',
+    params: query
+  })
+}
+
+// 查询详细
+export function getConf(env,key) {
+  return request({
+    url: '/config/conf/' + env+'/'+key,
     method: 'get'
   })
 }
@@ -29,9 +38,9 @@ export function saveConf(data) {
 }
 
 // 删除配置
-export function delConf(configId) {
+export function delConf(env,key) {
   return request({
-    url: '/config/conf/' + configId,
+    url: '/config/conf/' + env+'/'+key,
     method: 'delete'
   })
 }

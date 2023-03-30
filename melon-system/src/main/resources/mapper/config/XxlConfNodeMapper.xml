@@ -43,7 +43,7 @@
                 AND t.key like CONCAT('%',#{key},'%')
             </if>
         </trim>
-        ORDER BY update_time
+        ORDER BY update_time desc ,create_time desc
     </select>
 
     <delete id="delete" parameterType="java.util.Map">
@@ -66,7 +66,7 @@
                 #{appname},
                 #{title},
                 #{value},
-                now(),
+                #{createTime},
                 #{createBy})
     </insert>
 
@@ -81,8 +81,8 @@
         UPDATE xxl_conf_node
         SET `title`      = #{title},
             `value`      = #{value},
-            `update_time`=now(),
-            `update_by`=#{updateBy},
+            `update_time`=#{updateTime},
+            `update_by`=#{updateBy}
             WHERE `env` = #{env} AND `key` = #{key}
     </update>
 </mapper>
