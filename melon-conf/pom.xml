@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>melon-conf</artifactId>
+    <groupId>fun.pengzh</groupId>
     <packaging>jar</packaging>
 
 
@@ -35,11 +36,6 @@
             <artifactId>spring-beans</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
     </dependencies>
 
 </project>

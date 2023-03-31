@@ -19,11 +19,18 @@
 
     <dependencies>
 
-        <!-- 通用工具-->
+        <!-- 通用工具 -->
         <dependency>
             <groupId>fun.pengzh</groupId>
             <artifactId>melon-common</artifactId>
         </dependency>
+
+        <!-- 配置中心 -->
+        <dependency>
+            <groupId>fun.pengzh</groupId>
+            <artifactId>melon-conf</artifactId>
+        </dependency>
+
 
     </dependencies>
 

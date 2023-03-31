@@ -54,6 +54,6 @@
     <delete id="cleanMessage" parameterType="java.util.Map">
         DELETE
         FROM xxl_conf_node_msg
-        WHERE NOW() <![CDATA[ > ]]> DATE_ADD(addtime, Interval #{messageTimeout} SECOND)
+        WHERE NOW() <![CDATA[ > ]]> DATE_ADD(create_time, Interval #{messageTimeout} SECOND)
     </delete>
 </mapper>

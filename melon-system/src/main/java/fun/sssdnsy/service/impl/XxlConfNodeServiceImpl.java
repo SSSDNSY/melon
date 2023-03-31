@@ -1,5 +1,6 @@
 package fun.sssdnsy.service.impl;
 
+import fun.sssdnsy.client.util.PropUtil;
 import fun.sssdnsy.domain.XxlConfNode;
 import fun.sssdnsy.domain.XxlConfNodeLog;
 import fun.sssdnsy.domain.XxlConfNodeMsg;
@@ -55,7 +56,6 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     private String dataFilePath;
 
     @Value("${melon.conf.beat-time}")
-
     private int beatTime = 30;
     private ExecutorService executorService = Executors.newCachedThreadPool();
     private volatile boolean executorStoped = false;
@@ -87,7 +87,10 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         return deleteNum;
     }
 
-    // conf broadcast msg
+
+    /**
+     * conf broadcast msg
+     */
     private void sendConfMsg(String env, String key, String value) {
 
         XxlConfNodeMsg confNodeMsg = new XxlConfNodeMsg();
@@ -166,6 +169,26 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     }
 
     @Override
+    public XxlConfNode get(XxlConfNode confNode) {
+        return xxlConfNodeDao.load(confNode.getEnv(), confNode.getKey());
+    }
+
+    @Override
+    public boolean exist(XxlConfNode confNode) {
+        return get(confNode) != null;
+    }
+
+    @Override
+    public int delete(List<XxlConfNode> confNodeLis) {
+        int sum = 0;
+        for (XxlConfNode confNode : confNodeLis) {
+            sum += delete(confNode);
+        }
+        return sum;
+    }
+
+
+    @Override
     public List<XxlConfNode> find(List<XxlConfNode> confNodeList) {
         List<XxlConfNode> nodes = new ArrayList<>();
         // valid
@@ -193,25 +216,6 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     }
 
     @Override
-    public XxlConfNode get(XxlConfNode confNode) {
-        return xxlConfNodeDao.load(confNode.getEnv(), confNode.getKey());
-    }
-
-    @Override
-    public boolean exist(XxlConfNode confNode) {
-        return get(confNode) != null;
-    }
-
-    @Override
-    public int delete(List<XxlConfNode> confNodeLis) {
-        int sum = 0;
-        for (XxlConfNode confNode : confNodeLis) {
-            sum += delete(confNode);
-        }
-        return sum;
-    }
-
-    @Override
     public void afterPropertiesSet() throws Exception {
         startThead();
     }
@@ -224,41 +228,36 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     public void startThead() throws Exception {
 
         /**
-         * brocast conf-data msg, sync to file, for "add、update、delete"
+         * deal  msg, sync  file, for "add、update、delete" operation
          */
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                while (!executorStoped) {
-                    try {
-                        // new message, filter readed TODO
-                        List<XxlConfNodeMsg> messageList =  xxlConfNodeMsgDao.findMsg(readedMessageIds);
-                        if (messageList != null && messageList.size() > 0) {
-                            for (XxlConfNodeMsg message : messageList) {
-                                readedMessageIds.add(message.getId());
-
-
-                                // sync file
-                                setFileConfData(message.getEnv(), message.getKey(), message.getValue());
-                            }
-                        }
-
-                        // clean old message;
-                        if ((System.currentTimeMillis() / 1000) % beatTime == 0) {
-                            xxlConfNodeMsgDao.cleanMessage(beatTime);
-                            readedMessageIds.clear();
-                        }
-                    } catch (Exception e) {
-                        if (!executorStoped) {
-                            logger.error(e.getMessage(), e);
+        executorService.execute(() -> {
+            while (!executorStoped) {
+                try {
+                    // new message, filter read
+                    List<XxlConfNodeMsg> messageList = xxlConfNodeMsgDao.findMsg(readedMessageIds);
+                    if (messageList != null && messageList.size() > 0) {
+                        for (XxlConfNodeMsg message : messageList) {
+                            readedMessageIds.add(message.getId());
+                            // sync file
+                            setConfDataFile(message.getEnv(), message.getKey(), message.getValue());
                         }
                     }
-                    try {
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (Exception e) {
-                        if (!executorStoped) {
-                            logger.error(e.getMessage(), e);
-                        }
+
+                    // clean old message
+                    if ((System.currentTimeMillis() / 1000) % beatTime == 0) {
+                        xxlConfNodeMsgDao.cleanMessage(beatTime);
+                        readedMessageIds.clear();
+                    }
+                } catch (Exception e) {
+                    if (!executorStoped) {
+                        logger.error(e.getMessage(), e);
+                    }
+                }
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (Exception e) {
+                    if (!executorStoped) {
+                        logger.error(e.getMessage(), e);
                     }
                 }
             }
@@ -267,69 +266,55 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
         /**
          *  sync total conf-data, db + file      (1+N/30s)
-         *
          *  clean deleted conf-data file
          */
-//        executorService.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                while (!executorStoped) {
-//
-//                    // align to beattime
-//                    try {
-//                        long sleepSecond = beatTime - (System.currentTimeMillis() / 1000) % beatTime;
-//                        if (sleepSecond > 0 && sleepSecond < beatTime) {
-//                            TimeUnit.SECONDS.sleep(sleepSecond);
-//                        }
-//                    } catch (Exception e) {
-//                        if (!executorStoped) {
-//                            logger.error(e.getMessage(), e);
-//                        }
-//                    }
-//
-//                    try {
-//
-//                        // sync registry-data, db + file
-//                        int offset = 0;
-//                        int pagesize = 1000;
-//                        List<String> confDataFileList = new ArrayList<>();
-//
-//                        List<XxlConfNode> confNodeList = xxlConfNodeDao.pageList(offset, pagesize, null, null, null);
-//                        while (confNodeList != null && confNodeList.size() > 0) {
-//
-//                            for (XxlConfNode confNoteItem : confNodeList) {
-//
-//                                // sync file
-//                                String confDataFile = setFileConfData(confNoteItem.getEnv(), confNoteItem.getKey(), confNoteItem.getValue());
-//
-//                                // collect confDataFile
-//                                confDataFileList.add(confDataFile);
-//                            }
-//
-//
-//                            offset += 1000;
-//                            confNodeList = xxlConfNodeDao.pageList(offset, pagesize, null, null, null);
-//                        }
-//
-//                        // clean old registry-data file
-//                        cleanFileConfData(confDataFileList);
-//
-//                        logger.debug(">>>>>>>>>>> xxl-conf, sync totel conf data success, sync conf count = {}", confDataFileList.size());
-//                    } catch (Exception e) {
-//                        if (!executorStoped) {
-//                            logger.error(e.getMessage(), e);
-//                        }
-//                    }
-//                    try {
-//                        TimeUnit.SECONDS.sleep(beatTime);
-//                    } catch (Exception e) {
-//                        if (!executorStoped) {
-//                            logger.error(e.getMessage(), e);
-//                        }
-//                    }
-//                }
-//            }
-//        });
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                while (!executorStoped) {
+
+                    // align to beattime
+                    try {
+                        long sleepSecond = beatTime - (System.currentTimeMillis() / 1000) % beatTime;
+                        if (sleepSecond > 0 && sleepSecond < beatTime) {
+                            TimeUnit.SECONDS.sleep(sleepSecond);
+                        }
+                    } catch (Exception e) {
+                        if (!executorStoped) {
+                            logger.error(e.getMessage(), e);
+                        }
+                    }
+
+                    try {
+                        // sync registry-data, db + file
+                        List<String> confDataFileList = new ArrayList<>();
+                        List<XxlConfNode> confNodeList = xxlConfNodeDao.list(null, null, null);
+                        if (confNodeList != null && confNodeList.size() > 0) {
+                            for (XxlConfNode confNoteItem : confNodeList) {
+                                // sync file
+                                String confDataFile = setConfDataFile(confNoteItem.getEnv(), confNoteItem.getKey(), confNoteItem.getValue());
+                                // collect confDataFile
+                                confDataFileList.add(confDataFile);
+                            }
+                        }
+                        // clean old registry-data file
+                        cleanConfDataFile(confDataFileList);
+                        logger.debug(">>>>>>>>>>> conf, sync total conf data success, sync conf count = {}", confDataFileList.size());
+                    } catch (Exception e) {
+                        if (!executorStoped) {
+                            logger.error(e.getMessage(), e);
+                        }
+                    }
+                    try {
+                        TimeUnit.SECONDS.sleep(beatTime);
+                    } catch (Exception e) {
+                        if (!executorStoped) {
+                            logger.error(e.getMessage(), e);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     private void stopThread() {
@@ -339,7 +324,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
 
     // get
-    public String getFileConfData(String env, String key) {
+    public String getConfDataFile(String env, String key) {
 
         // fileName
         String confFileName = parseConfDataFileName(env, key);
@@ -362,13 +347,13 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     }
 
     // set
-    private String setFileConfData(String env, String key, String value) {
+    private String setConfDataFile(String env, String key, String value) {
 
         // fileName
         String confFileName = parseConfDataFileName(env, key);
 
         // valid repeat update
-        Properties existProp = null;//TODO PropUtil.loadFileProp(confFileName);
+        Properties existProp = PropUtil.loadFileProp(confFileName);
         if (existProp != null
                 && value != null
                 && value.equals(existProp.getProperty("value"))
@@ -384,8 +369,8 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
             prop.setProperty("value", value);
         }
 
-        //TODO PropUtil.writeFileProp(prop, confFileName);
-        logger.info(">>>>>>>>>>> xxl-conf, setFileConfData: confFileName={}, value={}", confFileName, value);
+        PropUtil.writeFileProp(prop, confFileName);
+        logger.info(">>>>>>>>>>> conf, setFileConfData: confFileName={}, value={}", confFileName, value);
 
         // brocast monitor client
         List<DeferredResult> deferredResultList = confDeferredResultMap.get(confFileName);
@@ -399,10 +384,13 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         return new File(confFileName).getPath();
     }
 
-    // clean
-    public void cleanFileConfData(List<String> confDataFileList) {
+    /**
+     * clean conf data file
+     */
+    public void cleanConfDataFile(List<String> confDataFileList) {
         filterChildPath(new File(dataFilePath), confDataFileList);
     }
+
 
     public void filterChildPath(File parentPath, final List<String> confDataFileList) {
         if (!parentPath.exists() || parentPath.list() == null || parentPath.list().length == 0) {
@@ -412,8 +400,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         for (File childFile : childFileList) {
             if (childFile.isFile() && !confDataFileList.contains(childFile.getPath())) {
                 childFile.delete();
-
-                logger.info(">>>>>>>>>>> xxl-conf, cleanFileConfData, ConfDataFile={}", childFile.getPath());
+                logger.info(">>>>>>>>>>> conf, cleanFileConfData, ConfDataFile={}", childFile.getPath());
             }
             if (childFile.isDirectory()) {
                 if (parentPath.listFiles() != null && parentPath.listFiles().length > 0) {

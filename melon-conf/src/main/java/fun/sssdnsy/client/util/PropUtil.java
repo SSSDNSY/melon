@@ -114,7 +114,6 @@ public class PropUtil {
             // write data
             fileOutputStream = new FileOutputStream(file, false);
             properties.store(new OutputStreamWriter(fileOutputStream, "utf-8"), null);
-            //properties.store(new FileWriter(filePathName), null);
             return true;
         } catch (IOException e) {
             logger.error(e.getMessage(), e);

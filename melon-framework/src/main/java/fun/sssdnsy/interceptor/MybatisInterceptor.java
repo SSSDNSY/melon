@@ -1,13 +1,14 @@
 package fun.sssdnsy.interceptor;
 
 import fun.sssdnsy.core.domain.BaseEntity;
+import fun.sssdnsy.core.domain.model.LoginUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationTargetException;
@@ -43,18 +44,18 @@ public class MybatisInterceptor implements Interceptor {
         MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
         Object parameter = invocation.getArgs()[1];
         if (parameter instanceof BaseEntity) {
-            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String currentUsername = null;
-            if (principal instanceof UserDetails) {
-                UserDetails userDetails = (UserDetails) principal;
-                currentUsername = userDetails.getUsername();
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication == null) {
+                return;
             }
+            LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+            String username = loginUser.getUsername();
             BaseEntity baseEntity = (BaseEntity) parameter;
             if (Objects.equals(SqlCommandType.INSERT, mappedStatement.getSqlCommandType())) {
-                baseEntity.setCreateBy(currentUsername);
+                baseEntity.setCreateBy(username);
                 baseEntity.setCreateTime(new Date());
             } else if (Objects.equals(SqlCommandType.UPDATE, mappedStatement.getSqlCommandType())) {
-                baseEntity.setUpdateBy(currentUsername);
+                baseEntity.setUpdateBy(username);
                 baseEntity.setUpdateTime(new Date());
             }
         }
