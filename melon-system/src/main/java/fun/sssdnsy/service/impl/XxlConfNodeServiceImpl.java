@@ -1,12 +1,16 @@
 package fun.sssdnsy.service.impl;
 
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import fun.sssdnsy.client.util.PropUtil;
+import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.domain.XxlConfNode;
 import fun.sssdnsy.domain.XxlConfNodeLog;
 import fun.sssdnsy.domain.XxlConfNodeMsg;
 import fun.sssdnsy.domain.XxlConfProject;
 import fun.sssdnsy.mapper.*;
 import fun.sssdnsy.service.IXxlConfNodeService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +18,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import javax.annotation.Resource;
@@ -187,32 +192,60 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         return sum;
     }
 
-
     @Override
-    public List<XxlConfNode> find(List<XxlConfNode> confNodeList) {
-        List<XxlConfNode> nodes = new ArrayList<>();
-        // valid
-		/*for (String key: keys) {
-			if (key==null || key.trim().length()<4 || key.trim().length()>100) {
-				return new ("", "Key Invalid[4~100]");
-			}
-			if (!RegexUtil.matches(RegexUtil.abc_number_line_point_pattern, key)) {
-				return new ("", "Key format Invalid");
-			}
-		}*/
+    public Map<String, String> find(JSONObject jsonObject) {
+
+        JSONArray keys = jsonObject.getJSONArray("keys");
+        String env = jsonObject.getString("env");
+        Assert.isTrue(CollectionUtils.isNotEmpty(keys) && StringUtils.isNotBlank(env), "入参keys、env不能为空！");
 
         // result
         Map<String, String> result = new HashMap<String, String>();
-        for (XxlConfNode key : confNodeList) {
+        for (Object key : keys) {
 
+
+            if (key == null || StringUtils.isBlank(key.toString())) {
+                continue;
+            }
+
+            String value = getConfDataFile(env, key.toString());
+
+            result.put(key.toString(), value);
         }
 
-        return confNodeList;
+        return result;
     }
 
     @Override
-    public void monitor(List<XxlConfNode> confNodeList) {
-        //TODO
+    public DeferredResult<AjaxResult> monitor(JSONObject jsonObject) {
+
+        DeferredResult deferredResult = new DeferredResult(beatTime * 1000L, AjaxResult.success("Monitor timeout, no key updated."));
+
+        JSONArray keys = jsonObject.getJSONArray("keys");
+        String env = jsonObject.getString("env");
+        Assert.isTrue(CollectionUtils.isNotEmpty(keys) && StringUtils.isNotBlank(env), "入参keys、env不能为空！");
+
+        // result
+        Map<String, String> result = new HashMap<String, String>();
+        for (Object key : keys) {
+            if (key == null || StringUtils.isBlank(key.toString())) {
+                deferredResult.setResult(AjaxResult.error("keys Invalid."));
+                return deferredResult;
+            }
+
+            // monitor each key
+            String fileName = parseConfDataFileName(env, key.toString());
+
+            List<DeferredResult> deferredResultList = confDeferredResultMap.get(fileName);
+            if (deferredResultList == null) {
+                deferredResultList = new ArrayList<>();
+                confDeferredResultMap.put(fileName, deferredResultList);
+            }
+            deferredResultList.add(deferredResult);
+
+        }
+
+        return deferredResult;
     }
 
     @Override
@@ -330,11 +363,12 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         String confFileName = parseConfDataFileName(env, key);
 
         // read
-        Properties existProp = null;//TODO null;//TODO PropUtil.loadFileProp(confFileName);
+        Properties existProp = PropUtil.loadFileProp(confFileName);
         if (existProp != null && existProp.containsKey("value")) {
-            return existProp.getProperty("value");
+            String value = existProp.getProperty("value");
+            return StringUtils.isBlank(value) ? StringUtils.EMPTY : value;
         }
-        return null;
+        return StringUtils.EMPTY;
     }
 
     private String parseConfDataFileName(String env, String key) {
@@ -372,7 +406,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
         PropUtil.writeFileProp(prop, confFileName);
         logger.info(">>>>>>>>>>> conf, setFileConfData: confFileName={}, value={}", confFileName, value);
 
-        // brocast monitor client
+        // broadcast monitor client
         List<DeferredResult> deferredResultList = confDeferredResultMap.get(confFileName);
         if (deferredResultList != null) {
             confDeferredResultMap.remove(confFileName);

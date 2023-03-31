@@ -34,7 +34,6 @@ public class ConfigFactory implements InstantiationAwareBeanPostProcessor, Initi
     private static final String placeHolderSuffix = "}";
     private static Logger log = LoggerFactory.getLogger(ConfigFactory.class);
     private static BeanFactory beanFactory;
-    private String envProp;
     private String adminAddress;
     private String env;
     private String accessToken;

@@ -1,5 +1,7 @@
 package fun.sssdnsy.web.controller.config;
 
+import com.alibaba.fastjson2.JSONObject;
+import fun.sssdnsy.annotation.Anonymous;
 import fun.sssdnsy.annotation.Log;
 import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -45,12 +48,13 @@ public class ConfController extends BaseController {
 
     /**
      * 查询环境、项目的下拉框
+     *
      * @return
      */
     @GetMapping("/listEnvApp")
     @PreAuthorize("@ss.hasPermi('config:conf:list')")
     public AjaxResult listEnvApp() {
-        Map<String,List> dataMap = confNodeService.listEnvApp();
+        Map<String, List> dataMap = confNodeService.listEnvApp();
         return success(dataMap);
     }
 
@@ -113,5 +117,77 @@ public class ConfController extends BaseController {
         int delete = confNodeService.delete(confNode);
         return delete > 0 ? success() : error();
     }
+
+    /**
+     * 配置查询 API
+     * <p>
+     * 说明：查询配置数据；
+     * <p>
+     * ------
+     * 地址格式：{配置中心跟地址}/find
+     * <p>
+     * 请求参数说明：
+     * 1、accessToken：请求令牌；
+     * 2、env：环境标识
+     * 3、keys：配置Key列表
+     * <p>
+     * 请求数据格式如下，放置在 RequestBody 中，JSON格式：
+     * <p>
+     * {
+     * "accessToken" : "xx",
+     * "env" : "xx",
+     * "keys" : [
+     * "key01",
+     * "key02"
+     * ]
+     * }
+     *
+     * @param param
+     * @return
+     */
+    @ResponseBody
+    @Anonymous
+    @RequestMapping("/find")
+    public AjaxResult find(@RequestBody(required = false) String param) {
+
+        JSONObject jsonObject = JSONObject.parseObject(param);
+        Map<String, String> xxlConfNodes = confNodeService.find(jsonObject);
+        return AjaxResult.success(xxlConfNodes);
+    }
+
+    /**
+     * 配置监控 API
+     * <p>
+     * 说明：long-polling 接口，主动阻塞一段时间（默认30s）；直至阻塞超时或配置信息变动时响应；
+     * <p>
+     * ------
+     * 地址格式：{配置中心跟地址}/monitor
+     * <p>
+     * 请求参数说明：
+     * 1、accessToken：请求令牌；
+     * 2、env：环境标识
+     * 3、keys：配置Key列表
+     * <p>
+     * 请求数据格式如下，放置在 RequestBody 中，JSON格式：
+     * <p>
+     * {
+     * "accessToken" : "xx",
+     * "env" : "xx",
+     * "keys" : [
+     * "key01",
+     * "key02"
+     * ]
+     * }
+     *
+     * @return
+     */
+    @ResponseBody
+    @Anonymous
+    @RequestMapping("/monitor")
+    public DeferredResult<AjaxResult> monitor(@RequestBody(required = false) String param) {
+        JSONObject jsonObject = JSONObject.parseObject(param);
+        return confNodeService.monitor(jsonObject);
+    }
+
 
 }

@@ -71,7 +71,7 @@ public class RemoteConf {
         for (String adminAddressUrl : RemoteConf.adminAddressList) {
 
             // url + param
-            String url = adminAddressUrl + "/conf/find";
+            String url = adminAddressUrl + "/config/conf/find";
 
             ConfParamVO paramVO = new ConfParamVO();
             paramVO.setAccessToken(accessToken);
@@ -113,7 +113,7 @@ public class RemoteConf {
         for (String adminAddressUrl : RemoteConf.adminAddressList) {
 
             // url + param
-            String url = adminAddressUrl + "/conf/monitor";
+            String url = adminAddressUrl + "/config/conf/monitor";
 
             ConfParamVO paramVO = new ConfParamVO();
             paramVO.setAccessToken(accessToken);

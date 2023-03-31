@@ -1,7 +1,10 @@
 package fun.sssdnsy.service;
 
 
+import com.alibaba.fastjson2.JSONObject;
+import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.domain.XxlConfNode;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.List;
 import java.util.Map;
@@ -12,8 +15,10 @@ import java.util.Map;
  */
 public interface IXxlConfNodeService {
 
+    Map<String,String>  find(JSONObject jsonObject);
 
-    List<XxlConfNode> find(List<XxlConfNode> confNodeList);
+    DeferredResult<AjaxResult> monitor(JSONObject jsonObject);
+
 
     XxlConfNode get(XxlConfNode confNode);
 
@@ -28,8 +33,6 @@ public interface IXxlConfNodeService {
     int add(XxlConfNode xxlConfNode);
 
     int update(XxlConfNode xxlConfNode);
-
-    void monitor(List<XxlConfNode> confNodeList);
 
     Map<String, List> listEnvApp();
 
