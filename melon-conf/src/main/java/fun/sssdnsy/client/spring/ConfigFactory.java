@@ -97,9 +97,11 @@ public class ConfigFactory implements InstantiationAwareBeanPostProcessor, Initi
         return null;
     }
 
+    /**
+     * Annotation (@Conf): resolve conf + watch
+     */
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-        // (@Conf): resolve conf + watch
         if (!beanName.equals(this.beanName)) {
             ReflectionUtils.doWithFields(bean.getClass(), new ReflectionUtils.FieldCallback() {
                 @Override
@@ -113,8 +115,10 @@ public class ConfigFactory implements InstantiationAwareBeanPostProcessor, Initi
 
                         //resolve palaceHolders
                         BeanRefreshConfListener.BeanField beanField = new BeanRefreshConfListener.BeanField(beanName, filedName);
+                        refreshBeanField(beanField, confValue, bean);
 
                         if (conf.callback()) {
+                            // watch
                             BeanRefreshConfListener.addBeanField(confKey, beanField);
                         }
                     }
@@ -124,8 +128,13 @@ public class ConfigFactory implements InstantiationAwareBeanPostProcessor, Initi
         return true;
     }
 
+
+    /**
+     * XML('$XxlConf{...}')：resolves placeholders + watch
+     */
     @Override
     public PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
+
         if (!beanName.equals(this.beanName)) {
             PropertyValue[] pvArr = pvs.getPropertyValues();
             for (PropertyValue pv : pvArr) {
@@ -146,6 +155,8 @@ public class ConfigFactory implements InstantiationAwareBeanPostProcessor, Initi
                         }
                         Object valueObj = FieldReflectionUtil.parseValue(propClass, confValue);
                         pv.setConvertedValue(valueObj);
+
+                        // watch
                         BeanRefreshConfListener.addBeanField(confKey, beanField);
                     }
                 }
