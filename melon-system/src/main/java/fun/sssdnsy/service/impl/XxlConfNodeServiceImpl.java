@@ -69,7 +69,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
 
     @Override
     public List<XxlConfNode> list(XxlConfNode confNode) {
-        return xxlConfNodeDao.list(confNode.getAppname(), confNode.getKey(), confNode.getEnv());
+        return xxlConfNodeDao.list(confNode);
     }
 
     @Override
@@ -321,7 +321,7 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
                     try {
                         // sync registry-data, db + file
                         List<String> confDataFileList = new ArrayList<>();
-                        List<XxlConfNode> confNodeList = xxlConfNodeDao.list(null, null, null);
+                        List<XxlConfNode> confNodeList = xxlConfNodeDao.list(null);
                         if (confNodeList != null && confNodeList.size() > 0) {
                             for (XxlConfNode confNoteItem : confNodeList) {
                                 // sync file

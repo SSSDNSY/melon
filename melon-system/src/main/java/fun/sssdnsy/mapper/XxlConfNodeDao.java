@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface XxlConfNodeDao {
 
-    List<XxlConfNode> list(@Param("env") String env, @Param("appname") String appname, @Param("key") String key);
+    List<XxlConfNode> list(XxlConfNode xxlConfNode);
 
     int delete(@Param("env") String env, @Param("key") String key);
 

@@ -28,7 +28,7 @@
 		t.`update_time`
     </sql>
 
-    <select id="list" parameterType="java.util.Map" resultMap="xxlConfNode">
+    <select id="list" parameterType="xxlConfNode" resultMap="xxlConfNode">
         SELECT
         <include refid="Base_Column_List"/>
         FROM xxl_conf_node AS t
@@ -39,8 +39,14 @@
             <if test="appname != null and appname != '' ">
                 AND t.appname = #{appname}
             </if>
+            <if test="title != null and title != '' ">
+                AND t.title like CONCAT('%',#{title},'%')
+            </if>
             <if test="key != null and key != '' ">
                 AND t.key like CONCAT('%',#{key},'%')
+            </if>
+            <if test="value != null and value != '' ">
+                AND t.value like CONCAT('%',#{value},'%')
             </if>
         </trim>
         ORDER BY update_time desc ,create_time desc
