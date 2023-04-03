@@ -16,6 +16,10 @@ import java.util.*;
  */
 public class RemoteConf {
 
+    public static final String MONITOR_API = "/config/conf/monitor";
+    public static final String FIND_API = "/config/conf/find";
+    public static final String KEY_DATA = "data";
+
     private static Logger log = LoggerFactory.getLogger(RemoteConf.class);
 
     private static String adminAddress;
@@ -71,7 +75,7 @@ public class RemoteConf {
         for (String adminAddressUrl : RemoteConf.adminAddressList) {
 
             // url + param
-            String url = adminAddressUrl + "/config/conf/find";
+            String url = adminAddressUrl + FIND_API;
 
             ConfParamVO paramVO = new ConfParamVO();
             paramVO.setAccessToken(accessToken);
@@ -84,8 +88,8 @@ public class RemoteConf {
             Map<String, Object> respObj = getAndValid(url, paramsJson, 5);
 
             // parse
-            if (respObj != null && respObj.containsKey("data")) {
-                Map<String, String> data = (Map<String, String>) respObj.get("data");
+            if (respObj != null && respObj.containsKey(KEY_DATA)) {
+                Map<String, String> data = (Map<String, String>) respObj.get(KEY_DATA);
                 return data;
             }
         }
@@ -113,7 +117,7 @@ public class RemoteConf {
         for (String adminAddressUrl : RemoteConf.adminAddressList) {
 
             // url + param
-            String url = adminAddressUrl + "/config/conf/monitor";
+            String url = adminAddressUrl + MONITOR_API;
 
             ConfParamVO paramVO = new ConfParamVO();
             paramVO.setAccessToken(accessToken);
