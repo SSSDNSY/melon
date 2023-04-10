@@ -25,6 +25,8 @@
       </el-col>
     </el-row>
 
+    <SystemBasicInfo/>
+
 
   </div>
 </template>
@@ -35,6 +37,7 @@ import LineChart from './dashboard/LineChart'
 import RaddarChart from './dashboard/RaddarChart'
 import PieChart from './dashboard/PieChart'
 import BarChart from './dashboard/BarChart'
+import SystemBasicInfo from './dashboard/SystemBasicInfo'
 
 const lineChartData = {
   newVisitis: {
@@ -62,7 +65,8 @@ export default {
     LineChart,
     RaddarChart,
     PieChart,
-    BarChart
+    BarChart,
+    SystemBasicInfo
   },
   data() {
     return {
