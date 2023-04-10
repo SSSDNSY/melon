@@ -1,22 +1,22 @@
 <template>
 
-  <el-row :gutter="32">
-    <el-col :xs="24" :sm="24" :lg="8">
+  <el-row :gutter="20">
+    <el-col :xs="24" :sm="24" :lg="6">
       <div class="chart-wrapper">
         <div id="cpuInfo" :class="classCpu" :style="{height:height,width:width}" />
       </div>
     </el-col>
-    <el-col :xs="24" :sm="24" :lg="8">
+    <el-col :xs="24" :sm="24" :lg="6">
       <div class="chart-wrapper">
 <!--        <div :class="classMem" :style="{height:height,width:width}" />-->
       </div>
     </el-col>
-    <el-col :xs="24" :sm="24" :lg="8">
+    <el-col :xs="24" :sm="24" :lg="6">
       <div class="chart-wrapper">
 <!--        <div :class="classDisk" :style="{height:height,width:width}" />-->
       </div>
     </el-col>
-    <el-col :xs="24" :sm="24" :lg="8">
+    <el-col :xs="24" :sm="24" :lg="6">
       <div class="chart-wrapper">
 <!--        <div :class="classNet" :style="{height:height,width:width}" />-->
       </div>
@@ -45,7 +45,7 @@
       },
       height: {
         type: String,
-        default: '300px'
+        default: '280%'
       }
   },
   data() {
@@ -76,7 +76,7 @@
             type: 'gauge',
             axisLine: {
               lineStyle: {
-                width: 30,
+                width: 10,
                 color: [
                   [0.3, '#67e0e3'],
                   [0.7, '#37a2da'],
@@ -86,44 +86,65 @@
             },
             pointer: {
               itemStyle: {
-                color: 'inherit'
+                color: 'inherit',
+                fontSize: 25
               }
             },
             axisTick: {
-              distance: -26,
+              distance: -20,
+              length: 8,
+              lineStyle: {
+                color: '#fff',
+                width: 8
+              }
+            },
+            splitLine: {
+              distance: -10,
               length: 8,
               lineStyle: {
                 color: '#fff',
                 width: 2
               }
             },
-            splitLine: {
-              distance: -30,
-              length: 30,
-              lineStyle: {
-                color: '#fff',
-                width: 4
-              }
-            },
             axisLabel: {
               color: 'inherit',
-              distance: 40,
+              distance: 10,
               fontSize: 10
             },
             detail: {
               valueAnimation: true,
-              formatter: '{value}%',
+              formatter: '{value} %',
+              color: 'inherit'
+            },
+            detail: {
+              valueAnimation: true,
+              formatter: '{value} %',
               color: 'inherit'
             },
             data: [
               {
-                value: +(Math.random() * 100).toFixed(2)
+                value: +(Math.random() * 100).toFixed(1)
               }
             ]
           }
         ]
-      })
-    }
+      });
+      setInterval(function (chart) {
+        chart.setOption({
+          series: [
+            {
+              data: [
+                {
+                  value: +(Math.random() * 100).toFixed(2)
+                }
+              ]
+            }
+          ]
+        });
+      }, 2000,this.chart);
+
+    },
+
   }
 }
 </script>
