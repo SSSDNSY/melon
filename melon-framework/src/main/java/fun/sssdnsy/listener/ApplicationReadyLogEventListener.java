@@ -40,6 +40,7 @@ public class ApplicationReadyLogEventListener implements ApplicationListener<App
         if (git != null) {
             LOG.info("\tBuild-Version : {}", git.get("build.version"));
             LOG.info("\tBuild-Time : {}", git.get("build.time"));
+            LOG.info("\tGit-Remote : {}", git.get("remote.origin.url"));
             LOG.info("\tGit-Branch : {}", git.getBranch());
             LOG.info("\tGit-CommitId : {}", git.getCommitId());
             LOG.info("\tGit-CommitTime : {}", git.get("commit.time"));
@@ -50,8 +51,8 @@ public class ApplicationReadyLogEventListener implements ApplicationListener<App
             LOG.info("\tInfoEndpoint : http://{}:{}{}/monitor/info", new Object[]{ip, port, path});
             LOG.info("\tEnvEndpoint : http://{}:{}{}/monitor/env", new Object[]{ip, port, path});
             LOG.info("\tHealthEndpoint : http://{}:{}{}/monitor/health", new Object[]{ip, port, path});
-        } catch (UnknownHostException var8) {
-            LOG.warn("UnknownHostException: {}", var8.getMessage());
+        } catch (UnknownHostException e) {
+            LOG.warn("UnknownHostException: {}", e.getMessage());
         }
 
         LOG.info("======================================================================");

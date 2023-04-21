@@ -24,7 +24,7 @@ import java.util.Properties;
  * @author sssdnsy
  */
 public class Server {
-    private static final int OSHI_WAIT_SECOND = 500;
+    private static final int OSHI_WAIT_SECOND = 666;
 
     /**
      * CPU相关信息

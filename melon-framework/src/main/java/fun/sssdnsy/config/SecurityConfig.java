@@ -99,19 +99,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 // CSRF禁用，因为不使用session
-                .csrf().disable()
-//                .oauth2Login()
-//                .and()
-                // 禁用HTTP响应标头
-//                .headers().cacheControl().disable().and()
-                // 基于token，所以不需要session
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .cors().and().csrf().disable()
                 // 认证失败处理类
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 注册register 验证码captchaImage Oauth 允许匿名访问
                 .antMatchers("/login", "/register", "/captchaImage", "/oauth/**").permitAll()
+                //websocket
+//                .antMatchers( "/endpoint/**" ).permitAll()
+                //监控中心
+                .antMatchers( "/actuator/**" ).permitAll()
                 // 配置中心服务，可匿名访问
                 .antMatchers("/find","/monitor").permitAll()
                 // 静态资源，可匿名访问

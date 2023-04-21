@@ -25,12 +25,14 @@
 </template>
 
 <script>
+
   import * as echarts from 'echarts';
+  import SockJS from  'sockjs-client';
+  import  Stomp from 'stompjs';
   import resize from './mixins/resize'
+  import Cookies from "js-cookie";
 
   require('echarts/theme/macarons') // echarts theme
-
-  const animationDuration = 6000
 
   export default {
     mixins: [resize],
@@ -54,15 +56,23 @@
         memChart: null,
         netChart: null,
         diskChart: null,
-        cpuVal: null
+        cpuVal: null,
+        data: '',
+        stompClient:'',
+        timer:''
       }
     },
     mounted() {
       this.$nextTick(() => {
         this.initCpuInfo()
+        this.initWebSocket()
       })
     },
     beforeDestroy() {
+      // 页面离开时断开连接,清除定时器
+      this.disconnect()
+      clearInterval(this.timer)
+
       if (!this.chart) {
         return
       }
@@ -76,6 +86,7 @@
       this.diskChart = null
     },
     methods: {
+
       initCpuInfo() {
         let cpuDom = document.getElementById('cpuInfo');
         let memDom = document.getElementById('memInfo');
@@ -165,31 +176,75 @@
           text:"磁盘"
         }
 
-
         this.cpuChart.setOption(cpuOpt);
         this.memChart.setOption(memOpt);
         this.netChart.setOption(netOpt);
         this.diskChart.setOption(diskOpt);
 
-        this.randomData(this.cpuChart)
-        this.randomData(this.memChart)
-        this.randomData(this.netChart)
-        this.randomData(this.diskChart)
       },
-      randomData(chartParam) {
-        setInterval(function (chart) {
+      //初始化链接
+      initWebSocket() {
+        this.connection();
+        let that= this;
+        // 断开重连机制,尝试发送消息,捕获异常发生时重连
+        this.timer = setInterval(() => {
+          try {
+            that.stompClient.send("/app/welcome",{},JSON.stringify({sender: '',chatType: 'JOIN'}),)   //用户加入接口
+            // console.log("******发送消息******")
+          } catch (err) {
+            console.log("断线了: " + err)
+            that.connection()
+          }
+        }, 5000);
+      },
+      // 连接服务器
+      connection() {
+        console.log("******连接服务器******")
+        // 建立连接对象
+        let socket = new SockJS('http://127.0.0.1:8080/melon/endpoint');
+        // 获取STOMP子协议的客户端对象
+        this.stompClient = Stomp.over(socket);
+        // 定义客户端的认证信息,按需求配置
+        let headers = {
+          "melon-token": Cookies.get('melon-token')
+        }
+        let that = this
+        // 向服务器发起websocket连接
+        this.stompClient.connect(headers,(t) => {
+          console.log("******连接成功******",t)
+          this.stompClient.subscribe('/topic/sysInfo',  function(data) { //订阅消息
+            console.log("******收到消息******")
+            //console.log(data)
+            that.data = JSON.parse(data.body);
+            that.setData( that.cpuChart, (that.data.cpu.sys+that.data.cpu.used).toFixed(2))
+            that.setData( that.memChart, that.data.mem.usage)
+            that.setData( that.netChart, that.data.jvm.usage)
+            that.setData( that.diskChart, that.data.sysFiles[1].usage)
+
+          })
+        }, (err) => {
+          // 连接发生错误时的处理函数
+          console.log('连接错误',err)
+        });
+      },
+      // 断开连接
+      disconnect() {
+        if (this.stompClient) {
+          this.stompClient.disconnect()
+        }
+      },
+      setData(chart,value) {
           chart.setOption({
             series: [
               {
                 data: [
                   {
-                    value: +(Math.random() * 100).toFixed(2)
+                    value:value
                   }
                 ]
               }
             ]
           });
-        }, 2000, chartParam);
       }
 
     }
