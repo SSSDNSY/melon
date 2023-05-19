@@ -35,13 +35,6 @@ stages:
         artifactName: melon-admin
         strategy: {}
         dependsOn: build_maven
-      - step: sc@opensca
-        name: open_sca
-        displayName: 代码扫描
-        detectPath: ./
-        notify: []
-        strategy:
-          retry: '0'
   - name: release
     displayName: 发布
     strategy: naturally
