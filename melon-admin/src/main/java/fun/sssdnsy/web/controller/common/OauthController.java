@@ -123,7 +123,7 @@ public class OauthController extends BaseController {
         token = oauthService.checkIn(jsonObjectUser);
         setTokenCookie(token);
 
-        return redirect("http://127.0.0.1:8081/");
+        return redirect("http://pengzh.fun/");
     }
 
 
