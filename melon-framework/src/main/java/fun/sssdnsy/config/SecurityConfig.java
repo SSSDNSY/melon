@@ -107,7 +107,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //websocket
                 .antMatchers( "/endpoint/**" ).permitAll()
                 //监控中心
-                .antMatchers( "**/actuator/**" ).permitAll()
+                .antMatchers( "/actuator/**" ).permitAll()
                 // 配置中心服务，可匿名访问
                 .antMatchers("/find","/monitor").permitAll()
                 // 静态资源，可匿名访问
