@@ -16,7 +16,7 @@ stages:
       - step: build@maven
         name: build_maven
         displayName: 构建基础包
-        jdkVersion: 8
+        jdkVersion: '11'
         mavenVersion: 3.3.9
         commands:
           - ''
