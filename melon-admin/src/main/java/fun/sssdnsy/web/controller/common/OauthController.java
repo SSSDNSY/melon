@@ -2,6 +2,7 @@ package fun.sssdnsy.web.controller.common;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import fun.sssdnsy.annotation.Anonymous;
 import fun.sssdnsy.config.oauth.GiteeConfig;
 import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
@@ -57,6 +58,7 @@ public class OauthController extends BaseController {
      */
 
     @ResponseBody
+    @Anonymous
     @GetMapping(value = "/gitee/getGiteeCode")
     public AjaxResult getGiteeCode() {
 
@@ -83,6 +85,7 @@ public class OauthController extends BaseController {
         return success(url.toString());
     }
 
+    @Anonymous
     @GetMapping("/callback/gitee")
     public String giteeCallback(@RequestParam("code") String code) throws Exception {
         String token = "";
