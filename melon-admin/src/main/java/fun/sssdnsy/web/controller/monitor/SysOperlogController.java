@@ -8,10 +8,10 @@ import fun.sssdnsy.domain.SysOperLog;
 import fun.sssdnsy.enums.BusinessType;
 import fun.sssdnsy.service.ISysOperLogService;
 import fun.sssdnsy.utils.poi.ExcelUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/monitor/operlog")
 public class SysOperlogController extends BaseController {
-    @Autowired
+    @Resource
     private ISysOperLogService operLogService;
 
     @PreAuthorize("@ss.hasPermi('monitor:operlog:list')")

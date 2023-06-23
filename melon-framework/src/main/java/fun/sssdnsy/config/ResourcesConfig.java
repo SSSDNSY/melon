@@ -3,7 +3,6 @@ package fun.sssdnsy.config;
 
 import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.interceptor.RepeatSubmitInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
@@ -14,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration
 public class ResourcesConfig implements WebMvcConfigurer {
-    @Autowired
+    @Resource
     private RepeatSubmitInterceptor repeatSubmitInterceptor;
 
     @Override

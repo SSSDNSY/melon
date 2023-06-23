@@ -13,10 +13,10 @@ import fun.sssdnsy.utils.uuid.IdUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class TokenService {
     // 令牌有效期（默认30分钟）
     @Value("${token.expireTime}")
     private int expireTime;
-    @Autowired
+    @Resource
     private RedisCache redisCache;
 
     /**

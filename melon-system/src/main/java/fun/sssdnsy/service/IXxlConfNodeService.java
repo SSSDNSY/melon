@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public interface IXxlConfNodeService {
 
-    Map<String,String>  find(JSONObject jsonObject);
+    Map<String, String> find(JSONObject jsonObject);
 
     DeferredResult<AjaxResult> monitor(JSONObject jsonObject);
 

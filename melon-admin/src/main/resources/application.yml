@@ -72,9 +72,9 @@ spring:
   servlet:
     multipart:
       # 单个文件大小
-      max-file-size:  100MB
+      max-file-size: 100MB
       # 设置总上传的文件大小
-      max-request-size:  500MB
+      max-request-size: 500MB
   # 服务模块
   devtools:
     restart:
@@ -102,6 +102,11 @@ spring:
         max-active: 8
         # #连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1ms
+  activiti:
+    database-schema-update: true
+    check-process-definitions: true
+    process-definition-location-prefix: classpath:/bpmn/
+    history-level: full
 # endpoints配置
 management:
   endpoints:

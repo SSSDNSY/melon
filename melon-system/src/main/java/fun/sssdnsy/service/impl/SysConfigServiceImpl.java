@@ -11,10 +11,10 @@ import fun.sssdnsy.exception.ServiceException;
 import fun.sssdnsy.mapper.SysConfigMapper;
 import fun.sssdnsy.service.ISysConfigService;
 import fun.sssdnsy.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,10 +25,10 @@ import java.util.List;
  */
 @Service
 public class SysConfigServiceImpl implements ISysConfigService {
-    @Autowired
+    @Resource
     private SysConfigMapper configMapper;
 
-    @Autowired
+    @Resource
     private RedisCache redisCache;
 
     /**

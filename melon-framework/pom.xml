@@ -4,14 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>melon</artifactId>
-        <groupId>fun.pengzh</groupId>
-        <version>1.0.0</version>
+        <groupId>fun.sssdnsy</groupId>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fun.pengzh</groupId>
     <artifactId>melon-framework</artifactId>
-    <version>1.0.0</version>
 
     <description>
         framework框架核心
@@ -57,7 +55,7 @@
 
         <!-- 系统模块-->
         <dependency>
-            <groupId>fun.pengzh</groupId>
+            <groupId>fun.sssdnsy</groupId>
             <artifactId>melon-system</artifactId>
         </dependency>
         <!-- WebSocket -->

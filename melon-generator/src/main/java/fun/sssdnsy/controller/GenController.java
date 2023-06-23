@@ -11,11 +11,11 @@ import fun.sssdnsy.enums.BusinessType;
 import fun.sssdnsy.service.IGenTableColumnService;
 import fun.sssdnsy.service.IGenTableService;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
@@ -30,10 +30,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/tool/gen")
 public class GenController extends BaseController {
-    @Autowired
+    @Resource
     private IGenTableService genTableService;
 
-    @Autowired
+    @Resource
     private IGenTableColumnService genTableColumnService;
 
     /**

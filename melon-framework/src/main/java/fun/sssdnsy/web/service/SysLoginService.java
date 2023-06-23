@@ -16,7 +16,6 @@ import fun.sssdnsy.utils.MessageUtils;
 import fun.sssdnsy.utils.ServletUtils;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.ip.IpUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -30,22 +29,22 @@ import javax.annotation.Resource;
  */
 @Component
 public class SysLoginService {
-    @Autowired
+    @Resource
     private TokenService tokenService;
 
     @Resource
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+    @Resource
     private RedisCache redisCache;
 
-    @Autowired
+    @Resource
     private ISysUserService userService;
 
-    @Autowired
+    @Resource
     private ISysConfigService configService;
 
-    @Autowired
+    @Resource
     private SysOauthService oauthService;
 
     /**

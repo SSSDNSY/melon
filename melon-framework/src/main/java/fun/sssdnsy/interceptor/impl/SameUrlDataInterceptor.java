@@ -8,10 +8,10 @@ import fun.sssdnsy.filter.RepeatedlyRequestWrapper;
 import fun.sssdnsy.interceptor.RepeatSubmitInterceptor;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.http.HttpHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {
     @Value("${token.header}")
     private String header;
 
-    @Autowired
+    @Resource
     private RedisCache redisCache;
 
     @SuppressWarnings("unchecked")

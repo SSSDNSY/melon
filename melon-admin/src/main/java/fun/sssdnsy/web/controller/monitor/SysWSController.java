@@ -1,10 +1,8 @@
 package fun.sssdnsy.web.controller.monitor;
 
-import fun.sssdnsy.utils.ip.IpUtils;
 import fun.sssdnsy.web.domain.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -13,8 +11,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +28,7 @@ public class SysWSController {
 
     private final Logger logger = LoggerFactory.getLogger(SysWSController.class);
 
-    @Autowired
+    @Resource
     private SimpMessagingTemplate messageTemplate;
 
     private Server server = new Server();
@@ -44,7 +42,7 @@ public class SysWSController {
     @MessageMapping("/welcome")
     @SendTo("/topic/greetings")
     public Map say(Map message) {
-        logger.info("{}@{}{}", "localhost"," ",message.get("chatType").toString());
+        logger.info("{}@{}{}", "localhost", " ", message.get("chatType").toString());
         Map res = new HashMap();
         res.put("topic", message.get("chatType").toString());
         return res;
@@ -60,7 +58,7 @@ public class SysWSController {
         server = new Server();
         server.copyTo();
         this.messageTemplate.convertAndSend("/topic/sysInfo", server);
-        server=null;
+        server = null;
     }
 
     /**

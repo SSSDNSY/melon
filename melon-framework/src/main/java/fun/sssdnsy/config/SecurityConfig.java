@@ -4,7 +4,6 @@ import fun.sssdnsy.config.properties.PermitAllUrlProperties;
 import fun.sssdnsy.security.filter.JwtAuthenticationTokenFilter;
 import fun.sssdnsy.security.handle.AuthenticationEntryPointImpl;
 import fun.sssdnsy.security.handle.LogoutSuccessHandlerImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.filter.CorsFilter;
 
+import javax.annotation.Resource;
+
 /**
  * spring security配置
  *
@@ -29,37 +30,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 自定义用户认证逻辑
      */
-    @Autowired
+    @Resource
     private UserDetailsService userDetailsService;
 
     /**
      * 认证失败处理类
      */
-    @Autowired
+    @Resource
     private AuthenticationEntryPointImpl unauthorizedHandler;
 
     /**
      * 退出处理类
      */
-    @Autowired
+    @Resource
     private LogoutSuccessHandlerImpl logoutSuccessHandler;
 
     /**
      * token认证过滤器
      */
-    @Autowired
+    @Resource
     private JwtAuthenticationTokenFilter authenticationTokenFilter;
 
     /**
      * 跨域过滤器
      */
-    @Autowired
+    @Resource
     private CorsFilter corsFilter;
 
     /**
      * 允许匿名访问的地址
      */
-    @Autowired
+    @Resource
     private PermitAllUrlProperties permitAllUrl;
 
     /**
@@ -105,11 +106,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 对于登录login 注册register 验证码captchaImage 第三方登录oauth 允许匿名访问
                 .antMatchers("/login", "/register", "/captchaImage").permitAll()
                 //websocket
-                .antMatchers( "/endpoint/**" ).permitAll()
+                .antMatchers("/endpoint/**").permitAll()
                 //监控中心
-                .antMatchers( "/actuator/**" ).permitAll()
+                .antMatchers("/actuator/**").permitAll()
                 // 配置中心服务，可匿名访问
-                .antMatchers("/find","/monitor").permitAll()
+                .antMatchers("/find", "/monitor").permitAll()
                 // 静态资源，可匿名访问
                 .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/profile/**").permitAll()
                 .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**").permitAll()

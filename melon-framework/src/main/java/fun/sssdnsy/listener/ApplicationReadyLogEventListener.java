@@ -2,13 +2,13 @@ package fun.sssdnsy.listener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.info.GitProperties;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
@@ -24,7 +24,7 @@ import java.util.Arrays;
 public class ApplicationReadyLogEventListener implements ApplicationListener<ApplicationReadyEvent> {
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationReadyLogEventListener.class);
 
-    @Autowired
+    @Resource
     private GitProperties git;
 
     public void onApplicationEvent(ApplicationReadyEvent event) {

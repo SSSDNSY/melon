@@ -17,7 +17,6 @@ import fun.sssdnsy.utils.ServletUtils;
 import fun.sssdnsy.utils.ip.IpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,13 +35,13 @@ public class SysOauthService {
 
     public static final String INIT_PASSWORD = "admin123";
     private static final Logger log = LoggerFactory.getLogger(SysOauthService.class);
-    @Autowired
+    @Resource
     private TokenService tokenService;
 
     @Resource
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+    @Resource
     private ISysUserService userService;
 
 

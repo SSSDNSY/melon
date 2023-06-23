@@ -4,9 +4,9 @@ import fun.sssdnsy.domain.XxlConfProject;
 import fun.sssdnsy.mapper.XxlConfProjectDao;
 import fun.sssdnsy.service.IXxlConfProjectService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class XxlConfProjectServiceImpl implements IXxlConfProjectService {
 
-    @Autowired
+    @Resource
     private XxlConfProjectDao projectDao;
 
     @Override

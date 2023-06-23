@@ -11,11 +11,11 @@ import fun.sssdnsy.manager.factory.AsyncFactory;
 import fun.sssdnsy.security.context.AuthenticationContextHolder;
 import fun.sssdnsy.utils.MessageUtils;
 import fun.sssdnsy.utils.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class SysPasswordService {
-    @Autowired
+    @Resource
     private RedisCache redisCache;
 
     @Value(value = "${user.password.maxRetryCount}")

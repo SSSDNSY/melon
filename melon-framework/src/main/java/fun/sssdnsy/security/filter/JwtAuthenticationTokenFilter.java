@@ -4,13 +4,13 @@ import fun.sssdnsy.core.domain.model.LoginUser;
 import fun.sssdnsy.utils.SecurityUtils;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.web.service.TokenService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +24,7 @@ import java.io.IOException;
  */
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
-    @Autowired
+    @Resource
     private TokenService tokenService;
 
     @Override

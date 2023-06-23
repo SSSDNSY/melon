@@ -4,9 +4,9 @@ import fun.sssdnsy.core.domain.entity.SysDictData;
 import fun.sssdnsy.mapper.SysDictDataMapper;
 import fun.sssdnsy.service.ISysDictDataService;
 import fun.sssdnsy.utils.DictUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Service
 public class SysDictDataServiceImpl implements ISysDictDataService {
-    @Autowired
+    @Resource
     private SysDictDataMapper dictDataMapper;
 
     /**

@@ -10,12 +10,12 @@ import fun.sssdnsy.domain.XxlConfNode;
 import fun.sssdnsy.enums.BusinessType;
 import fun.sssdnsy.service.IXxlConfNodeService;
 import fun.sssdnsy.utils.poi.ExcelUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,7 @@ import java.util.Map;
 public class ConfController extends BaseController {
 
 
-    @Autowired
+    @Resource
     private IXxlConfNodeService confNodeService;
 
     /**

@@ -15,8 +15,9 @@ import fun.sssdnsy.service.ISysUserService;
 import fun.sssdnsy.utils.MessageUtils;
 import fun.sssdnsy.utils.SecurityUtils;
 import fun.sssdnsy.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * 注册校验方法
@@ -25,13 +26,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SysRegisterService {
-    @Autowired
+    @Resource
     private ISysUserService userService;
 
-    @Autowired
+    @Resource
     private ISysConfigService configService;
 
-    @Autowired
+    @Resource
     private RedisCache redisCache;
 
     /**

@@ -20,7 +20,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,13 +42,13 @@ public class OauthController extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(OauthController.class);
 
-    @Autowired
+    @Resource
     private GiteeConfig giteeConfig;
 
     @Value("${token.expireTime}")
     private Integer tokenExpireTime;
 
-    @Autowired
+    @Resource
     private SysOauthService oauthService;
 
     /**

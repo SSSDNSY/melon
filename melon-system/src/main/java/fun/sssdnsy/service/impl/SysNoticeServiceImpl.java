@@ -3,9 +3,9 @@ package fun.sssdnsy.service.impl;
 import fun.sssdnsy.domain.SysNotice;
 import fun.sssdnsy.mapper.SysNoticeMapper;
 import fun.sssdnsy.service.ISysNoticeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Service
 public class SysNoticeServiceImpl implements ISysNoticeService {
-    @Autowired
+    @Resource
     private SysNoticeMapper noticeMapper;
 
     /**

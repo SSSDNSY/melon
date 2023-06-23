@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>melon</artifactId>
-        <groupId>fun.pengzh</groupId>
-        <version>1.0.0</version>
+        <groupId>fun.sssdnsy</groupId>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>melon-system</artifactId>
-    <groupId>fun.pengzh</groupId>
-    <version>1.0.0</version>
+    <groupId>fun.sssdnsy</groupId>
+    <version>${revision}</version>
 
     <description>
         system系统模块
@@ -21,16 +21,27 @@
 
         <!-- 通用工具 -->
         <dependency>
-            <groupId>fun.pengzh</groupId>
+            <groupId>fun.sssdnsy</groupId>
             <artifactId>melon-common</artifactId>
         </dependency>
 
         <!-- 配置中心 -->
         <dependency>
-            <groupId>fun.pengzh</groupId>
+            <groupId>fun.sssdnsy</groupId>
             <artifactId>melon-conf</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter-basic</artifactId>
+            <version>6.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
     </dependencies>
 

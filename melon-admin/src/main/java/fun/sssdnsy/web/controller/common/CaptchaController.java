@@ -9,7 +9,6 @@ import fun.sssdnsy.core.redis.RedisCache;
 import fun.sssdnsy.service.ISysConfigService;
 import fun.sssdnsy.utils.sign.Base64;
 import fun.sssdnsy.utils.uuid.IdUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,10 +33,10 @@ public class CaptchaController {
     @Resource(name = "captchaProducerMath")
     private Producer captchaProducerMath;
 
-    @Autowired
+    @Resource
     private RedisCache redisCache;
 
-    @Autowired
+    @Resource
     private ISysConfigService configService;
 
     /**

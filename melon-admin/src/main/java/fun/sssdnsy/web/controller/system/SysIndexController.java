@@ -2,9 +2,10 @@ package fun.sssdnsy.web.controller.system;
 
 import fun.sssdnsy.config.Config;
 import fun.sssdnsy.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * 首页
@@ -16,7 +17,7 @@ public class SysIndexController {
     /**
      * 系统基础配置
      */
-    @Autowired
+    @Resource
     private Config Config;
 
     /**

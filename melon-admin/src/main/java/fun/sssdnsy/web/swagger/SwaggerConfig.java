@@ -4,7 +4,6 @@ package fun.sssdnsy.web.swagger;
 import fun.sssdnsy.config.Config;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,9 @@ import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +26,12 @@ import java.util.List;
  * @author sssdnsy
  */
 @Configuration
+@EnableSwagger2WebMvc
 public class SwaggerConfig {
     /**
      * 系统基础配置
      */
-    @Autowired
+    @Resource
     private Config Config;
 
     /**
@@ -49,7 +51,7 @@ public class SwaggerConfig {
      */
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.OAS_30)
+        return new Docket(DocumentationType.SWAGGER_2)
                 // 是否启用Swagger
                 .enable(enabled)
                 // 用来创建该API的基本信息，展示在文档的页面中（自定义展示的信息）
@@ -60,12 +62,13 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 // 扫描指定包中的swagger注解
                 // .apis(RequestHandlerSelectors.basePackage("fun.sssdnsy.project.tool.swagger"))
-                // 扫描所有 .apis(RequestHandlerSelectors.any())
+                // 扫描所有
+//                .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
                 /* 设置安全模式，swagger可以设置访问token */
-                .securitySchemes(securitySchemes())
-                .securityContexts(securityContexts())
+//                .securitySchemes(securitySchemes())
+//                .securityContexts(securityContexts())
                 .pathMapping(pathMapping);
     }
 
@@ -81,15 +84,15 @@ public class SwaggerConfig {
     /**
      * 安全上下文
      */
-    private List<SecurityContext> securityContexts() {
-        List<SecurityContext> securityContexts = new ArrayList<>();
-        securityContexts.add(
-                SecurityContext.builder()
-                        .securityReferences(defaultAuth())
-                        .operationSelector(o -> o.requestMappingPattern().matches("/.*"))
-                        .build());
-        return securityContexts;
-    }
+//    private List<SecurityContext> securityContexts() {
+//        List<SecurityContext> securityContexts = new ArrayList<>();
+//        securityContexts.add(
+//                SecurityContext.builder()
+//                        .securityReferences(defaultAuth())
+//                        .operationSelector(o -> o.requestMappingPattern().matches("/.*"))
+//                        .build());
+//        return securityContexts;
+//    }
 
     /**
      * 默认的安全上引用
@@ -112,7 +115,7 @@ public class SwaggerConfig {
                 // 设置标题
                 .title("Melon接口文档")
                 // 描述
-                .description("just for fun ")
+                .description("just for sssdnsy ")
                 // 作者信息
                 .contact(new Contact(Config.getName(), null, null))
                 // 版本

@@ -8,11 +8,11 @@ import fun.sssdnsy.domain.XxlConfEnv;
 import fun.sssdnsy.enums.BusinessType;
 import fun.sssdnsy.service.IXxlConfEnvService;
 import fun.sssdnsy.utils.poi.ExcelUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping("/config/env")
 public class EnvController extends BaseController {
 
-    @Autowired
+    @Resource
     private IXxlConfEnvService confEnvService;
 
     /**

@@ -6,19 +6,16 @@
 
     <parent>
         <artifactId>melon</artifactId>
-        <groupId>fun.pengzh</groupId>
-        <version>1.0.0</version>
+        <groupId>fun.sssdnsy</groupId>
+        <version>${revision}</version>
     </parent>
 
-    <groupId>fun.pengzh</groupId>
-    <version>1.0.0</version>
     <artifactId>melon-admin</artifactId>
     <packaging>jar</packaging>
 
     <description>
         web服务入口
     </description>
-
 
     <dependencies>
 
@@ -29,17 +26,10 @@
             <optional>true</optional> <!-- 表示依赖不会传递 -->
         </dependency>
 
-        <!-- swagger3-->
+        <!-- swagger3 -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-        </dependency>
-
-        <!-- 防止进入swagger页面报类型转换错误，排除3.0.0中的引用，手动增加1.6.2版本 -->
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-models</artifactId>
-            <version>1.6.2</version>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
         </dependency>
 
         <!-- Mysql驱动包 -->
@@ -48,38 +38,34 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <!-- 核心模块-->
+        <!-- 核心模块 -->
         <dependency>
-            <groupId>fun.pengzh</groupId>
+            <groupId>fun.sssdnsy</groupId>
             <artifactId>melon-framework</artifactId>
-            <version>1.0.0</version>
         </dependency>
 
-        <!-- 定时任务-->
+        <!-- 定时任务 -->
         <dependency>
-            <groupId>fun.pengzh</groupId>
+            <groupId>fun.sssdnsy</groupId>
             <artifactId>melon-quartz</artifactId>
-            <version>1.0.0</version>
         </dependency>
 
-        <!-- 代码生成-->
+        <!-- 代码生成 -->
         <dependency>
-            <groupId>fun.pengzh</groupId>
+            <groupId>fun.sssdnsy</groupId>
             <artifactId>melon-generator</artifactId>
-            <version>1.0.0</version>
+        </dependency>
+
+        <!-- 工作流 -->
+        <dependency>
+            <groupId>fun.sssdnsy</groupId>
+            <artifactId>melon-activiti</artifactId>
         </dependency>
 
         <!-- 监控 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <!-- httpclient -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5</version>
         </dependency>
 
         <!-- oauth2 -->

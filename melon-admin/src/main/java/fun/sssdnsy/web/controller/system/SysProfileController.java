@@ -14,9 +14,10 @@ import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.file.FileUploadUtils;
 import fun.sssdnsy.utils.file.MimeTypeUtils;
 import fun.sssdnsy.web.service.TokenService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
 
 /**
  * 个人信息 业务处理
@@ -26,10 +27,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/system/user/profile")
 public class SysProfileController extends BaseController {
-    @Autowired
+    @Resource
     private ISysUserService userService;
 
-    @Autowired
+    @Resource
     private TokenService tokenService;
 
     /**

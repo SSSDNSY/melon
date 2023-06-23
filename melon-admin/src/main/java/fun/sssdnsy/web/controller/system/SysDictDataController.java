@@ -10,11 +10,11 @@ import fun.sssdnsy.service.ISysDictDataService;
 import fun.sssdnsy.service.ISysDictTypeService;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.poi.ExcelUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +27,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/system/dict/data")
 public class SysDictDataController extends BaseController {
-    @Autowired
+    @Resource
     private ISysDictDataService dictDataService;
 
-    @Autowired
+    @Resource
     private ISysDictTypeService dictTypeService;
 
     @PreAuthorize("@ss.hasPermi('system:dict:list')")

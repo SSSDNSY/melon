@@ -9,10 +9,10 @@ import fun.sssdnsy.enums.BusinessType;
 import fun.sssdnsy.service.ISysLogininforService;
 import fun.sssdnsy.utils.poi.ExcelUtil;
 import fun.sssdnsy.web.service.SysPasswordService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -24,10 +24,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/monitor/logininfor")
 public class SysLogininforController extends BaseController {
-    @Autowired
+    @Resource
     private ISysLogininforService logininforService;
 
-    @Autowired
+    @Resource
     private SysPasswordService passwordService;
 
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:list')")

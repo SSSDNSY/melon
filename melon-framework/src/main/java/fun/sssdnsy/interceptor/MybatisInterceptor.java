@@ -45,7 +45,7 @@ public class MybatisInterceptor implements Interceptor {
         Object parameter = invocation.getArgs()[1];
         if (parameter instanceof BaseEntity) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (authentication == null || !((authentication.getPrincipal()) instanceof  LoginUser)) {
+            if (authentication == null || !((authentication.getPrincipal()) instanceof LoginUser)) {
                 return;
             }
             LoginUser loginUser = (LoginUser) authentication.getPrincipal();

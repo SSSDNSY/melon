@@ -4,12 +4,12 @@ import fun.sssdnsy.constant.CacheConstants;
 import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.domain.SysCache;
 import fun.sssdnsy.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -21,7 +21,7 @@ import java.util.*;
 @RequestMapping("/monitor/cache")
 public class CacheController {
     private final static List<SysCache> caches = new ArrayList<SysCache>();
-    @Autowired
+    @Resource
     private RedisTemplate<String, String> redisTemplate;
 
     {

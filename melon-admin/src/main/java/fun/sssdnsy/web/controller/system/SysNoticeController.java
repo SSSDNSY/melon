@@ -7,11 +7,11 @@ import fun.sssdnsy.core.page.TableDataInfo;
 import fun.sssdnsy.domain.SysNotice;
 import fun.sssdnsy.enums.BusinessType;
 import fun.sssdnsy.service.ISysNoticeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/system/notice")
 public class SysNoticeController extends BaseController {
-    @Autowired
+    @Resource
     private ISysNoticeService noticeService;
 
     /**

@@ -18,11 +18,11 @@ import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.poi.ExcelUtil;
 import fun.sssdnsy.web.service.SysPermissionService;
 import fun.sssdnsy.web.service.TokenService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -34,19 +34,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/system/role")
 public class SysRoleController extends BaseController {
-    @Autowired
+    @Resource
     private ISysRoleService roleService;
 
-    @Autowired
+    @Resource
     private TokenService tokenService;
 
-    @Autowired
+    @Resource
     private SysPermissionService permissionService;
 
-    @Autowired
+    @Resource
     private ISysUserService userService;
 
-    @Autowired
+    @Resource
     private ISysDeptService deptService;
 
     @PreAuthorize("@ss.hasPermi('system:role:list')")

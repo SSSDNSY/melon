@@ -4,9 +4,9 @@ import fun.sssdnsy.domain.XxlConfEnv;
 import fun.sssdnsy.mapper.XxlConfEnvDao;
 import fun.sssdnsy.service.IXxlConfEnvService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class XxlConfEnvServiceImpl implements IXxlConfEnvService {
 
-    @Autowired
+    @Resource
     private XxlConfEnvDao envDao;
 
     @Override

@@ -28,6 +28,7 @@ import java.util.List;
  * @author sssdnsy
  */
 public class BaseController {
+    public static final String MSG = "查询成功";
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
@@ -76,7 +77,7 @@ public class BaseController {
     protected TableDataInfo getDataTable(List<?> list) {
         TableDataInfo rspData = new TableDataInfo();
         rspData.setCode(HttpStatus.SUCCESS);
-        rspData.setMsg("查询成功");
+        rspData.setMsg(MSG);
         rspData.setRows(list);
         rspData.setTotal(new PageInfo(list).getTotal());
         return rspData;
