@@ -1,14 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fun.pengzh</groupId>
+    <groupId>fun.sssdnsy</groupId>
     <artifactId>melon</artifactId>
-    <version>1.0.0</version>
+    <version>${revision}</version>
 
     <name>melon</name>
     <url>https://www.gitee.com/SSSDNSY/melon</url>
-    <description>melon is Front-End Admin Template project ,Its build with RuoYi-Vue </description>
+    <description>WaterMelon</description>
     <packaging>pom</packaging>
 
     <modules>
@@ -19,9 +19,11 @@
         <module>melon-quartz</module>
         <module>melon-system</module>
         <module>melon-conf</module>
+        <module>melon-activiti</module>
     </modules>
 
     <properties>
+        <revision>1.0.0</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
@@ -33,6 +35,7 @@
         <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
 
+        <springboot.dependencies.version>2.5.10</springboot.dependencies.version>
         <melon.version>1.0.0</melon.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -41,6 +44,7 @@
         <druid.version>1.2.15</druid.version>
         <bitwalker.version>1.21</bitwalker.version>
         <swagger.version>3.0.0</swagger.version>
+        <knife4j.version>4.0.0</knife4j.version>
         <kaptcha.version>2.3.3</kaptcha.version>
         <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
         <fastjson.version>2.0.20</fastjson.version>
@@ -62,7 +66,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.5.14</version>
+                <version>${springboot.dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -95,17 +99,11 @@
                 <version>${oshi.version}</version>
             </dependency>
 
-            <!-- Swagger3依赖 -->
+            <!--引入Knife4j的官方start包,该指南选择Spring Boot版本<3.0,开发者需要注意-->
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>${swagger.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>io.swagger</groupId>
-                        <artifactId>swagger-models</artifactId>
-                    </exclusion>
-                </exclusions>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
 
             <!-- io常用工具类 -->
@@ -166,43 +164,51 @@
 
             <!-- 定时任务-->
             <dependency>
-                <groupId>fun.pengzh</groupId>
+                <groupId>fun.sssdnsy</groupId>
                 <artifactId>melon-quartz</artifactId>
-                <version>${melon.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
-                <groupId>fun.pengzh</groupId>
+                <groupId>fun.sssdnsy</groupId>
                 <artifactId>melon-generator</artifactId>
-                <version>${melon.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>fun.pengzh</groupId>
+                <groupId>fun.sssdnsy</groupId>
                 <artifactId>melon-framework</artifactId>
-                <version>${melon.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>fun.pengzh</groupId>
+                <groupId>fun.sssdnsy</groupId>
                 <artifactId>melon-system</artifactId>
-                <version>${melon.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
-            <!-- 通用工具-->
+            <!-- 通用工具 -->
             <dependency>
-                <groupId>fun.pengzh</groupId>
+                <groupId>fun.sssdnsy</groupId>
                 <artifactId>melon-common</artifactId>
-                <version>${melon.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
+            <!-- 配置中心 -->
             <dependency>
-                <groupId>fun.pengzh</groupId>
+                <groupId>fun.sssdnsy</groupId>
                 <artifactId>melon-conf</artifactId>
-                <version>${melon.version}</version>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 流程管理 -->
+            <dependency>
+                <groupId>fun.sssdnsy</groupId>
+                <artifactId>melon-activiti</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
@@ -271,7 +277,8 @@
                     <failOnNoGitDirectory>false</failOnNoGitDirectory>
                     <dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
                     <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
+                    </generateGitPropertiesFilename>
                 </configuration>
             </plugin>
             <!--Nexus Staging Maven插件是将组件部署到OSSRH并将其发布到Central Repository的推荐方法-->
@@ -290,6 +297,33 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <configuration>
+                    <!--是否更新pom文件，记得设置为true，不然无法更新module里的pom版本号-->
+                    <!--此处还有更高级的用法，具体下方的参考文档-->
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
