@@ -213,14 +213,13 @@
         this.stompClient.connect(headers,(t) => {
           console.log("******连接成功******",t)
           this.stompClient.subscribe('/topic/sysInfo',  function(data) { //订阅消息
-            console.log("******收到消息******")
+            //console.log("******收到消息******")
             //console.log(data)
             that.data = JSON.parse(data.body);
             that.setData( that.cpuChart, (that.data.cpu.sys+that.data.cpu.used).toFixed(2))
             that.setData( that.memChart, that.data.mem.usage)
             that.setData( that.netChart, that.data.jvm.usage)
             that.setData( that.diskChart, that.data.sysFiles[1].usage)
-
           })
         }, (err) => {
           // 连接发生错误时的处理函数
