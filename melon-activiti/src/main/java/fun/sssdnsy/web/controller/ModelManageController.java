@@ -17,10 +17,14 @@ import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
+import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ModelQuery;
+import org.apache.batik.transcoder.TranscoderInput;
+import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.image.PNGTranscoder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.util.IOUtils;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +32,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,9 +49,8 @@ public class ModelManageController extends BaseController {
     @Resource
     private ObjectMapper objectMapper;
 
-
     @ApiOperation("查询所有模型")
-    @GetMapping(value = "/list")
+    @GetMapping("/list")
     public TableDataInfo list(@RequestParam(required = false) String key, @RequestParam(required = false) String name,
                               Integer pageSize, Integer pageNum) {
         ModelQuery query = repositoryService.createModelQuery();
@@ -148,6 +153,85 @@ public class ModelManageController extends BaseController {
         response.setHeader("Content-Disposition", "attachment;filename=" + filename);
         response.setHeader("content-Type", "application/xml");
         response.flushBuffer();
+    }
+
+
+    /**
+     * 打开在线编辑器时加载指定模型到页面
+     *
+     * @param modelId
+     * @return
+     */
+    @ApiOperation("打开在线编辑器时加载指定模型到页面")
+    @RequestMapping(value = "/{modelId}/json", method = RequestMethod.GET, produces = "application/json")
+    public ObjectNode getEditorJson(@PathVariable String modelId) {
+        ObjectNode modelNode = null;
+
+        Model model = repositoryService.getModel(modelId);
+
+        if (model != null) {
+            try {
+                if (StringUtils.isNotEmpty(model.getMetaInfo())) {
+                    modelNode = (ObjectNode) objectMapper.readTree(model.getMetaInfo());
+                } else {
+                    modelNode = objectMapper.createObjectNode();
+                    modelNode.put(ModelDataJsonConstants.MODEL_NAME, model.getName());
+                }
+                modelNode.put(ModelDataJsonConstants.MODEL_ID, model.getId());
+                ObjectNode editorJsonNode = (ObjectNode) objectMapper.readTree(
+                        new String(repositoryService.getModelEditorSource(model.getId()), "utf-8"));
+                modelNode.put("model", editorJsonNode);
+
+            } catch (Exception e) {
+                logger.error("Error creating model JSON", e);
+                throw new ActivitiException("Error creating model JSON", e);
+            }
+        }
+        return modelNode;
+    }
+
+    /**
+     * 保存流程图编辑器的信息
+     *
+     * @param modelId
+     * @param name
+     * @param description
+     * @param json_xml
+     * @param svg_xml
+     */
+
+    @ApiOperation("保存流程图编辑器的信息")
+    @RequestMapping(value = "/{modelId}/save", method = RequestMethod.PUT)
+    @ResponseStatus(value = org.springframework.http.HttpStatus.OK)
+    public void saveModel(@PathVariable String modelId, String name, String description, String json_xml, String svg_xml) {
+        try {
+            Model model = repositoryService.getModel(modelId);
+            ObjectNode modelJson = (ObjectNode) objectMapper.readTree(model.getMetaInfo());
+            modelJson.put(ModelDataJsonConstants.MODEL_NAME, name);
+            modelJson.put(ModelDataJsonConstants.MODEL_DESCRIPTION, description);
+            model.setMetaInfo(modelJson.toString());
+            model.setName(name);
+            model.setDeploymentId(null);
+            Integer version = model.getVersion();
+            version++;
+            model.setVersion(version);
+            repositoryService.saveModel(model);
+            repositoryService.addModelEditorSource(model.getId(), json_xml.getBytes("utf-8"));
+            InputStream svgStream = new ByteArrayInputStream(svg_xml.getBytes("utf-8"));
+            TranscoderInput input = new TranscoderInput(svgStream);
+            PNGTranscoder transcoder = new PNGTranscoder();
+            // Setup output
+            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+            TranscoderOutput output = new TranscoderOutput(outStream);
+            // Do the transformation
+            transcoder.transcode(input, output);
+            final byte[] result = outStream.toByteArray();
+            repositoryService.addModelEditorSourceExtra(model.getId(), result);
+            outStream.close();
+        } catch (Exception e) {
+            logger.error("Error saving model", e);
+            throw new ActivitiException("Error saving model", e);
+        }
     }
 
 
