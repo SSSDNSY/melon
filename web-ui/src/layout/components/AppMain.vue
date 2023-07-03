@@ -10,9 +10,9 @@
 </template>
 
 <script>
-  import iframeToggle from "./IframeToggle/index"
+import iframeToggle from "./IframeToggle/index"
 
-  export default {
+export default {
   name: 'AppMain',
   components: { iframeToggle },
   computed: {
@@ -55,7 +55,21 @@
 // fix css style bug in open el-dialog
 .el-popup-parent--hidden {
   .fixed-header {
-    padding-right: 17px;
+    padding-right: 6px;
   }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  border-radius: 3px;
 }
 </style>

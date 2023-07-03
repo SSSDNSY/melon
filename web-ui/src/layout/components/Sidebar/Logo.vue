@@ -35,7 +35,7 @@
   },
   data() {
     return {
-      title: 'SSSDNSY MELON',
+      title: process.env.VUE_APP_TITLE,
       logo: logoImg
     }
   }

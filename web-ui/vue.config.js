@@ -90,20 +90,21 @@ module.exports = defineConfig({
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test
     config.plugins.delete('prefetch') // TODO: need test
-    config.module
-      .rule("svg")
-      .exclude.add(resolve("packages/bpmn-icons"))
-      .end();
-    config.module
-      .rule("icons")
-      .test(/\.svg$/)
-      .include.add(resolve("packages/bpmn-icons"))
-      .end()
-      .use("svg-sprite-loader")
-      .loader("svg-sprite-loader")
-      .options({
-        symbolId: "[name]"
-      }).end();
+    // bpmn.js
+    // config.module
+    //   .rule("svg")
+    //   .exclude.add(resolve("packages/bpmn-icons"))
+    //   .end();
+    // config.module
+    //   .rule("icons")
+    //   .test(/\.svg$/)
+    //   .include.add(resolve("packages/bpmn-icons"))
+    //   .end()
+    //   .use("svg-sprite-loader")
+    //   .loader("svg-sprite-loader")
+    //   .options({
+    //     symbolId: "[name]"
+    //   }).end();
     // set svg-sprite-loader
     config.module
       .rule('svg')

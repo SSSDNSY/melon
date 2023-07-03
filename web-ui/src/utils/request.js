@@ -1,9 +1,9 @@
 import axios from 'axios'
-import {Loading, Message, MessageBox, Notification} from 'element-ui'
+import { Notification, MessageBox, Message, Loading } from 'element-ui'
 import store from '@/store'
 import {getToken} from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
-import {blobValidate, tansParams} from "@/utils/ruoyi";
+import { tansParams, blobValidate } from "@/utils/ruoyi";
 import cache from '@/plugins/cache'
 import {saveAs} from 'file-saver'
 
@@ -125,8 +125,8 @@ export function download(url, params, filename, config) {
     responseType: 'blob',
     ...config
   }).then(async (data) => {
-    const isLogin = await blobValidate(data);
-    if (isLogin) {
+    const isBlob = blobValidate(data);
+    if (isBlob) {
       const blob = new Blob([data])
       saveAs(blob, filename)
     } else {
