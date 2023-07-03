@@ -38,7 +38,7 @@ public class FileUtils {
             }
             fis = new FileInputStream(file);
             byte[] b = new byte[1024];
-            int length;
+            int    length;
             while ((length = fis.read(b)) > 0) {
                 os.write(b, 0, length);
             }
@@ -70,8 +70,8 @@ public class FileUtils {
      * @throws IOException IO异常
      */
     public static String writeBytes(byte[] data, String uploadDir) throws IOException {
-        FileOutputStream fos = null;
-        String pathName = "";
+        FileOutputStream fos      = null;
+        String           pathName = "";
         try {
             String extension = getFileExtendName(data);
             pathName = DateUtils.datePath() + "/" + IdUtils.fastUUID() + "." + extension;
@@ -92,7 +92,7 @@ public class FileUtils {
      */
     public static boolean deleteFile(String filePath) {
         boolean flag = false;
-        File file = new File(filePath);
+        File    file = new File(filePath);
         // 路径为文件且不为空则进行删除
         if (file.isFile() && file.exists()) {
             flag = file.delete();
@@ -139,8 +139,8 @@ public class FileUtils {
      * @return 编码后的文件名
      */
     public static String setFileDownloadHeader(HttpServletRequest request, String fileName) throws UnsupportedEncodingException {
-        final String agent = request.getHeader("USER-AGENT");
-        String filename = fileName;
+        final String agent    = request.getHeader("USER-AGENT");
+        String       filename = fileName;
         if (agent.contains("MSIE")) {
             // IE浏览器
             filename = URLEncoder.encode(filename, "utf-8");
@@ -222,9 +222,9 @@ public class FileUtils {
         if (fileName == null) {
             return null;
         }
-        int lastUnixPos = fileName.lastIndexOf('/');
+        int lastUnixPos    = fileName.lastIndexOf('/');
         int lastWindowsPos = fileName.lastIndexOf('\\');
-        int index = Math.max(lastUnixPos, lastWindowsPos);
+        int index          = Math.max(lastUnixPos, lastWindowsPos);
         return fileName.substring(index + 1);
     }
 

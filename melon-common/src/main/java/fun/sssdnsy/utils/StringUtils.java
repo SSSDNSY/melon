@@ -420,9 +420,12 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         if (s == null) {
             return null;
         }
+        if (s.indexOf(SEPARATOR) == -1) {
+            return s;
+        }
         s = s.toLowerCase();
-        StringBuilder sb = new StringBuilder(s.length());
-        boolean upperCase = false;
+        StringBuilder sb        = new StringBuilder(s.length());
+        boolean       upperCase = false;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
 

@@ -3,7 +3,6 @@ package fun.sssdnsy.aspectj;
 import fun.sssdnsy.annotation.RateLimiter;
 import fun.sssdnsy.enums.LimitType;
 import fun.sssdnsy.exception.ServiceException;
-import fun.sssdnsy.utils.ServletUtils;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.ip.IpUtils;
 import org.aspectj.lang.JoinPoint;
@@ -47,11 +46,11 @@ public class RateLimiterAspect {
 
     @Before("@annotation(rateLimiter)")
     public void doBefore(JoinPoint point, RateLimiter rateLimiter) throws Throwable {
-        int time = rateLimiter.time();
+        int time  = rateLimiter.time();
         int count = rateLimiter.count();
 
-        String combineKey = getCombineKey(rateLimiter, point);
-        List<Object> keys = Collections.singletonList(combineKey);
+        String       combineKey = getCombineKey(rateLimiter, point);
+        List<Object> keys       = Collections.singletonList(combineKey);
         try {
             Long number = redisTemplate.execute(limitScript, keys, count, time);
             if (StringUtils.isNull(number) || number.intValue() > count) {
@@ -68,11 +67,11 @@ public class RateLimiterAspect {
     public String getCombineKey(RateLimiter rateLimiter, JoinPoint point) {
         StringBuffer stringBuffer = new StringBuffer(rateLimiter.key());
         if (rateLimiter.limitType() == LimitType.IP) {
-            stringBuffer.append(IpUtils.getIpAddr(ServletUtils.getRequest())).append("-");
+            stringBuffer.append(IpUtils.getIpAddr()).append("-");
         }
-        MethodSignature signature = (MethodSignature) point.getSignature();
-        Method method = signature.getMethod();
-        Class<?> targetClass = method.getDeclaringClass();
+        MethodSignature signature   = (MethodSignature) point.getSignature();
+        Method          method      = signature.getMethod();
+        Class<?>        targetClass = method.getDeclaringClass();
         stringBuffer.append(targetClass.getName()).append("-").append(method.getName());
         return stringBuffer.toString();
     }

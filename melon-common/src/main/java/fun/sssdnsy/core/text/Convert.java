@@ -276,7 +276,7 @@ public class Convert {
         if (StringUtils.isEmpty(str)) {
             return new Integer[]{};
         }
-        String[] arr = str.split(split);
+        String[]        arr  = str.split(split);
         final Integer[] ints = new Integer[arr.length];
         for (int i = 0; i < arr.length; i++) {
             final Integer v = toInt(arr[i], 0);
@@ -296,7 +296,7 @@ public class Convert {
         if (StringUtils.isEmpty(str)) {
             return new Long[]{};
         }
-        String[] arr = str.split(split);
+        String[]     arr   = str.split(split);
         final Long[] longs = new Long[arr.length];
         for (int i = 0; i < arr.length; i++) {
             final Long v = toLong(arr[i], null);
@@ -820,9 +820,9 @@ public class Convert {
      * @return 中文大写数字
      */
     public static String digitUppercase(double n) {
-        String[] fraction = {"角", "分"};
-        String[] digit = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
-        String[][] unit = {{"元", "万", "亿"}, {"", "拾", "佰", "仟"}};
+        String[]   fraction = {"角", "分"};
+        String[]   digit    = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
+        String[][] unit     = {{"元", "万", "亿"}, {"", "拾", "佰", "仟"}};
 
         String head = n < 0 ? "负" : "";
         n = Math.abs(n);

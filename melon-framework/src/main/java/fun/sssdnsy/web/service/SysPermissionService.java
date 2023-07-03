@@ -4,6 +4,7 @@ import fun.sssdnsy.core.domain.entity.SysRole;
 import fun.sssdnsy.core.domain.entity.SysUser;
 import fun.sssdnsy.service.ISysMenuService;
 import fun.sssdnsy.service.ISysRoleService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -54,7 +55,7 @@ public class SysPermissionService {
             perms.add("*:*:*");
         } else {
             List<SysRole> roles = user.getRoles();
-            if (!roles.isEmpty() && roles.size() > 1) {
+            if (CollectionUtils.isNotEmpty(roles)) {
                 // 多角色设置permissions属性，以便数据权限匹配权限
                 for (SysRole role : roles) {
                     Set<String> rolePerms = menuService.selectMenuPermsByRoleId(role.getRoleId());
