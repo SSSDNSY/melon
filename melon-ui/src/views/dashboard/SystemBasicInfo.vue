@@ -196,6 +196,9 @@
             that.connection()
           }
         }, 5000);
+        //屏蔽消息打印
+        that.stompClient.debug =  () => {};
+
       },
       // 连接服务器
       connection() {

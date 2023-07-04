@@ -16,13 +16,13 @@ const getters = {
   defaultRoutes:state => state.permission.defaultRoutes,
   sidebarRouters:state => state.permission.sidebarRouters,
 
-  getEditor: state => state.bpmnf.getEditor,
-  getProcessDef: state => state.bpmnf.getProcessDef,
-  getProcessEngine: state => state.bpmnf.getProcessEngine,
-  getEditorConfig: state => state.bpmnf.getEditorConfig,
-  getModeler: state => state.bpmnf.getModeler,
-  getModeling: state => state.bpmnf.getModeling,
-  getActive: state => state.bpmnf.getActive,
+  // getEditor: state => state.bpmnf.getEditor,
+  // getProcessDef: state => state.bpmnf.getProcessDef,
+  // getProcessEngine: state => state.bpmnf.getProcessEngine,
+  // getEditorConfig: state => state.bpmnf.getEditorConfig,
+  // getModeler: state => state.bpmnf.getModeler,
+  // getModeling: state => state.bpmnf.getModeling,
+  // getActive: state => state.bpmnf.getActive
 
 }
 export default getters

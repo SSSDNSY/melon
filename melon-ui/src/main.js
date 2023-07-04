@@ -38,14 +38,6 @@ import VueMeta from 'vue-meta'
 // 字典数据组件
 import DictData from '@/components/DictData'
 
-//bpmn.js
-// import "@packages/bpmn-icons";
-// import "../packages/theme/element-variables.scss";
-// import { vuePlugin } from "../packages/highlight";
-// import "highlight.js/styles/atom-one-dark-reasonable.css";
-// import Common from "@packages/components/common";
-// import ResetPopover from "../utils/resetPopover";
-// import "../packages/theme/index.scss";
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -67,10 +59,6 @@ Vue.component('FileUpload', FileUpload)
 Vue.component('ImageUpload', ImageUpload)
 Vue.component('ImagePreview', ImagePreview)
 
-//bpmn.js
-// Vue.use(Common);
-// Vue.use(vuePlugin);
-// Vue.directive("r-popover", ResetPopover);
 
 Vue.use(directive)
 Vue.use(plugins)

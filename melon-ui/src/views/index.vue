@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-editor-container">
+  <div class="app-container home dashboard-editor-container">
 
 
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
@@ -86,6 +86,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.home {
+  blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-left: 5px solid #eee;
+  }
+}
 .dashboard-editor-container {
   padding: 32px;
   background-color: rgb(240, 242, 245);
