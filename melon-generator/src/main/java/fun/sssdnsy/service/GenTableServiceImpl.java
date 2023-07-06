@@ -156,6 +156,15 @@ public class GenTableServiceImpl implements IGenTableService {
         genTableColumnMapper.deleteGenTableColumnByIds(tableIds);
     }
 
+    @Override
+    public void deleteGenFilesByIds(Long[] tableIds) throws IOException {
+        for (Long id : tableIds) {
+            GenTable genTable = genTableMapper.selectGenTableById(id);
+            String   genPath  = genTable.getGenPath();
+            FileUtils.deleteDirectory(new File(genPath));
+        }
+    }
+
     /**
      * 导入表结构
      *

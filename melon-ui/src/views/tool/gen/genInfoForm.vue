@@ -222,7 +222,7 @@ export default {
   props: {
     info: {
       type: Object,
-      default: null
+      default: 1
     },
     tables: {
       type: Array,

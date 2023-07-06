@@ -59,6 +59,14 @@ export function delTable(tableId) {
   })
 }
 
+// 删除生成代码的文件夹
+export function removeFiles(tableId) {
+  return request({
+    url: '/tool/gen/removeFiles/' + tableId,
+    method: 'delete'
+  })
+}
+
 // 生成代码（自定义路径）
 export function genCode(tableName) {
   return request({

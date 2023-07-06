@@ -113,7 +113,7 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="生成信息" name="genInfo">
+      <el-tab-pane label="配置信息" name="genInfo">
         <gen-info-form ref="genInfo" :info="info" :tables="tables" :menus="menus"/>
       </el-tab-pane>
     </el-tabs>
@@ -127,9 +127,9 @@
 </template>
 
 <script>
-import { getGenTable, updateGenTable } from "@/api/tool/gen";
-import { optionselect as getDictOptionselect } from "@/api/system/dict/type";
-import { listMenu as getMenuTreeselect } from "@/api/system/menu";
+import {getGenTable, updateGenTable} from "@/api/tool/gen";
+import {optionselect as getDictOptionselect} from "@/api/system/dict/type";
+import {listMenu as getMenuTreeselect} from "@/api/system/menu";
 import basicInfoForm from "./basicInfoForm";
 import genInfoForm from "./genInfoForm";
 import Sortable from 'sortablejs'
@@ -143,7 +143,7 @@ export default {
   data() {
     return {
       // 选中选项卡的 name
-      activeName: "columnInfo",
+      activeName: "genInfo",
       // 表格的高度
       tableHeight: document.documentElement.scrollHeight - 245 + "px",
       // 表信息

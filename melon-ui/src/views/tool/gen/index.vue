@@ -129,24 +129,27 @@
           <el-button
             type="text"
             size="small"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['tool:gen:remove']"
-          >删除</el-button>
-          <el-button
-            type="text"
-            size="small"
             icon="el-icon-refresh"
             @click="handleSynchDb(scope.row)"
             v-hasPermi="['tool:gen:edit']"
-          >同步</el-button>
+          >同步
+          </el-button>
           <el-button
             type="text"
             size="small"
             icon="el-icon-download"
             @click="handleGenTable(scope.row)"
             v-hasPermi="['tool:gen:code']"
-          >生成代码</el-button>
+          >生成代码
+          </el-button>
+          <el-button
+            type="text"
+            size="small"
+            icon="el-icon-delete"
+            @click="handleRemoveFile(scope.row)"
+            v-hasPermi="['tool:gen:remove']"
+          >删除代码
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -176,10 +179,11 @@
 </template>
 
 <script>
-import { listTable, previewTable, delTable, genCode, synchDb } from "@/api/tool/gen";
+import {delTable, genCode, listTable, previewTable, removeFiles, synchDb} from "@/api/tool/gen";
 import importTable from "./importTable";
 import hljs from "highlight.js/lib/highlight";
 import "highlight.js/styles/github-gist.css";
+
 hljs.registerLanguage("java", require("highlight.js/lib/languages/java"));
 hljs.registerLanguage("xml", require("highlight.js/lib/languages/xml"));
 hljs.registerLanguage("html", require("highlight.js/lib/languages/xml"));
@@ -325,12 +329,25 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const tableIds = row.tableId || this.ids;
-      this.$modal.confirm('是否确认删除表编号为"' + tableIds + '"的数据项？').then(function() {
+      this.$modal.confirm('是否确认删除表编号为"' + tableIds + '"的数据项？').then(function () {
         return delTable(tableIds);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
+      }).catch(() => {
+      });
+    }
+    ,
+    /** 删除文件夹按钮操作 */
+    handleRemoveFile(row) {
+      const tableIds = row.tableId || this.ids;
+      this.$modal.confirm('是否确认删除表编号为"' + tableIds + '"[' + row.genPath + ']下的代码？').then(function () {
+        return removeFiles(tableIds);
+      }).then(() => {
+        this.getList();
+        this.$modal.msgSuccess("删除成功");
+      }).catch(() => {
+      });
     }
   }
 };

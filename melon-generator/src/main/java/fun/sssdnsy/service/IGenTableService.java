@@ -2,6 +2,7 @@ package fun.sssdnsy.service;
 
 import fun.sssdnsy.domain.GenTable;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,15 @@ public interface IGenTableService {
      */
     public void deleteGenTableByIds(Long[] tableIds);
 
+
+    /**
+     * 删除生成文件
+     *
+     * @param tableIds 需要删除的表数据ID
+     * @return 结果
+     */
+    public void deleteGenFilesByIds(Long[] tableIds) throws IOException;
+
     /**
      * 导入表结构
      *
@@ -118,4 +128,6 @@ public interface IGenTableService {
      * @param genTable 业务信息
      */
     public void validateEdit(GenTable genTable);
+
+
 }

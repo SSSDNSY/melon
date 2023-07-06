@@ -53,10 +53,10 @@ public class GenController extends BaseController {
     @PreAuthorize("@ss.hasPermi('tool:gen:query')")
     @GetMapping(value = "/{tableId}")
     public AjaxResult getInfo(@PathVariable Long tableId) {
-        GenTable table = genTableService.selectGenTableById(tableId);
-        List<GenTable> tables = genTableService.selectGenTableAll();
-        List<GenTableColumn> list = genTableColumnService.selectGenTableColumnListByTableId(tableId);
-        Map<String, Object> map = new HashMap<String, Object>();
+        GenTable             table  = genTableService.selectGenTableById(tableId);
+        List<GenTable>       tables = genTableService.selectGenTableAll();
+        List<GenTableColumn> list   = genTableColumnService.selectGenTableColumnListByTableId(tableId);
+        Map<String, Object>  map    = new HashMap<String, Object>();
         map.put("info", table);
         map.put("rows", list);
         map.put("tables", tables);
@@ -80,8 +80,8 @@ public class GenController extends BaseController {
     @PreAuthorize("@ss.hasPermi('tool:gen:list')")
     @GetMapping(value = "/column/{tableId}")
     public TableDataInfo columnList(Long tableId) {
-        TableDataInfo dataInfo = new TableDataInfo();
-        List<GenTableColumn> list = genTableColumnService.selectGenTableColumnListByTableId(tableId);
+        TableDataInfo        dataInfo = new TableDataInfo();
+        List<GenTableColumn> list     = genTableColumnService.selectGenTableColumnListByTableId(tableId);
         dataInfo.setRows(list);
         dataInfo.setTotal(list.size());
         return dataInfo;
@@ -121,6 +121,17 @@ public class GenController extends BaseController {
     @DeleteMapping("/{tableIds}")
     public AjaxResult remove(@PathVariable Long[] tableIds) {
         genTableService.deleteGenTableByIds(tableIds);
+        return success();
+    }
+
+    /**
+     * 删除生成代码的文件夹
+     */
+    @PreAuthorize("@ss.hasPermi('tool:gen:remove')")
+    @Log(title = "代码生成", businessType = BusinessType.DELETE)
+    @DeleteMapping("/removeFiles/{tableIds}")
+    public AjaxResult removeFiles(@PathVariable Long[] tableIds) throws IOException {
+        genTableService.deleteGenFilesByIds(tableIds);
         return success();
     }
 
@@ -175,7 +186,7 @@ public class GenController extends BaseController {
     @GetMapping("/batchGenCode")
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException {
         String[] tableNames = Convert.toStrArray(tables);
-        byte[] data = genTableService.downloadCode(tableNames);
+        byte[]   data       = genTableService.downloadCode(tableNames);
         genCode(response, data);
     }
 
