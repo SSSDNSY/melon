@@ -106,9 +106,11 @@ spring:
         max-wait: -1ms
   activiti:
     database-schema-update: true
-    check-process-definitions: true
+    # 自动部署验证设置:
+    check-process-definitions: false
     process-definition-location-prefix: classpath:/bpmn/
     history-level: full
+
 # endpoints配置
 management:
   endpoints:

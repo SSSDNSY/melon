@@ -38,6 +38,12 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!-- httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
         <!-- 核心模块 -->
         <dependency>
             <groupId>fun.sssdnsy</groupId>
@@ -54,12 +60,6 @@
         <dependency>
             <groupId>fun.sssdnsy</groupId>
             <artifactId>melon-generator</artifactId>
-        </dependency>
-
-        <!-- 工作流 -->
-        <dependency>
-            <groupId>fun.sssdnsy</groupId>
-            <artifactId>melon-activiti</artifactId>
         </dependency>
 
         <!-- 监控 -->

@@ -89,6 +89,7 @@ public class OauthController extends BaseController {
     @GetMapping("/callback/gitee")
     public String giteeCallback(@RequestParam("code") String code) throws Exception {
         String token = "";
+        // TODO
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost httpPost = new HttpPost(giteeConfig.getAccessToken());
         JSONObject jsonObj = JSONObject.of();

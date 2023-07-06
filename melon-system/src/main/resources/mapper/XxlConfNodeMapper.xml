@@ -28,7 +28,7 @@
 		t.`update_time`
     </sql>
 
-    <select id="list" parameterType="xxlConfNode" resultMap="xxlConfNode">
+    <select id="list" parameterType="fun.sssdnsy.domain.XxlConfNode" resultMap="xxlConfNode">
         SELECT
         <include refid="Base_Column_List"/>
         FROM xxl_conf_node AS t

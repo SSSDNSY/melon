@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fun.sssdnsy.mapper.SysJobMapper">
 
-    <resultMap type="SysJob" id="SysJobResult">
+    <resultMap type="fun.sssdnsy.domain.SysJob" id="SysJobResult">
         <id property="jobId" column="job_id"/>
         <result property="jobName" column="job_name"/>
         <result property="jobGroup" column="job_group"/>
