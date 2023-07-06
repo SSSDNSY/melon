@@ -73,7 +73,7 @@ public class PurchaseController extends BaseController {
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Purchase purchase) {
-        List<Purchase> list = purchaseService.selectPurchaseList(purchase);
+        List<Purchase>      list = purchaseService.selectPurchaseList(purchase);
         ExcelUtil<Purchase> util = new ExcelUtil<Purchase>(Purchase.class);
         return util.exportExcel(list, "采购数据");
     }
@@ -121,12 +121,12 @@ public class PurchaseController extends BaseController {
      */
     @GetMapping("/purchasemanager")
     public String purchasemanager(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
-            Purchase apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Purchase         apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
+            SimpleDateFormat sdf   = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             mmap.put("applyTime", sdf.format(apply.getApplytime()));
             mmap.put("apply", apply);
             mmap.put("taskid", taskid);
@@ -139,12 +139,12 @@ public class PurchaseController extends BaseController {
      */
     @GetMapping("/finance")
     public String finance(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
-            Purchase apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Purchase         apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
+            SimpleDateFormat sdf   = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             mmap.put("applyTime", sdf.format(apply.getApplytime()));
             mmap.put("apply", apply);
             mmap.put("taskid", taskid);
@@ -157,12 +157,12 @@ public class PurchaseController extends BaseController {
      */
     @GetMapping("/manager")
     public String manager(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
-            Purchase apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Purchase         apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
+            SimpleDateFormat sdf   = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             mmap.put("applyTime", sdf.format(apply.getApplytime()));
             mmap.put("apply", apply);
             mmap.put("taskid", taskid);
@@ -175,12 +175,12 @@ public class PurchaseController extends BaseController {
      */
     @GetMapping("/pay")
     public String pay(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
-            Purchase apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Purchase         apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
+            SimpleDateFormat sdf   = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             mmap.put("applyTime", sdf.format(apply.getApplytime()));
             mmap.put("apply", apply);
             mmap.put("taskid", taskid);
@@ -193,12 +193,12 @@ public class PurchaseController extends BaseController {
      */
     @GetMapping("/receiveitem")
     public String receiveitem(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
-            Purchase apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Purchase         apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
+            SimpleDateFormat sdf   = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             mmap.put("applyTime", sdf.format(apply.getApplytime()));
             mmap.put("apply", apply);
             mmap.put("taskid", taskid);
@@ -211,12 +211,12 @@ public class PurchaseController extends BaseController {
      */
     @GetMapping("/updateapply")
     public String updateapply(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
-            Purchase apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Purchase         apply = purchaseService.selectPurchaseById(Long.parseLong(p.getBusinessKey()));
+            SimpleDateFormat sdf   = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             mmap.put("applyTime", sdf.format(apply.getApplytime()));
             mmap.put("apply", apply);
             mmap.put("taskid", taskid);

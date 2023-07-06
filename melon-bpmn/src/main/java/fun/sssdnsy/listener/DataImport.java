@@ -13,7 +13,7 @@ public class DataImport implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) {
         LeaveapplyMapper leaveapplyMapper = SpringUtils.getBean(LeaveapplyMapper.class);
-        List<Leaveapply> applys = leaveapplyMapper.selectLeaveapplyList(new Leaveapply());
+        List<Leaveapply> applys           = leaveapplyMapper.selectLeaveapplyList(new Leaveapply());
         for (Leaveapply apply : applys) {
             System.out.println("请假信息" + apply.toString());
         }

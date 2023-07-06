@@ -35,6 +35,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 
@@ -60,10 +61,10 @@ public class ModelManageController extends BaseController {
         if (StringUtils.isNotEmpty(name)) {
             query.modelName(name);
         }
-        PageDomain pageDomain = TableSupport.buildPageRequest();
-        int start = (pageNum - 1) * pageSize;
-        List<Model> page = query.orderByCreateTime().desc().listPage(start, pageSize);
-        TableDataInfo rspData = new TableDataInfo();
+        PageDomain    pageDomain = TableSupport.buildPageRequest();
+        int           start      = (pageNum - 1) * pageSize;
+        List<Model>   page       = query.orderByCreateTime().desc().listPage(start, pageSize);
+        TableDataInfo rspData    = new TableDataInfo();
         rspData.setMsg(MSG);
         rspData.setCode(HttpStatus.SUCCESS);
         rspData.setRows(page);
@@ -87,8 +88,8 @@ public class ModelManageController extends BaseController {
         model.setMetaInfo(modelNode.toString());
         model.setName(modelRequest.getName());
         model.setVersion(modelRequest.getVersion());
-        ModelQuery modelQuery = repositoryService.createModelQuery();
-        List<Model> list = modelQuery.modelKey(modelRequest.getKey()).list();
+        ModelQuery  modelQuery = repositoryService.createModelQuery();
+        List<Model> list       = modelQuery.modelKey(modelRequest.getKey()).list();
         if (list.size() > 0) {
             return AjaxResult.error("模型标识不能重复");
         } else {
@@ -114,9 +115,9 @@ public class ModelManageController extends BaseController {
     @GetMapping("/deploy/{modelId}")
     public AjaxResult deploy(@PathVariable String modelId) {
         try {
-            Model model = repositoryService.getModel(modelId);
-            byte[] modelData = repositoryService.getModelEditorSource(modelId);
-            JsonNode jsonNode = objectMapper.readTree(modelData);
+            Model     model     = repositoryService.getModel(modelId);
+            byte[]    modelData = repositoryService.getModelEditorSource(modelId);
+            JsonNode  jsonNode  = objectMapper.readTree(modelData);
             BpmnModel bpmnModel = (new BpmnJsonConverter()).convertToBpmnModel(jsonNode);
             Deployment deploy = repositoryService.createDeployment().category(model.getCategory())
                     .name(model.getName()).key(model.getKey())
@@ -143,11 +144,11 @@ public class ModelManageController extends BaseController {
     @ApiOperation("导出模型")
     @GetMapping("/export/{modelId}")
     public void export(@PathVariable String modelId, HttpServletResponse response) throws IOException {
-        byte[] modelData = repositoryService.getModelEditorSource(modelId);
-        JsonNode jsonNode = objectMapper.readTree(modelData);
-        BpmnModel bpmnModel = (new BpmnJsonConverter()).convertToBpmnModel(jsonNode);
-        byte[] xmlBytes = (new BpmnXMLConverter()).convertToXML(bpmnModel, "UTF-8");
-        ByteArrayInputStream in = new ByteArrayInputStream(xmlBytes);
+        byte[]               modelData = repositoryService.getModelEditorSource(modelId);
+        JsonNode             jsonNode  = objectMapper.readTree(modelData);
+        BpmnModel            bpmnModel = (new BpmnJsonConverter()).convertToBpmnModel(jsonNode);
+        byte[]               xmlBytes  = (new BpmnXMLConverter()).convertToXML(bpmnModel, "UTF-8");
+        ByteArrayInputStream in        = new ByteArrayInputStream(xmlBytes);
         IOUtils.copy(in, response.getOutputStream());
         String filename = bpmnModel.getMainProcess().getId() + ".bpmn20.xml";
         response.setHeader("Content-Disposition", "attachment;filename=" + filename);
@@ -155,13 +156,6 @@ public class ModelManageController extends BaseController {
         response.flushBuffer();
     }
 
-
-    /**
-     * 打开在线编辑器时加载指定模型到页面
-     *
-     * @param modelId
-     * @return
-     */
     @ApiOperation("打开在线编辑器时加载指定模型到页面")
     @RequestMapping(value = "/{modelId}/json", method = RequestMethod.GET, produces = "application/json")
     public ObjectNode getEditorJson(@PathVariable String modelId) {
@@ -179,7 +173,7 @@ public class ModelManageController extends BaseController {
                 }
                 modelNode.put(ModelDataJsonConstants.MODEL_ID, model.getId());
                 ObjectNode editorJsonNode = (ObjectNode) objectMapper.readTree(
-                        new String(repositoryService.getModelEditorSource(model.getId()), "utf-8"));
+                        new String(repositoryService.getModelEditorSource(model.getId()), StandardCharsets.UTF_8));
                 modelNode.put("model", editorJsonNode);
 
             } catch (Exception e) {
@@ -190,22 +184,13 @@ public class ModelManageController extends BaseController {
         return modelNode;
     }
 
-    /**
-     * 保存流程图编辑器的信息
-     *
-     * @param modelId
-     * @param name
-     * @param description
-     * @param json_xml
-     * @param svg_xml
-     */
 
     @ApiOperation("保存流程图编辑器的信息")
     @RequestMapping(value = "/{modelId}/save", method = RequestMethod.PUT)
     @ResponseStatus(value = org.springframework.http.HttpStatus.OK)
     public void saveModel(@PathVariable String modelId, String name, String description, String json_xml, String svg_xml) {
         try {
-            Model model = repositoryService.getModel(modelId);
+            Model      model     = repositoryService.getModel(modelId);
             ObjectNode modelJson = (ObjectNode) objectMapper.readTree(model.getMetaInfo());
             modelJson.put(ModelDataJsonConstants.MODEL_NAME, name);
             modelJson.put(ModelDataJsonConstants.MODEL_DESCRIPTION, description);
@@ -216,13 +201,13 @@ public class ModelManageController extends BaseController {
             version++;
             model.setVersion(version);
             repositoryService.saveModel(model);
-            repositoryService.addModelEditorSource(model.getId(), json_xml.getBytes("utf-8"));
-            InputStream svgStream = new ByteArrayInputStream(svg_xml.getBytes("utf-8"));
-            TranscoderInput input = new TranscoderInput(svgStream);
-            PNGTranscoder transcoder = new PNGTranscoder();
+            repositoryService.addModelEditorSource(model.getId(), json_xml.getBytes(StandardCharsets.UTF_8));
+            InputStream     svgStream  = new ByteArrayInputStream(svg_xml.getBytes(StandardCharsets.UTF_8));
+            TranscoderInput input      = new TranscoderInput(svgStream);
+            PNGTranscoder   transcoder = new PNGTranscoder();
             // Setup output
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-            TranscoderOutput output = new TranscoderOutput(outStream);
+            TranscoderOutput      output    = new TranscoderOutput(outStream);
             // Do the transformation
             transcoder.transcode(input, output);
             final byte[] result = outStream.toByteArray();

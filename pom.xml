@@ -19,7 +19,7 @@
         <module>melon-quartz</module>
         <module>melon-system</module>
         <module>melon-conf</module>
-        <module>melon-activiti</module>
+        <module>melon-bpmn</module>
     </modules>
 
     <properties>

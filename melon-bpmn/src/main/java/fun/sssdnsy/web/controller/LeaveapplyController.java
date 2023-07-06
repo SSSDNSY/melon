@@ -62,9 +62,9 @@ public class LeaveapplyController extends BaseController {
      */
     @GetMapping("/deptleadercheck")
     public String deptleadercheck(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
             Leaveapply apply = leaveapplyService.selectLeaveapplyById(Long.parseLong(p.getBusinessKey()));
             mmap.put("apply", apply);
@@ -84,9 +84,9 @@ public class LeaveapplyController extends BaseController {
      */
     @GetMapping("/hrcheck")
     public String hrcheck(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
             Leaveapply apply = leaveapplyService.selectLeaveapplyById(Long.parseLong(p.getBusinessKey()));
             mmap.put("apply", apply);
@@ -105,9 +105,9 @@ public class LeaveapplyController extends BaseController {
      */
     @GetMapping("/destroyapply")
     public String destroyapply(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
             Leaveapply apply = leaveapplyService.selectLeaveapplyById(Long.parseLong(p.getBusinessKey()));
             mmap.put("apply", apply);
@@ -127,9 +127,9 @@ public class LeaveapplyController extends BaseController {
      */
     @GetMapping("/modifyapply")
     public String modifyapply(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
             Leaveapply apply = leaveapplyService.selectLeaveapplyById(Long.parseLong(p.getBusinessKey()));
             mmap.put("apply", apply);
@@ -149,9 +149,9 @@ public class LeaveapplyController extends BaseController {
      */
     @GetMapping("/addleave")
     public String addLeave(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
             Leaveapply apply = leaveapplyService.selectLeaveapplyById(Long.parseLong(p.getBusinessKey()));
             mmap.put("apply", apply);
@@ -169,8 +169,8 @@ public class LeaveapplyController extends BaseController {
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Leaveapply leaveapply) {
-        LoginUser user = getLoginUser();
-        String username = user.getUsername();
+        LoginUser user     = getLoginUser();
+        String    username = user.getUsername();
         leaveapply.setUserId(username);
         startPage();
         List<Leaveapply> list = leaveapplyService.selectLeaveapplyList(leaveapply);
@@ -184,10 +184,10 @@ public class LeaveapplyController extends BaseController {
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Leaveapply leaveapply) {
-        LoginUser user = getLoginUser();
-        String username = user.getUsername();
+        LoginUser user     = getLoginUser();
+        String    username = user.getUsername();
         leaveapply.setUserId(username);
-        List<Leaveapply> list = leaveapplyService.selectLeaveapplyList(leaveapply);
+        List<Leaveapply>      list = leaveapplyService.selectLeaveapplyList(leaveapply);
         ExcelUtil<Leaveapply> util = new ExcelUtil<Leaveapply>(Leaveapply.class);
         return util.exportExcel(list, "请假数据");
     }

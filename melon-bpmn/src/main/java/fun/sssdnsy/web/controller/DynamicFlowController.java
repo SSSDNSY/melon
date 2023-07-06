@@ -37,7 +37,7 @@ public class DynamicFlowController {
     @Resource
     private RuntimeService runtimeService;
     @Resource
-    private TaskService taskService;
+    private TaskService    taskService;
     @Resource
     private HistoryService historyService;
 
@@ -46,9 +46,9 @@ public class DynamicFlowController {
     @GetMapping(value = "/info/{processInstanceId}")
     @ResponseBody
     public AjaxResult remove(@PathVariable String processInstanceId) {
-        String processDefinitionId = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult().getProcessDefinitionId();
-        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
-        Collection<FlowElement> flowElements = bpmnModel.getMainProcess().getFlowElements();
+        String                  processDefinitionId = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult().getProcessDefinitionId();
+        BpmnModel               bpmnModel           = repositoryService.getBpmnModel(processDefinitionId);
+        Collection<FlowElement> flowElements        = bpmnModel.getMainProcess().getFlowElements();
         for (FlowElement flowElement : flowElements) {
             if (flowElement instanceof UserTask) {
                 UserTask userTask = (UserTask) flowElement;
@@ -72,25 +72,25 @@ public class DynamicFlowController {
     @GetMapping(value = "/forceEnd/{taskId}")
     @ResponseBody
     public AjaxResult forceEnd(@PathVariable String taskId) {
-        Task t = taskService.createTaskQuery().taskId(taskId).singleResult();
-        String processDefinitionId = runtimeService.createProcessInstanceQuery().processInstanceId(t.getProcessInstanceId()).singleResult().getProcessDefinitionId();
-        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
+        Task      t                   = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String    processDefinitionId = runtimeService.createProcessInstanceQuery().processInstanceId(t.getProcessInstanceId()).singleResult().getProcessDefinitionId();
+        BpmnModel bpmnModel           = repositoryService.getBpmnModel(processDefinitionId);
         // 寻找流程实例当前任务的activeId
-        Execution execution = runtimeService.createExecutionQuery().executionId(t.getExecutionId()).singleResult();
-        String activityId = execution.getActivityId();
-        FlowNode currentNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement(activityId);
+        Execution execution   = runtimeService.createExecutionQuery().executionId(t.getExecutionId()).singleResult();
+        String    activityId  = execution.getActivityId();
+        FlowNode  currentNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement(activityId);
         // 创建结束节点和连接线
         EndEvent end = new EndEvent();
         end.setName("强制结束");
         end.setId("forceEnd");
         List<SequenceFlow> newSequenceFlowList = new ArrayList<SequenceFlow>();
-        SequenceFlow newSequenceFlow = new SequenceFlow();
+        SequenceFlow       newSequenceFlow     = new SequenceFlow();
         newSequenceFlow.setId("newFlow");
         newSequenceFlow.setSourceFlowElement(currentNode);
         newSequenceFlow.setTargetFlowElement(end);
         newSequenceFlowList.add(newSequenceFlow);
         // 备份原有方向
-        List<SequenceFlow> dataflows = currentNode.getOutgoingFlows();
+        List<SequenceFlow> dataflows        = currentNode.getOutgoingFlows();
         List<SequenceFlow> oriSequenceFlows = new ArrayList<SequenceFlow>();
         oriSequenceFlows.addAll(dataflows);
         // 清空原有方向
@@ -109,23 +109,23 @@ public class DynamicFlowController {
     @GetMapping(value = "/jump/{taskId}/{sid}")
     @ResponseBody
     public AjaxResult jump(@PathVariable String taskId, @PathVariable String sid) {
-        Task t = taskService.createTaskQuery().taskId(taskId).singleResult();
-        String processDefinitionId = runtimeService.createProcessInstanceQuery().processInstanceId(t.getProcessInstanceId()).singleResult().getProcessDefinitionId();
-        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
+        Task      t                   = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String    processDefinitionId = runtimeService.createProcessInstanceQuery().processInstanceId(t.getProcessInstanceId()).singleResult().getProcessDefinitionId();
+        BpmnModel bpmnModel           = repositoryService.getBpmnModel(processDefinitionId);
         // 寻找流程实例当前任务的activeId
-        Execution execution = runtimeService.createExecutionQuery().executionId(t.getExecutionId()).singleResult();
-        String activityId = execution.getActivityId();
-        FlowNode currentNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement(activityId);
-        FlowNode targetNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement(sid);
+        Execution execution   = runtimeService.createExecutionQuery().executionId(t.getExecutionId()).singleResult();
+        String    activityId  = execution.getActivityId();
+        FlowNode  currentNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement(activityId);
+        FlowNode  targetNode  = (FlowNode) bpmnModel.getMainProcess().getFlowElement(sid);
         // 创建连接线
         List<SequenceFlow> newSequenceFlowList = new ArrayList<SequenceFlow>();
-        SequenceFlow newSequenceFlow = new SequenceFlow();
+        SequenceFlow       newSequenceFlow     = new SequenceFlow();
         newSequenceFlow.setId("newFlow");
         newSequenceFlow.setSourceFlowElement(currentNode);
         newSequenceFlow.setTargetFlowElement(targetNode);
         newSequenceFlowList.add(newSequenceFlow);
         // 备份原有方向
-        List<SequenceFlow> dataflows = currentNode.getOutgoingFlows();
+        List<SequenceFlow> dataflows        = currentNode.getOutgoingFlows();
         List<SequenceFlow> oriSequenceFlows = new ArrayList<SequenceFlow>();
         oriSequenceFlows.addAll(dataflows);
         // 清空原有方向
@@ -159,7 +159,7 @@ public class DynamicFlowController {
         // 连线信息
         List<SequenceFlow> flows = new ArrayList<SequenceFlow>();
         List<SequenceFlow> toEnd = new ArrayList<SequenceFlow>();
-        SequenceFlow s1 = new SequenceFlow();
+        SequenceFlow       s1    = new SequenceFlow();
         s1.setId("flow1");
         s1.setName("flow1");
         s1.setSourceRef(startEvent.getId());

@@ -45,14 +45,14 @@ import java.util.zip.ZipInputStream;
 public class FlowController extends BaseController {
 
     @Resource
-    RepositoryService repositoryService;
+    RepositoryService          repositoryService;
     @Resource
     ProcessEngineConfiguration configuration;
     @Resource
     private RuntimeService runtimeService;
     @Resource
-    private TaskService taskService;
-    private String prefix = "activiti/manage";
+    private TaskService    taskService;
+    private String         prefix = "activiti/manage";
 
     @GetMapping("")
     public String processList() {
@@ -81,8 +81,8 @@ public class FlowController extends BaseController {
     @ResponseBody
     public AjaxResult fileupload(@RequestParam MultipartFile uploadfile) {
         try {
-            String filename = uploadfile.getOriginalFilename();
-            InputStream is = uploadfile.getInputStream();
+            String      filename = uploadfile.getOriginalFilename();
+            InputStream is       = uploadfile.getInputStream();
             if (filename.endsWith("zip")) {
                 repositoryService.createDeployment().name(filename).addZipInputStream(new ZipInputStream(is)).deploy();
             } else if (filename.endsWith("bpmn") || filename.endsWith("xml")) {
@@ -112,10 +112,10 @@ public class FlowController extends BaseController {
         if (latest) {
             queryCondition.latestVersion();
         }
-        int total = queryCondition.list().size();
-        int start = (pageNum - 1) * pageSize;
+        int                     total    = queryCondition.list().size();
+        int                     start    = (pageNum - 1) * pageSize;
         List<ProcessDefinition> pageList = queryCondition.orderByDeploymentId().desc().listPage(start, pageSize);
-        List<Process> mylist = new ArrayList<Process>();
+        List<Process>           mylist   = new ArrayList<Process>();
         for (int i = 0; i < pageList.size(); i++) {
             Process p = new Process();
             p.setDeploymentId(pageList.get(i).getDeploymentId());
@@ -148,10 +148,10 @@ public class FlowController extends BaseController {
     @RequestMapping(value = "/showresource", method = RequestMethod.GET)
     public void showresource(@RequestParam("pdid") String pdid,
                              HttpServletResponse response) throws Exception {
-        BpmnModel bpmnModel = repositoryService.getBpmnModel(pdid);
+        BpmnModel               bpmnModel        = repositoryService.getBpmnModel(pdid);
         ProcessDiagramGenerator diagramGenerator = configuration.getProcessDiagramGenerator();
-        InputStream is = diagramGenerator.generateDiagram(bpmnModel, "png", "宋体", "宋体", "宋体", configuration.getClassLoader(), 1.0);
-        ServletOutputStream output = response.getOutputStream();
+        InputStream             is               = diagramGenerator.generateDiagram(bpmnModel, "png", "宋体", "宋体", "宋体", configuration.getClassLoader(), 1.0);
+        ServletOutputStream     output           = response.getOutputStream();
         IOUtils.copy(is, output);
     }
 
@@ -159,7 +159,7 @@ public class FlowController extends BaseController {
     @RequestMapping(value = "/showProcessDefinition/{pdid}/{resource}", method = RequestMethod.GET)
     public void showProcessDefinition(@PathVariable("pdid") String pdid, @PathVariable(value = "resource") String resource,
                                       HttpServletResponse response) throws Exception {
-        InputStream is = repositoryService.getResourceAsStream(pdid, resource);
+        InputStream         is     = repositoryService.getResourceAsStream(pdid, resource);
         ServletOutputStream output = response.getOutputStream();
         IOUtils.copy(is, output);
     }
@@ -169,9 +169,9 @@ public class FlowController extends BaseController {
     @ResponseBody
     public String exchangeProcessToModel(@PathVariable("pdid") String pdid, HttpServletResponse response) throws Exception {
         ProcessDefinition definition = repositoryService.createProcessDefinitionQuery().processDefinitionId(pdid).singleResult();
-        BpmnModel bpmnModel = repositoryService.getBpmnModel(definition.getId());
-        ObjectNode objectNode = new BpmnJsonConverter().convertToJson(bpmnModel);
-        Model modelData = repositoryService.newModel();
+        BpmnModel         bpmnModel  = repositoryService.getBpmnModel(definition.getId());
+        ObjectNode        objectNode = new BpmnJsonConverter().convertToJson(bpmnModel);
+        Model             modelData  = repositoryService.newModel();
         modelData.setKey(definition.getKey());
         modelData.setName(definition.getName());
         modelData.setCategory(definition.getCategory());

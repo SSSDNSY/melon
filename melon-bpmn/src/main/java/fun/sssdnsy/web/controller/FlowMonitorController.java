@@ -41,20 +41,20 @@ import java.util.Map;
 public class FlowMonitorController extends BaseController {
 
     @Resource
-    RepositoryService repositoryService;
+    RepositoryService    repositoryService;
     @Resource
-    ManagementService managementService;
+    ManagementService    managementService;
     @Resource
     ActRuExecutionMapper actRuExecutionMapper;
     @Resource
-    private RuntimeService runtimeService;
+    private RuntimeService       runtimeService;
     @Resource
-    private TaskService taskService;
+    private TaskService          taskService;
     @Resource
-    private HistoryService historyService;
+    private HistoryService       historyService;
     @Resource
     private ActivitiTracingChart activitiTracingChart;
-    private String prefix = "activiti/monitor";
+    private String               prefix = "activiti/monitor";
 
     @GetMapping("/instance")
     public String processList() {
@@ -93,7 +93,7 @@ public class FlowMonitorController extends BaseController {
     @ResponseBody
     public TableDataInfo getlist(@RequestParam(required = false) String bussinesskey, @RequestParam(required = false) String name,
                                  Integer pageSize, Integer pageNum) {
-        int start = (pageNum - 1) * pageSize;
+        int                  start     = (pageNum - 1) * pageSize;
         ProcessInstanceQuery condition = runtimeService.createProcessInstanceQuery();
         if (StringUtils.isNotEmpty(bussinesskey)) {
             condition.processInstanceBusinessKey(bussinesskey);
@@ -101,9 +101,9 @@ public class FlowMonitorController extends BaseController {
         if (StringUtils.isNotEmpty(name)) {
             condition.processDefinitionName(name);
         }
-        int total = condition.orderByProcessDefinitionId().desc().list().size();
+        int                   total       = condition.orderByProcessDefinitionId().desc().list().size();
         List<ProcessInstance> processList = condition.orderByProcessDefinitionId().desc().listPage(start, pageSize);
-        List<FlowInfo> flows = new ArrayList<>();
+        List<FlowInfo>        flows       = new ArrayList<>();
         processList.stream().forEach(p -> {
             FlowInfo info = new FlowInfo();
             info.setProcessInstanceId(p.getProcessInstanceId());
@@ -141,7 +141,7 @@ public class FlowMonitorController extends BaseController {
     @ResponseBody
     public TableDataInfo listHistoryProcess(@RequestParam(required = false) String bussinesskey, @RequestParam(required = false) String name,
                                             Integer pageSize, Integer pageNum) {
-        int start = (pageNum - 1) * pageSize;
+        int                          start     = (pageNum - 1) * pageSize;
         HistoricProcessInstanceQuery condition = historyService.createHistoricProcessInstanceQuery();
         if (StringUtils.isNotEmpty(bussinesskey)) {
             condition.processInstanceBusinessKey(bussinesskey);
@@ -149,9 +149,9 @@ public class FlowMonitorController extends BaseController {
         if (StringUtils.isNotEmpty(name)) {
             condition.processDefinitionName(name);
         }
-        int total = condition.orderByProcessInstanceStartTime().desc().list().size();
+        int                           total       = condition.orderByProcessInstanceStartTime().desc().list().size();
         List<HistoricProcessInstance> processList = condition.orderByProcessInstanceStartTime().desc().listPage(start, pageSize);
-        List<FlowInfo> flows = new ArrayList<>();
+        List<FlowInfo>                flows       = new ArrayList<>();
         processList.stream().forEach(p -> {
             FlowInfo info = new FlowInfo();
             info.setProcessInstanceId(p.getId());
@@ -192,11 +192,11 @@ public class FlowMonitorController extends BaseController {
     @RequestMapping(value = "/history/{processInstanceId}", method = RequestMethod.POST)
     @ResponseBody
     public TableDataInfo history(@PathVariable String processInstanceId, Integer pageSize, Integer pageNum) {
-        int start = (pageNum - 1) * pageSize;
+        int                            start   = (pageNum - 1) * pageSize;
         List<HistoricActivityInstance> history = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).activityType("userTask").orderByHistoricActivityInstanceStartTime().asc().listPage(start, pageSize);
-        int total = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).activityType("userTask").orderByHistoricActivityInstanceStartTime().asc().list().size();
-        List<TaskInfo> infos = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        int                            total   = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).activityType("userTask").orderByHistoricActivityInstanceStartTime().asc().list().size();
+        List<TaskInfo>                 infos   = new ArrayList<>();
+        SimpleDateFormat               sdf     = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         history.stream().forEach(h -> {
             TaskInfo info = new TaskInfo();
             info.setProcessInstanceId(h.getProcessInstanceId());
@@ -224,7 +224,7 @@ public class FlowMonitorController extends BaseController {
     @ResponseBody
     public List<FlowInfo> listExecutions(@RequestParam(required = false) String name) {
         List<ActRuExecution> executionList = actRuExecutionMapper.selectActRuExecutionListByProcessName(name);
-        List<FlowInfo> flows = new ArrayList<>();
+        List<FlowInfo>       flows         = new ArrayList<>();
         executionList.stream().forEach(p -> {
             FlowInfo info = new FlowInfo();
             info.setProcessInstanceId(p.getProcInstId());
@@ -239,9 +239,9 @@ public class FlowMonitorController extends BaseController {
                 info.setActive(true);
             }
             if (p.getActId() != null) {
-                ProcessInstance process = runtimeService.createProcessInstanceQuery().processInstanceId(p.getProcInstId()).singleResult();
-                BpmnModel bpmnModel = repositoryService.getBpmnModel(process.getProcessDefinitionId());
-                Map<String, FlowElement> nodes = bpmnModel.getMainProcess().getFlowElementMap();
+                ProcessInstance          process   = runtimeService.createProcessInstanceQuery().processInstanceId(p.getProcInstId()).singleResult();
+                BpmnModel                bpmnModel = repositoryService.getBpmnModel(process.getProcessDefinitionId());
+                Map<String, FlowElement> nodes     = bpmnModel.getMainProcess().getFlowElementMap();
                 info.setCurrentTask(nodes.get(p.getActId()).getName());
                 info.setName(process.getProcessDefinitionName());
             } else {
@@ -297,10 +297,10 @@ public class FlowMonitorController extends BaseController {
     @RequestMapping(value = "/variables/{processInstanceId}", method = RequestMethod.POST)
     @ResponseBody
     public TableDataInfo variables(@PathVariable String processInstanceId, Integer pageSize, Integer pageNum) {
-        int start = (pageNum - 1) * pageSize;
+        int                            start     = (pageNum - 1) * pageSize;
         List<HistoricVariableInstance> variables = historyService.createHistoricVariableInstanceQuery().processInstanceId(processInstanceId).orderByVariableName().asc().listPage(start, pageSize);
-        int total = historyService.createHistoricVariableInstanceQuery().processInstanceId(processInstanceId).orderByVariableName().asc().list().size();
-        List<VariableInfo> infos = new ArrayList<>();
+        int                            total     = historyService.createHistoricVariableInstanceQuery().processInstanceId(processInstanceId).orderByVariableName().asc().list().size();
+        List<VariableInfo>             infos     = new ArrayList<>();
         variables.forEach(v -> {
             VariableInfo info = new VariableInfo();
             BeanUtils.copyBeanProp(info, v);
@@ -319,12 +319,12 @@ public class FlowMonitorController extends BaseController {
     @ResponseBody
     public TableDataInfo listJobs(@RequestParam(required = false) String processDefinitionId, @RequestParam(required = false) String startDate,
                                   @RequestParam(required = false) String endDate, @RequestParam Integer type, Integer pageSize, Integer pageNum) throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        int start = (pageNum - 1) * pageSize;
-        int total = 0;
-        List<Job> jobList = null;
-        ArrayList<DeadLetterJob> jobs = new ArrayList<>();
-        TableDataInfo rspData = new TableDataInfo();
+        SimpleDateFormat         sdf     = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        int                      start   = (pageNum - 1) * pageSize;
+        int                      total   = 0;
+        List<Job>                jobList = null;
+        ArrayList<DeadLetterJob> jobs    = new ArrayList<>();
+        TableDataInfo            rspData = new TableDataInfo();
         if (type == 1) {
             // 定时作业
             TimerJobQuery condition = managementService.createTimerJobQuery();

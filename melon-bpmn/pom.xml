@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>melon-activiti</artifactId>
+    <artifactId>melon-bpmn</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

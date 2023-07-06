@@ -66,7 +66,7 @@ public class MeetingController extends BaseController {
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Meeting meeting) {
-        List<Meeting> list = meetingService.selectMeetingList(meeting);
+        List<Meeting>      list = meetingService.selectMeetingList(meeting);
         ExcelUtil<Meeting> util = new ExcelUtil<Meeting>(Meeting.class);
         return util.exportExcel(list, "会议数据");
     }
@@ -111,9 +111,9 @@ public class MeetingController extends BaseController {
      */
     @GetMapping("/signate")
     public String signate(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
             Meeting apply = meetingService.selectMeetingById(Long.parseLong(p.getBusinessKey()));
             mmap.put("apply", apply);
@@ -130,9 +130,9 @@ public class MeetingController extends BaseController {
      */
     @GetMapping("/input")
     public String input(String taskid, ModelMap mmap) {
-        Task t = taskService.createTaskQuery().taskId(taskid).singleResult();
-        String processId = t.getProcessInstanceId();
-        ProcessInstance p = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
+        Task            t         = taskService.createTaskQuery().taskId(taskid).singleResult();
+        String          processId = t.getProcessInstanceId();
+        ProcessInstance p         = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
         if (p != null) {
             Meeting apply = meetingService.selectMeetingById(Long.parseLong(p.getBusinessKey()));
             mmap.put("apply", apply);

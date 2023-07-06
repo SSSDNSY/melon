@@ -36,7 +36,7 @@ public class TaskController extends BaseController {
     @Resource
     private RuntimeService runtimeService;
     @Resource
-    private TaskService taskService;
+    private TaskService    taskService;
     @Resource
     private HistoryService historyService;
 
@@ -59,8 +59,8 @@ public class TaskController extends BaseController {
     @PostMapping("/mylist")
     @ResponseBody
     public TableDataInfo mylist(TaskInfo param) {
-        LoginUser user = getLoginUser();
-        String username = user.getUsername();
+        LoginUser user      = getLoginUser();
+        String    username  = user.getUsername();
         TaskQuery condition = taskService.createTaskQuery().taskAssignee(username);
         if (StringUtils.isNotEmpty(param.getTaskName())) {
             condition.taskName(param.getTaskName());
@@ -69,14 +69,14 @@ public class TaskController extends BaseController {
             condition.processDefinitionName(param.getProcessName());
         }
         // 过滤掉流程挂起的待办任务
-        int total = condition.active().orderByTaskCreateTime().desc().list().size();
-        int start = (param.getPageNum() - 1) * param.getPageSize();
-        List<Task> taskList = condition.active().orderByTaskCreateTime().desc().listPage(start, param.getPageSize());
-        List<TaskInfo> tasks = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        int              total    = condition.active().orderByTaskCreateTime().desc().list().size();
+        int              start    = (param.getPageNum() - 1) * param.getPageSize();
+        List<Task>       taskList = condition.active().orderByTaskCreateTime().desc().listPage(start, param.getPageSize());
+        List<TaskInfo>   tasks    = new ArrayList<>();
+        SimpleDateFormat sdf      = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         taskList.stream().forEach(a -> {
             ProcessInstance process = runtimeService.createProcessInstanceQuery().processInstanceId(a.getProcessInstanceId()).singleResult();
-            TaskInfo info = new TaskInfo();
+            TaskInfo        info    = new TaskInfo();
             info.setAssignee(a.getAssignee());
             info.setBusinessKey(process.getBusinessKey());
             info.setCreateTime(sdf.format(a.getCreateTime()));
@@ -112,14 +112,14 @@ public class TaskController extends BaseController {
         if (StringUtils.isNotEmpty(param.getProcessName())) {
             condition.processDefinitionName(param.getProcessName());
         }
-        int total = condition.active().orderByTaskCreateTime().desc().list().size();
-        int start = (param.getPageNum() - 1) * param.getPageSize();
-        List<Task> taskList = condition.active().orderByTaskCreateTime().desc().listPage(start, param.getPageSize());
-        List<TaskInfo> tasks = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        int              total    = condition.active().orderByTaskCreateTime().desc().list().size();
+        int              start    = (param.getPageNum() - 1) * param.getPageSize();
+        List<Task>       taskList = condition.active().orderByTaskCreateTime().desc().listPage(start, param.getPageSize());
+        List<TaskInfo>   tasks    = new ArrayList<>();
+        SimpleDateFormat sdf      = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         taskList.stream().forEach(a -> {
             ProcessInstance process = runtimeService.createProcessInstanceQuery().processInstanceId(a.getProcessInstanceId()).singleResult();
-            TaskInfo info = new TaskInfo();
+            TaskInfo        info    = new TaskInfo();
             info.setAssignee(a.getAssignee());
             info.setBusinessKey(process.getBusinessKey());
             info.setCreateTime(sdf.format(a.getCreateTime()));
@@ -156,8 +156,8 @@ public class TaskController extends BaseController {
     @RequestMapping(value = "/completeTask/{taskId}", method = RequestMethod.POST)
     @ResponseBody
     public AjaxResult completeTask(@PathVariable("taskId") String taskId, @RequestBody(required = false) Map<String, Object> variables) {
-        LoginUser user = getLoginUser();
-        String username = user.getUsername();
+        LoginUser user     = getLoginUser();
+        String    username = user.getUsername();
         taskService.setAssignee(taskId, username);
         // 查出流程实例id
         String processInstanceId = taskService.createTaskQuery().taskId(taskId).singleResult().getProcessInstanceId();
@@ -178,10 +178,10 @@ public class TaskController extends BaseController {
     @RequestMapping(value = "/history/{taskId}", method = RequestMethod.GET)
     @ResponseBody
     public List<TaskInfo> history(@PathVariable String taskId) {
-        String processInstanceId = taskService.createTaskQuery().taskId(taskId).singleResult().getProcessInstanceId();
-        List<HistoricActivityInstance> history = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).activityType("userTask").orderByHistoricActivityInstanceStartTime().asc().list();
-        List<TaskInfo> infos = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String                         processInstanceId = taskService.createTaskQuery().taskId(taskId).singleResult().getProcessInstanceId();
+        List<HistoricActivityInstance> history           = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).activityType("userTask").orderByHistoricActivityInstanceStartTime().asc().list();
+        List<TaskInfo>                 infos             = new ArrayList<>();
+        SimpleDateFormat               sdf               = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         history.stream().forEach(h -> {
             TaskInfo info = new TaskInfo();
             info.setProcessInstanceId(h.getProcessInstanceId());

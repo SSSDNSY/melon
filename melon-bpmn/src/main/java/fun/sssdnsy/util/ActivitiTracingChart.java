@@ -75,7 +75,7 @@ public class ActivitiTracingChart {
 
             // 输出图片内容
             byte[] b = new byte[1024];
-            int len;
+            int    len;
             while ((len = imageStream.read(b, 0, 1024)) != -1) {
                 outputStream.write(b, 0, len);
             }
@@ -114,7 +114,7 @@ public class ActivitiTracingChart {
             for (SequenceFlow sequenceFlow : sequenceFlows) {
                 targetFlowNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement(sequenceFlow.getTargetRef(), true);
                 if (historicActivityNodes.contains(targetFlowNode)) {
-                    int target = historicActivityNodes.indexOf(targetFlowNode);
+                    int target  = historicActivityNodes.indexOf(targetFlowNode);
                     int current = historicActivityNodes.indexOf(currentFlowNode);
                     if (target - current == 1) {
                         highLightedFlowIds.add(sequenceFlow.getId());
