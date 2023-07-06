@@ -1412,3 +1412,29 @@ CREATE TABLE `qrtz_simprop_triggers`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_bin COMMENT ='同步机制的行锁表';
+
+
+
+CREATE TABLE `form_meta`
+(
+    `id`          VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin  NOT NULL COMMENT '主键',
+    `name`        VARCHAR(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '名称',
+    `event_type`  VARCHAR(64) COLLATE utf8mb4_bin DEFAULT '' COMMENT '事件类型',
+    `event_exe`   VARCHAR(64) COLLATE utf8mb4_bin DEFAULT '' COMMENT '事件执行方式',
+    `main_table`  VARCHAR(64) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '主表',
+    `sub_table`   VARCHAR(64) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '子表样式属性（其他样式扩展）',
+    `form_js`     text COLLATE utf8mb4_bin        DEFAULT NULL COMMENT '表单JS',
+    `form_html`   text COLLATE utf8mb4_bin        DEFAULT NULL COMMENT '表单HTML',
+    `form_json`   text COLLATE utf8mb4_bin        DEFAULT NULL COMMENT '表单JSON',
+    `is_main`     CHAR(1) COLLATE utf8mb4_bin     DEFAULT 'N' COMMENT '是否主版本（Y是 N否）',
+    `version`     INT(11)                         DEFAULT '0' COMMENT '版本号',
+    `create_by`   VARCHAR(64) COLLATE utf8mb4_bin DEFAULT '' COMMENT '创建者',
+    `create_time` datetime                        DEFAULT NULL COMMENT '创建时间',
+    `update_by`   VARCHAR(64) COLLATE utf8mb4_bin DEFAULT '' COMMENT '更新者',
+    `update_time` datetime                        DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8mb4
+    COLLATE = utf8mb4_bin COMMENT = '元表单';
+
