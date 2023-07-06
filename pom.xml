@@ -19,7 +19,6 @@
         <module>melon-quartz</module>
         <module>melon-system</module>
         <module>melon-conf</module>
-        <module>melon-bpmn</module>
     </modules>
 
     <properties>
@@ -194,13 +193,6 @@
             <dependency>
                 <groupId>fun.sssdnsy</groupId>
                 <artifactId>melon-conf</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <!-- 流程管理 -->
-            <dependency>
-                <groupId>fun.sssdnsy</groupId>
-                <artifactId>melon-activiti</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
