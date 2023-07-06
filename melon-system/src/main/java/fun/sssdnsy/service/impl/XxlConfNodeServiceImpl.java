@@ -57,15 +57,18 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     @Resource
     private XxlConfNodeMsgDao xxlConfNodeMsgDao;
 
+    @Value("${melon.switch}")
+    private Boolean confSwitch = false;
+
     @Value("${melon.conf.file-path}")
     private String dataFilePath;
 
     @Value("${melon.conf.beat-time}")
-    private int beatTime = 30;
-    private ExecutorService executorService = Executors.newCachedThreadPool();
-    private volatile boolean executorStoped = false;
-    private volatile List<Integer> readedMessageIds = Collections.synchronizedList(new ArrayList());
-    private Map<String, List<DeferredResult>> confDeferredResultMap = new ConcurrentHashMap<>();
+    private          int                               beatTime              = 30;
+    private          ExecutorService                   executorService       = Executors.newCachedThreadPool();
+    private volatile boolean                           executorStoped        = false;
+    private volatile List<Integer>                     readedMessageIds      = Collections.synchronizedList(new ArrayList());
+    private          Map<String, List<DeferredResult>> confDeferredResultMap = new ConcurrentHashMap<>();
 
     @Override
     public List<XxlConfNode> list(XxlConfNode confNode) {
@@ -259,6 +262,9 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     }
 
     public void startThead() throws Exception {
+        if (!confSwitch) {
+            return;
+        }
 
         /**
          * deal  msg, sync  file, for "add、update、delete" operation
@@ -351,6 +357,9 @@ public class XxlConfNodeServiceImpl implements IXxlConfNodeService, Initializing
     }
 
     private void stopThread() {
+        if (!confSwitch) {
+            return;
+        }
         executorStoped = true;
         executorService.shutdownNow();
     }
