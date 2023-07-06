@@ -631,7 +631,9 @@ CREATE TABLE `sys_logininfor`
     `status`         char(1) COLLATE utf8mb4_bin      DEFAULT '0' COMMENT '登录状态（0成功 1失败）',
     `msg`            varchar(255) COLLATE utf8mb4_bin DEFAULT '' COMMENT '提示消息',
     `login_time`     datetime                         DEFAULT NULL COMMENT '访问时间',
-    PRIMARY KEY (`info_id`)
+    PRIMARY KEY (`info_id`),
+    key idx_sys_logininfor_s (status),
+    key idx_sys_logininfor_lt (login_time)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 226
   DEFAULT CHARSET = utf8mb4
@@ -709,6 +711,7 @@ CREATE TABLE `sys_oper_log`
     `status`         int(11)                           DEFAULT '0' COMMENT '操作状态（0正常 1异常）',
     `error_msg`      varchar(2000) COLLATE utf8mb4_bin DEFAULT '' COMMENT '错误消息',
     `oper_time`      datetime                          DEFAULT NULL COMMENT '操作时间',
+    `cost_time`      bigint(20)                        DEFAULT 0 COMMENT '消耗时间',
     PRIMARY KEY (`oper_id`),
     KEY `sys_oper_log_oper_time_IDX` (`oper_time`) USING BTREE,
     KEY `sys_oper_log_status_IDX` (`status`) USING BTREE,
