@@ -1,6 +1,7 @@
 // ESlint 检查配置
 module.exports = {
   root: true,
+  parser: 'vue-eslint-parser',
   parserOptions: {
     parser: 'babel-eslint',
     sourceType: 'module'
@@ -11,10 +12,12 @@ module.exports = {
     es6: true,
   },
   extends: ['plugin:vue/recommended', 'eslint:recommended'],
-
+  plugins: ['prettier'],
   // add your custom rules here
   //it is base on https://github.com/vuejs/eslint-config-vue
   rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     // 强制第一个属性的位置(属性换行)
     'vue/first-attribute-linebreak': [2, {
       "singleline": 'beside',
