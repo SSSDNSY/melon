@@ -7,7 +7,7 @@ const isAttr = makeMap(
   + 'checked,cite,class,code,codebase,color,cols,colspan,content,http-equiv,'
   + 'name,contenteditable,contextmenu,controls,coords,data,datetime,default,'
   + 'defer,dir,dirname,disabled,download,draggable,dropzone,enctype,method,for,'
-  + 'form,formaction,headers,height,hidden,high,href,hreflang,http-equiv,'
+  + 'form.js,formaction,headers,height,hidden,high,href,hreflang,http-equiv,'
   + 'icon,id,ismap,itemprop,keytype,kind,label,lang,language,list,loop,low,'
   + 'manifest,max,maxlength,media,method,GET,POST,min,multiple,email,file,'
   + 'muted,name,novalidate,open,optimum,pattern,ping,placeholder,poster,'
