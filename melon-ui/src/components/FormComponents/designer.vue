@@ -2,19 +2,13 @@
   <!--中间面板-->
   <div class="center-board">
     <div class="action-bar">
-      <el-button type="text" @click="preview"
-      >
-        <icon name="preview" size="14"/>
-        预览
-      </el-button>
-      <el-button type="text" @click="saveMap"><icon-svg name="save" size="15" /> 保存 </el-button>
-      <el-button type="text" @click="view"><icon-svg name="preview" size="14" /> 查看 </el-button>
-      <el-button type="text" icon="el-icon-tickets" @click="viewJSON">JSON </el-button>
-      <el-button type="text" icon="el-icon-s-tools" @click="setting">设置 </el-button>
-      <el-button class="delete-btn" type="text" @click="clear"
-        ><icon-svg name="clear" size="15" /> 清空
-      </el-button>
-      <el-button type="text" @click="help"><icon-svg name="help" size="15" /> 帮助 </el-button>
+      <el-button type="text" @click="preview" icon="el-icon-view"> 预览</el-button>
+      <el-button type="text" @click="saveMap" icon="el-icon-circle-check"> 保存</el-button>
+      <el-button type="text" @click="view" icon="el-icon-reading"> 查看</el-button>
+      <el-button type="text" icon="el-icon-tickets" @click="viewJSON">JSON</el-button>
+      <el-button type="text" icon="el-icon-s-tools" @click="setting">设置</el-button>
+      <el-button class="delete-btn" type="text" @click="clear" icon="el-icon-delete"> 清空</el-button>
+      <el-button type="text" @click="help" icon="el-icon-question"> 帮助</el-button>
     </div>
     <el-scrollbar class="center-scrollbar">
       <el-row class="center-board-row" :gutter="formConf.gutter">

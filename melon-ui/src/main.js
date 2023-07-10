@@ -63,8 +63,6 @@ Vue.component('ImagePreview', ImagePreview)
 
 // 注意 有些组件使用异步加载会有影响
 Vue.component('container', container);
-Vue.component('icon', () => import('@/components/Icon'));
-Vue.component('icon-svg', () => import('@/components/IconSvg'));
 
 
 Vue.use(directive)
