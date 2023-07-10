@@ -3,7 +3,9 @@
   <div class="center-board">
     <div class="action-bar">
       <el-button type="text" @click="preview"
-        ><icon-svg name="preview" size="14" /> 预览
+      >
+        <icon name="preview" size="14"/>
+        预览
       </el-button>
       <el-button type="text" @click="saveMap"><icon-svg name="save" size="15" /> 保存 </el-button>
       <el-button type="text" @click="view"><icon-svg name="preview" size="14" /> 查看 </el-button>
@@ -69,13 +71,13 @@
             <el-form-item label="物理表">
               <el-input class="input" v-model="formConf.tableName"></el-input>
             </el-form-item>
-            <el-form-item label="表单分类">
-              <select-tree class="tree"
-                           v-model="formConf.formSort"
-                           :data="sortList"
-                           placeholder="请选择所属分类">
-              </select-tree>
-            </el-form-item>
+            <!--            <el-form-item label="表单分类">-->
+            <!--              <select-tree class="tree"-->
+            <!--                           v-model="formConf.formSort"-->
+            <!--                           :data="sortList"-->
+            <!--                           placeholder="请选择所属分类">-->
+            <!--              </select-tree>-->
+            <!--            </el-form-item>-->
             <el-form-item label="表单模型">
               <el-input class="input" v-model="formConf.formModel"></el-input>
             </el-form-item>
@@ -147,7 +149,6 @@ import configPanel from './configPanel';
 import designItem from './designItem';
 import {getSimpleId} from './utils/IdGenerate';
 import {inTable, isLayout, isTable} from './utils/index';
-import {addForm, formSortList} from '@/api/bpmn/form';
 import formConf from './custom/formConf';
 import preview from './preview';
 import codemirror from 'vue-codemirror';
@@ -181,7 +182,6 @@ export default {
       return {
         formConf: this.formConfig,
         activeItem: {},
-        sortList:[],
         lastActiveItem: {},
         formConfVisible: false,
         previewVisible: false,
@@ -206,7 +206,6 @@ export default {
       };
     },
     mounted() {
-      this.getSelectData();
     },
     methods: {
       saveMap() {
@@ -217,12 +216,6 @@ export default {
             this.$message.error('保存失败');
           }
         });
-      },
-      async getSelectData() {
-        const data = (await formSortList()).result;
-        if (data.length) {
-          this.sortList = data;
-        }
       },
       preview() {
         const clone = JSON.parse(JSON.stringify(this.list));
@@ -394,9 +387,10 @@ export default {
     margin-left: 0px;
   }
 </style>
+
 <style lang="scss">
-  @import './style/designer.scss';
+@import './style/designer.scss';
 </style>
-<style>
-  @import './style/designer.css';
+<style lang="css" scoped>
+@import './style/designer.css';
 </style>

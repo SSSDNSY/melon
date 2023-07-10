@@ -3,15 +3,16 @@
 </template>
 
 <script>
-  import './font-awesome-4.7.0/css/font-awesome.min.css';
-  export default {
-    name: 'icon',
-    props: {
-      name: {
-        type: String,
-        required: false,
-        default: 'font-awesome'
-      }
+import './font-awesome-4.7.0/css/font-awesome.min.css';
+
+export default {
+  name: 'Icon',
+  props: {
+    name: {
+      type: String,
+      required: false,
+      default: 'font-awesome'
     }
-  };
+  }
+};
 </script>

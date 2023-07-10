@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'icon-svg',
+    name: 'IconSvg',
     props: {
       name: {
         type: String,
@@ -19,7 +19,7 @@
     },
     computed: {
       icon() {
-        return `#Z6-${this.name}`;
+        return `${this.name}`;
       },
       getStyle() {
         let s = `${this.size}`;
