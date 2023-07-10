@@ -5,7 +5,7 @@ import modal from './modal'
 import download from './download'
 
 export default {
-  install(Vue) {
+  async install(Vue) {
     // 页签操作
     Vue.prototype.$tab = tab
     // 认证对象

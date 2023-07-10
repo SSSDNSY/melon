@@ -3,19 +3,12 @@ import request from '@/utils/request';
 // 获取表单列表
 export function formList(queryParams) {
   return request({
-    url: '/api/form/formList',
-    method: 'post',
-    data: queryParams
+    url: '/formMeta/list',
+    method: 'get',
+    params: queryParams
   });
 }
 
-// 获取表单分类
-export function formSortList() {
-  return request({
-    url: '/api/form/formSortList',
-    method: 'get'
-  });
-}
 
 // 删除表单
 export function deleteForm(queryParams) {
@@ -29,24 +22,7 @@ export function deleteForm(queryParams) {
 // 增加表单
 export function addForm(queryParams) {
   return request({
-    url: '/api/form/addForm',
-    method: 'post',
-    data: queryParams
-  });
-}
-// 增加表单分类
-export function addFormSort(queryParams) {
-  return request({
-    url: '/api/form/addFormSort',
-    method: 'post',
-    data: queryParams
-  });
-}
-
-// 保存表单分类
-export function updateFormSort(queryParams) {
-  return request({
-    url: '/api/form/updateFormSort',
+    url: '/formMeta',
     method: 'post',
     data: queryParams
   });
@@ -55,9 +31,8 @@ export function updateFormSort(queryParams) {
 // 获取表单信息
 export function getFormEntity(queryParams) {
   return request({
-    url: '/api/form/getFormEntity',
+    url: '/formMeta/' + queryParams,
     method: 'get',
-    params: queryParams
   });
 }
 
@@ -69,10 +44,11 @@ export function getDataById(approval) {
     data: approval
   });
 }
+
 // 删除表单分类
 export function deleteFormSort(approval) {
   return request({
-    url: '/api/form/deleteFormSort',
+    url: '/formMeta/remove',
     method: 'post',
     data: approval
   });

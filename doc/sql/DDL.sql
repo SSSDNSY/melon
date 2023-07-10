@@ -19,7 +19,7 @@ CREATE TABLE `form_meta`
 )
     ENGINE = InnoDB
     DEFAULT CHARSET = utf8mb4
-    COLLATE = utf8mb4_bin COMMENT = '元表单';
+    COLLATE = utf8mb4_bin COMMENT = '表单';
 
 
 -- melon.ACT_EVT_LOG definition

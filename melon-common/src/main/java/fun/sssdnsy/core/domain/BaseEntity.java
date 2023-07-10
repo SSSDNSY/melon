@@ -56,6 +56,12 @@ public class BaseEntity implements Serializable {
      * 请求参数
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private String searchKeyword;
+
+    /**
+     * 请求参数
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Map<String, Object> params;
 
 

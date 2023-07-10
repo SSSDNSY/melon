@@ -27,7 +27,7 @@
         <el-row :gutter="12">
           <el-table :data="dataTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="50"></el-table-column>
-            <el-table-column type="index" width="50" label="序号"></el-table-column>  
+            <el-table-column type="index" width="50" label="序号"></el-table-column>
             <el-table-column prop="name" label="人员名称"></el-table-column>
             <el-table-column prop="username" label="人员帐号" ></el-table-column>
             <el-table-column prop="departname" label="所属部门"></el-table-column>
@@ -41,7 +41,7 @@
             <span>已选人员</span>
           </div>
           <el-table :data="selectData" style="">
-            <el-table-column type="index" width="50" label="序号"></el-table-column>  
+            <el-table-column type="index" width="50" label="序号"></el-table-column>
             <el-table-column prop="name" label="人员名称"></el-table-column>
             <el-table-column prop="username" label="人员帐号" ></el-table-column>
             <el-table-column prop="departname" label="所属部门"></el-table-column>
@@ -52,16 +52,17 @@
 </template>
 
 <script>
-import { getOrgData } from '@/api/orgm/orgm'
-import { getUserByDepartId } from '@/api/orgm/user'
+import {getOrgData} from '@/api/orgm/orgm'
+import {getUserByDepartId} from '@/api/orgm/user'
+
 export default {
   name: "ruleToUser",
   data() {
     return {
-      treedata:[],
-      dataTable:[],
-      selectData:[],
-      isTreeChange:false,
+      treedata: [],
+      dataTable: [],
+      selectData: [],
+      isTreeChange: false,
       filterText: '',
       defaultProps: {
         value:'id',
@@ -85,9 +86,9 @@ export default {
     },//初始加载数据
     loadData(){
       getOrgData().then(res => {
-        if(res.error=="200"){
+        if (res.code == "200") {
           this.treedata = res.result.departList;
-          this.dataTable=res.result.userList;
+          this.dataTable = res.result.userList;
         }
       });
     },//表格选中事件
@@ -105,7 +106,7 @@ export default {
       this.isTreeChange=true;
       const nodeid=node.id;
       getUserByDepartId({departid:nodeid}).then(res => {
-        if(res.error=="200"){
+        if (res.code == "200") {
           this.dataTable = res.result;
         }
       });

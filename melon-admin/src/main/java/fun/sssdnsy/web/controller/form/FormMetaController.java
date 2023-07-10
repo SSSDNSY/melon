@@ -22,7 +22,7 @@ import java.util.List;
  * @date 2023-07-06
  */
 @RestController
-@RequestMapping("/sssdnsy/meta")
+@RequestMapping("/formMeta")
 public class FormMetaController extends BaseController {
     @Resource
     private IFormMetaService formMetaService;

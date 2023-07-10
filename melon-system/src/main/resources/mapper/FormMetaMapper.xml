@@ -3,190 +3,262 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fun.sssdnsy.mapper.FormMetaMapper">
-
     <resultMap type="fun.sssdnsy.domain.FormMeta" id="FormMetaResult">
-            <result property="id" column="id"/>
-            <result property="name" column="name"/>
-            <result property="eventType" column="event_type"/>
-            <result property="eventExe" column="event_exe"/>
-            <result property="mainTable" column="main_table"/>
-            <result property="subTable" column="sub_table"/>
-            <result property="formJs" column="form_js"/>
-            <result property="formHtml" column="form_html"/>
-            <result property="formJson" column="form_json"/>
-            <result property="isMain" column="is_main"/>
-            <result property="version" column="version"/>
-            <result property="createBy" column="create_by"/>
-            <result property="createTime" column="create_time"/>
-            <result property="updateBy" column="update_by"/>
-            <result property="updateTime" column="update_time"/>
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="eventType" column="event_type"/>
+        <result property="eventExe" column="event_exe"/>
+        <result property="mainTable" column="main_table"/>
+        <result property="subTable" column="sub_table"/>
+        <result property="formJs" column="form_js"/>
+        <result property="formHtml" column="form_html"/>
+        <result property="formJson" column="form_json"/>
+        <result property="isMain" column="is_main"/>
+        <result property="version" column="version"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <sql id="selectFormMetaVo">
-        select id, name, event_type, event_exe, main_table, sub_table, form_js, form_html, form_json, is_main, version, create_by, create_time, update_by, update_time from form_meta
+        select id,
+               name,
+               event_type,
+               event_exe,
+               main_table,
+               sub_table,
+               form_js,
+               form_html,
+               form_json,
+               is_main,
+               version,
+               create_by,
+               create_time,
+               update_by,
+               update_time
+        from form_meta
     </sql>
 
     <select id="selectFormMetaList" parameterType="fun.sssdnsy.domain.FormMeta" resultMap="FormMetaResult">
         <include refid="selectFormMetaVo"/>
         <where>
-                        <if test="name != null  and name != ''">
-                            and name like concat('%', #{name}, '%')
-                        </if>
-                        <if test="eventType != null  and eventType != ''">
-                            and event_type = #{eventType}
-                        </if>
-                        <if test="eventExe != null  and eventExe != ''">
-                            and event_exe = #{eventExe}
-                        </if>
-                        <if test="mainTable != null  and mainTable != ''">
-                            and main_table = #{mainTable}
-                        </if>
-                        <if test="subTable != null  and subTable != ''">
-                            and sub_table = #{subTable}
-                        </if>
-                        <if test="formJs != null  and formJs != ''">
-                            and form_js = #{formJs}
-                        </if>
-                        <if test="formHtml != null  and formHtml != ''">
-                            and form_html = #{formHtml}
-                        </if>
-                        <if test="formJson != null  and formJson != ''">
-                            and form_json = #{formJson}
-                        </if>
-                        <if test="isMain != null  and isMain != ''">
-                            and is_main = #{isMain}
-                        </if>
-                        <if test="version != null ">
-                            and version = #{version}
-                        </if>
+            <if test="name != null  and name != ''">
+                and `name` like concat('%', #{name}, '%')
+            </if>
+            <if test="eventType != null  and eventType != ''">
+                and event_type = #{eventType}
+            </if>
+            <if test="eventExe != null  and eventExe != ''">
+                and event_exe = #{eventExe}
+            </if>
+            <if test="mainTable != null  and mainTable != ''">
+                and main_table = #{mainTable}
+            </if>
+            <if test="subTable != null  and subTable != ''">
+                and sub_table = #{subTable}
+            </if>
+            <if test="formJs != null  and formJs != ''">
+                and form_js = #{formJs}
+            </if>
+            <if test="formHtml != null  and formHtml != ''">
+                and form_html = #{formHtml}
+            </if>
+            <if test="formJson != null  and formJson != ''">
+                and form_json = #{formJson}
+            </if>
+            <if test="isMain != null  and isMain != ''">
+                and is_main = #{isMain}
+            </if>
+            <if test="version != null ">
+                and version = #{version}
+            </if>
+
+            <if test="searchKeyword != null  and searchKeyword != ''">
+                and (
+                     id like concat('%', #{searchKeyword}, '%')
+                    or `name` like concat('%', #{searchKeyword}, '%')
+                    or create_by like concat('%', #{searchKeyword}, '%')
+                    or update_by like concat('%', #{searchKeyword}, '%')
+                )
+            </if>
+            <if test="updateBy != null  and updateBy != '' ">
+                and update_by like concat('%', #{updateBy}, '%')
+            </if>
         </where>
     </select>
 
     <select id="selectFormMetaById" parameterType="String"
             resultMap="FormMetaResult">
-            <include refid="selectFormMetaVo"/>
-            where id = #{id}
+        <include refid="selectFormMetaVo"/>
+        where id = #{id}
     </select>
 
     <insert id="insertFormMeta" parameterType="fun.sssdnsy.domain.FormMeta">
         insert into form_meta
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                    <if test="id != null">id,
-                    </if>
-                    <if test="name != null and name != ''">name,
-                    </if>
-                    <if test="eventType != null">event_type,
-                    </if>
-                    <if test="eventExe != null">event_exe,
-                    </if>
-                    <if test="mainTable != null">main_table,
-                    </if>
-                    <if test="subTable != null">sub_table,
-                    </if>
-                    <if test="formJs != null">form_js,
-                    </if>
-                    <if test="formHtml != null">form_html,
-                    </if>
-                    <if test="formJson != null">form_json,
-                    </if>
-                    <if test="isMain != null">is_main,
-                    </if>
-                    <if test="version != null">version,
-                    </if>
-                    <if test="createBy != null">create_by,
-                    </if>
-                    <if test="createTime != null">create_time,
-                    </if>
-                    <if test="updateBy != null">update_by,
-                    </if>
-                    <if test="updateTime != null">update_time,
-                    </if>
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null and name != ''">
+                name,
+            </if>
+            <if test="eventType != null">
+                event_type,
+            </if>
+            <if test="eventExe != null">
+                event_exe,
+            </if>
+            <if test="mainTable != null">
+                main_table,
+            </if>
+            <if test="subTable != null">
+                sub_table,
+            </if>
+            <if test="formJs != null">
+                form_js,
+            </if>
+            <if test="formHtml != null">
+                form_html,
+            </if>
+            <if test="formJson != null">
+                form_json,
+            </if>
+            <if test="isMain != null">
+                is_main,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                    <if test="id != null">#{id},
-                    </if>
-                    <if test="name != null and name != ''">#{name},
-                    </if>
-                    <if test="eventType != null">#{eventType},
-                    </if>
-                    <if test="eventExe != null">#{eventExe},
-                    </if>
-                    <if test="mainTable != null">#{mainTable},
-                    </if>
-                    <if test="subTable != null">#{subTable},
-                    </if>
-                    <if test="formJs != null">#{formJs},
-                    </if>
-                    <if test="formHtml != null">#{formHtml},
-                    </if>
-                    <if test="formJson != null">#{formJson},
-                    </if>
-                    <if test="isMain != null">#{isMain},
-                    </if>
-                    <if test="version != null">#{version},
-                    </if>
-                    <if test="createBy != null">#{createBy},
-                    </if>
-                    <if test="createTime != null">#{createTime},
-                    </if>
-                    <if test="updateBy != null">#{updateBy},
-                    </if>
-                    <if test="updateTime != null">#{updateTime},
-                    </if>
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="eventType != null">
+                #{eventType},
+            </if>
+            <if test="eventExe != null">
+                #{eventExe},
+            </if>
+            <if test="mainTable != null">
+                #{mainTable},
+            </if>
+            <if test="subTable != null">
+                #{subTable},
+            </if>
+            <if test="formJs != null">
+                #{formJs},
+            </if>
+            <if test="formHtml != null">
+                #{formHtml},
+            </if>
+            <if test="formJson != null">
+                #{formJson},
+            </if>
+            <if test="isMain != null">
+                #{isMain},
+            </if>
+            <if test="version != null">
+                #{version},
+            </if>
+            <if test="createBy != null">
+                #{createBy},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
         </trim>
     </insert>
 
     <update id="updateFormMeta" parameterType="fun.sssdnsy.domain.FormMeta">
         update form_meta
         <trim prefix="SET" suffixOverrides=",">
-                    <if test="name != null and name != ''">name =
-                        #{name},
-                    </if>
-                    <if test="eventType != null">event_type =
-                        #{eventType},
-                    </if>
-                    <if test="eventExe != null">event_exe =
-                        #{eventExe},
-                    </if>
-                    <if test="mainTable != null">main_table =
-                        #{mainTable},
-                    </if>
-                    <if test="subTable != null">sub_table =
-                        #{subTable},
-                    </if>
-                    <if test="formJs != null">form_js =
-                        #{formJs},
-                    </if>
-                    <if test="formHtml != null">form_html =
-                        #{formHtml},
-                    </if>
-                    <if test="formJson != null">form_json =
-                        #{formJson},
-                    </if>
-                    <if test="isMain != null">is_main =
-                        #{isMain},
-                    </if>
-                    <if test="version != null">version =
-                        #{version},
-                    </if>
-                    <if test="createBy != null">create_by =
-                        #{createBy},
-                    </if>
-                    <if test="createTime != null">create_time =
-                        #{createTime},
-                    </if>
-                    <if test="updateBy != null">update_by =
-                        #{updateBy},
-                    </if>
-                    <if test="updateTime != null">update_time =
-                        #{updateTime},
-                    </if>
+            <if test="name != null and name != ''">
+                name =
+                #{name},
+            </if>
+            <if test="eventType != null">
+                event_type =
+                #{eventType},
+            </if>
+            <if test="eventExe != null">
+                event_exe =
+                #{eventExe},
+            </if>
+            <if test="mainTable != null">
+                main_table =
+                #{mainTable},
+            </if>
+            <if test="subTable != null">
+                sub_table =
+                #{subTable},
+            </if>
+            <if test="formJs != null">
+                form_js =
+                #{formJs},
+            </if>
+            <if test="formHtml != null">
+                form_html =
+                #{formHtml},
+            </if>
+            <if test="formJson != null">
+                form_json =
+                #{formJson},
+            </if>
+            <if test="isMain != null">
+                is_main =
+                #{isMain},
+            </if>
+            <if test="version != null">
+                version =
+                #{version},
+            </if>
+            <if test="createBy != null">
+                create_by =
+                #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time =
+                #{createTime},
+            </if>
+            <if test="updateBy != null">
+                update_by =
+                #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time =
+                #{updateTime},
+            </if>
         </trim>
         where id = #{id}
     </update>
 
     <delete id="deleteFormMetaById" parameterType="String">
-        delete from form_meta where id = #{id}
+        delete
+        from form_meta
+        where id = #{id}
     </delete>
 
     <delete id="deleteFormMetaByIds" parameterType="String">

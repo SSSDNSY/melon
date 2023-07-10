@@ -141,34 +141,33 @@
   </div>
 </template>
 <script>
-  import draggable from 'vuedraggable';
-  import SelectTree from '@/components/selectTree/index.vue';
-  import configPanel from './configPanel';
-  import designItem from './designItem';
-  import { getSimpleId } from './utils/IdGenerate';
-  import { isLayout, isTable, inTable } from './utils/index';
-  import { formSortList } from '@/api/process/processFrom';
-  import formConf from './custom/formConf';
-  import preview from './preview';
-  import codemirror  from 'vue-codemirror';
-  // 核心样式
-  import 'codemirror/lib/codemirror.css';
-  // 引入主题后还需要在 options 中指定主题才会生效
-  import 'codemirror/theme/dracula.css';
-  import 'codemirror/mode/javascript/javascript';
-  import { addForm } from '@/api/process/processFrom';
+import draggable from 'vuedraggable';
+import SelectTree from '@/components/SelectTree/index.vue';
+import configPanel from './configPanel';
+import designItem from './designItem';
+import {getSimpleId} from './utils/IdGenerate';
+import {inTable, isLayout, isTable} from './utils/index';
+import {addForm, formSortList} from '@/api/bpmn/form';
+import formConf from './custom/formConf';
+import preview from './preview';
+import codemirror from 'vue-codemirror';
+// 核心样式
+import 'codemirror/lib/codemirror.css';
+// 引入主题后还需要在 options 中指定主题才会生效
+import 'codemirror/theme/dracula.css';
+import 'codemirror/mode/javascript/javascript';
 
-  export default {
-    name: 'Designer',
-    components: {
-      draggable,
-      configPanel,
-      designItem,
-      preview,
-      SelectTree,
-      codemirror
-    },
-    props: {
+export default {
+  name: 'Designer',
+  components: {
+    draggable,
+    configPanel,
+    designItem,
+    preview,
+    SelectTree,
+    codemirror
+  },
+  props: {
       list: {
         type: Array,
         default() {
@@ -211,8 +210,8 @@
     },
     methods: {
       saveMap() {
-        addForm({ viewcode: this.code, formid: this.formid }).then((res) => {
-          if (res.error == '200') {
+        addForm({viewcode: this.code, id: this.formid}).then((res) => {
+          if (res.code == '200') {
             this.$message.success('保存成功');
           } else {
             this.$message.error('保存失败');

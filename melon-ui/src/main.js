@@ -12,13 +12,13 @@ import store from './store'
 import router from './router'
 import directive from './directive' // directive
 import plugins from './plugins' // plugins
-import { download } from '@/utils/request'
+import {download} from '@/utils/request'
 
 import './assets/icons' // icon
 import './permission' // permission control
-import { getDicts } from "@/api/system/dict/data";
-import { getConfigKey } from "@/api/system/config";
-import { parseTime, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree } from "@/utils/ruoyi";
+import {getDicts} from "@/api/system/dict/data";
+import {getConfigKey} from "@/api/system/config";
+import {addDateRange, handleTree, parseTime, resetForm, selectDictLabel, selectDictLabels} from "@/utils/ruoyi";
 // 分页组件
 import Pagination from "@/components/Pagination";
 // 自定义表格工具组件
@@ -37,6 +37,8 @@ import DictTag from '@/components/DictTag'
 import VueMeta from 'vue-meta'
 // 字典数据组件
 import DictData from '@/components/DictData'
+// 容器组件
+import container from '@/components/Container';
 
 
 // 全局方法挂载
@@ -58,6 +60,11 @@ Vue.component('Editor', Editor)
 Vue.component('FileUpload', FileUpload)
 Vue.component('ImageUpload', ImageUpload)
 Vue.component('ImagePreview', ImagePreview)
+
+// 注意 有些组件使用异步加载会有影响
+Vue.component('container', container);
+Vue.component('icon', () => import('@/components/Icon'));
+Vue.component('icon-svg', () => import('@/components/IconSvg/index.vue'));
 
 
 Vue.use(directive)

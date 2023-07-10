@@ -113,20 +113,21 @@
   </div>
 </template>
 <script>
-  import { changeId } from '../mixin';
-  import draggable from 'vuedraggable';
-  import { isNumberStr } from '../../utils/index';
-  export default {
-    name: 'inputConfig',
-    props: ['props', 'getFormId'],
-    components: {
-      draggable
-    },
-    mixins: [changeId],
-    data() {
-      return {
-        tempOptions: [],
-        typeList: [],
+import {changeId} from '../mixin';
+import draggable from 'vuedraggable';
+import {isNumberStr} from '../../utils/index';
+
+export default {
+  name: 'inputConfig',
+  props: ['props', 'getFormId'],
+  components: {
+    draggable
+  },
+  mixins: [changeId],
+  data() {
+    return {
+      tempOptions: [],
+      typeList: [],
         // 日期范围
         dateRange: [],
         // 查询参数
@@ -149,7 +150,7 @@
           this.Apis.diceTypeList + '?access_token=' + localStorage.getItem('token'),
           null,
           (res) => {
-            if (res.error == '200') {
+            if (res.code == '200') {
               this.typeList = res.result;
             }
           }

@@ -5,8 +5,8 @@ export const remoteData = {
             //动态数据
             if(this.conf.dataType === 'dynamic'){
             //   this.get(this.Apis.dictDataList+"?access_token="+localStorage.getItem("token"), {dictType:this.conf.action}, res => {
-            //     if(res.error=="200"){
-            //       if(this.conf.options.length===0){
+              //     if(res.code=="200"){
+              //       if(this.conf.options.length===0){
             //         this.conf.options = this.conf.options.concat(res.result);
             //       }
             //       //this.conf.options =this.conf.options.concat(res.result);
