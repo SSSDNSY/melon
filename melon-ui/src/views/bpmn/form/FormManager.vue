@@ -313,6 +313,22 @@ export default {
   margin-bottom: 0px !important;
 }
 
+.el-drawer .el-drawer__header {
+  color: #1f2228;
+  border-color: rgba(0, 0, 0, .09);
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  line-height: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, .09);
+  padding: 20px 20px 15px;
+  margin-bottom: 0;
+}
+
+.form-design .el-drawer__header {
+  padding: 10px 15px;
+}
+
 .v-modal {
   z-index: 2000 !important;
 }
