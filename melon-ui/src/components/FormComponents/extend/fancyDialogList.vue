@@ -202,17 +202,18 @@ export default {
       })
     },
     searchKeyWord(){
-      this.post(this.Apis.getDataById,
-        this.queryParams,res=> {
+      //TODO this.post(this.Apis.getDataById,
+      this.post(null,
+        this.queryParams, res => {
           this.gridData = [];
           this.gridData = this.gridData.concat(res.result.list);
-          if(this.value !=='' && this.dialogValue ===''){
-            if(this.multi){
+          if (this.value !== '' && this.dialogValue === '') {
+            if (this.multi) {
               const ids = this.value.split(splitKey);
               this.currentRow = [];
-              ids.forEach(e=>{
-                const index = this.gridData.findIndex(element=>(element[this.dval]+"") == e);
-                if(index>0){
+              ids.forEach(e => {
+                const index = this.gridData.findIndex(element => (element[this.dval] + "") == e);
+                if (index > 0) {
                   const row = this.gridData[index];
                   this.currentRow.push(row);
                 }

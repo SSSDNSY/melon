@@ -1,7 +1,7 @@
-import { isAttr, jsonClone } from '../utils';
+import {isAttr, jsonClone} from '../utils';
 import childrenItem from './slot/index';
-import { remoteData } from './mixin';
-import { getToken } from '@/utils/auth';
+import {remoteData} from './mixin';
+
 //先修改在这里,后续需要优化
 function vModel(self, dataObject) {
   dataObject.props.value = self.value;
@@ -83,7 +83,7 @@ export default {
         } else if (!isAttr(key)) {
           dataObject.props[key] = val;
         } else if (key === 'action') {
-          dataObject.attrs[key] = '/api/' + this.Apis.uploadfiles + '?access_token=' + getToken();
+          dataObject.attrs[key] = null;//TODO '/api/' + this.Apis.uploadfiles + '?access_token=' + getToken();
         } else {
           if (key !== 'value') {
             dataObject.attrs[key] = val;
@@ -115,7 +115,7 @@ export default {
         } else if (!isAttr(key)) {
           dataObject.props[key] = val;
         } else if (key == 'action') {
-          dataObject.attrs[key] = '/api/' + this.Apis.getDataById + '?access_token=' + getToken();
+          dataObject.attrs[key] = null;//TODO '/api/' + this.Apis.getDataById + '?access_token=' + getToken();
         } else {
           if (key !== 'value') {
             dataObject.attrs[key] = val;

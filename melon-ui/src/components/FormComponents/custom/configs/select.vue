@@ -147,7 +147,7 @@ export default {
       /** 查询字典类型列表 */
       getList() {
         this.get(
-          this.Apis.diceTypeList + '?access_token=' + localStorage.getItem('token'),
+          // this.Apis.diceTypeList + '?access_token=' + localStorage.getItem('token'),
           null,
           (res) => {
             if (res.code == '200') {

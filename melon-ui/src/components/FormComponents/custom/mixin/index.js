@@ -21,11 +21,11 @@ export const remoteData = {
         },
       upDownLoad(fileParams){
         this.$axios({
-          method:'POST',
-          url:"/proc-api/"+this.Apis.downFiles+"?access_token="+util.cookies.get('token'),
-          data:{
+          method: 'POST',
+          url: null,//TODO  "/proc-api/"+this.Apis.downFiles+"?access_token="+util.cookies.get('token'),
+          data: {
             fileName: fileParams.fileName,
-            filePath:fileParams.filePath
+            filePath: fileParams.filePath
           },
           responseType: 'blob'
         })
