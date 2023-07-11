@@ -6,23 +6,25 @@ const components = {
   itemBtns(h, element, index, parent) {
     const { copyItem, deleteItem } = this.$listeners
     return [
-      <span class="drawing-item-copy" title="复制" onClick={event => {
-        copyItem(element, parent); event.stopPropagation()
+      <span class="drawing-item-copy_" title="复制" onClick={event => {
+        copyItem(element, parent);
+        event.stopPropagation()
       }}>
-        <i class="el-icon-copy-document" />
+        <i class="el-icon-copy-document"/>
       </span>,
-      <span class="drawing-item-delete" title="删除" onClick={event => {
-        deleteItem(index, parent); event.stopPropagation()
+      <span class="drawing-item-delete_" title="删除" onClick={event => {
+        deleteItem(index, parent);
+        event.stopPropagation()
       }}>
-        <i class="el-icon-delete" />
+        <i class="el-icon-delete"/>
       </span>
     ]
   }
 }
 const layouts = {
   colFormItem(h, element, index, parent) {
-    const { activeItem } = this.$listeners
-    let className = this.activeId === element.formId ? 'drawing-item active-from-item' : 'drawing-item'
+    const {activeItem} = this.$listeners
+    let className = this.activeId === element.formId ? 'drawing-item_ active-from-item_' : 'drawing-item_'
     if (this.formConf.unFocusedComponentBorder) className += ' unfocus-bordered'
     return (
       <el-col span={element.span} class={className}
@@ -38,8 +40,8 @@ const layouts = {
     )
   },
   rowFormItem(h, element, index, parent) {
-    const { activeItem } = this.$listeners
-    const className = this.activeId === element.formId ? 'drawing-row-item active-from-item' : 'drawing-row-item'
+    const {activeItem} = this.$listeners
+    const className = this.activeId === element.formId ? 'drawing-row-item_ active-from-item_' : 'drawing-row-item_'
     let child = renderChildren.apply(this, arguments)
     if (element.type === 'flex') {
       child = <el-row type={element.type} justify={element.justify} align={element.align}>
@@ -49,9 +51,12 @@ const layouts = {
     return (
       <el-col span={element.span}>
         <el-row gutter={element.gutter} class={className}
-          nativeOnClick={event => { activeItem(element); event.stopPropagation() }}>
-          <span class="component-name">{element.componentName}</span>
-          <draggable list={element.children} animation={340} group="componentsGroup" class="drag-wrapper">
+                nativeOnClick={event => {
+                  activeItem(element);
+                  event.stopPropagation()
+                }}>
+          <span class="component-name_">{element.componentName}</span>
+          <draggable list={element.children} animation={340} group="componentsGroup" class="drag-wrapper_">
             {child}
           </draggable>
           {components.itemBtns.apply(this, arguments)}

@@ -2,7 +2,7 @@
   <container type="ghost">
     <div class="app-container">
       <!-- 搜索 -->
-      <div class="filter-container">
+      <div>
         <el-form ref="form" :model="searchForm" label-width="80px" align="right" @submit.prevent.native>
           <el-row>
             <el-col :span="6">
@@ -23,7 +23,7 @@
           </el-row>
         </el-form>
       </div>
-      <div class="btn-container">
+      <div class="btn-container filter-container">
         <el-button type="primary" icon="el-icon-plus" @click="openNewDialog">新建表单</el-button>
         <!--         <el-button style="width: 117px">批量操作</el-button> -->
         <!--         <el-button style="width: 117px">导入</el-button> -->
@@ -37,7 +37,7 @@
             <div v-else-if="item.prop === 'operation'" class="operation-btn">
               <el-button icon="el-icon-view" type="text" @click="openView(scope.row)">预览</el-button>
               <el-button icon="el-icon-edit" type="text" @click="edit(scope.row)">编辑</el-button>
-              <el-button icon="el-icon-edit" type="text" @click="edit(scope.row)">版本</el-button>
+              <el-button icon="el-icon-tickets" type="text" @click="edit(scope.row)">版本</el-button>
               <el-popconfirm title="您确定要删除吗？" @confirm="deleteById(scope.row)">
                 <el-button icon="el-icon-delete" slot="reference" type="text" class="btn-danger">删除</el-button>
               </el-popconfirm>

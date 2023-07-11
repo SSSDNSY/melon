@@ -1,73 +1,76 @@
 <template>
-  <div class="container">
-    <div class="left-board">
-      <div class="logo-wrapper">
-        <div class="logo">
+  <div class="container_">
+    <div class="left-board_">
+      <div class="logo-wrapper_">
+        <div class="logo_">
           <img :src="logo" alt="logo"> Form Generator
         </div>
       </div>
-      <el-scrollbar class="left-scrollbar">
-        <div class="components-list">
-          <div class="components-title">
-            <svg-icon icon-class="component" />输入型组件
+      <el-scrollbar class="left-scrollbar_">
+        <div class="components-list_">
+          <div class="components-title_">
+            <svg-icon icon-class="component_"/>
+            输入型组件
           </div>
           <draggable
-            class="components-draggable"
+            class="components-draggable_"
             :list="inputComponents"
             :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
             :clone="cloneComponent"
-            draggable=".components-item"
+            draggable=".components-item_"
             :sort="false"
             @end="onEnd"
           >
             <div
-              v-for="(element, index) in inputComponents" :key="index" class="components-item"
+              v-for="(element, index) in inputComponents" :key="index" class="components-item_"
               @click="addComponent(element)"
             >
-              <div class="components-body">
-                <svg-icon :icon-class="element.tagIcon" />
+              <div class="components-body_">
+                <svg-icon :icon-class="element.tagIcon"/>
                 {{ element.label }}
               </div>
             </div>
           </draggable>
-          <div class="components-title">
-            <svg-icon icon-class="component" />选择型组件
+          <div class="components-title_">
+            <svg-icon icon-class="component_"/>
+            选择型组件
           </div>
           <draggable
-            class="components-draggable"
+            class="components-draggable_"
             :list="selectComponents"
             :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
             :clone="cloneComponent"
-            draggable=".components-item"
+            draggable=".components-item_"
             :sort="false"
             @end="onEnd"
           >
             <div
               v-for="(element, index) in selectComponents"
               :key="index"
-              class="components-item"
+              class="components-item_"
               @click="addComponent(element)"
             >
-              <div class="components-body">
-                <svg-icon :icon-class="element.tagIcon" />
+              <div class="components-body_">
+                <svg-icon :icon-class="element.tagIcon"/>
                 {{ element.label }}
               </div>
             </div>
           </draggable>
-          <div class="components-title">
-            <svg-icon icon-class="component" /> 布局型组件
+          <div class="components-title_">
+            <svg-icon icon-class="component_"/>
+            布局型组件
           </div>
           <draggable
-            class="components-draggable" :list="layoutComponents"
+            class="components-draggable_" :list="layoutComponents"
             :group="{ name: 'componentsGroup', pull: 'clone', put: false }" :clone="cloneComponent"
-            draggable=".components-item" :sort="false" @end="onEnd"
+            draggable=".components-item_" :sort="false" @end="onEnd"
           >
             <div
-              v-for="(element, index) in layoutComponents" :key="index" class="components-item"
+              v-for="(element, index) in layoutComponents" :key="index" class="components-item_"
               @click="addComponent(element)"
             >
-              <div class="components-body">
-                <svg-icon :icon-class="element.tagIcon" />
+              <div class="components-body_">
+                <svg-icon :icon-class="element.tagIcon"/>
                 {{ element.label }}
               </div>
             </div>
@@ -76,27 +79,27 @@
       </el-scrollbar>
     </div>
 
-    <div class="center-board">
-      <div class="action-bar">
-        <el-button icon="el-icon-download" type="text" @click="download">
+    <div class="center-board_">
+      <div class="action-bar_">
+        <el-button icon="el-icon-download_" type="text" @click="download">
           导出vue文件
         </el-button>
-        <el-button class="copy-btn-main" icon="el-icon-document-copy" type="text" @click="copy">
+        <el-button class="copy-btn-main_" icon="el-icon-document-copy" type="text" @click="copy">
           复制代码
         </el-button>
-        <el-button class="delete-btn" icon="el-icon-delete" type="text" @click="empty">
+        <el-button class="delete-btn_" icon="el-icon-delete" type="text" @click="empty">
           清空
         </el-button>
       </div>
-      <el-scrollbar class="center-scrollbar">
-        <el-row class="center-board-row" :gutter="formConf.gutter">
+      <el-scrollbar class="center-scrollbar_">
+        <el-row class="center-board-row_" :gutter="formConf.gutter">
           <el-form
             :size="formConf.size"
             :label-position="formConf.labelPosition"
             :disabled="formConf.disabled"
             :label-width="formConf.labelWidth + 'px'"
           >
-            <draggable class="drawing-board" :list="drawingList" :animation="340" group="componentsGroup">
+            <draggable class="drawing-board_" :list="drawingList" :animation="340" group="componentsGroup">
               <draggable-item
                 v-for="(element, index) in drawingList"
                 :key="element.renderKey"
@@ -110,7 +113,7 @@
                 @deleteItem="drawingItemDelete"
               />
             </draggable>
-            <div v-show="!drawingList.length" class="empty-info">
+            <div v-show="!drawingList.length" class="empty-info_">
               从左侧拖入或点选组件进行表单设计
             </div>
           </el-form>
@@ -141,11 +144,11 @@ import beautifier from 'js-beautify'
 import ClipboardJS from 'clipboard'
 import render from '@/utils/generator/render'
 import RightPanel from './RightPanel'
-import { inputComponents, selectComponents, layoutComponents, formConf } from '@/utils/generator/config'
-import { beautifierConf, titleCase } from '@/utils/index'
-import { makeUpHtml, vueTemplate, vueScript, cssStyle } from '@/utils/generator/html'
-import { makeUpJs } from '@/utils/generator/js'
-import { makeUpCss } from '@/utils/generator/css'
+import {formConf, inputComponents, layoutComponents, selectComponents} from '@/utils/generator/config'
+import {beautifierConf, titleCase} from '@/utils/index'
+import {cssStyle, makeUpHtml, vueScript, vueTemplate} from '@/utils/generator/html'
+import {makeUpJs} from '@/utils/generator/js'
+import {makeUpCss} from '@/utils/generator/css'
 import drawingDefault from '@/utils/generator/drawingDefault'
 import logo from '@/assets/logo/logo.png'
 import CodeTypeDialog from './CodeTypeDialog'
@@ -275,14 +278,14 @@ export default {
     },
     execDownload(data) {
       const codeStr = this.generateCode()
-      const blob = new Blob([codeStr], { type: 'text/plain;charset=utf-8' })
+      const blob = new Blob([codeStr], {type: 'text/plain;charset=utf-8'})
       this.$download.saveAs(blob, data.fileName)
     },
     execCopy(data) {
       document.getElementById('copyNode').click()
     },
     empty() {
-      this.$confirm('确定要清空所有组件吗？', '提示', { type: 'warning' }).then(
+      this.$confirm('确定要清空所有组件吗？', '提示', {type: 'warning'}).then(
         () => {
           this.drawingList = []
         }
@@ -317,7 +320,7 @@ export default {
       })
     },
     generateCode() {
-      const { type } = this.generateConf
+      const {type} = this.generateConf
       this.AssembleFormData()
       const script = vueScript(makeUpJs(this.formData, type))
       const html = vueTemplate(makeUpHtml(this.formData, type))
@@ -373,16 +376,19 @@ export default {
 <style lang='scss'>
 
 
-.editor-tabs{
+.editor-tabs {
   background: #121315;
-  .el-tabs__header{
+
+  .el-tabs__header {
     margin: 0;
     border-bottom-color: #121315;
-    .el-tabs__nav{
+
+    .el-tabs__nav {
       border-color: #121315;
     }
   }
-  .el-tabs__item{
+
+  .el-tabs__item {
     height: 32px;
     line-height: 32px;
     color: #888a8e;
@@ -391,15 +397,18 @@ export default {
     margin-right: 5px;
     user-select: none;
   }
-  .el-tabs__item.is-active{
+
+  .el-tabs__item.is-active {
     background: #1e1e1e;
-    border-bottom-color: #1e1e1e!important;
+    border-bottom-color: #1e1e1e !important;
     color: #fff;
   }
-  .el-icon-edit{
+
+  .el-icon-edit {
     color: #f1fa8c;
   }
-  .el-icon-document{
+
+  .el-icon-document {
     color: #a95812;
   }
 }
@@ -410,29 +419,35 @@ export default {
     padding: 12px 18px 15px 15px;
   }
 }
-.left-scrollbar .el-scrollbar__wrap {
+
+.left-scrollbar_ .el-scrollbar__wrap_ {
   box-sizing: border-box;
   overflow-x: hidden !important;
   margin-bottom: 0 !important;
 }
-.center-tabs{
-  .el-tabs__header{
-    margin-bottom: 0!important;
+
+.center-tabs_ {
+  .el-tabs__header {
+    margin-bottom: 0 !important;
   }
-  .el-tabs__item{
+
+  .el-tabs__item {
     width: 50%;
     text-align: center;
   }
-  .el-tabs__nav{
+
+  .el-tabs__nav {
     width: 100%;
   }
 }
-.reg-item{
+
+.reg-item {
   padding: 12px 6px;
   background: #f8f8f8;
   position: relative;
   border-radius: 4px;
-  .close-btn{
+
+  .close-btn {
     position: absolute;
     right: -6px;
     top: -6px;
@@ -447,18 +462,22 @@ export default {
     z-index: 1;
     cursor: pointer;
     font-size: 12px;
-    &:hover{
+
+    &:hover {
       background: rgba(210, 23, 23, 0.5)
     }
   }
-  & + .reg-item{
+
+  & + .reg-item {
     margin-top: 18px;
   }
 }
-.action-bar{
-  & .el-button+.el-button {
+
+.action-bar_ {
+  & .el-button + .el-button {
     margin-left: 15px;
   }
+
   & i {
     font-size: 20px;
     vertical-align: middle;
@@ -467,113 +486,129 @@ export default {
   }
 }
 
-.custom-tree-node{
+.custom-tree-node {
   width: 100%;
   font-size: 14px;
-  .node-operation{
+
+  .node-operation {
     float: right;
   }
-  i[class*="el-icon"] + i[class*="el-icon"]{
+
+  i[class*="el-icon"] + i[class*="el-icon"] {
     margin-left: 6px;
   }
-  .el-icon-plus{
+
+  .el-icon-plus {
     color: #409EFF;
   }
-  .el-icon-delete{
+
+  .el-icon-delete {
     color: #157a0c;
   }
 }
 
-.left-scrollbar .el-scrollbar__view{
+.left-scrollbar_ .el-scrollbar__view {
   overflow-x: hidden;
 }
 
-.el-rate{
+.el-rate {
   display: inline-block;
   vertical-align: text-top;
 }
-.el-upload__tip{
+
+.el-upload__tip {
   line-height: 1.2;
 }
 
 $selectedColor: #f6f7ff;
 $lighterBlue: #409EFF;
 
-.container {
+.container_ {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.components-list {
+.components-list_ {
   padding: 8px;
   box-sizing: border-box;
   height: 100%;
-  .components-item {
+
+  .components-item_ {
     display: inline-block;
     width: 48%;
     margin: 1%;
     transition: transform 0ms !important;
   }
 }
-.components-draggable{
+
+.components-draggable_ {
   padding-bottom: 20px;
 }
-.components-title{
+
+.components-title_ {
   font-size: 14px;
   color: #222;
   margin: 6px 2px;
-  .svg-icon{
+
+  .svg-icon {
     color: #666;
     font-size: 18px;
   }
 }
 
-.components-body {
+.components-body_ {
   padding: 8px 10px;
   background: $selectedColor;
   font-size: 12px;
   cursor: move;
   border: 1px dashed $selectedColor;
   border-radius: 3px;
-  .svg-icon{
+
+  .svg-icon_ {
     color: #777;
     font-size: 15px;
   }
+
   &:hover {
     border: 1px dashed #787be8;
     color: #787be8;
+
     .svg-icon {
       color: #787be8;
     }
   }
 }
 
-.left-board {
+.left-board_ {
   width: 260px;
   position: absolute;
   left: 0;
   top: 0;
   height: 100vh;
 }
-.left-scrollbar{
+
+.left-scrollbar_ {
   height: calc(100vh - 42px);
   overflow: hidden;
 }
-.center-scrollbar {
+
+.center-scrollbar_ {
   height: calc(100vh - 42px);
   overflow: hidden;
   border-left: 1px solid #f1e8e8;
   border-right: 1px solid #f1e8e8;
   box-sizing: border-box;
 }
-.center-board {
+
+.center-board_ {
   height: 100vh;
   width: auto;
   margin: 0 350px 0 260px;
   box-sizing: border-box;
 }
-.empty-info{
+
+.empty-info_ {
   position: absolute;
   top: 46%;
   left: 0;
@@ -583,7 +618,8 @@ $lighterBlue: #409EFF;
   color: #ccb1ea;
   letter-spacing: 4px;
 }
-.action-bar{
+
+.action-bar_ {
   position: relative;
   height: 42px;
   text-align: right;
@@ -592,18 +628,21 @@ $lighterBlue: #409EFF;
   border: 1px solid #f1e8e8;
   border-top: none;
   border-left: none;
-  .delete-btn{
+
+  .delete-btn_ {
     color: #F56C6C;
   }
 }
-.logo-wrapper{
+
+.logo-wrapper_ {
   position: relative;
   height: 42px;
   background: #fff;
   border-bottom: 1px solid #f1e8e8;
   box-sizing: border-box;
 }
-.logo{
+
+.logo_ {
   position: absolute;
   left: 12px;
   top: 6px;
@@ -612,41 +651,49 @@ $lighterBlue: #409EFF;
   font-weight: 600;
   font-size: 17px;
   white-space: nowrap;
-  > img{
+
+  > img {
     width: 30px;
     height: 30px;
     vertical-align: top;
   }
-  .github{
+
+  .github {
     display: inline-block;
     vertical-align: sub;
     margin-left: 15px;
-    > img{
+
+    > img {
       height: 22px;
     }
   }
 }
 
-.center-board-row {
+.center-board-row_ {
   padding: 12px 12px 15px 12px;
   box-sizing: border-box;
+
   & > .el-form {
     // 69 = 12+15+42
     height: calc(100vh - 69px);
   }
 }
-.drawing-board {
+
+.drawing-board_ {
   height: 100%;
   position: relative;
-  .components-body {
+
+  .components-body_ {
     padding: 0;
     margin: 0;
     font-size: 0;
   }
-  .sortable-ghost {
+
+  .sortable-ghost_ {
     position: relative;
     display: block;
     overflow: hidden;
+
     &::before {
       content: " ";
       position: absolute;
@@ -658,38 +705,47 @@ $lighterBlue: #409EFF;
       z-index: 2;
     }
   }
-  .components-item.sortable-ghost {
+
+  .components-item_.sortable-ghost_ {
     width: 100%;
     height: 60px;
     background-color: $selectedColor;
   }
-  .active-from-item {
-    & > .el-form-item{
+
+  .active-from-item_ {
+    & > .el-form-item {
       background: $selectedColor;
       border-radius: 6px;
     }
-    & > .drawing-item-copy, & > .drawing-item-delete{
+
+    & > .drawing-item-copy_, & > .drawing-item-delete_ {
       display: initial;
     }
-    & > .component-name{
+
+    & > .component-name_ {
       color: $lighterBlue;
     }
   }
-  .el-form-item{
+
+  .el-form-item_ {
     margin-bottom: 15px;
   }
 }
-.drawing-item{
+
+.drawing-item_ {
   position: relative;
   cursor: move;
-  &.unfocus-bordered:not(.activeFromItem) > div:first-child  {
+
+  &.unfocus-bordered_:not(.activeFromItem_) > div:first-child {
     border: 1px dashed #ccc;
   }
-  .el-form-item{
+
+  .el-form-item_ {
     padding: 12px 10px;
   }
 }
-.drawing-row-item{
+
+.drawing-row-item_ {
   position: relative;
   cursor: move;
   box-sizing: border-box;
@@ -697,22 +753,28 @@ $lighterBlue: #409EFF;
   border-radius: 3px;
   padding: 0 2px;
   margin-bottom: 15px;
-  .drawing-row-item {
+
+  .drawing-row-item_ {
     margin-bottom: 2px;
   }
-  .el-col{
+
+  .el-col_ {
     margin-top: 22px;
   }
-  .el-form-item{
+
+  .el-form-item_ {
     margin-bottom: 0;
   }
-  .drag-wrapper{
+
+  .drag-wrapper_ {
     min-height: 80px;
   }
-  &.active-from-item{
+
+  &.active-from-item_ {
     border: 1px dashed $lighterBlue;
   }
-  .component-name{
+
+  .component-name_ {
     position: absolute;
     top: 0;
     left: 0;
@@ -722,17 +784,20 @@ $lighterBlue: #409EFF;
     padding: 0 6px;
   }
 }
-.drawing-item, .drawing-row-item{
+
+.drawing-item_, .drawing-row-item_ {
   &:hover {
-    & > .el-form-item{
+    & > .el-form-item_ {
       background: $selectedColor;
       border-radius: 6px;
     }
-    & > .drawing-item-copy, & > .drawing-item-delete{
+
+    & > .drawing-item-copy_, & > .drawing-item-delete_ {
       display: initial;
     }
   }
-  & > .drawing-item-copy, & > .drawing-item-delete{
+
+  & > .drawing-item-copy_, & > .drawing-item-delete_ {
     display: none;
     position: absolute;
     top: -10px;
@@ -746,22 +811,26 @@ $lighterBlue: #409EFF;
     cursor: pointer;
     z-index: 1;
   }
-  & > .drawing-item-copy{
+
+  & > .drawing-item-copy_ {
     right: 56px;
     border-color: $lighterBlue;
     color: $lighterBlue;
     background: #fff;
-    &:hover{
+
+    &:hover {
       background: $lighterBlue;
       color: #fff;
     }
   }
-  & > .drawing-item-delete{
+
+  & > .drawing-item-delete_ {
     right: 24px;
     border-color: #F56C6C;
     color: #F56C6C;
     background: #fff;
-    &:hover{
+
+    &:hover {
       background: #F56C6C;
       color: #fff;
     }

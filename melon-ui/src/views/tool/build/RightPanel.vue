@@ -1,12 +1,12 @@
 <template>
-  <div class="right-board">
-    <el-tabs v-model="currentTab" class="center-tabs">
-      <el-tab-pane label="组件属性" name="field" />
-      <el-tab-pane label="表单属性" name="form" />
+  <div class="right-board_">
+    <el-tabs v-model="currentTab" class="center-tabs_">
+      <el-tab-pane label="组件属性" name="field"/>
+      <el-tab-pane label="表单属性" name="form"/>
     </el-tabs>
-    <div class="field-box">
-      <a class="document-link" target="_blank" :href="documentLink" title="查看组件文档">
-        <i class="el-icon-link" />
+    <div class="field-box_">
+      <a class="document-link_" target="_blank" :href="documentLink" title="查看组件文档">
+        <i class="el-icon-link"/>
       </a>
       <el-scrollbar class="right-scrollbar">
         <!-- 组件属性 -->
@@ -25,7 +25,7 @@
                   :label="item.label"
                   :value="item.tagIcon"
                 >
-                  <svg-icon class="node-icon" :icon-class="item.tagIcon" />
+                  <svg-icon class="node-icon_" :icon-class="item.tagIcon"/>
                   <span> {{ item.label }}</span>
                 </el-option>
               </el-option-group>
@@ -276,21 +276,21 @@
               :list="activeData.options"
               :animation="340"
               group="selectItem"
-              handle=".option-drag"
+              handle=".option-drag_"
             >
-              <div v-for="(item, index) in activeData.options" :key="index" class="select-item">
-                <div class="select-line-icon option-drag">
-                  <i class="el-icon-s-operation" />
+              <div v-for="(item, index) in activeData.options" :key="index" class="select-item_">
+                <div class="select-line-icon_ option-drag_">
+                  <i class="el-icon-s-operation"/>
                 </div>
-                <el-input v-model="item.label" placeholder="选项名" size="small" />
+                <el-input v-model="item.label" placeholder="选项名" size="small"/>
                 <el-input
                   placeholder="选项值"
                   size="small"
                   :value="item.value"
                   @input="setOptionValue(item, $event)"
                 />
-                <div class="close-btn select-line-icon" @click="activeData.options.splice(index, 1)">
-                  <i class="el-icon-remove-outline" />
+                <div class="close-btn_ select-line-icon_" @click="activeData.options.splice(index, 1)">
+                  <i class="el-icon-remove-outline"/>
                 </div>
               </div>
             </draggable>
@@ -478,8 +478,8 @@
               draggable
             >
               <span slot-scope="{ node, data }">
-                <span class="node-label">
-                  <svg-icon class="node-icon" :icon-class="data.tagIcon" />
+                <span class="node-label_">
+                  <svg-icon class="node-icon_" :icon-class="data.tagIcon"/>
                   {{ node.label }}
                 </span>
               </span>
@@ -491,10 +491,10 @@
             <div
               v-for="(item, index) in activeData.regList"
               :key="index"
-              class="reg-item"
+              class="reg-item_"
             >
-              <span class="close-btn" @click="activeData.regList.splice(index, 1)">
-                <i class="el-icon-close" />
+              <span class="close-btn_" @click="activeData.regList.splice(index, 1)">
+                <i class="el-icon-close"/>
               </span>
               <el-form-item label="表达式">
                 <el-input v-model="item.pattern" placeholder="请输入正则" />
@@ -572,16 +572,12 @@
 </template>
 
 <script>
-import { isArray } from 'util'
+import {isArray} from 'util'
 import draggable from 'vuedraggable'
 import TreeNodeDialog from './TreeNodeDialog'
-import { isNumberStr } from '@/utils/index'
+import {isNumberStr} from '@/utils/index'
 import IconsDialog from './IconsDialog'
-import {
-  inputComponents,
-  selectComponents,
-  layoutComponents
-} from '@/utils/generator/config'
+import {inputComponents, selectComponents} from '@/utils/generator/config'
 
 const dateTimeFormat = {
   date: 'yyyy-MM-dd',
@@ -870,58 +866,145 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.right-board {
+.right-board_ {
   width: 350px;
   position: absolute;
   right: 0;
   top: 0;
   padding-top: 3px;
-  .field-box {
+
+  .field-box_ {
     position: relative;
     height: calc(100vh - 42px);
     box-sizing: border-box;
     overflow: hidden;
   }
+
   .el-scrollbar {
     height: 100%;
   }
 }
-.select-item {
+
+
+.center-tabs_ {
+  .el-tabs__header {
+    margin-bottom: 0 !important;
+    padding: 0;
+    position: relative;
+    margin: 0 0 15px;
+  }
+
+  .el-tabs__item {
+    width: 100%;
+    text-align: left;
+    padding-left: 17px !important;
+    font-size: 14px;
+    font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+    font-weight: 400;
+    // color: #000000;
+  }
+
+  .el-tabs__nav {
+    width: 100%;
+  }
+
+  .el-tabs__nav-scroll {
+    overflow: hidden;
+  }
+
+  .el-tabs__nav-wrap {
+    overflow: hidden;
+    margin-bottom: -1px;
+    position: relative;
+  }
+
+  .el-tabs__active-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: #1890ff;
+    z-index: 1;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(.645, .045, .355, 1);
+    transition: -webkit-transform .3s cubic-bezier(.645, .045, .355, 1);
+    transition: transform .3s cubic-bezier(.645, .045, .355, 1);
+    transition: transform .3s cubic-bezier(.645, .045, .355, 1), -webkit-transform .3s cubic-bezier(.645, .045, .355, 1);
+    list-style: none;
+  }
+
+  .el-tabs__nav-wrap::after {
+    background-color: #e8e8e8;
+  }
+}
+
+.right-scrollbar {
+  .el-scrollbar__view {
+    padding: 12px 18px 15px 15px;
+  }
+}
+
+.drawing-row-item .el-col {
+  margin-bottom: 5px;
+}
+
+.components-item.dynamicGhost {
+  width: 5px;
+  height: 120px;
+  background-color: #409eff;
+}
+
+.dynamic-table_item.dynamicGhost {
+  width: 5px;
+  height: 120px;
+  background-color: #409eff;
+}
+
+
+.select-item_ {
   display: flex;
   border: 1px dashed #fff;
   box-sizing: border-box;
-  & .close-btn {
+
+  & .close-btn_ {
     cursor: pointer;
     color: #f56c6c;
   }
+
   & .el-input + .el-input {
     margin-left: 4px;
   }
 }
-.select-item + .select-item {
+
+.select-item_ + .select-item_ {
   margin-top: 4px;
 }
-.select-item.sortable-chosen {
+
+.select-item_.sortable-chosen_ {
   border: 1px dashed #409eff;
 }
-.select-line-icon {
+
+.select-line-icon_ {
   line-height: 32px;
   font-size: 22px;
   padding: 0 4px;
   color: #777;
 }
-.option-drag {
+
+.option-drag_ {
   cursor: move;
 }
-.time-range {
+
+.time-range_ {
   .el-date-editor {
     width: 227px;
   }
+
   ::v-deep .el-icon-time {
     display: none;
   }
 }
-.document-link {
+
+.document-link_ {
   position: absolute;
   display: block;
   width: 26px;
