@@ -17,7 +17,7 @@
               </el-form.js-item>
             </el-col> -->
             <el-col :span="18" class="btn-container">
-              <el-button icon="el-icon-search" type="primary"  @click="search">查询</el-button>
+              <el-button icon="el-icon-search" type="primary" @click="search">查询</el-button>
               <el-button icon="el-icon-refresh" @click="search('reset')">重置</el-button>
             </el-col>
           </el-row>
@@ -66,28 +66,29 @@
     >
       <slot name="-" style="border: none; padding: 0px">
         <el-form
-          :model="ruleForm"
-          :rules="rules"
+          :model="newForm"
           ref="ruleForm"
           style="width: 95%"
           label-width="100px"
           class="demo-ruleForm"
         >
           <el-form-item label="表单ID" prop="id">
-            <el-input v-model="ruleForm.id"></el-input>
+            <el-input v-model="newForm.id" disabled="true"></el-input>
           </el-form-item>
           <el-form-item label="表单名称" prop="name">
-            <el-input v-model="ruleForm.name" @change="setTableName"></el-input>
+            <el-input v-model="newForm.name" @change="setTableName"></el-input>
           </el-form-item>
-          <el-form-item label="存储表名" prop="tableName">
-            <el-input v-model="ruleForm.tableName"></el-input>
+          <el-form-item label="事件类型" prop="eventType">
+            <el-input v-model="newForm.eventType"></el-input>
           </el-form-item>
-          <el-form-item label="表单分类" prop="formSort">
-            <select-tree class="tree"
-                         v-model="ruleForm.formSort"
-                         :data="tabList"
-                         placeholder="请选择所属分类">
-            </select-tree>
+          <el-form-item label="主表名" prop="mainTable">
+            <el-input v-model="newForm.mainTable"></el-input>
+          </el-form-item>
+          <el-form-item label="子表名" prop="subTable">
+            <el-input v-model="newForm.subTable"></el-input>
+          </el-form-item>
+          <el-form-item label="JS脚本" prop="formJs">
+            <codemirror v-model="" :options="options"/>
           </el-form-item>
         </el-form>
       </slot>
@@ -129,17 +130,26 @@
 import {mapActions} from 'vuex';
 import SelectTree from '@/components/SelectTree';
 import {deleteForm, formList} from '@/api/bpmn/form';
+import {nextId} from '@/api/common';
 import Pagination from '@/components/Pagination';
 import FormDesigner from '@/components/FormComponents/formDesigner.vue';
 import formConf from '@/components/FormComponents/custom/formConf';
 import preview from '@/components/FormComponents/preview';
 import {colorList, titleMap} from '@/const';
+// codemirror
+import codemirror from 'vue-codemirror';
+import 'codemirror/lib/codemirror.css';
+// 引入主题后还需要在 options 中指定主题才会生效
+import 'codemirror/theme/dracula.css';
+import 'codemirror/mode/javascript/javascript';
 
 const pinyin = require('js-pinyin');
 
 export default {
   name: 'formManager',
-  components: {Pagination, FormDesigner, preview, SelectTree},
+  components: {
+    Pagination, FormDesigner, preview, SelectTree, codemirror
+  },
   data() {
     return {
       colorList,
@@ -151,6 +161,10 @@ export default {
           label: '序号',
           prop: 'index',
           type: 'index'
+        },
+        {
+          label: '编号',
+          prop: 'id',
         },
         {
           label: '表单名称',
@@ -182,6 +196,17 @@ export default {
           width: '300px'
         }
       ],
+      // 默认配置
+      options: {
+        tabSize: 2, // 缩进格式
+        theme: 'dracula', // 主题，对应主题库 JS 需要提前引入
+        lineNumbers: true, // 显示行号
+        line: true,
+        styleActiveLine: true, // 高亮选中行
+        hintOptions: {
+          completeSingle: true // 当匹配只有一项的时候是否自动补全
+        }
+      },
       list: [],
       total: 0,
       listLoading: false,
@@ -193,11 +218,13 @@ export default {
       dialogVisible: false,
       viewVisible: false,
       dialogNewSortVisible: false,
-      ruleForm: {
+      newForm: {
         id: '',
         name: '',
-        tableName: '',
-        formSort: null
+        eventType: '',
+        mainTable: '',
+        subTable: '',
+        formJs: '',
       },
       itemList: [],
       formConf,
@@ -241,25 +268,24 @@ export default {
     // 新建表单
     openNewDialog() {
       this.dialogNewSortVisible = true;
-      this.ruleForm.id = this.uuidv4();
+      this.nextId();
     },
     setTableName() {
-      this.ruleForm.tableName = pinyin.getCamelChars(this.ruleForm.name);
+      this.newForm.tableName = pinyin.getCamelChars(this.newForm.name);
     },
     //打开表单设计器
     openFormDialog() {
-      if (this.ruleForm.name == '' || this.ruleForm.name == null) {
+      if (this.newForm.name == '' || this.newForm.name == null) {
         this.$message.error('请填写必填项');
         return;
       }
       this.dialogNewSortVisible = false;
       this.dialogVisible = true;
       this.formConf = formConf;
-      this.formConf.tableName = this.ruleForm.tableName;
-      this.formConf.formSort = this.ruleForm.formSort;
-      this.formConf.formRef = this.ruleForm.name;
+      this.formConf.tableName = this.newForm.tableName;
+      this.formConf.formRef = this.newForm.name;
       this.mapList = [];
-      this.formId = this.ruleForm.id;
+      this.formId = this.newForm.id;
     },
     // 预览
     openView(row) {
@@ -292,12 +318,11 @@ export default {
       }
       this.dialogVisible = true;
     },
-    uuidv4() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = (Math.random() * 16) | 0,
-          v = c == 'x' ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-      });
+    nextId() {
+      nextId().then(resp => {
+        this.newForm.id = resp.data;
+        this.formId = resp.data;
+      })
     },
     addForm() {
       // 新打开一个标签显示

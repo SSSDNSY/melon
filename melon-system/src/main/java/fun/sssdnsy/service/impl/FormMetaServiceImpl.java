@@ -3,7 +3,7 @@ package fun.sssdnsy.service.impl;
 import fun.sssdnsy.domain.FormMeta;
 import fun.sssdnsy.mapper.FormMetaMapper;
 import fun.sssdnsy.service.IFormMetaService;
-import fun.sssdnsy.utils.DateUtils;
+import fun.sssdnsy.utils.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -50,21 +50,17 @@ public class FormMetaServiceImpl implements IFormMetaService {
      */
     @Override
     public int insertFormMeta(FormMeta formMeta) {
-        formMeta.setCreateTime(DateUtils.getNowDate());
-        return formMetaMapper.insertFormMeta(formMeta);
+        int num;
+        if (StringUtils.isNotBlank(formMeta.getId())) {
+
+            formMeta.setVersion(formMeta.getVersion() + 1);
+            num = formMetaMapper.updateFormMeta(formMeta);
+        } else {
+            num = formMetaMapper.insertFormMeta(formMeta);
+        }
+        return num;
     }
 
-    /**
-     * 修改表单
-     *
-     * @param formMeta 表单
-     * @return 结果
-     */
-    @Override
-    public int updateFormMeta(FormMeta formMeta) {
-        formMeta.setUpdateTime(DateUtils.getNowDate());
-        return formMetaMapper.updateFormMeta(formMeta);
-    }
 
     /**
      * 批量删除表单

@@ -60,23 +60,13 @@ public class FormMetaController extends BaseController {
     }
 
     /**
-     * 新增表单
+     * 保存表单
      */
     @PreAuthorize("@ss.hasPermi('sssdnsy:meta:add')")
     @Log(title = "表单", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody FormMeta formMeta) {
+    public AjaxResult save(@RequestBody FormMeta formMeta) {
         return toAjax(formMetaService.insertFormMeta(formMeta));
-    }
-
-    /**
-     * 修改表单
-     */
-    @PreAuthorize("@ss.hasPermi('sssdnsy:meta:edit')")
-    @Log(title = "表单", businessType = BusinessType.UPDATE)
-    @PutMapping
-    public AjaxResult edit(@RequestBody FormMeta formMeta) {
-        return toAjax(formMetaService.updateFormMeta(formMeta));
     }
 
     /**

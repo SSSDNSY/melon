@@ -36,14 +36,6 @@ public interface IFormMetaService {
     public int insertFormMeta(FormMeta formMeta);
 
     /**
-     * 修改表单
-     *
-     * @param formMeta 表单
-     * @return 结果
-     */
-    public int updateFormMeta(FormMeta formMeta);
-
-    /**
      * 批量删除表单
      *
      * @param ids 需要删除的表单主键集合
