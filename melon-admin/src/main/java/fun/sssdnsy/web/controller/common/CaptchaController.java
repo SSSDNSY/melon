@@ -52,7 +52,7 @@ public class CaptchaController {
         }
 
         // 保存验证码信息
-        String uuid = IdUtils.simpleUUID();
+        String uuid      = IdUtils.getSuid();
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
 
         String capStr = null, code = null;

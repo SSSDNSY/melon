@@ -70,7 +70,7 @@ public class OauthController extends BaseController {
         String redirectUri = giteeConfig.getRedirectURI();
 
         // 用于第三方应用防止CSRF攻击
-        String uuid = IdUtils.randomUUID();
+        String uuid = IdUtils.getSuid();
 
         // 拼接url
         StringBuilder url = new StringBuilder();

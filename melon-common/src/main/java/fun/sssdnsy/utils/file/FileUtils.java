@@ -74,7 +74,7 @@ public class FileUtils {
         String           pathName = "";
         try {
             String extension = getFileExtendName(data);
-            pathName = DateUtils.datePath() + "/" + IdUtils.fastUUID() + "." + extension;
+            pathName = DateUtils.datePath() + "/" + IdUtils.getSuid() + "." + extension;
             File file = FileUploadUtils.getAbsoluteFile(uploadDir, pathName);
             fos = new FileOutputStream(file);
             fos.write(data);

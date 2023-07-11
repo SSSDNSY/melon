@@ -7,6 +7,7 @@ import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.file.FileUploadUtils;
 import fun.sssdnsy.utils.file.FileUtils;
+import fun.sssdnsy.utils.uuid.IdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,4 +141,13 @@ public class CommonController {
             log.error("下载文件失败", e);
         }
     }
+
+    /**
+     * 获取下一个ID
+     */
+    @GetMapping("/nextId")
+    public AjaxResult nextId() {
+        return AjaxResult.success(IdUtils.getSuid());
+    }
+
 }

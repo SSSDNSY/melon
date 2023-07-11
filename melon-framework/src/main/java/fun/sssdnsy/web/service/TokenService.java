@@ -92,7 +92,7 @@ public class TokenService {
      * @return 令牌
      */
     public String createToken(LoginUser loginUser) {
-        String token = IdUtils.fastUUID();
+        String token = IdUtils.getSuid();
         loginUser.setToken(token);
         setUserAgent(loginUser);
         refreshToken(loginUser);
