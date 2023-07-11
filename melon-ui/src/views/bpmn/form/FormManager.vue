@@ -11,11 +11,6 @@
                           placeholder="请输入表单ID、名称或标识KEY"></el-input>
               </el-form-item>
             </el-col>
-            <!-- <el-col :span="6">
-              <el-form.js-item label="流程类型">
-                <el-input v-model="searchForm.form_type" placeholder="请输入流程类型"></el-input>
-              </el-form.js-item>
-            </el-col> -->
             <el-col :span="18" class="btn-container">
               <el-button icon="el-icon-search" type="primary" @click="search">查询</el-button>
               <el-button icon="el-icon-refresh" @click="search('reset')">重置</el-button>
@@ -88,7 +83,7 @@
             <el-input v-model="newForm.subTable"></el-input>
           </el-form-item>
           <el-form-item label="JS脚本" prop="formJs">
-            <codemirror v-model="" :options="options"/>
+            <codemirror v-model="" :options="options"></codemirror>
           </el-form-item>
         </el-form>
       </slot>
@@ -289,11 +284,11 @@ export default {
     },
     // 预览
     openView(row) {
-      if (row.form_json == undefined) {
+      if (row.formJson == undefined) {
         this.formConf = formConf;
         this.itemList = [];
       } else {
-        const mapJson = JSON.parse(row.form_json);
+        const mapJson = JSON.parse(row.formJson);
         this.formConf = mapJson.config;
         this.itemList = mapJson.list;
       }
@@ -306,12 +301,12 @@ export default {
     // 编辑
     edit(row) {
       console.log('row', row);
-      if (row.form_json === undefined) {
+      if (row.formJson === undefined) {
         this.formConf = formConf;
         this.mapList = [];
         this.formId = row.id;
       } else {
-        const mapJson = JSON.parse(row.form_json);
+        const mapJson = JSON.parse(row.formJson);
         this.formConf = mapJson.config;
         this.formId = row.id;
         this.mapList = mapJson.list;
@@ -323,12 +318,6 @@ export default {
         this.newForm.id = resp.data;
         this.formId = resp.data;
       })
-    },
-    addForm() {
-      // 新打开一个标签显示
-      this.$router.push('/test');
-      // 关闭该标签
-      // this.close({ tagName: '/test' });
     }
   }
 };
