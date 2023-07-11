@@ -147,7 +147,7 @@ public class CommonController {
      */
     @GetMapping("/nextId")
     public AjaxResult nextId() {
-        return AjaxResult.success(IdUtils.getSuid());
+        return AjaxResult.success((Object)IdUtils.getSuid());
     }
 
 }

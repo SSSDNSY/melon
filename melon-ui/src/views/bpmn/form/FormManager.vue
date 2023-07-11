@@ -47,8 +47,8 @@
         :total="total"
         :page.sync="searchForm.page"
         :limit.sync="searchForm.pagesize"
-        @pagination="getList"
-      />
+        @pagination="getList">
+      </pagination>
     </div>
     <el-dialog
       title="新建表单"
@@ -59,7 +59,7 @@
       @close="dialogNewSortVisible = false"
       custom-class="center-dialog"
     >
-      <slot name="-" style="border: none; padding: 0px">
+      <slot name="-" style="border: none; padding: 0">
         <el-form
           :model="newForm"
           ref="ruleForm"
@@ -68,7 +68,7 @@
           class="demo-ruleForm"
         >
           <el-form-item label="表单ID" prop="id">
-            <el-input v-model="newForm.id" disabled="true"></el-input>
+            <el-input v-model="newForm.id" disabled="disabled"></el-input>
           </el-form-item>
           <el-form-item label="表单名称" prop="name">
             <el-input v-model="newForm.name" @change="setTableName"></el-input>
@@ -83,7 +83,7 @@
             <el-input v-model="newForm.subTable"></el-input>
           </el-form-item>
           <el-form-item label="JS脚本" prop="formJs">
-            <codemirror v-model="" :options="options"></codemirror>
+            <codemirror v-model="viewCode" :options="options"/>
           </el-form-item>
         </el-form>
       </slot>
@@ -116,7 +116,7 @@
       direction="btt"
       destroy-on-close
     >
-      <preview :itemList="itemList" :formConf="formConf"/>
+      <preview :itemList="itemList" :formConf="formConf"></preview>
     </el-drawer>
   </container>
 </template>
@@ -132,7 +132,7 @@ import formConf from '@/components/FormComponents/custom/formConf';
 import preview from '@/components/FormComponents/preview';
 import {colorList, titleMap} from '@/const';
 // codemirror
-import codemirror from 'vue-codemirror';
+import {codemirror} from 'vue-codemirror';
 import 'codemirror/lib/codemirror.css';
 // 引入主题后还需要在 options 中指定主题才会生效
 import 'codemirror/theme/dracula.css';
@@ -191,17 +191,6 @@ export default {
           width: '300px'
         }
       ],
-      // 默认配置
-      options: {
-        tabSize: 2, // 缩进格式
-        theme: 'dracula', // 主题，对应主题库 JS 需要提前引入
-        lineNumbers: true, // 显示行号
-        line: true,
-        styleActiveLine: true, // 高亮选中行
-        hintOptions: {
-          completeSingle: true // 当匹配只有一项的时候是否自动补全
-        }
-      },
       list: [],
       total: 0,
       listLoading: false,
@@ -224,7 +213,19 @@ export default {
       itemList: [],
       formConf,
       formId: '',
-      mapList: []
+      mapList: [],
+      viewCode:'',
+      // 默认配置
+      options: {
+        tabSize: 2, // 缩进格式
+        theme: 'dracula', // 主题，对应主题库 JS 需要提前引入
+        lineNumbers: true, // 显示行号
+        line: true,
+        styleActiveLine: true, // 高亮选中行
+        hintOptions: {
+          completeSingle: true // 当匹配只有一项的时候是否自动补全
+        }
+      }
     };
   },
   created() {
@@ -261,15 +262,17 @@ export default {
       }
     },
     // 新建表单
-    openNewDialog() {
+    openNewDialog(row) {
       this.dialogNewSortVisible = true;
-      this.nextId();
+      this.getId();
+      debugger
+      this.viewCode = row.formJs;
     },
     setTableName() {
       this.newForm.tableName = pinyin.getCamelChars(this.newForm.name);
     },
     //打开表单设计器
-    openFormDialog() {
+    openFormDialog(row) {
       if (this.newForm.name == '' || this.newForm.name == null) {
         this.$message.error('请填写必填项');
         return;
@@ -313,7 +316,7 @@ export default {
       }
       this.dialogVisible = true;
     },
-    nextId() {
+    getId() {
       nextId().then(resp => {
         this.newForm.id = resp.data;
         this.formId = resp.data;
