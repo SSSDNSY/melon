@@ -5,7 +5,8 @@ import fancyText from './extend/fancyText';
 import fancyBarCode from 'vue-barcode';
 import fancyDialogList from './extend/fancyDialogList';
 import iconDialog from './iconDialog';
-const plugins = {
+
+const formPlugins = {
   install: function (Vue) {
     Vue.component('form-designer', formDesigner);
     Vue.component('fancy-editor', fancyEditor);
@@ -20,4 +21,4 @@ const plugins = {
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugins);
 }
-export default plugins;
+export default formPlugins;
