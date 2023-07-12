@@ -66,7 +66,7 @@ public class FormMetaController extends BaseController {
     @Log(title = "表单", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult save(@RequestBody FormMeta formMeta) {
-        return toAjax(formMetaService.insertFormMeta(formMeta));
+        return toAjax(formMetaService.save(formMeta));
     }
 
     /**

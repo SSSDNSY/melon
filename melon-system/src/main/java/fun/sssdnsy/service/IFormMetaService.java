@@ -33,7 +33,7 @@ public interface IFormMetaService {
      * @param formMeta 表单
      * @return 结果
      */
-    public int insertFormMeta(FormMeta formMeta);
+    public int save(FormMeta formMeta);
 
     /**
      * 批量删除表单

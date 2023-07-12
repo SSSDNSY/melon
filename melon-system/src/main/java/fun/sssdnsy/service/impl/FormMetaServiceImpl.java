@@ -4,6 +4,7 @@ import fun.sssdnsy.domain.FormMeta;
 import fun.sssdnsy.mapper.FormMetaMapper;
 import fun.sssdnsy.service.IFormMetaService;
 import fun.sssdnsy.utils.StringUtils;
+import fun.sssdnsy.utils.uuid.IdUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -49,13 +50,15 @@ public class FormMetaServiceImpl implements IFormMetaService {
      * @return 结果
      */
     @Override
-    public int insertFormMeta(FormMeta formMeta) {
+    public int save(FormMeta formMeta) {
         int num;
         if (StringUtils.isNotBlank(formMeta.getId())) {
-
-            formMeta.setVersion(formMeta.getVersion() + 1);
-            num = formMetaMapper.updateFormMeta(formMeta);
+            FormMeta formMetaUpd = formMetaMapper.selectFormMetaById(formMeta.getId());
+            formMetaUpd.setVersion(formMetaUpd.getVersion() + 1);
+            formMetaUpd.setFormJson(formMeta.getFormJson());
+            num = formMetaMapper.updateFormMeta(formMetaUpd);
         } else {
+            formMeta.setId(IdUtils.getSuid());
             num = formMetaMapper.insertFormMeta(formMeta);
         }
         return num;

@@ -3,7 +3,7 @@
   <div class="center-board">
     <div class="action-bar">
       <el-button type="text" @click="preview" icon="el-icon-view"> 预览</el-button>
-      <el-button type="text" @click="saveMap" icon="el-icon-circle-check"> 保存</el-button>
+      <el-button type="text" @click="save" icon="el-icon-circle-check"> 保存</el-button>
       <el-button type="text" @click="view" icon="el-icon-reading"> 查看</el-button>
       <el-button type="text" icon="el-icon-tickets" @click="viewJSON">JSON</el-button>
       <el-button type="text" icon="el-icon-s-tools" @click="setting">设置</el-button>
@@ -197,8 +197,11 @@ export default {
   mounted() {
   },
   methods: {
-    saveMap() {
-      addForm({viewcode: this.code, id: this.formid}).then((res) => {
+    save() {
+      addForm({
+        id: this.formid,
+        formJson: this.code,
+      }).then((res) => {
         if (res.code == '200') {
           this.$message.success('保存成功');
         } else {

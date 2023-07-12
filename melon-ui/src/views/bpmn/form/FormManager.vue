@@ -135,7 +135,7 @@ import {colorList, titleMap} from '@/const';
 import {codemirror} from 'vue-codemirror';
 import 'codemirror/lib/codemirror.css';
 // 引入主题后还需要在 options 中指定主题才会生效
-import 'codemirror/theme/dracula.css';
+import 'codemirror/theme/idea.css';
 import 'codemirror/mode/javascript/javascript';
 
 const pinyin = require('js-pinyin');
@@ -218,7 +218,7 @@ export default {
       // 默认配置
       options: {
         tabSize: 2, // 缩进格式
-        theme: 'dracula', // 主题，对应主题库 JS 需要提前引入
+        theme: 'idea', // 主题，对应主题库 JS 需要提前引入
         lineNumbers: true, // 显示行号
         line: true,
         styleActiveLine: true, // 高亮选中行
@@ -265,8 +265,6 @@ export default {
     openNewDialog(row) {
       this.dialogNewSortVisible = true;
       this.getId();
-      debugger
-      this.viewCode = row.formJs;
     },
     setTableName() {
       this.newForm.tableName = pinyin.getCamelChars(this.newForm.name);
@@ -304,7 +302,7 @@ export default {
     // 编辑
     edit(row) {
       console.log('row', row);
-      if (row.formJson === undefined) {
+      if (row.formJson === null || row.formJson === undefined) {
         this.formConf = formConf;
         this.mapList = [];
         this.formId = row.id;
