@@ -1,7 +1,7 @@
 <template>
   <container type="ghost">
 
-    <div class="app-container">
+    <div class="theme-tab-container">
       <el-tabs v-model="activeName">
         <el-tab-pane v-for="item in tabList" :key="item.id" :name="item.id + ''" :label="item.name">
           <div v-if="item.children && item.children.length" class="card-box">
@@ -17,14 +17,13 @@
             >
           </div>
           <div v-else class="card-box-empty" flex="dir:top main:center cross:center">
-            <icon name="inbox"></icon>
-            <span>没有流程类型</span>
+            <span icon="el-icon-search" >没有流程类型</span>
           </div>
         </el-tab-pane>
       </el-tabs>
     </div>
 
-    <div class="app-container">
+    <div class="theme-main-container">
       <!-- 搜索 -->
       <div class="filter-container">
         <el-form ref="form" :model="searchForm" label-width="80px" align="right">
@@ -266,7 +265,7 @@ export default {
       };
       formList(params).then((res) => {
         if (res.code == '200') {
-          this.formMapList = res.result.list;
+          this.formMapList = res.rows;
         } else {
           this.$message.error('获取失败');
         }
@@ -417,7 +416,7 @@ export default {
       this.search();
     },
     async getSelectData() {
-      const data = (await flowSortTree()).result;
+      const data = (await flowSortTree()).data;
       if (data.length) {
         this.tabList = data;
         this.activeName = this.tabList[0].id + '';
@@ -435,3 +434,72 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.theme-tab-container {
+  padding: 10px 20px 5px;
+  margin-bottom: 10px;
+  .card-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+    .name {
+      font-size: 16px;
+      // font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+      font-weight: 500;
+      // color: #4d4d4d;
+    }
+    .el-input {
+      width: 186px;
+    }
+  }
+  .card-box {
+    overflow-x: auto;
+    white-space: nowrap;
+    .card-content {
+      display: inline-block;
+      width: 226px;
+      height: 100px;
+      margin-right: 10px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 16px;
+      line-height: 100px;
+      text-align: center;
+      cursor: pointer;
+      box-sizing: border-box;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+      &:hover,
+      &.is-active {
+        box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.32),
+        0px 1px 4px 0px rgba(183, 183, 183, 0.06);
+      }
+    }
+    img {
+      cursor: pointer;
+      height: 100%;
+    }
+  }
+}
+.theme-main-container {
+  padding: 20px;
+}
+.card-box-empty {
+  text-align-all: center;
+  height: 100px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  i {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  span {
+    font-size: 14px;
+  }
+}
+</style>
