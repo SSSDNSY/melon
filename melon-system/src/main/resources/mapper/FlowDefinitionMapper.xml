@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="fun.sssdnsy.mapper.FlowDefinitionMapper">
+    <update id="updateFlowEntity" parameterType="fun.sssdnsy.domain.FlowDefinition">
+        update act_re_deployment
+        set name_=#{name},
+            engine_version_=#{engineVersion}
+        where id_
+                  in (select DEPLOYMENT_ID_ from act_re_procdef where KEY_ = #{processKey});
+        update act_re_procdef
+        set engine_version_ =#{engineVersion}
+        where KEY_ = #{processKey};
+    </update>
+
+    <select id="getFlowListBySort" parameterType="fun.sssdnsy.domain.FlowDefinition"
+            resultType="fun.sssdnsy.domain.FlowDefinition">
+        select a.id_, a.name_, a.engine_version_, b.key_ as processKey
+        from act_re_deployment a
+                 left join
+             act_re_procdef b on a.id_ = b.deployment_id_
+        where a.engine_version_ = #{engineVersion}
+        GROUP BY b.KEY_
+        order by b.version_ desc
+    </select>
+
+    <select id="getCommProceList" parameterType="fun.sssdnsy.domain.FlowDefinition"
+            resultType="fun.sssdnsy.domain.FlowDefinition">
+        SELECT a.PROC_DEF_ID_ as id_, b.name_, b.engine_version_, b.key_ as processKey
+        from (select PROC_DEF_ID_, count(*) as Total
+              from act_hi_procinst
+              where START_USER_ID_ = #{username}
+              GROUP BY PROC_DEF_ID_
+              ORDER BY Total DESC) a
+                 left join (select *
+                            from (SELECT * FROM act_re_procdef ORDER BY VERSION_ DESC) t
+                            GROUP BY t.KEY_) b
+                           on a.PROC_DEF_ID_ = b.ID_
+        where b.ID_ != ''
+        LIMIT 0,10
+    </select>
+
+    <select id="getProcessIns" resultType="fun.sssdnsy.domain.FlowDefinition">
+        select *
+        from act_re_procdef
+        where id_ = #{id}
+    </select>
+    <select id="getProcessInsLastVersion" resultType="fun.sssdnsy.domain.FlowDefinition">
+        select *
+        from act_re_procdef
+        where key_ = #{key}
+        order by version_ desc
+        LIMIT 0,1
+    </select>
+
+    <select id="getProcessInsByDeployId" resultType="fun.sssdnsy.domain.FlowDefinition">
+        select *
+        from act_re_procdef
+        where deployment_id_ = #{deploymentid}
+        order by version_ desc
+        LIMIT 0,1
+    </select>
+
+    <update id="updateProcessEntity" parameterType="fun.sssdnsy.domain.FlowDefinition">
+        update act_re_procdef
+        set engine_version_=#{engineVersion},
+            name_=#{name}
+        where deployment_id_ = #{deploymentId}
+    </update>
+</mapper>

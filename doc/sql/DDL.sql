@@ -1,3 +1,45 @@
+DROP TABLE IF EXISTS `flow_sort`;
+CREATE TABLE `flow_sort`
+(
+    `id`        int unsigned NOT NULL AUTO_INCREMENT COMMENT '编码',
+    `name`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '分类名',
+    `parent_id` int                                                    DEFAULT NULL COMMENT '父编码',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 25
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_bin COMMENT ='流程分类';
+
+
+DROP TABLE IF EXISTS `flow_element_attr`;
+CREATE TABLE `flow_element_attr`
+(
+    `id`               VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin  NOT NULL COMMENT '主键',
+    `process_key`      VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '流程标识建',
+    `task_def_key`     VARCHAR(256) COLLATE utf8mb4_bin DEFAULT '' COMMENT '节点标识',
+    `reject_rule`      VARCHAR(256) COLLATE utf8mb4_bin DEFAULT '' COMMENT '驳回规则',
+    `reject_way`       VARCHAR(256) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '驳回方式',
+    `jump_rule`        VARCHAR(256) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '跳转规则',
+    `copyto_rule`      VARCHAR(256) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '抄送规则',
+    `auto_copyto_rule` VARCHAR(256) COLLATE utf8mb4_bin DEFAULT NULL COMMENT'自动抄送规则',
+    `transfer`         TINYINT(1) COLLATE utf8mb4_bin   DEFAULT 0 COMMENT '可移交',
+    `addsign`          TINYINT(1) COLLATE utf8mb4_bin   DEFAULT 0 COMMENT '可加签',
+    `endable`          TINYINT(1) COLLATE utf8mb4_bin   DEFAULT 0 COMMENT '可结束',
+    `refuable`         TINYINT(1) COLLATE utf8mb4_bin   DEFAULT 0 COMMENT '可拒绝',
+    `form_id`          text COLLATE utf8mb4_bin         DEFAULT NULL COMMENT '表单编码',
+    `form_url`         text COLLATE utf8mb4_bin         DEFAULT NULL COMMENT '表单URL',
+    `form_json`        text COLLATE utf8mb4_bin         DEFAULT NULL COMMENT '表单JSON',
+    `version`          INT(11)                          DEFAULT '0' COMMENT '版本号',
+    `create_by`        VARCHAR(64) COLLATE utf8mb4_bin  DEFAULT '' COMMENT '创建者',
+    `create_time`      datetime                         DEFAULT NULL COMMENT '创建时间',
+    `update_by`        VARCHAR(64) COLLATE utf8mb4_bin  DEFAULT '' COMMENT '更新者',
+    `update_time`      datetime                         DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8mb4
+    COLLATE = utf8mb4_bin COMMENT = '流程元素属性';
+
 CREATE TABLE `form_meta`
 (
     `id`          VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin  NOT NULL COMMENT '主键',

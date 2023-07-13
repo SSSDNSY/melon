@@ -12,7 +12,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="18" class="btn-container">
-              <el-button icon="el-icon-search" type="primary" @click="search">查询</el-button>
+              <el-button  icon="el-icon-search" type="primary" @click="search">查询</el-button>
               <el-button icon="el-icon-refresh" @click="search('reset')">重置</el-button>
             </el-col>
           </el-row>

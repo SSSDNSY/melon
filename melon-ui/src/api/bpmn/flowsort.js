@@ -1,26 +1,26 @@
 import request from '@/utils/request';
 
-// 获取流程类别
-export function flowSortTree() {
+// 流程类别分页
+export function list(queryParams) {
   return request({
-    url: '/api/deployment/getFlowSortTree',
-    method: 'get'
+    url: '/flowSort/list',
+    method: 'get',
+    params: queryParams
   });
 }
 
-// 增加流程类别
-export function addFlowSort(queryParams) {
+// 获取流程类别
+export function flowSortTree() {
   return request({
-    url: '/api/deployment/addFlowSort',
-    method: 'post',
-    data: queryParams
+    url: '/flowSort/getTree',
+    method: 'get',
   });
 }
 
 // 保存流程类型
 export function saveFlowSort(queryParams) {
   return request({
-    url: '/api/deployment/saveFlowSort',
+    url: '/flowSort/save',
     method: 'post',
     data: queryParams
   });
@@ -29,8 +29,7 @@ export function saveFlowSort(queryParams) {
 // 删除流程列表
 export function deleteFlowSort(queryParams) {
   return request({
-    url: '/api/deployment/deleteFlowSort',
-    method: 'post',
-    data: queryParams
+    url: '/flowSort/' + queryParams,
+    method: 'delete',
   });
 }

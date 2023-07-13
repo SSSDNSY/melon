@@ -1,36 +1,38 @@
 import request from '@/utils/request';
 
 // 获取流程部署列表
-export function processList(queryParams) {
+export function list(queryParams) {
   return request({
-    url: '/api/deployment/getDeployment',
+    url: '/flowDefinition/list',
     method: 'post',
     data: queryParams
   });
 }
 
 // 保存流程信息
-export function updataProcess(queryParams) {
+export function save(queryParams) {
   return request({
-    url: '/api/deployment/updateDeployment',
+    url: '/flowDefinition/save',
     method: 'post',
     data: queryParams
   });
 }
 
 // 获取流程设置
-export function getFormElement(queryParams) {
+export function get(queryParams) {
   return request({
-    url: '/api/as/getFormElement',
+    url: '/flowDefinition/get',
     method: 'get',
     params: queryParams
   });
 }
+
 // 删除流程
-export function delDefinition(queryParams) {
+export function remove(queryParams) {
   return request({
-    url: '/api/deployment/delDefinition',
-    method: 'get',
+    url: '/flowDefinition/remove',
+    method: 'delete',
     params: queryParams
   });
+
 }

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fun.sssdnsy.mapper.FlowElementAttrMapper">
+    <resultMap id="BaseResultMap" type="fun.sssdnsy.domain.FlowElementAttr">
+        <result column="id" property="id"/>
+        <result column="process_key" property="processKey"/>
+        <result column="task_def_key" property="taskDefKey"/>
+        <result column="reject_rule" property="rejectRule"/>
+        <result column="reject_way" property="rejectWay"/>
+        <result column="jump_rule" property="jumpRule"/>
+        <result column="copyto_rule" property="copytoRule"/>
+        <result column="auto_copyto_rule" property="autoCopytoRule"/>
+        <result column="transfer" property="transfer"/>
+        <result column="addsign" property="addsign"/>
+        <result column="endable" property="endable"/>
+        <result column="refuable" property="refuable"/>
+        <result column="form_id" property="formId"/>
+        <result column="form_url" property="formUrl"/>
+        <result column="form_json" property="formJson"/>
+        <result column="version" property="version"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        a.id,
+        a.process_key,
+        a.task_def_key,
+        a.reject_rule,
+        a.reject_way,
+        a.jump_rule,
+        a.copyto_rule,
+        a.auto_copyto_rule,
+        a.transfer,
+        a.addsign,
+        a.endable,
+        a.refuable,
+        a.form_id,
+        a.form_url,
+        a.form_json,
+        a.version,
+        a.create_by,
+        a.create_time,
+        a.update_by,
+        a.update_time
+    </sql>
+
+    <select id="getFlowElementFormAttr" resultType="fun.sssdnsy.domain.FlowElementAttr"
+            parameterType="fun.sssdnsy.domain.FlowElementAttr">
+        select<include refid="Base_Column_List"/>, b.form_json as formJson
+        from flow_element_attr a
+        left join form_mata b on a.formId = b.id
+        where a.process_key = #{processKey}  or a.id= #{id} or a.task_def_key = #{taskDefKey}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="fun.sssdnsy.domain.FlowElementAttr">
+        INSERT INTO flow_element_attr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != processKey and '' != processKey">
+                process_key,
+            </if>
+            <if test="null != taskDefKey and '' != taskDefKey">
+                task_def_key,
+            </if>
+            <if test="null != rejectRule and '' != rejectRule">
+                reject_rule,
+            </if>
+            <if test="null != rejectWay and '' != rejectWay">
+                reject_way,
+            </if>
+            <if test="null != jumpRule and '' != jumpRule">
+                jump_rule,
+            </if>
+            <if test="null != copytoRule and '' != copytoRule">
+                copyto_rule,
+            </if>
+            <if test="null != autoCopytoRule and '' != autoCopytoRule">
+                auto_copyto_rule,
+            </if>
+            <if test="null != transfer and '' != transfer">
+                transfer,
+            </if>
+            <if test="null != addsign and '' != addsign">
+                addsign,
+            </if>
+            <if test="null != endable and '' != endable">
+                endable,
+            </if>
+            <if test="null != refuable and '' != refuable">
+                refuable,
+            </if>
+            <if test="null != formId and '' != formId">
+                form_id,
+            </if>
+            <if test="null != formUrl and '' != formUrl">
+                form_url,
+            </if>
+            <if test="null != formJson and '' != formJson">
+                form_json,
+            </if>
+            <if test="null != version and '' != version">
+                version,
+            </if>
+            <if test="null != createBy and '' != createBy">
+                create_by,
+            </if>
+            <if test="null != createTime and '' != createTime">
+                create_time,
+            </if>
+            <if test="null != updateBy and '' != updateBy">
+                update_by,
+            </if>
+            <if test="null != updateTime and '' != updateTime">
+                update_time
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != processKey and '' != processKey">
+                #{processKey},
+            </if>
+            <if test="null != taskDefKey and '' != taskDefKey">
+                #{taskDefKey},
+            </if>
+            <if test="null != rejectRule and '' != rejectRule">
+                #{rejectRule},
+            </if>
+            <if test="null != rejectWay and '' != rejectWay">
+                #{rejectWay},
+            </if>
+            <if test="null != jumpRule and '' != jumpRule">
+                #{jumpRule},
+            </if>
+            <if test="null != copytoRule and '' != copytoRule">
+                #{copytoRule},
+            </if>
+            <if test="null != autoCopytoRule and '' != autoCopytoRule">
+                #{autoCopytoRule},
+            </if>
+            <if test="null != transfer and '' != transfer">
+                #{transfer},
+            </if>
+            <if test="null != addsign and '' != addsign">
+                #{addsign},
+            </if>
+            <if test="null != endable and '' != endable">
+                #{endable},
+            </if>
+            <if test="null != refuable and '' != refuable">
+                #{refuable},
+            </if>
+            <if test="null != formId and '' != formId">
+                #{formId},
+            </if>
+            <if test="null != formUrl and '' != formUrl">
+                #{formUrl},
+            </if>
+            <if test="null != formJson and '' != formJson">
+                #{formJson},
+            </if>
+            <if test="null != version and '' != version">
+                #{version},
+            </if>
+            <if test="null != createBy and '' != createBy">
+                #{createBy},
+            </if>
+            <if test="null != createTime and '' != createTime">
+                #{createTime},
+            </if>
+            <if test="null != updateBy and '' != updateBy">
+                #{updateBy},
+            </if>
+            <if test="null != updateTime and '' != updateTime">
+                #{updateTime}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" >
+        DELETE FROM flow_element_ttr
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="fun.sssdnsy.domain.FlowElementAttr">
+        UPDATE flow_element_ttr
+        <set>
+            <if test="null != processKey and '' != processKey">process_key = #{processKey},</if>
+            <if test="null != taskDefKey and '' != taskDefKey">task_def_key = #{taskDefKey},</if>
+            <if test="null != rejectRule and '' != rejectRule">reject_rule = #{rejectRule},</if>
+            <if test="null != rejectWay and '' != rejectWay">reject_way = #{rejectWay},</if>
+            <if test="null != jumpRule and '' != jumpRule">jump_rule = #{jumpRule},</if>
+            <if test="null != copytoRule and '' != copytoRule">copyto_rule = #{copytoRule},</if>
+            <if test="null != autoCopytoRule and '' != autoCopytoRule">auto_copyto_rule = #{autoCopytoRule},</if>
+            <if test="null != transfer and '' != transfer">transfer = #{transfer},</if>
+            <if test="null != addsign and '' != addsign">addsign = #{addsign},</if>
+            <if test="null != endable and '' != endable">endable = #{endable},</if>
+            <if test="null != refuable and '' != refuable">refuable = #{refuable},</if>
+            <if test="null != formId and '' != formId">form_id = #{formId},</if>
+            <if test="null != formUrl and '' != formUrl">form_url = #{formUrl},</if>
+            <if test="null != formJson and '' != formJson">form_json = #{formJson},</if>
+            <if test="null != version and '' != version">version = #{version},</if>
+            <if test="null != createBy and '' != createBy">create_by = #{createBy},</if>
+            <if test="null != createTime and '' != createTime">create_time = #{createTime},</if>
+            <if test="null != updateBy and '' != updateBy">update_by = #{updateBy},</if>
+            <if test="null != updateTime and '' != updateTime">update_time = #{updateTime}</if>
+        </set>
+        WHERE
+        id = #{id} or process_key=#{processKey}
+    </update>
+
+
+</mapper>

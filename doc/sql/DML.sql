@@ -1,3 +1,24 @@
+-- 流程分类
+INSERT INTO `flow_sort` VALUES (2, '日常办公', 0);
+INSERT INTO `flow_sort` VALUES (3, '报销类流程', 1);
+INSERT INTO `flow_sort` VALUES (8, '测试类别', 7);
+INSERT INTO `flow_sort` VALUES (10, '日常', 2);
+INSERT INTO `flow_sort` VALUES (13, '考勤打卡', 11);
+INSERT INTO `flow_sort` VALUES (14, '人事', 0);
+INSERT INTO `flow_sort` VALUES (15, '考勤打卡', 14);
+INSERT INTO `flow_sort` VALUES (16, '公章申请', 14);
+INSERT INTO `flow_sort` VALUES (17, '调薪申请', 14);
+INSERT INTO `flow_sort` VALUES (18, '离职申请', 14);
+INSERT INTO `flow_sort` VALUES (19, '行政', 0);
+INSERT INTO `flow_sort` VALUES (20, '物品领用', 19);
+INSERT INTO `flow_sort` VALUES (21, '物品报修', 19);
+INSERT INTO `flow_sort` VALUES (22, '财务', 0);
+INSERT INTO `flow_sort` VALUES (23, '出勤', 0);
+INSERT INTO `flow_sort` VALUES (24, '费用报销', 22);
+
+
+
+
 -- 菜单
 INSERT INTO sys_menu
 (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon,

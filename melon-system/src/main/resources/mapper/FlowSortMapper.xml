@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fun.sssdnsy.mapper.FlowSortMapper">
+    <resultMap type="fun.sssdnsy.domain.FlowSort" id="FlowSortResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="parentId" column="parent_id"/>
+    </resultMap>
+
+    <sql id="selectFlowSortVo">
+        select id,
+               name,
+               parent_id
+        from flow_sort
+    </sql>
+
+    <select id="list" parameterType="fun.sssdnsy.domain.FlowSort" resultMap="FlowSortResult">
+        <include refid="selectFlowSortVo"/>
+        <where>
+            <if test="id != null">
+                and `id` = #{id}
+            </if>
+            <if test="name != null  and name != ''">
+                and `name` like concat('%', #{name}, '%')
+            </if>
+            <if test="parentId != null ">
+                and event_type = #{parentId}
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="fun.sssdnsy.domain.FlowSort" useGeneratedKeys="true" keyProperty="id">
+        insert into flow_sort(id, name, parent_id)
+        values (null, #{name}, #{parentId})
+    </insert>
+
+    <update id="update" parameterType="fun.sssdnsy.domain.FlowSort">
+        update flow_sort
+        set name=#{name},
+            parent_id=#{parentId}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete
+        from flow_sort
+        where id = #{id}
+    </delete>
+</mapper>
