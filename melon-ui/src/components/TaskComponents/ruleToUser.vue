@@ -52,8 +52,8 @@
 </template>
 
 <script>
-import {getOrgData} from '@/api/orgm/orgm'
-import {getUserByDepartId} from '@/api/orgm/user'
+import {getOrgData} from '@/api/uc/orgm'
+import {getUserByDepartId} from '@/api/uc/user'
 
 export default {
   name: "ruleToUser",

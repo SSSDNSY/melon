@@ -5,11 +5,11 @@ import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.core.page.TableDataInfo;
 import fun.sssdnsy.domain.FlowDefinition;
 import fun.sssdnsy.service.IFlowDefinitionService;
-import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @Desc 流程定义控制器
@@ -28,7 +28,7 @@ public class FlowDefinitionController extends BaseController {
      */
     @PostMapping("/list")
     public TableDataInfo list(@RequestBody FlowDefinition flowDefinition) {
-        return flowDefinitionService.list(flowDefinition) ;
+        return flowDefinitionService.list(flowDefinition);
     }
 
     /**
@@ -55,4 +55,20 @@ public class FlowDefinitionController extends BaseController {
         return AjaxResult.success(flowDefinitionService.remove(ids));
     }
 
+    /**
+     * 流程发布
+     */
+    @PostMapping(value = "/deployWithBPMNJS")
+    public AjaxResult deployWithBPMNJS(@RequestParam String stringBPMNXml) {
+        flowDefinitionService.deployWithBPMNJS(stringBPMNXml);
+        return AjaxResult.success();
+    }
+
+    /**
+     * 获取流程定义的xml模版
+     */
+    @GetMapping(value = "/getDeploymentXmlById/{deploymentId}")
+    public void getDeploymentXmlById(HttpServletResponse response, @PathVariable String deploymentId) throws IOException {
+        flowDefinitionService.getResourceAsStream(response, deploymentId, "leave.bpmn");
+    }
 }

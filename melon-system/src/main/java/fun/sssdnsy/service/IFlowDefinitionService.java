@@ -5,6 +5,9 @@ import fun.sssdnsy.domain.FlowDefinition;
 import fun.sssdnsy.domain.FlowElementAttr;
 import org.activiti.engine.repository.ProcessDefinition;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -22,4 +25,7 @@ public interface IFlowDefinitionService {
 
     Integer remove(String[] ids);
 
+    void deployWithBPMNJS(String stringBPMNXml);
+
+    void getResourceAsStream(HttpServletResponse response, String deploymentId, String resourceName) throws IOException;
 }

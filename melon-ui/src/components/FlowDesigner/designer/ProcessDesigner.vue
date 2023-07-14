@@ -160,7 +160,7 @@
   import camundaModdleExtension from './plugins/extension-moddle/camunda';
   import activitiModdleExtension from './plugins/extension-moddle/activiti';
   import flowableModdleExtension from './plugins/extension-moddle/flowable';
-  import { deploymentXML, deployWithBPMNJS } from '@/api/process/process';
+  import { deploymentXML, deployWithBPMNJS } from '@/api/bpmn/flowDefinition';
   // 引入json转换与高亮
   import X2JS from 'x2js';
 
@@ -311,7 +311,7 @@
         });
       } //编辑流程
       else {
-        deploymentXML({ deploymentId: this.deployMId }).then((res) => {
+        deploymentXML(1).then((res) => {
           this.initBpmnModeler();
           this.createNewDiagram(res);
           this.$once('hook:beforeDestroy', () => {

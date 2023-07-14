@@ -39,7 +39,8 @@ import VueMeta from 'vue-meta'
 import DictData from '@/components/DictData'
 // 容器组件
 import container from '@/components/Container';
-
+// 自定义流程组件
+import FlowPd from '@/components/FlowDesigner/index';
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -67,6 +68,7 @@ Vue.component('container', container);
 
 Vue.use(directive)
 Vue.use(plugins)
+Vue.use(FlowPd)
 Vue.use(VueMeta)
 DictData.install()
 

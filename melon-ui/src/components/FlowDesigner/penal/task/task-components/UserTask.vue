@@ -269,16 +269,16 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import ruleToUser from '@/components/taskcomponents/ruleToUser.vue';
-  import ruleToDept from '@/components/taskcomponents/ruleToDept.vue';
-  import { getOrgData } from '@/api/orgm/orgm';
+  import ruleToUser from '@/components/TaskComponents/ruleToUser.vue';
+  import ruleToDept from '@/components/TaskComponents/ruleToDept.vue';
+  import { getOrgData } from '@/api/uc/orgm';
   import {
     getFlowElementAttrs,
     setAssigneeUserWithTaskId,
     getAssigneeUserWithTaskId,
     deleteAssigneeUser,
     setFlowAttrs
-  } from '@/api/process/process';
+  } from '@/api/bpmn/form';
   export default {
     name: 'UserTask',
     props: {

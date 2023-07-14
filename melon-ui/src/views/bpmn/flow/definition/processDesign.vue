@@ -1,6 +1,6 @@
 <template>
   <div id="procDes">
-    <my-process-designer
+    <MyProcessDesigner
       :key="`designer-${reloadIndex}`"
       :options="{
         taskResizingEnabled: true,
@@ -13,9 +13,9 @@
       @element-click="elementClick"
       @element-contextmenu="elementContextmenu"
       @init-finished="initModeler"
-    >
-    </my-process-designer>
-    <my-properties-panel
+    />
+
+    <MyPropertiesPanel
       :key="`penal-${reloadIndex}`"
       :bpmn-modeler="modeler"
       :prefix="controlForm.prefix"

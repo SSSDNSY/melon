@@ -187,12 +187,12 @@
 <script>
 import VueBpmn from './processDesign';
 import preview from '@/components/FormComponents/preview';
-import {flowSortTree} from '@/api/bpmn/flowsort';
-import {get, list, remove, save} from '@/api/bpmn/flowdesign';
+import {flowSortTree} from '@/api/bpmn/flowSort';
+import {get, list, remove, save} from '@/api/bpmn/flowDefinition';
 import {formList, getForm} from '@/api/bpmn/form';
 import Pagination from '@/components/Pagination';
 import {colorList} from '@/const';
-import {tableColumns} from './const';
+import {flowDefinitionColumns} from './const';
 import SelectTree from '@/components/SelectTree/index.vue';
 
 export default {
@@ -217,7 +217,7 @@ export default {
       colorList,
       tabList: [],
       activeName: '',
-      tableColumns,
+      tableColumns: flowDefinitionColumns,
       list: [],
       total: 0,
       listLoading: false,

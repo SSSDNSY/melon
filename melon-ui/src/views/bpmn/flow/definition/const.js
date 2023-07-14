@@ -1,4 +1,4 @@
-export const tableColumns = [
+export const flowDefinitionColumns = [
   {
     label: '序号',
     prop: 'index',
@@ -10,12 +10,16 @@ export const tableColumns = [
     prop: 'name'
   },
   {
-    label: '流程ID',
-    prop: 'procId'
+    label: '流程编码',
+    prop: 'id'
   },
   {
-    label: '流程定义Key',
-    prop: 'procKey'
+    label: '部署编码',
+    prop: 'deploymentId'
+  },
+  {
+    label: '流程定义键',
+    prop: 'key'
   },
   {
     label: '操作',

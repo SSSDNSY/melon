@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import {deleteFlowSort, flowSortTree, saveFlowSort} from '@/api/bpmn/flowsort';
+import {deleteFlowSort, flowSortTree, saveFlowSort} from '@/api/bpmn/flowSort';
 import Pagination from '@/components/Pagination';
 import {titleMap} from '@/const';
 import SelectTree from '@/components/SelectTree/index.vue';

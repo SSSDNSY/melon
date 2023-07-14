@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
     <!-- 日志存放路径 -->
     <property name="log.path" value="/apps/logs/melon"/>
     <!-- 日志输出格式 -->
@@ -81,9 +82,6 @@
     <!-- 系统模块日志级别控制  -->
     <logger name="fun.sssdnsy" level="info"/>
 
-    <logger name="fun.sssdnsy.mapper.XxlConfNodeMsgDao" level="off" />
-
-
     <root level="info">
         <appender-ref ref="console"/>
     </root>
@@ -98,4 +96,16 @@
     <logger name="sys-user" level="info">
         <appender-ref ref="sys-user"/>
     </logger>
+
+    <!--关闭配置中心日志-->
+    <logger name="fun.sssdnsy.mapper.XxlConfNodeMsgDao" level="off" />
+
+    <!--开启activiti日志-->
+    <logger name="org.activiti.engine.impl.persistence.entity" level="debug"/>
+    <logger name="org.activiti.engine.impl.asyncexecutor" level="off"/>
+
+    <!--关闭配置中心日志-->
+    <logger name="fun.sssdnsy.mapper.XxlConfNodeMsgDao" level="off" />
+
+
 </configuration>

@@ -1,6 +1,6 @@
 import MyProcessDesigner from "./designer";
-import MyProcessPalette from "./palette";
 import MyProcessPenal from "./penal";
+import MyProcessPalette from "./palette";
 
 const components = [MyProcessDesigner, MyProcessPenal, MyProcessPalette];
 

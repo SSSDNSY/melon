@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import {getDeptByCompany, getOrgData} from '@/api/orgm/orgm'
+import {getDeptByCompany, getOrgData} from '@/api/uc/orgm'
 
 export default {
   name: "ruleToDept",
