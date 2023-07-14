@@ -17,7 +17,8 @@
             >
           </div>
           <div v-else class="card-box-empty" flex="dir:top main:center cross:center">
-            <span icon="el-icon-search" >没有流程类型</span>
+            <i class="el-icon-search"></i>
+            <span>没有流程类型</span>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -490,12 +491,18 @@ export default {
   padding: 20px;
 }
 .card-box-empty {
-  text-align-all: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: center;
+  display :flex;
+  flex-direction: column;
   height: 100px;
+  background: rgba(0,0,0,.03);
   border-radius: 4px;
   margin-bottom: 8px;
   i {
-    font-size: 30px;
+    font-size: 150%;
     margin-bottom: 10px;
   }
   span {
