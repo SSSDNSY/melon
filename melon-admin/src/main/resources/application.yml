@@ -110,6 +110,7 @@ spring:
     check-process-definitions: false
     process-definition-location-prefix: classpath:/bpmn/
     history-level: full
+    async-executor-activate: false
 
 # endpoints配置
 management:

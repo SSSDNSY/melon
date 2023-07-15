@@ -7,6 +7,17 @@ import './assets/styles/element-variables.scss'
 
 import '@/assets/styles/index.scss' // global css
 import '@/assets/styles/ruoyi.scss' // ruoyi css
+
+//BPMN CSS
+// import '@/package/theme/element-variables.scss';
+import '@/components/FlowDesigner/theme/index.scss';
+import 'bpmn-js/dist/assets/diagram-js.css';
+import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
+import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css';
+import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
+import '@/assets/styles/vue-bmpn.css';
+import 'element-ui/lib/theme-chalk/index.css';
+
 import App from './App'
 import store from './store'
 import router from './router'

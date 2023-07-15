@@ -98,14 +98,12 @@
     </logger>
 
     <!--关闭配置中心日志-->
-    <logger name="fun.sssdnsy.mapper.XxlConfNodeMsgDao" level="off" />
+    <logger name="fun.sssdnsy.mapper.XxlConfNodeMsgDao" level="off"/>
 
     <!--开启activiti日志-->
     <logger name="org.activiti.engine.impl.persistence.entity" level="debug"/>
-    <logger name="org.activiti.engine.impl.asyncexecutor" level="off"/>
 
     <!--关闭配置中心日志-->
-    <logger name="fun.sssdnsy.mapper.XxlConfNodeMsgDao" level="off" />
-
+    <logger name="fun.sssdnsy.mapper.XxlConfNodeMsgDao" level="off"/>
 
 </configuration>

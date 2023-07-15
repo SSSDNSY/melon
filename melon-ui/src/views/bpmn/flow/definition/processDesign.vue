@@ -66,7 +66,7 @@
           headerButtonSize: 'mini',
           events: ['element.click', 'element.contextmenu'],
           // additionalModel: []
-          moddleExtension: { user: UserSql },
+          moddleExtension: {user: UserSql},
           additionalModel: [CustomContentPadProvider, CustomPaletteProvider, CustomRenderer]
         },
         addis: {
@@ -80,7 +80,8 @@
       deployMId: String,
       deployMName: String
     },
-    created() {},
+    created() {
+    },
     methods: {
       initModeler(modeler) {
         setTimeout(() => {
@@ -104,7 +105,7 @@
         this.modeler = null; // 避免 panel 异常
       },
       changeLabelEditingStatus(status) {
-        this.addis.labelEditing = status ? { labelEditingProvider: ['value', ''] } : false;
+        this.addis.labelEditing = status ? {labelEditingProvider: ['value', '']} : false;
         this.reloadProcessDesigner();
       },
       changeLabelVisibleStatus(status) {
@@ -121,15 +122,15 @@
       changePageMode(mode) {
         const theme = mode
           ? {
-              // dark
-              stroke: '#ffffff',
-              fill: '#333333'
-            }
+            // dark
+            stroke: '#ffffff',
+            fill: '#333333'
+          }
           : {
-              // light
-              stroke: '#000000',
-              fill: '#ffffff'
-            };
+            // light
+            stroke: '#000000',
+            fill: '#ffffff'
+          };
         const elements = this.modeler.get('elementRegistry').getAll();
         this.modeler.get('modeling').setColor(elements, theme);
       },
@@ -148,6 +149,7 @@
     margin: 0;
     box-sizing: border-box;
   }
+
   #procDes {
     max-height: 100vh;
     width: 100%;
@@ -156,18 +158,21 @@
     grid-template-columns: auto max-content;
     height: calc(100vh - 76px);
   }
+
   .demo-info-bar {
     position: fixed;
     right: 8px;
     bottom: 108px;
     z-index: 1;
   }
+
   .demo-control-bar {
     position: fixed;
     right: 8px;
     bottom: 48px;
     z-index: 1;
   }
+
   .open-model-button {
     width: 48px;
     height: 48px;
@@ -180,6 +185,7 @@
     color: #ffffff;
     cursor: pointer;
   }
+
   .zoom-in-right-enter-active,
   .zoom-in-right-leave-active {
     opacity: 1;
@@ -187,11 +193,13 @@
     transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
     transform-origin: right center;
   }
+
   .zoom-in-right-enter,
   .zoom-in-right-leave-active {
     opacity: 0;
     transform: scaleX(0) translateY(-48px);
   }
+
   .info-tip {
     position: absolute;
     width: 480px;
@@ -205,6 +213,7 @@
     transform: translateY(-48px);
     border: 1px solid #ebeef5;
     border-radius: 4px;
+
     &::before,
     &::after {
       content: '';
@@ -216,22 +225,26 @@
       right: -15px;
       top: 50%;
     }
+
     &::before {
       border-color: transparent transparent transparent #f2f6fc;
       z-index: 10;
     }
+
     &::after {
       right: -16px;
       border-color: transparent transparent transparent #ebeef5;
       z-index: 1;
     }
   }
+
   .control-form {
     .el-radio {
       width: 100%;
       line-height: 32px;
     }
   }
+
   .element-overlays {
     box-sizing: border-box;
     padding: 8px;
@@ -239,4 +252,53 @@
     border-radius: 4px;
     color: #fafafa;
   }
+
+  .el-drawer {
+    box-sizing: border-box;
+    padding: 0 15px;
+
+    .el-drawer__header {
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      line-height: 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+      padding: 20px 20px 15px;
+      margin-bottom: 0;
+    }
+    header.el-drawer__header{
+      color:#000;
+    }
+
+    .el-drawer__body {
+      box-sizing: border-box;
+      overflow: hidden;
+      overflow-y: auto;
+      padding-top: 20px;
+      padding-bottom: 20px;
+
+      .drawer-content {
+        max-height: calc(100% - 65px);
+        overflow-y: auto;
+
+        .el-form {
+          width: 70%;
+          margin: 0 auto;
+        }
+      }
+    }
+
+    .drawer-footer {
+      position: absolute;
+      width: calc(100% - 30px);
+      height: 55px;
+      line-height: 55px;
+      text-align: right;
+      bottom: 0;
+      left: 15px;
+      border-top: 1px solid rgba(0, 0, 0, 0.09);
+    }
+  }
+
+
 </style>
