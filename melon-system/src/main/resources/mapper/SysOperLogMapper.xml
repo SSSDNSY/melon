@@ -21,7 +21,7 @@
         <result property="status" column="status"/>
         <result property="errorMsg" column="error_msg"/>
         <result property="operTime" column="oper_time"/>
-        <result property="costTime"       column="cost_time"      />
+        <result property="costTime" column="cost_time"      />
     </resultMap>
 
     <sql id="selectOperLogVo">
@@ -75,6 +75,10 @@
     <select id="selectOperLogById" parameterType="Long" resultMap="SysOperLogResult">
         <include refid="selectOperLogVo"/>
         where oper_id = #{operId}
+    </select>
+
+    <select id="selectVisitorNumber" resultType="int">
+        SELECT count(1) from (SELECT distinct(oper_ip)  from sys_oper_log sol GROUP BY oper_ip ) t;
     </select>
 
     <update id="cleanOperLog">

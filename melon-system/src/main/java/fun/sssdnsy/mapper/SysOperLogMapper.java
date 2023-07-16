@@ -42,6 +42,10 @@ public interface SysOperLogMapper {
     public SysOperLog selectOperLogById(Long operId);
 
     /**
+     * 查询访问用户
+     */
+    public Integer selectVisitorNumber();
+    /**
      * 清空操作日志
      */
     public void cleanOperLog();

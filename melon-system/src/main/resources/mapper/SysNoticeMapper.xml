@@ -22,6 +22,10 @@
 		from sys_notice
     </sql>
 
+    <select id="selectNoticeCount"  resultType="int" >
+        select count(*)  from sys_notice
+    </select>
+
     <select id="selectNoticeById" parameterType="Long" resultMap="SysNoticeResult">
         <include refid="selectNoticeVo"/>
         where notice_id = #{noticeId}

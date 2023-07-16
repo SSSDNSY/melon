@@ -1,7 +1,6 @@
 <template>
   <div class="app-container home dashboard-editor-container">
 
-
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
     <SystemBasicInfo/>

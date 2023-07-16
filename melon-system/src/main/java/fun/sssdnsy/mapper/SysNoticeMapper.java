@@ -11,12 +11,18 @@ import java.util.List;
  */
 public interface SysNoticeMapper {
     /**
+     * 查询公告信息数量
+     */
+    public Integer selectNoticeCount();
+
+    /**
      * 查询公告信息
      *
      * @param noticeId 公告ID
      * @return 公告信息
      */
     public SysNotice selectNoticeById(Long noticeId);
+
 
     /**
      * 查询公告列表

@@ -32,7 +32,6 @@ import java.util.List;
 @Service
 public class FlowDefinitionServiceImpl implements IFlowDefinitionService {
 
-    // 流程部署服务
     @Resource
     private RepositoryService repositoryService;
 
