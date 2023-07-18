@@ -63,6 +63,8 @@ spring:
   #应用名
   application:
     name: melon
+  main:
+    banner-mode: off
   # 资源信息
   messages:
     # 国际化资源文件路径
@@ -111,6 +113,7 @@ spring:
     process-definition-location-prefix: classpath:/bpmn/
     history-level: full
     async-executor-activate: false
+
 
 # endpoints配置
 management:
