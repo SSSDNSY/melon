@@ -9,7 +9,7 @@
   components: { iFrame },
   data() {
     return {
-      url: process.env.VUE_APP_BASE_API + "/druid/login.html"
+      url: process.env.VUE_APP_BASE_API + "/druid/index.html"
     };
   },
 };

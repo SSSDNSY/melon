@@ -50,6 +50,8 @@ spring:
         # 控制台管理用户名和密码
         login-username: root
         login-password: root
+        # 免登录
+        no-login: true
       filter:
         stat:
           enabled: true
