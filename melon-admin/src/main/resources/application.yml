@@ -5,7 +5,7 @@ melon:
   #关闭
   switch: false
   # 名称
-  name: Melon
+  name: @project.name@
   # 版本
   version: @melon.version@
   # 构建时间
@@ -129,7 +129,7 @@ token:
   # 令牌自定义标识
   header: Authorization
   # 令牌密钥
-  secret: abcdefghijklmnopqrstuvwxyz
+  secret: xyzabcdefghijklmnopqrstuvw
   # 令牌有效期（默认30分钟）
   expireTime: 30
 
