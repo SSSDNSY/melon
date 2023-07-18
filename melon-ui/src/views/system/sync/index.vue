@@ -5,10 +5,10 @@
       <div class="app-container">
         <h2>驱动信息</h2>
         <el-row :gutter="20">
-          <el-col :span="6" v-for="driver in drivers" :key="driver">
+          <el-col :span="6" v-for="driver in drivers" :key="driver.driverName">
             <el-card type="card" shadow="hover">
               <div slot="header" class="clearfix">
-                <span class="text-extra-large">{{ driver.driverName }}</span>
+                <span class="text-large">{{ driver.driverName }}</span>
                 <el-button style="float: right; padding: 3px 0" type="text" @click="gotoDriverTab">更多</el-button>
               </div>
               <div class="text item text-medium">
@@ -23,13 +23,18 @@
       </div>
 
       <div class="app-container">
-        <h2>连接池</h2>
+        <h2>数据源管理</h2>
         <el-row :gutter="20">
-          <el-col :span="6" v-for="druid in druids" :key="druid">
+          <el-col :span="6" v-for="druid in druids" :key="druid.Name">
             <el-card type="card" shadow="hover">
               <div slot="header" class="clearfix">
                 <span class="text-extra-large">{{ druid.DbType }}</span>
-                <el-button style="float: right; padding: 3px 0" type="text" @click="gotoDruidTab">更多</el-button>
+                <el-button-group style="float: right;">
+                  <el-button  type="text" @click="gotoDruidTab">详细</el-button>
+                  <el-button  type="text" @click="gotoDruidTab">测试</el-button>
+                  <el-button  type="text" class="text-red" @click="gotoDruidTab">删除</el-button>
+                  <el-button  type="text" @click="gotoDruidTab">新增</el-button>
+                </el-button-group>
               </div>
               <div class="text item text-base">
                 {{ '驱动实例名：' + druid.Name }}
@@ -343,7 +348,6 @@ export default {
       );
     },
     getAllDrivers() {
-      debugger
       getAllDriver().then(response => {
         this.drivers = response.data;
       })
