@@ -1,22 +1,53 @@
 <template>
   <el-tabs class="app-container" v-model="activeName" type="card" @tab-click="handleTabClick">
-    <el-tab-pane label="配置管理" name="connectionManager">
+    <el-tab-pane label="配置管理" name="dbConfManager">
+
       <div class="app-container">
-        <h2>驱动管理</h2>
+        <h2>驱动信息</h2>
         <el-row :gutter="20">
-          <el-col :span="6">
-            <el-card type="card" shadow="hover" c>
+          <el-col :span="6" v-for="driver in drivers" :key="driver">
+            <el-card type="card" shadow="hover">
               <div slot="header" class="clearfix">
-                <span>卡片名称</span>
-                <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+                <span class="text-extra-large">{{ driver.driverName }}</span>
+                <el-button style="float: right; padding: 3px 0" type="text" @click="gotoDriverTab">更多</el-button>
               </div>
-              <div v-for="o in 4" :key="o" class="text item bg-purple-light">
-                {{'列表内容 ' + o }}
+              <div class="text item text-medium">
+                {{ '主版本：' + driver.majorVersion }}
+              </div>
+              <div class="text item text-medium">
+                {{ '次版本：' + driver.minorVersion }}
               </div>
             </el-card>
           </el-col>
         </el-row>
       </div>
+
+      <div class="app-container">
+        <h2>连接池</h2>
+        <el-row :gutter="20">
+          <el-col :span="6" v-for="druid in druids" :key="druid">
+            <el-card type="card" shadow="hover">
+              <div slot="header" class="clearfix">
+                <span class="text-extra-large">{{ druid.DbType }}</span>
+                <el-button style="float: right; padding: 3px 0" type="text" @click="gotoDruidTab">更多</el-button>
+              </div>
+              <div class="text item text-base">
+                {{ '驱动实例名：' + druid.Name }}
+              </div>
+              <div class="text item text-medium">
+                {{ '用户名：' + druid.UserName }}
+              </div>
+              <div class="text item text-medium" style="width: 100%;word-wrap: break-word;">
+                连接地址：<span class="text-extra-small">{{ druid.URL }}</span>
+              </div>
+              <div class="text item text-medium">
+                {{ '驱动类：' + druid.DriverClassName }}
+              </div>
+            </el-card>
+          </el-col>
+        </el-row>
+      </div>
+
       <div class="app-container">
         <h2>连接管理</h2>
         <el-row :gutter="20">
@@ -28,13 +59,14 @@
                 <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
               </div>
               <div v-for="o in 4" :key="o" class="text item bg-purple-light">
-                {{'列表内容 ' + o }}
+                {{ '列表内容 ' + o }}
               </div>
             </el-card>
           </el-col>
         </el-row>
       </div>
     </el-tab-pane>
+
     <el-tab-pane label="同步任务" name="syncTask">
       <div class="app-container">
         <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch"
@@ -231,14 +263,14 @@
 
 <script>
 import {addConfig, delConfig, getConfig, listConfig, refreshCache, updateConfig} from "@/api/system/config";
-import {druidDatasource} from "@/api/common";
+import {druidDatasource, getAllDriver} from "@/api/common";
 
 export default {
   name: "Config",
   dicts: ['sys_yes_no'],
   data() {
     return {
-      activeName:'connectionManager',
+      activeName: 'dbConfManager',
       // 遮罩层
       loading: true,
       // 选中数组
@@ -259,7 +291,8 @@ export default {
       open: false,
       // 日期范围
       dateRange: [],
-      druids:[],
+      druids: [],
+      drivers: [],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -287,10 +320,17 @@ export default {
   created() {
     this.getList();
     this.getDatasource();
+    this.getAllDrivers();
   },
   methods: {
-    handleTabClick(){
+    handleTabClick() {
 
+    },
+    gotoDriverTab() {
+      this.$router.push("/monitor/druid");
+    },
+    gotoDruidTab() {
+      this.$router.push("/monitor/druid");
     },
     /** 查询参数列表 */
     getList() {
@@ -302,11 +342,17 @@ export default {
         }
       );
     },
-    getDatasource(){
-    druidDatasource().then(response =>{
+    getAllDrivers() {
       debugger
-      this.druids=response.Content;
-    })},
+      getAllDriver().then(response => {
+        this.drivers = response.data;
+      })
+    },
+    getDatasource() {
+      druidDatasource().then(response => {
+        this.druids = response.Content;
+      })
+    },
     // 取消按钮
     cancel() {
       this.open = false;

@@ -5,7 +5,7 @@
 import iFrame from "@/components/iFrame/index";
 
 export default {
-  name: "Knife Document",
+  name: "ApiDoc",
   components: { iFrame },
   data() {
     return {

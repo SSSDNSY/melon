@@ -9,6 +9,14 @@ export function nextId() {
 }
 
 //获取druid 数据源信息
+export function getAllDriver() {
+  return request({
+    url: '/common/getAllDriver',
+    method: 'get',
+  });
+}
+
+//获取druid 数据源信息
 export function druidDatasource() {
   return request({
     url: '/druid/datasource.json',

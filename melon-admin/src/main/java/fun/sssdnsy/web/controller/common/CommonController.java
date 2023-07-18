@@ -7,6 +7,7 @@ import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.file.FileUploadUtils;
 import fun.sssdnsy.utils.file.FileUtils;
+import fun.sssdnsy.utils.sql.DriverUtil;
 import fun.sssdnsy.utils.uuid.IdUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -147,7 +148,14 @@ public class CommonController {
      */
     @GetMapping("/nextId")
     public AjaxResult nextId() {
-        return AjaxResult.success((Object)IdUtils.getSuid());
+        return AjaxResult.success((Object) IdUtils.getSuid());
     }
 
+    /**
+     * 获取所有数据库驱动
+     */
+    @GetMapping("/getAllDriver")
+    public AjaxResult getAllDriver() {
+        return AjaxResult.success(DriverUtil.getAllDrivers());
+    }
 }
