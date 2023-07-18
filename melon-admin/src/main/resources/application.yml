@@ -7,7 +7,9 @@ melon:
   # 名称
   name: Melon
   # 版本
-  version: 1.0.0
+  version: @melon.version@
+  # 构建时间
+  buildTime: @timestamp@
   # 版权年份
   copyrightYear: 2023
   # 实例演示开关
@@ -146,12 +148,25 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-# Swagger配置
-swagger:
-  # 是否开启swagger
-  enabled: true
-  # 请求前缀
-  pathMapping: /dev-api
+# Knife4j
+knife4j:
+  enable: true
+  openapi:
+    title: MELON文档
+    description: "`MELON`API文档"
+    email: sssdnsy@163.com
+    concat: sssdnsy
+    url: https://gitee.com/SSSDNSY
+    version: @melon.version@
+    license: GNU
+    license-url: https://www.gnu.org/licenses/
+    terms-of-service-url: 127.0.0.1:8080/
+    group:
+      test1:
+        group-name: @melon.version@
+        api-rule: package
+        api-rule-resources:
+          - fun.sssdnsy.web.controller
 
 # 防止XSS攻击
 xss:

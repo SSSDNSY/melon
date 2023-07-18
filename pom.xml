@@ -34,6 +34,11 @@
         <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
 
+        <!--maven.build.timestamp保存了maven编译时间戳-->
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <!--指定时间格式-->
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+
         <springboot.dependencies.version>2.5.15</springboot.dependencies.version>
         <melon.version>1.0.0</melon.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,8 +47,7 @@
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <druid.version>1.2.16</druid.version>
         <bitwalker.version>1.21</bitwalker.version>
-        <swagger.version>3.0.0</swagger.version>
-        <knife4j.version>4.0.0</knife4j.version>
+        <knife4j.version>4.1.0</knife4j.version>
         <kaptcha.version>2.3.3</kaptcha.version>
         <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
         <fastjson.version>2.0.34</fastjson.version>
@@ -101,7 +105,7 @@
             <!--引入Knife4j的官方start包,该指南选择Spring Boot版本<3.0,开发者需要注意-->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+                <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
 
@@ -214,6 +218,14 @@
     </dependencies>
 
     <build>
+        <!--指定filtering=true.maven的占位符解析表达式就可以用于它里面的文件-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -309,6 +321,23 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <!--支持yaml读取pom的参数-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <delimiters>
+                        <delimiter>@</delimiter>
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
