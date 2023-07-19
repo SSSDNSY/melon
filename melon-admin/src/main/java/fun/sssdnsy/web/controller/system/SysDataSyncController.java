@@ -1,11 +1,10 @@
 package fun.sssdnsy.web.controller.system;
 
+import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
 import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
-import fun.sssdnsy.service.ISysHomeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import fun.sssdnsy.service.ISysDataSyncService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -18,14 +17,32 @@ import javax.annotation.Resource;
 @RequestMapping("/system/data")
 public class SysDataSyncController extends BaseController {
     @Resource
-    private ISysHomeService homeInfoService;
+    private ISysDataSyncService dataSyncService;
 
     /**
-     * 获取参数配置列表
+     * 获取数据源列表
      */
-    @GetMapping("/list")
-    public AjaxResult list() {
-        return AjaxResult.success(homeInfoService.list());
+    @GetMapping("/list/{name}")
+    public AjaxResult list(@PathVariable String name) {
+        return AjaxResult.success(dataSyncService.listDataSource(name));
+    }
+
+
+    /**
+     * 通用添加数据源
+     */
+    @PostMapping("/add")
+    public AjaxResult add(@RequestBody DataSourceProperty property) {
+        return AjaxResult.success(dataSyncService.addDataSource(property));
+    }
+
+    /**
+     * 删除数据源
+     */
+    @DeleteMapping("/remove")
+    public AjaxResult remove(String name) {
+        dataSyncService.removeDataSource(name);
+        return AjaxResult.success();
     }
 
 }
