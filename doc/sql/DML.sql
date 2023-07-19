@@ -19,49 +19,6 @@ INSERT INTO `flow_sort` VALUES (24, '费用报销', 22);
 
 
 
--- 菜单
-INSERT INTO sys_menu
-(menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon,
- create_by, create_time, update_by, update_time, remark)
-VALUES ('流程设计', 0, 10, 'flowDesign', NULL, NULL, 1, 0, 'M', '0', '0', '', 'edit', 'SSSDNSY', '2023-06-23 18:17:20',
-        'admin', '2023-07-12 11:10:30', '');
-INSERT INTO sys_menu
-(menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon,
- create_by, create_time, update_by, update_time, remark)
-VALUES ('流程编辑', 2015, 1, 'flowEditor', 'bpmn/flow/FlowEditor', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin',
-        '2023-06-23 19:41:08', 'admin', '2023-07-12 11:09:36',
-        '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	');
-INSERT INTO sys_menu
-(menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon,
- create_by, create_time, update_by, update_time, remark)
-VALUES ('表单设计', 0, 8, 'formDesign', NULL, NULL, 1, 0, 'M', '0', '0', '', 'form', 'admin', '2023-07-06 19:53:27',
-        'admin', '2023-07-12 11:10:26', '');
-INSERT INTO sys_menu
-(menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon,
- create_by, create_time, update_by, update_time, remark)
-VALUES ('表单管理', 2018, 1, 'formManager', 'bpmn/form/FormManager', NULL, 1, 0, 'C', '0', '0', NULL, 'build', 'admin',
-        '2023-07-06 19:56:51', '', NULL, '');
-INSERT INTO sys_menu
-(menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon,
- create_by, create_time, update_by, update_time, remark)
-VALUES ('流程监控', 0, 15, 'flowMonitor', NULL, NULL, 1, 0, 'M', '0', '0', NULL, 'cascader', 'admin', '2023-07-12 11:11:44',
-        '', NULL, '');
-INSERT INTO sys_menu
-(menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon,
- create_by, create_time, update_by, update_time, remark)
-VALUES ('流程管理', 2020, 1, 'InstManager', '/bpmn/inst/InstManager', NULL, 1, 0, 'C', '0', '0', NULL, 'druid', 'admin',
-        '2023-07-12 11:13:45', '', NULL, '');
-INSERT INTO sys_menu
-(menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon,
- create_by, create_time, update_by, update_time, remark)
-VALUES ('任务管理', 2020, 5, 'TaskManager', 'bpmn/task/TaskManager', NULL, 1, 0, 'C', '0', '0', NULL, 'documentation',
-        'admin', '2023-07-12 11:14:25', '', NULL, '');
-INSERT INTO sys_menu
-(menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon,
- create_by, create_time, update_by, update_time, remark)
-VALUES ('流程统计', 2020, 15, 'Statistics', 'bpmn/stat/Statistics', NULL, 1, 0, 'C', '0', '0', NULL, 'chart', 'admin',
-        '2023-07-12 11:15:33', '', NULL, '');
-
 
 
 INSERT INTO melon.act_ge_bytearray (ID_, REV_, NAME_, DEPLOYMENT_ID_, BYTES_, GENERATED_)
@@ -449,231 +406,188 @@ VALUES ('admin', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登�
        ('admin', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-06-23 19:34:51'),
        ('admin', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-23 19:34:53'),
        ('admin', '121.33.64.87', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-07-02 15:12:39');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('系统管理', 0, 1, 'system', NULL, '', 1, 0, 'M', '0', '0', '', 'system', 'admin', '2023-01-30 13:46:09', '', NULL,
-        '系统管理目录'),
-       ('系统监控', 0, 2, 'monitor', NULL, '', 1, 0, 'M', '0', '0', '', 'monitor', 'admin', '2023-01-30 13:46:09', '', NULL,
-        '系统监控目录'),
-       ('系统工具', 0, 3, 'tool', NULL, '', 1, 0, 'M', '0', '0', '', 'tool', 'admin', '2023-01-30 13:46:09', '', NULL,
-        '系统工具目录'),
-       ('若依官网', 0, 0, 'http://ruoyi.vip', NULL, '', 0, 0, 'M', '0', '0', '', 'guide', 'admin', '2023-01-30 13:46:09',
-        'SSSDNSY', '2023-03-24 09:28:59', '若依官网地址'),
-       ('用户管理', 1, 1, 'user', 'system/user/index', '', 1, 0, 'C', '0', '0', 'system:user:list', 'user', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '用户管理菜单'),
-       ('角色管理', 1, 2, 'role', 'system/role/index', '', 1, 0, 'C', '0', '0', 'system:role:list', 'peoples', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '角色管理菜单'),
-       ('菜单管理', 1, 3, 'menu', 'system/menu/index', '', 1, 0, 'C', '0', '0', 'system:menu:list', 'tree-table', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '菜单管理菜单'),
-       ('部门管理', 1, 4, 'dept', 'system/dept/index', '', 1, 0, 'C', '0', '0', 'system:dept:list', 'tree', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '部门管理菜单'),
-       ('岗位管理', 1, 5, 'post', 'system/post/index', '', 1, 0, 'C', '0', '0', 'system:post:list', 'post', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '岗位管理菜单'),
-       ('字典管理', 1, 6, 'dict', 'system/dict/index', '', 1, 0, 'C', '0', '0', 'system:dict:list', 'dict', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '字典管理菜单');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('参数设置', 1, 7, 'config', 'system/config/index', '', 1, 0, 'C', '0', '0', 'system:config:list', 'edit', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '参数设置菜单'),
-       ('通知公告', 1, 8, 'notice', 'system/notice/index', '', 1, 0, 'C', '0', '0', 'system:notice:list', 'message',
-        'admin', '2023-01-30 13:46:09', '', NULL, '通知公告菜单'),
-       ('日志管理', 1, 9, 'log', '', '', 1, 0, 'M', '0', '0', '', 'log', 'admin', '2023-01-30 13:46:09', '', NULL,
-        '日志管理菜单'),
-       ('在线用户', 2, 1, 'online', 'monitor/online/index', '', 1, 0, 'C', '0', '0', 'monitor:online:list', 'online',
-        'admin', '2023-01-30 13:46:09', '', NULL, '在线用户菜单'),
-       ('定时任务', 2, 2, 'job', 'monitor/job/index', '', 1, 0, 'C', '0', '0', 'monitor:job:list', 'job', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '定时任务菜单'),
-       ('数据监控', 2, 3, 'druid', 'monitor/druid/index', '', 1, 0, 'C', '0', '0', 'monitor:druid:list', 'druid', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '数据监控菜单'),
-       ('服务监控', 2, 4, 'server', 'monitor/server/index', '', 1, 0, 'C', '0', '0', 'monitor:server:list', 'server',
-        'admin', '2023-01-30 13:46:09', '', NULL, '服务监控菜单'),
-       ('缓存监控', 2, 5, 'cache', 'monitor/cache/index', '', 1, 0, 'C', '0', '0', 'monitor:cache:list', 'redis', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '缓存监控菜单'),
-       ('缓存列表', 2, 6, 'cacheList', 'monitor/cache/list', '', 1, 0, 'C', '0', '0', 'monitor:cache:list', 'redis-list',
-        'admin', '2023-01-30 13:46:09', '', NULL, '缓存列表菜单'),
-       ('表单构建', 3, 1, 'build', 'tool/build/index', '', 1, 0, 'C', '0', '0', 'tool:build:list', 'build', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '表单构建菜单');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('代码生成', 3, 2, 'gen', 'tool/gen/index', '', 1, 0, 'C', '0', '0', 'tool:gen:list', 'code', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '代码生成菜单'),
-       ('系统接口', 3, 3, 'swagger', 'tool/swagger/index', '', 1, 0, 'C', '0', '0', 'tool:swagger:list', 'swagger', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '系统接口菜单'),
-       ('操作日志', 108, 1, 'operlog', 'monitor/operlog/index', '', 1, 0, 'C', '0', '0', 'monitor:operlog:list', 'form.js',
-        'admin', '2023-01-30 13:46:09', '', NULL, '操作日志菜单'),
-       ('登录日志', 108, 2, 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list',
-        'logininfor', 'admin', '2023-01-30 13:46:09', '', NULL, '登录日志菜单'),
-       ('用户查询', 100, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:user:query', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('用户新增', 100, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:user:add', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('用户修改', 100, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('用户删除', 100, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('用户导出', 100, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:user:export', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('用户导入', 100, 6, '', '', '', 1, 0, 'F', '0', '0', 'system:user:import', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, '');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('重置密码', 100, 7, '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd', '#', 'admin', '2023-01-30 13:46:09',
-        '', NULL, ''),
-       ('角色查询', 101, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:role:query', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('角色新增', 101, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:role:add', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('角色修改', 101, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('角色删除', 101, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('角色导出', 101, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:role:export', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('菜单查询', 102, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('菜单新增', 102, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('菜单修改', 102, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('菜单删除', 102, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, '');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('部门查询', 103, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('部门新增', 103, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('部门修改', 103, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('部门删除', 103, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('岗位查询', 104, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:post:query', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('岗位新增', 104, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:post:add', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('岗位修改', 104, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('岗位删除', 104, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('岗位导出', 104, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:post:export', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('字典查询', 105, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, '');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('字典新增', 105, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('字典修改', 105, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('字典删除', 105, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('字典导出', 105, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('参数查询', 106, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query', '#', 'admin', '2023-01-30 13:46:09',
-        '', NULL, ''),
-       ('参数新增', 106, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('参数修改', 106, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('参数删除', 106, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove', '#', 'admin', '2023-01-30 13:46:09',
-        '', NULL, ''),
-       ('参数导出', 106, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export', '#', 'admin', '2023-01-30 13:46:09',
-        '', NULL, ''),
-       ('公告查询', 107, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:query', '#', 'admin', '2023-01-30 13:46:09',
-        '', NULL, '');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('公告新增', 107, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:add', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('公告修改', 107, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:edit', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('公告删除', 107, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:remove', '#', 'admin', '2023-01-30 13:46:09',
-        '', NULL, ''),
-       ('操作查询', 500, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query', '#', 'admin', '2023-01-30 13:46:09',
-        '', NULL, ''),
-       ('操作删除', 500, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove', '#', 'admin', '2023-01-30 13:46:09',
-        '', NULL, ''),
-       ('日志导出', 500, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:export', '#', 'admin', '2023-01-30 13:46:09',
-        '', NULL, ''),
-       ('登录查询', 501, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:query', '#', 'admin',
-        '2023-01-30 13:46:09', '', NULL, ''),
-       ('登录删除', 501, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:remove', '#', 'admin',
-        '2023-01-30 13:46:09', '', NULL, ''),
-       ('日志导出', 501, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:export', '#', 'admin',
-        '2023-01-30 13:46:09', '', NULL, ''),
-       ('账户解锁', 501, 4, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:unlock', '#', 'admin',
-        '2023-01-30 13:46:09', '', NULL, '');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('在线查询', 109, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query', '#', 'admin', '2023-01-30 13:46:09',
-        '', NULL, ''),
-       ('批量强退', 109, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin',
-        '2023-01-30 13:46:09', '', NULL, ''),
-       ('单条强退', 109, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'admin',
-        '2023-01-30 13:46:09', '', NULL, ''),
-       ('任务查询', 110, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('任务新增', 110, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('任务修改', 110, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('任务删除', 110, 4, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('状态修改', 110, 5, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus', '#', 'admin',
-        '2023-01-30 13:46:09', '', NULL, ''),
-       ('任务导出', 110, 6, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('生成查询', 116, 1, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, '');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('生成修改', 116, 2, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('生成删除', 116, 3, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('导入代码', 116, 4, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('预览代码', 116, 5, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('生成代码', 116, 6, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code', '#', 'admin', '2023-01-30 13:46:09', '',
-        NULL, ''),
-       ('配置管理', 0, 4, 'config', '', '', 1, 0, 'M', '0', '0', '', 'component', 'admin', '2023-01-25 12:00:23', 'admin',
-        '2023-01-25 13:18:04', ''),
-       ('配置列表', 2000, 1, 'config', 'config/conf/index', '', 1, 0, 'C', '0', '0', 'config:project:list', 'code', 'admin',
-        '2023-01-25 12:02:03', 'SSSDNSY', '2023-03-27 16:09:34', ''),
-       ('环境管理', 2000, 2, 'env', 'config/env/index', '', 1, 0, 'C', '0', '0', '', 'swagger', 'admin',
-        '2023-01-25 13:13:34', 'admin', '2023-01-25 13:14:35', ''),
-       ('项目管理', 2000, 3, 'project', 'config/project/index', '', 1, 0, 'C', '0', '0', '', 'example', 'admin',
-        '2023-01-25 13:14:09', '', NULL, ''),
-       ('编辑权限', 2001, 1, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:conf:edit', '#', 'SSSDNSY', '2023-03-27 16:08:02',
-        '', NULL, '');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('导出权限', 2001, 2, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:conf:export', '#', 'SSSDNSY',
-        '2023-03-27 16:08:48', '', NULL, ''),
-       ('查询权限', 2001, 3, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:conf:list', '#', 'admin', '2023-03-27 16:18:27',
-        '', NULL, ''),
-       ('编辑权限', 2002, 1, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:env:edit', '#', 'SSSDNSY', '2023-03-27 16:08:02',
-        '', NULL, ''),
-       ('导出权限', 2002, 2, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:env:export', '#', 'SSSDNSY',
-        '2023-03-27 16:08:48', '', NULL, ''),
-       ('查询权限', 2002, 3, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:env:list', '#', 'admin', '2023-03-27 16:18:27',
-        '', NULL, ''),
-       ('编辑权限', 2003, 1, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:project:edit', '#', 'SSSDNSY',
-        '2023-03-27 16:08:02', '', NULL, ''),
-       ('导出权限', 2003, 2, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:project:export', '#', 'SSSDNSY',
-        '2023-03-27 16:08:48', '', NULL, ''),
-       ('查询权限', 2003, 3, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:project:list', '#', 'admin',
-        '2023-03-27 16:18:27', '', NULL, ''),
-       ('流程管理', 0, 5, 'activiti', NULL, NULL, 1, 0, 'M', '0', '0', '', 'edit', 'SSSDNSY', '2023-06-23 18:17:20',
-        'admin', '2023-06-23 18:23:38', ''),
-       ('模型管理', 2015, 1, 'modelList', 'activiti/ModelList', NULL, 1, 0, 'C', '0', '0', '', 'documentation', 'admin',
-        '2023-06-23 19:41:08', 'admin', '2023-06-23 19:41:47', '');
-INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
-                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES ('流程编辑', 2015, 1, 'flowEditor', 'bpmn/flowEditor', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin',
-        '2023-06-23 19:41:08', 'admin', '2023-06-23 19:41:47',
-        '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	');
+
+
+-- 一级菜单
+insert into sys_menu values('1', '系统管理', '0', '1', 'system',           null, '', 1, 0, 'M', '0', '0', '', 'system',   'admin', sysdate(), '', null, '系统管理目录');
+insert into sys_menu values('2', '系统监控', '0', '2', 'monitor',          null, '', 1, 0, 'M', '0', '0', '', 'monitor',  'admin', sysdate(), '', null, '系统监控目录');
+insert into sys_menu values('3', '系统工具', '0', '3', 'tool',             null, '', 1, 0, 'M', '0', '0', '', 'tool',     'admin', sysdate(), '', null, '系统工具目录');
+insert into sys_menu values('4', '若依官网', '0', '4', 'http://ruoyi.vip', null, '', 0, 0, 'M', '0', '0', '', 'guide',    'admin', sysdate(), '', null, '若依官网地址');
+-- 二级菜单
+insert into sys_menu values('100',  '用户管理', '1',   '1', 'user',       'system/user/index',        '', 1, 0, 'C', '0', '0', 'system:user:list',        'user',          'admin', sysdate(), '', null, '用户管理菜单');
+insert into sys_menu values('101',  '角色管理', '1',   '2', 'role',       'system/role/index',        '', 1, 0, 'C', '0', '0', 'system:role:list',        'peoples',       'admin', sysdate(), '', null, '角色管理菜单');
+insert into sys_menu values('102',  '菜单管理', '1',   '3', 'menu',       'system/menu/index',        '', 1, 0, 'C', '0', '0', 'system:menu:list',        'tree-table',    'admin', sysdate(), '', null, '菜单管理菜单');
+insert into sys_menu values('103',  '部门管理', '1',   '4', 'dept',       'system/dept/index',        '', 1, 0, 'C', '0', '0', 'system:dept:list',        'tree',          'admin', sysdate(), '', null, '部门管理菜单');
+insert into sys_menu values('104',  '岗位管理', '1',   '5', 'post',       'system/post/index',        '', 1, 0, 'C', '0', '0', 'system:post:list',        'post',          'admin', sysdate(), '', null, '岗位管理菜单');
+insert into sys_menu values('105',  '字典管理', '1',   '6', 'dict',       'system/dict/index',        '', 1, 0, 'C', '0', '0', 'system:dict:list',        'dict',          'admin', sysdate(), '', null, '字典管理菜单');
+insert into sys_menu values('106',  '参数设置', '1',   '7', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'edit',          'admin', sysdate(), '', null, '参数设置菜单');
+insert into sys_menu values('107',  '通知公告', '1',   '8', 'notice',     'system/notice/index',      '', 1, 0, 'C', '0', '0', 'system:notice:list',      'message',       'admin', sysdate(), '', null, '通知公告菜单');
+insert into sys_menu values('108',  '日志管理', '1',   '9', 'log',        '',                         '', 1, 0, 'M', '0', '0', '',                        'log',           'admin', sysdate(), '', null, '日志管理菜单');
+insert into sys_menu values('109',  '在线用户', '2',   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'online',        'admin', sysdate(), '', null, '在线用户菜单');
+insert into sys_menu values('110',  '定时任务', '2',   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'job',           'admin', sysdate(), '', null, '定时任务菜单');
+insert into sys_menu values('111',  '数据监控', '2',   '3', 'druid',      'monitor/druid/index',      '', 1, 0, 'C', '0', '0', 'monitor:druid:list',      'druid',         'admin', sysdate(), '', null, '数据监控菜单');
+insert into sys_menu values('112',  '服务监控', '2',   '4', 'server',     'monitor/server/index',     '', 1, 0, 'C', '0', '0', 'monitor:server:list',     'server',        'admin', sysdate(), '', null, '服务监控菜单');
+insert into sys_menu values('113',  '缓存监控', '2',   '5', 'cache',      'monitor/cache/index',      '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis',         'admin', sysdate(), '', null, '缓存监控菜单');
+insert into sys_menu values('114',  '缓存列表', '2',   '6', 'cacheList',  'monitor/cache/list',       '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis-list',    'admin', sysdate(), '', null, '缓存列表菜单');
+insert into sys_menu values('115',  '表单构建', '3',   '1', 'build',      'tool/build/index',         '', 1, 0, 'C', '0', '0', 'tool:build:list',         'build',         'admin', sysdate(), '', null, '表单构建菜单');
+insert into sys_menu values('116',  '代码生成', '3',   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'code',          'admin', sysdate(), '', null, '代码生成菜单');
+insert into sys_menu values('117',  '系统接口', '3',   '3', 'swagger',    'tool/swagger/index',       '', 1, 0, 'C', '0', '0', 'tool:swagger:list',       'swagger',       'admin', sysdate(), '', null, '系统接口菜单');
+-- 三级菜单
+insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'admin', sysdate(), '', null, '操作日志菜单');
+insert into sys_menu values('501',  '登录日志', '108', '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'admin', sysdate(), '', null, '登录日志菜单');
+-- 用户管理按钮
+insert into sys_menu values('1000', '用户查询', '100', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:query',          '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1001', '用户新增', '100', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:add',            '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1002', '用户修改', '100', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit',           '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1003', '用户删除', '100', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove',         '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1004', '用户导出', '100', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:export',         '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1005', '用户导入', '100', '6',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:import',         '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1006', '重置密码', '100', '7',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd',       '#', 'admin', sysdate(), '', null, '');
+-- 角色管理按钮
+insert into sys_menu values('1007', '角色查询', '101', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:query',          '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1008', '角色新增', '101', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:add',            '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1009', '角色修改', '101', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit',           '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1010', '角色删除', '101', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove',         '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1011', '角色导出', '101', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:export',         '#', 'admin', sysdate(), '', null, '');
+-- 菜单管理按钮
+insert into sys_menu values('1012', '菜单查询', '102', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query',          '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1013', '菜单新增', '102', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add',            '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1014', '菜单修改', '102', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit',           '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1015', '菜单删除', '102', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove',         '#', 'admin', sysdate(), '', null, '');
+-- 部门管理按钮
+insert into sys_menu values('1016', '部门查询', '103', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query',          '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1017', '部门新增', '103', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add',            '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1018', '部门修改', '103', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit',           '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1019', '部门删除', '103', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove',         '#', 'admin', sysdate(), '', null, '');
+-- 岗位管理按钮
+insert into sys_menu values('1020', '岗位查询', '104', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:query',          '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1021', '岗位新增', '104', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:add',            '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1022', '岗位修改', '104', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit',           '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1023', '岗位删除', '104', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove',         '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1024', '岗位导出', '104', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:export',         '#', 'admin', sysdate(), '', null, '');
+-- 字典管理按钮
+insert into sys_menu values('1025', '字典查询', '105', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query',          '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1026', '字典新增', '105', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add',            '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1027', '字典修改', '105', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit',           '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1028', '字典删除', '105', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove',         '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1029', '字典导出', '105', '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export',         '#', 'admin', sysdate(), '', null, '');
+-- 参数设置按钮
+insert into sys_menu values('1030', '参数查询', '106', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query',        '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1031', '参数新增', '106', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add',          '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1032', '参数修改', '106', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit',         '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1033', '参数删除', '106', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove',       '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1034', '参数导出', '106', '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export',       '#', 'admin', sysdate(), '', null, '');
+-- 通知公告按钮
+insert into sys_menu values('1035', '公告查询', '107', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:query',        '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1036', '公告新增', '107', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:add',          '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1037', '公告修改', '107', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:edit',         '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1038', '公告删除', '107', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:remove',       '#', 'admin', sysdate(), '', null, '');
+-- 操作日志按钮
+insert into sys_menu values('1039', '操作查询', '500', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query',      '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1040', '操作删除', '500', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove',     '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1041', '日志导出', '500', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:export',     '#', 'admin', sysdate(), '', null, '');
+-- 登录日志按钮
+insert into sys_menu values('1042', '登录查询', '501', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:query',   '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1043', '登录删除', '501', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:remove',  '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1044', '日志导出', '501', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:export',  '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1045', '账户解锁', '501', '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:unlock',  '#', 'admin', sysdate(), '', null, '');
+-- 在线用户按钮
+insert into sys_menu values('1046', '在线查询', '109', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query',       '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1047', '批量强退', '109', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1048', '单条强退', '109', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'admin', sysdate(), '', null, '');
+-- 定时任务按钮
+insert into sys_menu values('1049', '任务查询', '110', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query',          '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1050', '任务新增', '110', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add',            '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1051', '任务修改', '110', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit',           '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1052', '任务删除', '110', '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove',         '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1053', '状态修改', '110', '5', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus',   '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1054', '任务导出', '110', '6', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export',         '#', 'admin', sysdate(), '', null, '');
+-- 代码生成按钮
+insert into sys_menu values('1055', '生成查询', '116', '1', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query',             '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1056', '生成修改', '116', '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit',              '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1057', '生成删除', '116', '3', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove',            '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1058', '导入代码', '116', '4', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import',            '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1059', '预览代码', '116', '5', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview',           '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1060', '生成代码', '116', '6', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code',              '#', 'admin', sysdate(), '', null, '');
+
+-- 自定义菜单
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2000, '配置管理', 0, 4, 'config', '', '', 1, 0, 'M', '0', '0', '', 'component', 'admin', '2023-01-25 12:00:23', 'admin', '2023-01-25 13:18:04', '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2001, '配置列表', 2000, 1, 'config', 'config/conf/index', '', 1, 0, 'C', '0', '0', 'config:project:list', 'code', 'admin', '2023-01-25 12:02:03', 'SSSDNSY', '2023-03-27 16:09:34', '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2002, '环境管理', 2000, 2, 'env', 'config/env/index', '', 1, 0, 'C', '0', '0', '', 'swagger', 'admin', '2023-01-25 13:13:34', 'admin', '2023-01-25 13:14:35', '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2003, '项目管理', 2000, 3, 'project', 'config/project/index', '', 1, 0, 'C', '0', '0', '', 'example', 'admin', '2023-01-25 13:14:09', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2004, '编辑权限', 2001, 1, '', '', '', 1, 0, 'F', '0', '0', 'config:conf:edit', '#', 'SSSDNSY', '2023-03-27 16:08:02', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2005, '导出权限', 2001, 2, '', '', '', 1, 0, 'F', '0', '0', 'config:conf:export', '#', 'SSSDNSY', '2023-03-27 16:08:48', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2006, '查询权限', 2001, 3, '', '', '', 1, 0, 'F', '0', '0', 'config:conf:list', '#', 'admin', '2023-03-27 16:18:27', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2007, '编辑权限', 2002, 1, '', '', '', 1, 0, 'F', '0', '0', 'config:env:edit', '#', 'SSSDNSY', '2023-03-27 16:08:02', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2008, '导出权限', 2002, 2, '', '', '', 1, 0, 'F', '0', '0', 'config:env:export', '#', 'SSSDNSY', '2023-03-27 16:08:48', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2009, '查询权限', 2002, 3, '', '', '', 1, 0, 'F', '0', '0', 'config:env:list', '#', 'admin', '2023-03-27 16:18:27', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2010, '编辑权限', 2003, 1, '', '', '', 1, 0, 'F', '0', '0', 'config:project:edit', '#', 'SSSDNSY', '2023-03-27 16:08:02', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2011, '导出权限', 2003, 2, '', '', '', 1, 0, 'F', '0', '0', 'config:project:export', '#', 'SSSDNSY', '2023-03-27 16:08:48', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2012, '查询权限', 2003, 3, '', '', '', 1, 0, 'F', '0', '0', 'config:project:list', '#', 'admin', '2023-03-27 16:18:27', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2015, '流程管理', 0, 10, 'flow', '', '', 1, 0, 'M', '0', '0', '', 'edit', 'SSSDNSY', '2023-06-23 18:17:20', 'admin', '2023-07-12 11:10:30', '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2016, '流程编辑', 2015, 1, 'flowEditor', 'bpmn/flow/definition/flowEditor', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2023-06-23 19:41:08', 'admin', '2023-07-12 11:09:36', '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2018, '表单管理', 0, 8, 'form', '', '', 1, 0, 'M', '0', '0', '', 'form', 'admin', '2023-07-06 19:53:27', 'admin', '2023-07-12 11:10:26', '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2019, '表单管理', 2018, 1, 'formManager', 'bpmn/form/FormManager', '', 1, 0, 'C', '0', '0', '', 'build', 'admin', '2023-07-06 19:56:51', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2020, '流程监控', 0, 15, 'flowMonitor', '', '', 1, 0, 'M', '0', '0', '', 'cascader', 'admin', '2023-07-12 11:11:44', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2021, '实例管理', 2020, 1, 'instManager', '/bpmn/inst/InstManager', '', 1, 0, 'C', '0', '0', '', 'druid', 'admin', '2023-07-12 11:13:45', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2022, '任务管理', 2020, 5, 'taskManager', 'bpmn/task/TaskManager', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2023-07-12 11:14:25', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2023, '统计分析', 2020, 15, 'statistics', 'bpmn/stat/Statistics', '', 1, 0, 'C', '0', '0', '', 'chart', 'admin', '2023-07-12 11:15:33', '', NULL, '');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2024, '流程设计', 2015, 1, 'flowDesigner', 'bpmn/flow/definition/index', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2023-06-23 19:41:08', 'admin', '2023-07-12 11:09:36', '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2025, '流程分类', 2015, 1, 'flowCategory', 'bpmn/flow/category/index', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2023-06-23 19:41:08', 'admin', '2023-07-12 11:09:36', '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	');
+INSERT INTO melon.sys_menu
+(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES(2026, '数据同步', 3, 10, 'dataSync', 'system/sync/index', '', 1, 0, 'C', '0', '0', '', 'server', 'admin', '2023-07-17 13:55:08', '', NULL, '');
+
+UPDATE melon.sys_menu
+SET `path`='knife4j',component='tool/knife4j/index'
+WHERE menu_id=117
+
 INSERT INTO melon.sys_notice (notice_title, notice_type, notice_content, status, create_by, create_time, update_by,
                               update_time, remark)
 VALUES ('温馨提醒：2018-07-01 若依新版本发布啦', '2', 0xE696B0E78988E69CACE58685E5AEB9, '0', 'admin', '2023-01-30 13:46:10', '',
