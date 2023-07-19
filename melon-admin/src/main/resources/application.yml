@@ -160,7 +160,7 @@ knife4j:
     version: @melon.version@
     license: GNU
     license-url: https://www.gnu.org/licenses/
-    terms-of-service-url: 127.0.0.1:8080/
+    terms-of-service-url: http://127.0.0.1:8080/
     group:
       test1:
         group-name: @melon.version@

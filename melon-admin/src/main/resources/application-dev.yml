@@ -62,6 +62,7 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+      name: localhost-dataSource
 
 # token配置
 token:
