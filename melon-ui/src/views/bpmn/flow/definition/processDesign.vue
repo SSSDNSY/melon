@@ -274,7 +274,6 @@
       box-sizing: border-box;
       overflow: hidden;
       overflow-y: auto;
-      padding-top: 20px;
       padding-bottom: 20px;
 
       .drawer-content {

@@ -4,18 +4,34 @@
       <slot name="control-header"></slot>
       <template v-if="!$slots['control-header']">
         <el-button-group key="file-control">
+          <el-button
+            class="red-btn"
+            :size="headerButtonSize"
+            :type="headerButtonType"
+            icon="el-icon-setting"
+            @click="$refs.refFile.click()">流程属性
+          </el-button>
           <el-tooltip class="item" effect="dark" content="保存并发布" placement="bottom">
-            <el-button type="primary" size="mini" @click="deploy"
-              ><i class="fa fa-save"> 保存并发布</i></el-button
-            >
+            <el-button type="primary" size="mini" @click="deploy">
+              <i class="fa fa-save"> 保存并发布</i>
+            </el-button>
           </el-tooltip>
           <el-button
             :size="headerButtonSize"
             :type="headerButtonType"
             icon="el-icon-folder-opened"
             @click="$refs.refFile.click()"
-            >打开文件</el-button
-          >
+            >打开文件</el-button>
+          <el-tooltip class="item" effect="dark" content="下载文件" placement="bottom">
+            <el-button type="primary" size="mini" @click="deploy">
+              <i class="fa fa-download"> 下载文件</i>
+            </el-button>
+          </el-tooltip>
+          <el-tooltip class="item" effect="dark" content="预览" placement="bottom">
+            <el-button type="primary" size="mini" @click="deploy">
+              <i class="fa fa-eye"> 预览</i>
+            </el-button>
+          </el-tooltip>
         </el-button-group>
         <el-button-group key="align-control">
           <el-tooltip effect="light" content="向左对齐">
