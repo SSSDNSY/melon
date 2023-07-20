@@ -1,6 +1,5 @@
 package fun.sssdnsy.web.controller.system;
 
-import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
 import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.service.ISysDataSyncService;
@@ -32,8 +31,8 @@ public class SysDataSyncController extends BaseController {
      * 通用添加数据源
      */
     @PostMapping("/add")
-    public AjaxResult add(@RequestBody DataSourceProperty property) {
-        return AjaxResult.success(dataSyncService.addDataSource(property));
+    public AjaxResult add() {
+        return AjaxResult.success(dataSyncService.addDataSource());
     }
 
     /**

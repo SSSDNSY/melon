@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 /**
- * @Desc 公告字段拦截器
+ * @Desc 公共字段拦截器
  * @Author pengzh
  * @Since 2023-03-30
  */
@@ -38,7 +38,7 @@ public class MybatisInterceptor implements Interceptor {
     }
 
     /**
-     * 填充创建、修改公共信息
+     * 填充创建、修改信息
      */
     private void fillField(Invocation invocation) {
         MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];

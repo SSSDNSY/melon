@@ -1,8 +1,5 @@
 package fun.sssdnsy.service;
 
-import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
-import fun.sssdnsy.domain.SysHome;
-
 import java.util.Map;
 
 /**
@@ -21,7 +18,7 @@ public interface ISysDataSyncService {
     /**
      * 新增数据源
      */
-    Map addDataSource(DataSourceProperty property);
+    Map addDataSource();
 
     /**
      * 删除数据源

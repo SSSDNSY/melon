@@ -16,6 +16,9 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.ClassUtils;
 
 import javax.sql.DataSource;
@@ -31,15 +34,20 @@ import java.util.List;
  * @author sssdnsy
  */
 @Configuration
+@EnableTransactionManagement
 public class MyBatisConfig {
     static final String DEFAULT_RESOURCE_PATTERN = "**/*.class";
+
+    @javax.annotation.Resource(name = "dynamicDataSource")
+    private DataSource dynamicDataSource;
+
     @Autowired
     private Environment env;
 
     public static String setTypeAliasesPackage(String typeAliasesPackage) {
-        ResourcePatternResolver resolver = (ResourcePatternResolver) new PathMatchingResourcePatternResolver();
-        MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory(resolver);
-        List<String> allResult = new ArrayList<String>();
+        ResourcePatternResolver resolver              = (ResourcePatternResolver) new PathMatchingResourcePatternResolver();
+        MetadataReaderFactory   metadataReaderFactory = new CachingMetadataReaderFactory(resolver);
+        List<String>            allResult             = new ArrayList<String>();
         try {
             for (String aliasesPackage : typeAliasesPackage.split(",")) {
                 List<String> result = new ArrayList<String>();
@@ -77,7 +85,7 @@ public class MyBatisConfig {
 
     public Resource[] resolveMapperLocations(String[] mapperLocations) {
         ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
-        List<Resource> resources = new ArrayList<Resource>();
+        List<Resource>          resources        = new ArrayList<Resource>();
         if (mapperLocations != null) {
             for (String mapperLocation : mapperLocations) {
                 try {
@@ -92,18 +100,25 @@ public class MyBatisConfig {
     }
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
         String typeAliasesPackage = env.getProperty("mybatis.typeAliasesPackage");
-        String mapperLocations = env.getProperty("mybatis.mapperLocations");
-        String configLocation = env.getProperty("mybatis.configLocation");
+        String mapperLocations    = env.getProperty("mybatis.mapperLocations");
+        String configLocation     = env.getProperty("mybatis.configLocation");
         typeAliasesPackage = setTypeAliasesPackage(typeAliasesPackage);
         VFS.addImplClass(SpringBootVFS.class);
-
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource);
+        //使用动态数据源
+        sessionFactory.setDataSource(dynamicDataSource);
         sessionFactory.setTypeAliasesPackage(typeAliasesPackage);
         sessionFactory.setMapperLocations(resolveMapperLocations(StringUtils.split(mapperLocations, ",")));
         sessionFactory.setConfigLocation(new DefaultResourceLoader().getResource(configLocation));
         return sessionFactory.getObject();
     }
+
+    @Bean
+    public PlatformTransactionManager platformTransactionManager() {
+        //使用动态数据源
+        return new DataSourceTransactionManager(dynamicDataSource);
+    }
+
 }

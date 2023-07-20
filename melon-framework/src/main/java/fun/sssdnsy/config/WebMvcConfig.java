@@ -2,6 +2,7 @@ package fun.sssdnsy.config;
 
 
 import fun.sssdnsy.constant.Constants;
+import fun.sssdnsy.interceptor.DataSourceInterceptor;
 import fun.sssdnsy.interceptor.RepeatSubmitInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +23,12 @@ import java.util.concurrent.TimeUnit;
  * @author sssdnsy
  */
 @Configuration
-public class ResourcesConfig implements WebMvcConfigurer {
+public class WebMvcConfig implements WebMvcConfigurer {
     @Resource
     private RepeatSubmitInterceptor repeatSubmitInterceptor;
+
+    @Resource
+    private DataSourceInterceptor dataSourceInterceptor;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -45,6 +49,7 @@ public class ResourcesConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(repeatSubmitInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(dataSourceInterceptor).addPathPatterns("/**");
     }
 
     /**

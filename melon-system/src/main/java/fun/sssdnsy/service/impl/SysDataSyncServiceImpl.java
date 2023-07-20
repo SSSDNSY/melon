@@ -1,21 +1,13 @@
 package fun.sssdnsy.service.impl;
 
-import com.baomidou.dynamic.datasource.creator.DataSourceCreator;
-import com.baomidou.dynamic.datasource.provider.DynamicDataSourceProvider;
-import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
-import fun.sssdnsy.config.DynamicDataSource;
 import fun.sssdnsy.service.ISysDataSyncService;
-import fun.sssdnsy.utils.spring.SpringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import static fun.sssdnsy.utils.sql.DataSourceUtil.addDataSourceToDynamic;
 
 /**
  * @Desc 数据同步 服务层实现
@@ -39,7 +31,7 @@ public class SysDataSyncServiceImpl implements ISysDataSyncService {
     }
 
     @Override
-    public Map addDataSource(DataSourceProperty dataSourceProperty) {
+    public Map addDataSource() {
 //        DynamicRoutingDataSource dataSource = new DynamicRoutingDataSource();
 //
 //        dataSourceProperty.setDriverClassName("com.mysql.cj.jdbc.Driver");
@@ -49,7 +41,6 @@ public class SysDataSyncServiceImpl implements ISysDataSyncService {
 //        dataSourceProperty.setPassword("imi123");
 //        dataSource = (DynamicRoutingDataSource) dataSourceCreator.createDataSource(dataSourceProperty);
 //        dataSource.addDataSource("sssdnsy-dataSource", dataSource);
-        addDataSourceToDynamic("sssdnsy-dataSource", "localhost", 3306, null, "melon", "root", "imi123");
         return null;
     }
 
@@ -61,7 +52,7 @@ public class SysDataSyncServiceImpl implements ISysDataSyncService {
     }
 
     public Map<Object, DataSource> getDynamicRoutingDataSource() {
-        return SpringUtils.getBean(DynamicDataSource.class).getResolvedDataSources();
+        return null;
     }
 
 
