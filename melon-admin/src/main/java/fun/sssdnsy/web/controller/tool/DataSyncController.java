@@ -1,4 +1,4 @@
-package fun.sssdnsy.web.controller.system;
+package fun.sssdnsy.web.controller.tool;
 
 import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/system/data")
-public class SysDataSyncController extends BaseController {
+public class DataSyncController extends BaseController {
     @Resource
     private ISysDataSyncService dataSyncService;
 
