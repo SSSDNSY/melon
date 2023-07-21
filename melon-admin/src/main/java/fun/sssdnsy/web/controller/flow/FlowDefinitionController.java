@@ -59,8 +59,8 @@ public class FlowDefinitionController extends BaseController {
      * 流程发布
      */
     @PostMapping(value = "/deployWithBPMNJS")
-    public AjaxResult deployWithBPMNJS(@RequestParam String stringBPMNXml) {
-        flowDefinitionService.deployWithBPMNJS(stringBPMNXml);
+    public AjaxResult deployWithBPMNJS(@RequestBody String bpmnXmlStr) {
+        flowDefinitionService.deployWithBPMNJS(bpmnXmlStr);
         return AjaxResult.success();
     }
 
