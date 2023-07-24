@@ -1,10 +1,13 @@
 package fun.sssdnsy.utils;
 
+import cn.hutool.core.util.StrUtil;
 import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.core.text.StrFormatter;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.*;
+
+import static cn.hutool.core.text.CharPool.UNDERLINE;
 
 /**
  * 字符串工具类
@@ -15,12 +18,12 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 空字符串
      */
-    private static final String NULLSTR = "";
+    private static final String NULLSTR = EMPTY;
 
     /**
      * 下划线
      */
-    private static final char SEPARATOR = '_';
+    private static final char SEPARATOR = UNDERLINE;
 
     /**
      * 获取参数不为空值
@@ -424,8 +427,8 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             return s;
         }
         s = s.toLowerCase();
-        StringBuilder sb        = new StringBuilder(s.length());
-        boolean       upperCase = false;
+        StringBuilder sb = new StringBuilder(s.length());
+        boolean upperCase = false;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
 
@@ -517,5 +520,15 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 获取参数不为空值
+     *
+     * @param str defaultValue 要判断的value
+     * @return value 返回值
+     */
+    public static String blankToDefault(String str, String defaultValue) {
+        return StrUtil.blankToDefault(str, defaultValue);
     }
 }

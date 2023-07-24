@@ -47,17 +47,25 @@
             <artifactId>oshi-core</artifactId>
         </dependency>
 
-        <!-- 系统模块-->
-        <dependency>
-            <groupId>fun.sssdnsy</groupId>
-            <artifactId>melon-system</artifactId>
-        </dependency>
+
+
         <!-- WebSocket -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+        <!-- 公共模块-->
+        <dependency>
+            <groupId>fun.sssdnsy</groupId>
+            <artifactId>melon-common</artifactId>
+        </dependency>
+
+        <!-- 系统模块-->
+        <dependency>
+            <groupId>fun.sssdnsy</groupId>
+            <artifactId>melon-system</artifactId>
+        </dependency>
 
     </dependencies>
 

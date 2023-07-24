@@ -18,7 +18,8 @@ public @interface RepeatSubmit {
     public int interval() default 5000;
 
     /**
-     * 提示消息
+     * 提示消息 支持国际化 格式为 {code}
      */
-    public String message() default "不允许重复提交，请稍候再试";
+    String message() default "{repeat.submit.message}";
+
 }

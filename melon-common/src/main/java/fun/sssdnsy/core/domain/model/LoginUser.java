@@ -122,6 +122,14 @@ public class LoginUser implements UserDetails {
     }
 
     /**
+     * 账户是否管理员
+     */
+    @JSONField(serialize = false)
+    public boolean isAdmin() {
+        return user.isAdmin();
+    }
+
+    /**
      * 账户是否未过期,过期无法验证
      */
     @JSONField(serialize = false)
