@@ -1,7 +1,5 @@
 package fun.sssdnsy.core.controller;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import fun.sssdnsy.constant.HttpStatus;
 import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.core.domain.model.LoginUser;
@@ -28,8 +26,8 @@ import java.util.List;
  * @author sssdnsy
  */
 public class BaseController {
-    public static final String MSG = "查询成功";
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    public static final String MSG    = "查询成功";
+    protected final     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 将前台传递过来的日期格式的字符串，自动转化为Date类型
@@ -59,7 +57,7 @@ public class BaseController {
         PageDomain pageDomain = TableSupport.buildPageRequest();
         if (StringUtils.isNotEmpty(pageDomain.getOrderBy())) {
             String orderBy = SqlUtil.escapeOrderBySql(pageDomain.getOrderBy());
-            PageHelper.orderBy(orderBy);
+            // TODO   PageHelper.orderBy(orderBy);
         }
     }
 
@@ -79,7 +77,7 @@ public class BaseController {
         rspData.setCode(HttpStatus.SUCCESS);
         rspData.setMsg(MSG);
         rspData.setRows(list);
-        rspData.setTotal(new PageInfo(list).getTotal());
+        // TODO rspData.setTotal(new PageInfo(list).getTotal());
         return rspData;
     }
 

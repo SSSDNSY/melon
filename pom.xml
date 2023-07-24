@@ -67,7 +67,7 @@
         <redisson.version>3.20.0</redisson.version>
         <lock4j.version>2.2.3</lock4j.version>
         <easyexcel.version>3.2.1</easyexcel.version>
-
+        <alibaba-ttl.version>2.14.2</alibaba-ttl.version>
     </properties>
 
     <!-- ==========================依赖声明========================== -->
@@ -140,6 +140,12 @@
                         <artifactId>poi-ooxml-schemas</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${alibaba-ttl.version}</version>
             </dependency>
 
             <!-- hutool工具 -->

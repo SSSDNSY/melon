@@ -7,10 +7,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
-import com.ruoyi.common.annotation.Translation;
-import com.ruoyi.common.translation.TranslationInterface;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.utils.reflect.ReflectUtils;
+import fun.sssdnsy.annotation.Translation;
+import fun.sssdnsy.translation.TranslationInterface;
+import fun.sssdnsy.utils.StringUtils;
+import fun.sssdnsy.utils.reflect.ReflectUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;

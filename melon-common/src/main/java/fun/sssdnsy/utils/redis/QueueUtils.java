@@ -1,6 +1,6 @@
 package fun.sssdnsy.utils.redis;
 
-import com.ruoyi.common.utils.spring.SpringUtils;
+import fun.sssdnsy.utils.spring.SpringUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.redisson.api.*;

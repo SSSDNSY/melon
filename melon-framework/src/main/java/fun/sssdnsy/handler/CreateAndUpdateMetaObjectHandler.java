@@ -3,11 +3,11 @@ package fun.sssdnsy.handler;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.HttpStatus;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.ruoyi.common.core.domain.BaseEntity;
-import com.ruoyi.common.core.domain.model.LoginUser;
-import com.ruoyi.common.exception.ServiceException;
-import com.ruoyi.common.helper.LoginHelper;
-import com.ruoyi.common.utils.StringUtils;
+import fun.sssdnsy.core.domain.BaseEntity;
+import fun.sssdnsy.core.domain.model.LoginUser;
+import fun.sssdnsy.exception.ServiceException;
+import fun.sssdnsy.utils.SecurityUtils;
+import fun.sssdnsy.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 
@@ -68,7 +68,7 @@ public class CreateAndUpdateMetaObjectHandler implements MetaObjectHandler {
     private String getLoginUsername() {
         LoginUser loginUser;
         try {
-            loginUser = LoginHelper.getLoginUser();
+            loginUser = SecurityUtils.getLoginUser();
         } catch (Exception e) {
             log.warn("自动注入警告 => 用户未登录");
             return null;

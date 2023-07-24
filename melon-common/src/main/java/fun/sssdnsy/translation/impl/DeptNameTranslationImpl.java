@@ -1,9 +1,9 @@
 package fun.sssdnsy.translation.impl;
 
-import com.ruoyi.common.annotation.TranslationType;
-import com.ruoyi.common.constant.TransConstant;
-import com.ruoyi.common.core.service.DeptService;
-import com.ruoyi.common.translation.TranslationInterface;
+import fun.sssdnsy.annotation.TranslationType;
+import fun.sssdnsy.constant.TransConstant;
+import fun.sssdnsy.core.service.DeptService;
+import fun.sssdnsy.translation.TranslationInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

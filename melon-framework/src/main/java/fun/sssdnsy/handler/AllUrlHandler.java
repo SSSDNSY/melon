@@ -1,7 +1,7 @@
 package fun.sssdnsy.handler;
 
 import cn.hutool.core.util.ReUtil;
-import com.ruoyi.common.utils.spring.SpringUtils;
+import fun.sssdnsy.utils.spring.SpringUtils;
 import lombok.Data;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
