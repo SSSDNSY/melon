@@ -18,9 +18,9 @@ import org.springframework.stereotype.Component;
 @TranslationType(type = TransConstant.OSS_ID_TO_URL)
 public class OssUrlTranslationImpl implements TranslationInterface<String> {
 
-    private final OssService ossService;
+    //private final OssService ossService;
 
     public String translation(Object key, String other) {
-        return ossService.selectUrlByIds(key.toString());
+        return null;
     }
 }

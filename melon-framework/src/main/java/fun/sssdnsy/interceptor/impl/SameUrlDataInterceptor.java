@@ -3,7 +3,7 @@ package fun.sssdnsy.interceptor.impl;
 import com.alibaba.fastjson2.JSON;
 import fun.sssdnsy.annotation.RepeatSubmit;
 import fun.sssdnsy.constant.CacheConstants;
-import fun.sssdnsy.core.redis.RedisCache;
+import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.filter.RepeatedlyRequestWrapper;
 import fun.sssdnsy.interceptor.RepeatSubmitInterceptor;
 import fun.sssdnsy.utils.StringUtils;

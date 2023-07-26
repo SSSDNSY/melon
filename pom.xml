@@ -31,15 +31,14 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.test.skip>true</maven.test.skip>
-
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
-        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-
         <!--maven.build.timestamp保存了maven编译时间戳-->
         <timestamp>${maven.build.timestamp}</timestamp>
         <!--指定时间格式-->
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
+        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+
         <springboot.dependencies.version>2.7.9</springboot.dependencies.version>
         <melon.version>1.0.0</melon.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,7 +51,7 @@
         <bitwalker.version>1.21</bitwalker.version>
         <knife4j.version>4.1.0</knife4j.version>
         <kaptcha.version>2.3.3</kaptcha.version>
-        <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
+        <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
         <fastjson.version>2.0.34</fastjson.version>
         <oshi.version>6.4.3</oshi.version>
         <commons.io.version>2.11.0</commons.io.version>
@@ -64,7 +63,7 @@
         <lombok.version>1.18.26</lombok.version>
         <hutool.version>5.8.15</hutool.version>
         <okhttp.version>4.10.0</okhttp.version>
-        <redisson.version>3.20.0</redisson.version>
+        <redisson.version>3.23.1</redisson.version>
         <lock4j.version>2.2.3</lock4j.version>
         <easyexcel.version>3.2.1</easyexcel.version>
         <alibaba-ttl.version>2.14.2</alibaba-ttl.version>
@@ -122,6 +121,13 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons.io.version}</version>
+            </dependency>
+
+            <!-- pagehelper 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.boot.version}</version>
             </dependency>
 
             <!-- excel工具 -->

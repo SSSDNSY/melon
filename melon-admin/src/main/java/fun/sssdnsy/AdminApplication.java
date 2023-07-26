@@ -2,6 +2,7 @@ package fun.sssdnsy;
 
 import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;
@@ -23,7 +24,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ComponentScan({"fun.sssdnsy","fun.sssdnsy.web.controller"})
 public class AdminApplication {
     public static void main(String[] args) {
-        System.setProperty("spring.devtools.restart.enabled", "false");
+        System.setProperty("pagehelper.banner", "false");
         SpringApplication application = new SpringApplication(AdminApplication.class);
         application.setApplicationStartup(new BufferingApplicationStartup(2048));
         application.run(args);

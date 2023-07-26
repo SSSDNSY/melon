@@ -3,7 +3,7 @@ package fun.sssdnsy.web.service;
 import fun.sssdnsy.constant.CacheConstants;
 import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.core.domain.entity.SysUser;
-import fun.sssdnsy.core.redis.RedisCache;
+import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.exception.user.UserPasswordNotMatchException;
 import fun.sssdnsy.exception.user.UserPasswordRetryLimitExceedException;
 import fun.sssdnsy.manager.AsyncManager;

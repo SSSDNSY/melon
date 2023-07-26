@@ -14,7 +14,7 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 
 /**
- * @author fun.pengzh
+ * @author fun.sssdnsy
  * @class fun.sssdnsy.listener.ApplicationReadyLogEventListener
  * @desc 启动事件打印
  * @since 2023-01-18

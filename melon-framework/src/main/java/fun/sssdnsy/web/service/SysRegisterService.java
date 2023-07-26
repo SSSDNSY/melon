@@ -5,7 +5,7 @@ import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.constant.UserConstants;
 import fun.sssdnsy.core.domain.entity.SysUser;
 import fun.sssdnsy.core.domain.model.RegisterBody;
-import fun.sssdnsy.core.redis.RedisCache;
+import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.exception.user.CaptchaException;
 import fun.sssdnsy.exception.user.CaptchaExpireException;
 import fun.sssdnsy.manager.AsyncManager;

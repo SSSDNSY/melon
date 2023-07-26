@@ -1,5 +1,6 @@
 package fun.sssdnsy.mapper;
 
+import fun.sssdnsy.core.mapper.BaseMapperPlus;
 import fun.sssdnsy.domain.SysJobLog;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author sssdnsy
  */
-public interface SysJobLogMapper {
+public interface SysJobLogMapper extends BaseMapperPlus<SysJobLogMapper, SysJobLog, SysJobLog> {
     /**
      * 获取quartz调度器日志的计划任务
      *

@@ -14,7 +14,7 @@
     <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
     <method v="2">
       <option name="Make" enabled="true" />
-      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="git-commit-id:revision" />
+      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="resources:copy-resources" />
     </method>
   </configuration>
 </component>

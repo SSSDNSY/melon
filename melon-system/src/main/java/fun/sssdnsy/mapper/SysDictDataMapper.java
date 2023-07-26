@@ -1,6 +1,7 @@
 package fun.sssdnsy.mapper;
 
 import fun.sssdnsy.core.domain.entity.SysDictData;
+import fun.sssdnsy.core.mapper.BaseMapperPlus;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * @author sssdnsy
  */
-public interface SysDictDataMapper {
+public interface SysDictDataMapper extends BaseMapperPlus<SysDictDataMapper, SysDictData, SysDictData> {
     /**
      * 根据条件分页查询字典数据
      *

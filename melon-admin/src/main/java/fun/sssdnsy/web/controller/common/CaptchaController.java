@@ -5,7 +5,7 @@ import fun.sssdnsy.config.Config;
 import fun.sssdnsy.constant.CacheConstants;
 import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.core.domain.AjaxResult;
-import fun.sssdnsy.core.redis.RedisCache;
+import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.service.ISysConfigService;
 import fun.sssdnsy.utils.sign.Base64;
 import fun.sssdnsy.utils.uuid.IdUtils;

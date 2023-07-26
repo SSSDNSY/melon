@@ -1,5 +1,8 @@
 package fun.sssdnsy.core.page;
 
+import cn.hutool.http.HttpStatus;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -46,6 +49,15 @@ public class TableDataInfo implements Serializable {
     public TableDataInfo(List<?> list, int total) {
         this.rows = list;
         this.total = total;
+    }
+
+    public static TableDataInfo build(IPage page) {
+        TableDataInfo rspData = new TableDataInfo();
+        rspData.setCode(HttpStatus.HTTP_OK);
+        rspData.setMsg("查询成功");
+        rspData.setRows(page.getRecords());
+        rspData.setTotal(page.getTotal());
+        return rspData;
     }
 
     public long getTotal() {

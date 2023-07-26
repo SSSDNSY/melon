@@ -15,6 +15,61 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
+        <xerces.version>2.11.0</xerces.version>
+        <batik.version>1.10</batik.version>
+        <commons.io.version>2.11.0</commons.io.version>
+    </properties>
+    <dependencies>
+        <!--activiti6.0-->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter-rest-api</artifactId>
+        </dependency>
+
+        <!-- java绘制activiti流程图 -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-image-generator</artifactId>
+        </dependency>
+
+        <!-- activiti json转换器-->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-json-converter</artifactId>
+        </dependency>
+
+        <!-- svg转png图片工具-->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-all</artifactId>
+            <version>${batik.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>xalan</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--解决部署xml错误-->
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>${xerces.version}</version>
+        </dependency>
+
+        <!-- excel下载失败问题处理-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+
+        <!--系统模块-->
+        <dependency>
+            <groupId>fun.sssdnsy</groupId>
+            <artifactId>melon-system</artifactId>
+        </dependency>
+    </dependencies>
 </project>

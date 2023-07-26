@@ -1,10 +1,16 @@
 package fun.sssdnsy.utils.poi;
 
+import cn.hutool.core.util.IdUtil;
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
+import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import fun.sssdnsy.annotation.Excel;
 import fun.sssdnsy.annotation.Excels;
 import fun.sssdnsy.config.Config;
+import fun.sssdnsy.convert.ExcelBigNumberConvert;
 import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.core.text.Convert;
+import fun.sssdnsy.excel.CellMergeStrategy;
 import fun.sssdnsy.exception.UtilException;
 import fun.sssdnsy.utils.DateUtils;
 import fun.sssdnsy.utils.DictUtils;
@@ -28,6 +34,7 @@ import org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.Field;
@@ -544,6 +551,59 @@ public class ExcelUtil<T> {
         response.setCharacterEncoding("utf-8");
         this.init(list, sheetName, title, Excel.Type.EXPORT);
         exportExcel(response);
+    }
+
+
+    /**
+     * 导出excel
+     *
+     * @param list      导出数据集合
+     * @param sheetName 工作表的名称
+     * @param clazz     实体类
+     * @param response  响应体
+     */
+    public static <T> void exportExcel(List<T> list, String sheetName, Class<T> clazz, HttpServletResponse response) {
+        try {
+            resetResponse(sheetName, response);
+            ServletOutputStream os = response.getOutputStream();
+            exportExcel(list, sheetName, clazz, false, os);
+        } catch (IOException e) {
+            throw new RuntimeException("导出Excel异常");
+        }
+    }
+
+    /**
+     * 重置响应体
+     */
+    private static void resetResponse(String sheetName, HttpServletResponse response) throws UnsupportedEncodingException {
+        String filename = encodingFilename(sheetName);
+        FileUtils.setAttachmentResponseHeader(response, filename);
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8");
+    }
+
+
+    /**
+     * 导出excel
+     *
+     * @param list      导出数据集合
+     * @param sheetName 工作表的名称
+     * @param clazz     实体类
+     * @param merge     是否合并单元格
+     * @param os        输出流
+     */
+    public static <T> void exportExcel(List<T> list, String sheetName, Class<T> clazz, boolean merge, OutputStream os) {
+        ExcelWriterSheetBuilder builder = EasyExcel.write(os, clazz)
+                .autoCloseStream(false)
+                // 自动适配
+                .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy())
+                // 大数值自动转换 防止失真
+                .registerConverter(new ExcelBigNumberConvert())
+                .sheet(sheetName);
+        if (merge) {
+            // 合并处理器
+            builder.registerWriteHandler(new CellMergeStrategy(list, true));
+        }
+        builder.doWrite(list);
     }
 
     /**
@@ -1106,7 +1166,7 @@ public class ExcelUtil<T> {
     /**
      * 编码文件名
      */
-    public String encodingFilename(String filename) {
+    public static String encodingFilename(String filename) {
         filename = UUID.randomUUID().toString() + "_" + filename + ".xlsx";
         return filename;
     }

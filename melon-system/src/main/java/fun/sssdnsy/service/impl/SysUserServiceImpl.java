@@ -1,9 +1,12 @@
 package fun.sssdnsy.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import fun.sssdnsy.annotation.DataScope;
 import fun.sssdnsy.constant.UserConstants;
 import fun.sssdnsy.core.domain.entity.SysRole;
 import fun.sssdnsy.core.domain.entity.SysUser;
+import fun.sssdnsy.core.service.UserService;
 import fun.sssdnsy.domain.SysPost;
 import fun.sssdnsy.domain.SysUserPost;
 import fun.sssdnsy.domain.SysUserRole;
@@ -17,6 +20,7 @@ import fun.sssdnsy.utils.bean.BeanValidators;
 import fun.sssdnsy.utils.spring.SpringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -33,7 +37,7 @@ import java.util.stream.Collectors;
  * @author sssdnsy
  */
 @Service
-public class SysUserServiceImpl implements ISysUserService {
+public class SysUserServiceImpl implements ISysUserService, UserService {
     private static final Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
     @Resource
     protected Validator validator;
@@ -475,5 +479,12 @@ public class SysUserServiceImpl implements ISysUserService {
             successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
         }
         return successMsg.toString();
+    }
+
+    @Override
+    public String selectUserNameById(Long userId) {
+        SysUser sysUser = userMapper.selectOne(new LambdaQueryWrapper<SysUser>()
+                .select(SysUser::getUserName).eq(SysUser::getUserId, userId));
+        return ObjectUtil.isNull(sysUser) ? null : sysUser.getUserName();
     }
 }

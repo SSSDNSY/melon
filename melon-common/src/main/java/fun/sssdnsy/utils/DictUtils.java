@@ -3,7 +3,7 @@ package fun.sssdnsy.utils;
 import com.alibaba.fastjson2.JSONArray;
 import fun.sssdnsy.constant.CacheConstants;
 import fun.sssdnsy.core.domain.entity.SysDictData;
-import fun.sssdnsy.core.redis.RedisCache;
+import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.utils.spring.SpringUtils;
 
 import java.util.Collection;

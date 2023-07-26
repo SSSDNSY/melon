@@ -42,7 +42,6 @@ import java.util.concurrent.ConcurrentMap;
  * @author Nikita Koksharov
  *
  */
-@SuppressWarnings("unchecked")
 public class PlusSpringCacheManager implements CacheManager {
 
     private boolean dynamic = true;

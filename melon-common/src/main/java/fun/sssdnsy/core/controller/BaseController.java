@@ -1,5 +1,7 @@
 package fun.sssdnsy.core.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import fun.sssdnsy.constant.HttpStatus;
 import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.core.domain.model.LoginUser;
@@ -57,7 +59,7 @@ public class BaseController {
         PageDomain pageDomain = TableSupport.buildPageRequest();
         if (StringUtils.isNotEmpty(pageDomain.getOrderBy())) {
             String orderBy = SqlUtil.escapeOrderBySql(pageDomain.getOrderBy());
-            // TODO   PageHelper.orderBy(orderBy);
+            PageHelper.orderBy(orderBy);
         }
     }
 
@@ -77,7 +79,7 @@ public class BaseController {
         rspData.setCode(HttpStatus.SUCCESS);
         rspData.setMsg(MSG);
         rspData.setRows(list);
-        // TODO rspData.setTotal(new PageInfo(list).getTotal());
+        rspData.setTotal(new PageInfo(list).getTotal());
         return rspData;
     }
 

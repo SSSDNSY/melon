@@ -4,7 +4,7 @@ import eu.bitwalker.useragentutils.UserAgent;
 import fun.sssdnsy.constant.CacheConstants;
 import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.core.domain.model.LoginUser;
-import fun.sssdnsy.core.redis.RedisCache;
+import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.utils.ServletUtils;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.ip.AddressUtils;

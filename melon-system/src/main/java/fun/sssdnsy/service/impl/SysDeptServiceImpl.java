@@ -1,11 +1,13 @@
 package fun.sssdnsy.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import fun.sssdnsy.annotation.DataScope;
 import fun.sssdnsy.constant.UserConstants;
 import fun.sssdnsy.core.domain.TreeSelect;
 import fun.sssdnsy.core.domain.entity.SysDept;
 import fun.sssdnsy.core.domain.entity.SysRole;
 import fun.sssdnsy.core.domain.entity.SysUser;
+import fun.sssdnsy.core.service.DeptService;
 import fun.sssdnsy.core.text.Convert;
 import fun.sssdnsy.exception.ServiceException;
 import fun.sssdnsy.mapper.SysDeptMapper;
@@ -22,18 +24,38 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.baomidou.mybatisplus.core.toolkit.StringPool.COMMA;
+
 /**
  * 部门管理 服务实现
  *
  * @author sssdnsy
  */
 @Service
-public class SysDeptServiceImpl implements ISysDeptService {
+public class SysDeptServiceImpl implements ISysDeptService, DeptService {
     @Resource
     private SysDeptMapper deptMapper;
 
     @Resource
     private SysRoleMapper roleMapper;
+
+    /**
+     * 通过部门ID查询部门名称
+     *
+     * @param deptIds 部门ID串逗号分隔
+     * @return 部门名称串逗号分隔
+     */
+    @Override
+    public String selectDeptNameByIds(String deptIds) {
+        List<String> list = new ArrayList<>();
+        for (Long id : StringUtils.splitTo(deptIds, cn.hutool.core.convert.Convert::toLong)) {
+            SysDept dept = SpringUtils.getAopProxy(this).selectDeptById(id);
+            if (ObjectUtil.isNotNull(dept)) {
+                list.add(dept.getDeptName());
+            }
+        }
+        return String.join(COMMA, list);
+    }
 
     /**
      * 查询部门管理数据

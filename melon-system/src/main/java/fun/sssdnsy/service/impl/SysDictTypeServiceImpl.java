@@ -1,19 +1,25 @@
 package fun.sssdnsy.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
+import fun.sssdnsy.constant.CacheConstants;
 import fun.sssdnsy.constant.UserConstants;
 import fun.sssdnsy.core.domain.entity.SysDictData;
 import fun.sssdnsy.core.domain.entity.SysDictType;
+import fun.sssdnsy.core.service.DictService;
 import fun.sssdnsy.exception.ServiceException;
 import fun.sssdnsy.mapper.SysDictDataMapper;
 import fun.sssdnsy.mapper.SysDictTypeMapper;
 import fun.sssdnsy.service.ISysDictTypeService;
 import fun.sssdnsy.utils.DictUtils;
+import fun.sssdnsy.utils.StreamUtils;
 import fun.sssdnsy.utils.StringUtils;
+import fun.sssdnsy.utils.spring.SpringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +31,7 @@ import java.util.stream.Collectors;
  * @author sssdnsy
  */
 @Service
-public class SysDictTypeServiceImpl implements ISysDictTypeService {
+public class SysDictTypeServiceImpl implements ISysDictTypeService , DictService {
     @Resource
     private SysDictTypeMapper dictTypeMapper;
 
@@ -198,5 +204,49 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
             return UserConstants.NOT_UNIQUE;
         }
         return UserConstants.UNIQUE;
+    }
+
+    /**
+     * 根据字典类型和字典值获取字典标签
+     *
+     * @param dictType  字典类型
+     * @param dictValue 字典值
+     * @param separator 分隔符
+     * @return 字典标签
+     */
+    @Override
+    public String getDictLabel(String dictType, String dictValue, String separator) {
+        // 优先从本地缓存获取
+        List<SysDictData> datas = selectDictDataByType(dictType);
+        Map<String, String> map = StreamUtils.toMap(datas, SysDictData::getDictValue, SysDictData::getDictLabel);
+        if (StringUtils.containsAny(dictValue, separator)) {
+            return Arrays.stream(dictValue.split(separator))
+                    .map(v -> map.getOrDefault(v, StringUtils.EMPTY))
+                    .collect(Collectors.joining(separator));
+        } else {
+            return map.getOrDefault(dictValue, StringUtils.EMPTY);
+        }
+    }
+
+    /**
+     * 根据字典类型和字典标签获取字典值
+     *
+     * @param dictType  字典类型
+     * @param dictLabel 字典标签
+     * @param separator 分隔符
+     * @return 字典值
+     */
+    @Override
+    public String getDictValue(String dictType, String dictLabel, String separator) {
+        // 优先从本地缓存获取
+        List<SysDictData> datas =selectDictDataByType(dictType);
+        Map<String, String> map = StreamUtils.toMap(datas, SysDictData::getDictLabel, SysDictData::getDictValue);
+        if (StringUtils.containsAny(dictLabel, separator)) {
+            return Arrays.stream(dictLabel.split(separator))
+                    .map(l -> map.getOrDefault(l, StringUtils.EMPTY))
+                    .collect(Collectors.joining(separator));
+        } else {
+            return map.getOrDefault(dictLabel, StringUtils.EMPTY);
+        }
     }
 }

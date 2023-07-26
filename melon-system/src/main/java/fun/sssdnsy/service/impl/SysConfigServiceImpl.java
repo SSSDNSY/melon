@@ -3,7 +3,7 @@ package fun.sssdnsy.service.impl;
 import fun.sssdnsy.annotation.DataSource;
 import fun.sssdnsy.constant.CacheConstants;
 import fun.sssdnsy.constant.UserConstants;
-import fun.sssdnsy.core.redis.RedisCache;
+import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.core.text.Convert;
 import fun.sssdnsy.domain.SysConfig;
 import fun.sssdnsy.enums.DataSourceType;

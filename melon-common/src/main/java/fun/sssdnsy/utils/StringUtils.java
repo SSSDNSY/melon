@@ -1,13 +1,17 @@
 package fun.sssdnsy.utils;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.core.text.StrFormatter;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static cn.hutool.core.text.CharPool.UNDERLINE;
+import static com.baomidou.mybatisplus.core.toolkit.StringPool.COMMA;
 
 /**
  * 字符串工具类
@@ -530,5 +534,56 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      */
     public static String blankToDefault(String str, String defaultValue) {
         return StrUtil.blankToDefault(str, defaultValue);
+    }
+
+    /**
+     * 切分字符串(分隔符默认逗号)
+     *
+     * @param str 被切分的字符串
+     * @return 分割后的数据列表
+     */
+    public static List<String> splitList(String str) {
+        return splitTo(str, Convert::toStr);
+    }
+
+    /**
+     * 切分字符串
+     *
+     * @param str       被切分的字符串
+     * @param separator 分隔符
+     * @return 分割后的数据列表
+     */
+    public static List<String> splitList(String str, String separator) {
+        return splitTo(str, separator, Convert::toStr);
+    }
+
+    /**
+     * 切分字符串自定义转换(分隔符默认逗号)
+     *
+     * @param str    被切分的字符串
+     * @param mapper 自定义转换
+     * @return 分割后的数据列表
+     */
+    public static <T> List<T> splitTo(String str, Function<? super Object, T> mapper) {
+        return splitTo(str, COMMA, mapper);
+    }
+
+    /**
+     * 切分字符串自定义转换
+     *
+     * @param str       被切分的字符串
+     * @param separator 分隔符
+     * @param mapper    自定义转换
+     * @return 分割后的数据列表
+     */
+    public static <T> List<T> splitTo(String str, String separator, Function<? super Object, T> mapper) {
+        if (isBlank(str)) {
+            return new ArrayList<>(0);
+        }
+        return StrUtil.split(str, separator)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(mapper)
+                .collect(Collectors.toList());
     }
 }

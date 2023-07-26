@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author fun.pengzh
+ * @author fun.sssdnsy
  * @class fun.sssdnsy.service.impl.XxlConfProjectServiceImpl
  * @desc
  * @since 2023-01-27

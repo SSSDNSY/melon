@@ -6,7 +6,7 @@ import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.core.domain.model.LoginUser;
 import fun.sssdnsy.core.page.TableDataInfo;
-import fun.sssdnsy.core.redis.RedisCache;
+import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.domain.SysUserOnline;
 import fun.sssdnsy.enums.BusinessType;
 import fun.sssdnsy.service.ISysUserOnlineService;
