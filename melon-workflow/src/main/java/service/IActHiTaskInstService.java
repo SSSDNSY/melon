@@ -2,7 +2,7 @@ package service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ruoyi.workflow.domain.ActHiTaskInst;
+import domain.ActHiTaskInst;
 
 /**
  * 历史任务信息Service接口

@@ -1,7 +1,7 @@
 package service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ruoyi.workflow.domain.ActTaskNode;
+import domain.ActTaskNode;
 
 import java.util.List;
 

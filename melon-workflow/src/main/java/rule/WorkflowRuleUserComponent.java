@@ -1,10 +1,10 @@
 package rule;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.ruoyi.common.core.domain.entity.SysUser;
-import com.ruoyi.common.exception.user.UserException;
-import com.ruoyi.common.utils.spring.SpringUtils;
-import com.ruoyi.system.mapper.SysUserMapper;
+import fun.sssdnsy.core.domain.entity.SysUser;
+import fun.sssdnsy.exception.user.UserException;
+import fun.sssdnsy.mapper.SysUserMapper;
+import fun.sssdnsy.utils.spring.SpringUtils;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.stereotype.Component;
