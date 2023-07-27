@@ -5,6 +5,7 @@ import modal from './modal'
 import download from './download'
 import Apis from '@/libs/api';
 import formPlugins from '@/components/FormComponents/index';
+import formPlugins1 from '@/components/FormComponents/index';
 
 export default {
   async install(Vue) {

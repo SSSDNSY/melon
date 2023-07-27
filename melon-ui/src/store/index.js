@@ -6,6 +6,7 @@ import user from './modules/user'
 import tagsView from './modules/tagsView'
 import permission from './modules/permission'
 import settings from './modules/settings'
+import message from './modules/message'
 // import bpmnf from './modules/bpmnf'
 import getters from './getters'
 
@@ -18,7 +19,8 @@ const store = new Vuex.Store({
     user,
     tagsView,
     permission,
-    settings
+    settings,
+    message
     // bpmnf
   },
   getters
