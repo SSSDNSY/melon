@@ -84,7 +84,9 @@
     "jeeplus-bpmn": "6.0.10",
     "vue-barcode": "1.3.0",
     "x2js": "3.4.2",
-    "xml-js": "1.6.11"
+    "xml-js": "1.6.11",
+    "workflow-bpmn-modeler": "^0.2.8",
+    "voca": "^1.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.6",
