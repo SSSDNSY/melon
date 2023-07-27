@@ -3,19 +3,19 @@ package fun.sssdnsy.interceptor.impl;
 import com.alibaba.fastjson2.JSON;
 import fun.sssdnsy.annotation.RepeatSubmit;
 import fun.sssdnsy.constant.CacheConstants;
-import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.filter.RepeatedlyRequestWrapper;
 import fun.sssdnsy.interceptor.RepeatSubmitInterceptor;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.http.HttpHelper;
+import fun.sssdnsy.utils.redis.RedisUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 判断请求url和数据是否和上一次相同，
@@ -32,9 +32,6 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {
     // 令牌自定义标识
     @Value("${token.header}")
     private String header;
-
-    @Resource
-    private RedisCache redisCache;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -62,7 +59,7 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {
         // 唯一标识（指定key + url + 消息头）
         String cacheRepeatKey = CacheConstants.REPEAT_SUBMIT_KEY + url + submitKey;
 
-        Object sessionObj = redisCache.getCacheObject(cacheRepeatKey);
+        Object sessionObj = RedisUtils.getCacheObject(cacheRepeatKey);
         if (sessionObj != null) {
             Map<String, Object> sessionMap = (Map<String, Object>) sessionObj;
             if (sessionMap.containsKey(url)) {
@@ -74,7 +71,7 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {
         }
         Map<String, Object> cacheMap = new HashMap<String, Object>();
         cacheMap.put(url, nowDataMap);
-        redisCache.setCacheObject(cacheRepeatKey, cacheMap, annotation.interval(), TimeUnit.MILLISECONDS);
+        RedisUtils.setCacheObject(cacheRepeatKey, cacheMap, Duration.of(annotation.interval(), ChronoUnit.MILLIS));
         return false;
     }
 

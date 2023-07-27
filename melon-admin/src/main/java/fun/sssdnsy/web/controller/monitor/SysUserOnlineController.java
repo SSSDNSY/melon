@@ -6,11 +6,11 @@ import fun.sssdnsy.core.controller.BaseController;
 import fun.sssdnsy.core.domain.AjaxResult;
 import fun.sssdnsy.core.domain.model.LoginUser;
 import fun.sssdnsy.core.page.TableDataInfo;
-import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.domain.SysUserOnline;
 import fun.sssdnsy.enums.BusinessType;
 import fun.sssdnsy.service.ISysUserOnlineService;
 import fun.sssdnsy.utils.StringUtils;
+import fun.sssdnsy.utils.redis.RedisUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,16 +31,13 @@ public class SysUserOnlineController extends BaseController {
     @Resource
     private ISysUserOnlineService userOnlineService;
 
-    @Resource
-    private RedisCache redisCache;
-
     @PreAuthorize("@ss.hasPermi('monitor:online:list')")
     @GetMapping("/list")
     public TableDataInfo list(String ipaddr, String userName) {
-        Collection<String>  keys           = redisCache.keys(CacheConstants.LOGIN_TOKEN_KEY + "*");
+        Collection<String>  keys           = RedisUtils.keys(CacheConstants.LOGIN_TOKEN_KEY + "*");
         List<SysUserOnline> userOnlineList = new ArrayList<SysUserOnline>();
         for (String key : keys) {
-            LoginUser user = redisCache.getCacheObject(key);
+            LoginUser user = RedisUtils.getCacheObject(key);
             if (StringUtils.isNotEmpty(ipaddr) && StringUtils.isNotEmpty(userName)) {
                 userOnlineList.add(userOnlineService.selectOnlineByInfo(ipaddr, userName, user));
             } else if (StringUtils.isNotEmpty(ipaddr)) {
@@ -63,7 +60,7 @@ public class SysUserOnlineController extends BaseController {
     @Log(title = "在线用户", businessType = BusinessType.FORCE)
     @DeleteMapping("/{tokenId}")
     public AjaxResult forceLogout(@PathVariable String tokenId) {
-        redisCache.deleteObject(CacheConstants.LOGIN_TOKEN_KEY + tokenId);
+        RedisUtils.deleteObject(CacheConstants.LOGIN_TOKEN_KEY + tokenId);
         return success();
     }
 }

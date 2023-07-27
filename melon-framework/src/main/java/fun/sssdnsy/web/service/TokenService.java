@@ -4,11 +4,11 @@ import eu.bitwalker.useragentutils.UserAgent;
 import fun.sssdnsy.constant.CacheConstants;
 import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.core.domain.model.LoginUser;
-import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.utils.ServletUtils;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.ip.AddressUtils;
 import fun.sssdnsy.utils.ip.IpUtils;
+import fun.sssdnsy.utils.redis.RedisUtils;
 import fun.sssdnsy.utils.uuid.IdUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -16,11 +16,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * token验证处理
@@ -29,20 +29,18 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class TokenService {
-    protected static final long       MILLIS_SECOND     = 1000;
-    protected static final long       MILLIS_MINUTE     = 60 * MILLIS_SECOND;
-    private static final   Long       MILLIS_MINUTE_TEN = 20 * 60 * 1000L;
+    protected static final long   MILLIS_SECOND     = 1000;
+    protected static final long   MILLIS_MINUTE     = 60 * MILLIS_SECOND;
+    private static final   Long   MILLIS_MINUTE_TEN = 20 * 60 * 1000L;
     // 令牌自定义标识
     @Value("${token.header}")
-    private                String     header;
+    private                String header;
     // 令牌秘钥
     @Value("${token.secret}")
-    private                String     secret;
+    private                String secret;
     // 令牌有效期（默认30分钟）
     @Value("${token.expireTime}")
-    private                int        expireTime;
-    @Resource
-    private                RedisCache redisCache;
+    private                int    expireTime;
 
     /**
      * 获取用户身份信息
@@ -58,7 +56,7 @@ public class TokenService {
                 // 解析对应的权限以及用户信息
                 String    uuid    = (String) claims.get(Constants.LOGIN_USER_KEY);
                 String    userKey = getTokenKey(uuid);
-                LoginUser user    = redisCache.getCacheObject(userKey);
+                LoginUser user    = RedisUtils.getCacheObject(userKey);
                 return user;
             } catch (Exception e) {
             }
@@ -81,7 +79,7 @@ public class TokenService {
     public void delLoginUser(String token) {
         if (StringUtils.isNotEmpty(token)) {
             String userKey = getTokenKey(token);
-            redisCache.deleteObject(userKey);
+            RedisUtils.deleteObject(userKey);
         }
     }
 
@@ -126,7 +124,7 @@ public class TokenService {
         loginUser.setExpireTime(loginUser.getLoginTime() + expireTime * MILLIS_MINUTE);
         // 根据uuid将loginUser缓存
         String userKey = getTokenKey(loginUser.getToken());
-        redisCache.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
+        RedisUtils.setCacheObject(userKey, loginUser, Duration.of(expireTime, ChronoUnit.MINUTES));
     }
 
     /**

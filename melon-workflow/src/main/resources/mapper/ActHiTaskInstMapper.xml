@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.workflow.mapper.ActHiTaskInstMapper">
+<mapper namespace="fun.sssdnsy.mapper.ActHiTaskInstMapper">
 
-    <resultMap type="com.ruoyi.workflow.domain.ActHiTaskInst" id="ActHiTaskInstResult">
+    <resultMap type="fun.sssdnsy.domain.ActHiTaskInst" id="ActHiTaskInstResult">
         <result property="id" column="ID_"/>
         <result property="procDefId" column="PROC_DEF_ID_"/>
         <result property="taskDefKey" column="TASK_DEF_KEY_"/>

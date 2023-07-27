@@ -1,6 +1,7 @@
 package fun.sssdnsy.mapper;
 
 import fun.sssdnsy.core.domain.entity.SysRole;
+import fun.sssdnsy.core.mapper.BaseMapperPlus;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author sssdnsy
  */
-public interface SysRoleMapper {
+public interface SysRoleMapper extends BaseMapperPlus<SysRoleMapper,SysRole,SysRole> {
     /**
      * 根据条件分页查询角色数据
      *

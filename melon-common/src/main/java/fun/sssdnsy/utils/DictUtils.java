@@ -1,13 +1,12 @@
 package fun.sssdnsy.utils;
 
-import com.alibaba.fastjson2.JSONArray;
-import fun.sssdnsy.constant.CacheConstants;
 import fun.sssdnsy.core.domain.entity.SysDictData;
-import fun.sssdnsy.utils.redis.RedisCache;
-import fun.sssdnsy.utils.spring.SpringUtils;
+import fun.sssdnsy.utils.redis.CacheUtils;
 
-import java.util.Collection;
 import java.util.List;
+
+import static cn.hutool.core.text.StrPool.COMMA;
+import static fun.sssdnsy.constant.CacheConstants.SYS_DICT_KEY;
 
 /**
  * 字典工具类
@@ -18,7 +17,7 @@ public class DictUtils {
     /**
      * 分隔符
      */
-    public static final String SEPARATOR = ",";
+    public static final String SEPARATOR = COMMA;
 
     /**
      * 设置字典缓存
@@ -27,7 +26,7 @@ public class DictUtils {
      * @param dictDatas 字典数据列表
      */
     public static void setDictCache(String key, List<SysDictData> dictDatas) {
-        SpringUtils.getBean(RedisCache.class).setCacheObject(getCacheKey(key), dictDatas);
+        CacheUtils.put(SYS_DICT_KEY, key, dictDatas);
     }
 
     /**
@@ -37,11 +36,7 @@ public class DictUtils {
      * @return dictDatas 字典数据列表
      */
     public static List<SysDictData> getDictCache(String key) {
-        JSONArray arrayCache = SpringUtils.getBean(RedisCache.class).getCacheObject(getCacheKey(key));
-        if (StringUtils.isNotNull(arrayCache)) {
-            return arrayCache.toList(SysDictData.class);
-        }
-        return null;
+        return CacheUtils.get(SYS_DICT_KEY, key);
     }
 
     /**
@@ -75,8 +70,8 @@ public class DictUtils {
      * @return 字典标签
      */
     public static String getDictLabel(String dictType, String dictValue, String separator) {
-        StringBuilder propertyString = new StringBuilder();
-        List<SysDictData> datas = getDictCache(dictType);
+        StringBuilder     propertyString = new StringBuilder();
+        List<SysDictData> datas          = getDictCache(dictType);
 
         if (StringUtils.isNotNull(datas)) {
             if (StringUtils.containsAny(separator, dictValue)) {
@@ -108,8 +103,8 @@ public class DictUtils {
      * @return 字典值
      */
     public static String getDictValue(String dictType, String dictLabel, String separator) {
-        StringBuilder propertyString = new StringBuilder();
-        List<SysDictData> datas = getDictCache(dictType);
+        StringBuilder     propertyString = new StringBuilder();
+        List<SysDictData> datas          = getDictCache(dictType);
 
         if (StringUtils.containsAny(separator, dictLabel) && StringUtils.isNotEmpty(datas)) {
             for (SysDictData dict : datas) {
@@ -136,24 +131,14 @@ public class DictUtils {
      * @param key 字典键
      */
     public static void removeDictCache(String key) {
-        SpringUtils.getBean(RedisCache.class).deleteObject(getCacheKey(key));
+        CacheUtils.evict(SYS_DICT_KEY, key);
     }
 
     /**
      * 清空字典缓存
      */
     public static void clearDictCache() {
-        Collection<String> keys = SpringUtils.getBean(RedisCache.class).keys(CacheConstants.SYS_DICT_KEY + "*");
-        SpringUtils.getBean(RedisCache.class).deleteObject(keys);
+        CacheUtils.clear(SYS_DICT_KEY);
     }
 
-    /**
-     * 设置cache key
-     *
-     * @param configKey 参数键
-     * @return 缓存键key
-     */
-    public static String getCacheKey(String configKey) {
-        return CacheConstants.SYS_DICT_KEY + configKey;
-    }
 }

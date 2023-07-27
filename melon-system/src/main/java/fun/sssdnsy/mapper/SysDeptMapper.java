@@ -1,6 +1,8 @@
 package fun.sssdnsy.mapper;
 
 import fun.sssdnsy.core.domain.entity.SysDept;
+import fun.sssdnsy.core.mapper.BaseMapperPlus;
+import fun.sssdnsy.domain.SysUserRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
  *
  * @author sssdnsy
  */
-public interface SysDeptMapper {
+public interface SysDeptMapper extends BaseMapperPlus<SysUserRoleMapper, SysDept,SysDept> {
     /**
      * 查询部门管理数据
      *

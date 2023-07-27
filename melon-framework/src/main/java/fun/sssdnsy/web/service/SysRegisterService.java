@@ -5,7 +5,6 @@ import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.constant.UserConstants;
 import fun.sssdnsy.core.domain.entity.SysUser;
 import fun.sssdnsy.core.domain.model.RegisterBody;
-import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.exception.user.CaptchaException;
 import fun.sssdnsy.exception.user.CaptchaExpireException;
 import fun.sssdnsy.manager.AsyncManager;
@@ -15,6 +14,7 @@ import fun.sssdnsy.service.ISysUserService;
 import fun.sssdnsy.utils.MessageUtils;
 import fun.sssdnsy.utils.SecurityUtils;
 import fun.sssdnsy.utils.StringUtils;
+import fun.sssdnsy.utils.redis.RedisUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -32,14 +32,11 @@ public class SysRegisterService {
     @Resource
     private ISysConfigService configService;
 
-    @Resource
-    private RedisCache redisCache;
-
     /**
      * 注册
      */
     public String register(RegisterBody registerBody) {
-        String msg = "", username = registerBody.getUsername(), password = registerBody.getPassword();
+        String  msg     = "", username = registerBody.getUsername(), password = registerBody.getPassword();
         SysUser sysUser = new SysUser();
         sysUser.setUserName(username);
 
@@ -84,8 +81,8 @@ public class SysRegisterService {
      */
     public void validateCaptcha(String username, String code, String uuid) {
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
-        String captcha = redisCache.getCacheObject(verifyKey);
-        redisCache.deleteObject(verifyKey);
+        String captcha   = RedisUtils.getCacheObject(verifyKey);
+        RedisUtils.deleteObject(verifyKey);
         if (captcha == null) {
             throw new CaptchaExpireException();
         }

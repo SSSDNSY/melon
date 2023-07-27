@@ -1,8 +1,6 @@
 package fun.sssdnsy;
 
-import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;
@@ -17,11 +15,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @SpringBootApplication(exclude = {
         org.activiti.spring.boot.SecurityAutoConfiguration.class,
-        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
         org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class,
         DataSourceAutoConfiguration.class,
 })
-@ComponentScan({"fun.sssdnsy","fun.sssdnsy.web.controller"})
+@ComponentScan({"fun.sssdnsy", "fun.sssdnsy.web.controller"})
 public class AdminApplication {
     public static void main(String[] args) {
         System.setProperty("pagehelper.banner", "false");

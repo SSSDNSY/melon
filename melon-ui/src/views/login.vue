@@ -183,6 +183,7 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
+          let that = this;
           this.loading = true;
           if (this.loginForm.rememberMe) {
             Cookies.set("username", this.loginForm.username, {expires: 30});
@@ -195,8 +196,10 @@ export default {
           }
           this.$store.dispatch("Login", this.loginForm).then(() => {
             this.$router.push({path: this.redirect || "/"}).catch(() => {
+              that.loading = false;
             });
           }).catch(() => {
+            that.loading = false;
           });
         }
       });
@@ -207,6 +210,7 @@ export default {
         this.$router.push({path: this.redirect || "/"}).catch(() => {
         });
       }).catch(() => {
+
       });
     }
 

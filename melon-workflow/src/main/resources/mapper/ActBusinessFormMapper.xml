@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.workflow.mapper.ActBusinessFormMapper">
+<mapper namespace="fun.sssdnsy.mapper.ActBusinessFormMapper">
 
-    <resultMap type="com.ruoyi.workflow.domain.ActBusinessForm" id="ActBusinessFormResult">
+    <resultMap type="fun.sssdnsy.domain.ActBusinessForm" id="ActBusinessFormResult">
         <result property="id" column="id"/>
         <result property="formId" column="form_id"/>
         <result property="formKey" column="form_key"/>

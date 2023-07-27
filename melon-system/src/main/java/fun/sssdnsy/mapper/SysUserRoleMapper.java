@@ -1,5 +1,7 @@
 package fun.sssdnsy.mapper;
 
+import fun.sssdnsy.core.domain.entity.SysRole;
+import fun.sssdnsy.core.mapper.BaseMapperPlus;
 import fun.sssdnsy.domain.SysUserRole;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +12,7 @@ import java.util.List;
  *
  * @author sssdnsy
  */
-public interface SysUserRoleMapper {
+public interface SysUserRoleMapper extends BaseMapperPlus<SysUserRoleMapper, SysUserRole,SysUserRole> {
     /**
      * 通过用户ID删除用户和角色关联
      *

@@ -5,7 +5,6 @@ import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.constant.UserConstants;
 import fun.sssdnsy.core.domain.entity.SysUser;
 import fun.sssdnsy.core.domain.model.LoginUser;
-import fun.sssdnsy.utils.redis.RedisCache;
 import fun.sssdnsy.exception.user.*;
 import fun.sssdnsy.manager.AsyncManager;
 import fun.sssdnsy.manager.factory.AsyncFactory;
@@ -15,6 +14,7 @@ import fun.sssdnsy.utils.DateUtils;
 import fun.sssdnsy.utils.MessageUtils;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.ip.IpUtils;
+import fun.sssdnsy.utils.redis.RedisUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -33,9 +33,6 @@ public class SysLoginService {
 
     @Resource
     private AuthenticationManager authenticationManager;
-
-    @Resource
-    private RedisCache redisCache;
 
     @Resource
     private ISysUserService userService;
@@ -81,8 +78,8 @@ public class SysLoginService {
         boolean captchaEnabled = configService.selectCaptchaEnabled();
         if (captchaEnabled) {
             String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
-            String captcha   = redisCache.getCacheObject(verifyKey);
-            redisCache.deleteObject(verifyKey);
+            String captcha   = RedisUtils.getCacheObject(verifyKey);
+            RedisUtils.deleteObject(verifyKey);
             if (captcha == null) {
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
                 throw new CaptchaExpireException();
