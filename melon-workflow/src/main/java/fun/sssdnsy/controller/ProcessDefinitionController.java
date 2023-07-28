@@ -36,11 +36,7 @@ public class ProcessDefinitionController extends BaseController {
     private final IProcessDefinitionService iProcessDefinitionService;
 
     /**
-     * @Description: 查询流程定义列表
-     * @param: defReq
-     * @return: com.ruoyi.common.core.domain.R<java.util.List < com.ruoyi.workflow.ProcessDefinitionVo>>
-     * @Author: gssong
-     * @Date: 2021/10/7
+     *  查询流程定义列表
      */
     @GetMapping("/list")
     public TableDataInfo getByPage(DefinitionBo defReq) {
@@ -49,10 +45,6 @@ public class ProcessDefinitionController extends BaseController {
 
     /**
      * @Description: 查询历史流程定义列表
-     * @param: definitionBo
-     * @return: com.ruoyi.common.core.domain.R<java.util.List < com.ruoyi.workflow.ProcessDefinitionVo>>
-     * @Author: gssong
-     * @Date: 2021/10/7
      */
     @GetMapping("/hisList")
     public AjaxResult getHisByPage(DefinitionBo definitionBo) {

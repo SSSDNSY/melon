@@ -1,8 +1,13 @@
 package fun.sssdnsy.domain;
 
+import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import fun.sssdnsy.annotation.Excel;
 import fun.sssdnsy.annotation.Excel.ColumnType;
 import fun.sssdnsy.core.domain.BaseEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,6 +19,10 @@ import javax.validation.constraints.Size;
  *
  * @author sssdnsy
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
+@TableName("sys_config")
+@ExcelIgnoreUnannotated
 public class SysConfig extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -21,6 +30,7 @@ public class SysConfig extends BaseEntity {
      * 参数主键
      */
     @Excel(name = "参数主键", cellType = ColumnType.NUMERIC)
+    @TableId(value = "config_id")
     private Long configId;
 
     /**

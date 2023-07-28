@@ -1,5 +1,7 @@
 package fun.sssdnsy.core.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import fun.sssdnsy.annotation.Excel;
 import fun.sssdnsy.annotation.Excels;
 import fun.sssdnsy.core.domain.BaseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
  *
  * @author sssdnsy
  */
+@TableName("sys_user")
 public class SysUser extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -25,6 +28,7 @@ public class SysUser extends BaseEntity {
      * 用户ID
      */
     @Excel(name = "用户序号", cellType = Excel.ColumnType.NUMERIC, prompt = "用户编号")
+    @TableId(value = "user_id")
     private Long userId;
 
     /**

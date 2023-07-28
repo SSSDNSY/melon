@@ -1,5 +1,7 @@
 package fun.sssdnsy.core.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import fun.sssdnsy.annotation.Excel;
 import fun.sssdnsy.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -14,6 +16,7 @@ import javax.validation.constraints.Size;
  *
  * @author sssdnsy
  */
+@TableName("sys_dict_type")
 public class SysDictType extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -21,6 +24,7 @@ public class SysDictType extends BaseEntity {
      * 字典主键
      */
     @Excel(name = "字典主键", cellType = Excel.ColumnType.NUMERIC)
+    @TableId(value = "dict_id")
     private Long dictId;
 
     /**

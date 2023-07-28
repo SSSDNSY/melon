@@ -1,5 +1,7 @@
 package fun.sssdnsy.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import fun.sssdnsy.core.domain.BaseEntity;
 import fun.sssdnsy.xss.Xss;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,12 +15,14 @@ import javax.validation.constraints.Size;
  *
  * @author sssdnsy
  */
+@TableName("sys_notice")
 public class SysNotice extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
      * 公告ID
      */
+    @TableId(value = "notice_id")
     private Long noticeId;
 
     /**

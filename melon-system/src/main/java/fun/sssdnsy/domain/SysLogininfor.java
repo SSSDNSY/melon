@@ -1,9 +1,13 @@
 package fun.sssdnsy.domain;
 
+import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import fun.sssdnsy.annotation.Excel;
 import fun.sssdnsy.annotation.Excel.ColumnType;
 import fun.sssdnsy.core.domain.BaseEntity;
+import lombok.Data;
 
 import java.util.Date;
 
@@ -12,12 +16,15 @@ import java.util.Date;
  *
  * @author sssdnsy
  */
+@Data
+@TableName("sys_logininfor")
 public class SysLogininfor extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
      * ID
      */
+    @TableId(value = "info_id")
     @Excel(name = "序号", cellType = ColumnType.NUMERIC)
     private Long infoId;
 

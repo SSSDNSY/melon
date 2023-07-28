@@ -1,5 +1,7 @@
 package fun.sssdnsy.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import fun.sssdnsy.annotation.Excel;
 import fun.sssdnsy.annotation.Excel.ColumnType;
 import fun.sssdnsy.core.domain.BaseEntity;
@@ -15,6 +17,7 @@ import javax.validation.constraints.Size;
  *
  * @author sssdnsy
  */
+@TableName("sys_post")
 public class SysPost extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -22,6 +25,7 @@ public class SysPost extends BaseEntity {
      * 岗位序号
      */
     @Excel(name = "岗位序号", cellType = ColumnType.NUMERIC)
+    @TableId(value = "post_id")
     private Long postId;
 
     /**

@@ -41,7 +41,7 @@ import javax.sql.DataSource;
  */
 @EnableTransactionManagement(proxyTargetClass = true)
 @Configuration
-@MapperScan("fun.sssdnsy.mapper")
+@MapperScan("${mybatis-plus.mapperPackage}")
 public class MybatisPlusConfig {
 
     @Resource(name = "dynamicDataSource")

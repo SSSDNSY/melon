@@ -97,8 +97,9 @@
 </template>
 
 <script>
-import {list,add,del,deploy} from "@/api/workflow/model";
+import {add, del, deploy, list} from "@/api/workflow/model";
 import BpmnJs from './bpmnJs'
+
 export default {
     dicts: ['act_category'],
     name: 'Model', // 和对应路由表中配置的name值一致
@@ -253,3 +254,8 @@ export default {
 
 }
 </script>
+<style lang="scss">
+.el-dialog__body {
+  padding: 0px 20px
+}
+</style>

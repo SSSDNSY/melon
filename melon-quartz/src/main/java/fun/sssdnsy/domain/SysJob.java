@@ -1,5 +1,7 @@
 package fun.sssdnsy.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import fun.sssdnsy.annotation.Excel;
 import fun.sssdnsy.annotation.Excel.ColumnType;
@@ -19,6 +21,7 @@ import java.util.Date;
  *
  * @author sssdnsy
  */
+@TableName("sys_job")
 public class SysJob extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -26,6 +29,7 @@ public class SysJob extends BaseEntity {
      * 任务ID
      */
     @Excel(name = "任务序号", cellType = ColumnType.NUMERIC)
+    @TableId(value = "job_id")
     private Long jobId;
 
     /**

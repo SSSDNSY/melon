@@ -1,5 +1,7 @@
 package fun.sssdnsy.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import fun.sssdnsy.annotation.Excel;
 import fun.sssdnsy.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -12,12 +14,14 @@ import java.util.Date;
  *
  * @author sssdnsy
  */
+@TableName("sys_job_log")
 public class SysJobLog extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
      * ID
      */
+    @TableId(value = "job_log_id")
     @Excel(name = "日志序号")
     private Long jobLogId;
 

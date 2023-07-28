@@ -18,7 +18,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
         org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class,
         DataSourceAutoConfiguration.class,
 })
-@ComponentScan({"fun.sssdnsy", "fun.sssdnsy.web.controller"})
 public class AdminApplication {
     public static void main(String[] args) {
         System.setProperty("pagehelper.banner", "false");

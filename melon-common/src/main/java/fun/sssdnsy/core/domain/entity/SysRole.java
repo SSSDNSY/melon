@@ -1,5 +1,7 @@
 package fun.sssdnsy.core.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import fun.sssdnsy.annotation.Excel;
 import fun.sssdnsy.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -15,12 +17,14 @@ import java.util.Set;
  *
  * @author sssdnsy
  */
+@TableName("sys_role")
 public class SysRole extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
      * 角色ID
      */
+    @TableId(value = "role_id")
     @Excel(name = "角色序号", cellType = Excel.ColumnType.NUMERIC)
     private Long roleId;
 

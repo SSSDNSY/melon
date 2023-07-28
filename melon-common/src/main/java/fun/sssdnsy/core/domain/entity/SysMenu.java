@@ -1,5 +1,7 @@
 package fun.sssdnsy.core.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import fun.sssdnsy.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -15,12 +17,14 @@ import java.util.List;
  *
  * @author sssdnsy
  */
+@TableName("sys_menu")
 public class SysMenu extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
      * 菜单ID
      */
+    @TableId(value = "menu_id")
     private Long menuId;
 
     /**
