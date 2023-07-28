@@ -37,6 +37,9 @@ public class ActBusinessRuleServiceImpl implements IActBusinessRuleService {
     @Override
     public ActBusinessRuleVo queryById(Long id) {
         ActBusinessRuleVo vo = baseMapper.selectVoById(id);
+        if(vo==null){
+            return vo;
+        }
         if (StringUtils.isNotBlank(vo.getParam())) {
             List<ActBusinessRuleParam> params = JsonUtils.parseArray(vo.getParam(), ActBusinessRuleParam.class);
             vo.setBusinessRuleParams(params);

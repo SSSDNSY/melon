@@ -18,13 +18,5 @@ import java.util.TimeZone;
 @EnableAspectJAutoProxy(exposeProxy = true)
 public class ApplicationConfig {
 
-    /**
-     * 时区配置
-     */
-    @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jacksonObjectMapperCustomization()
-    {
-        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.timeZone(TimeZone.getDefault());
-    }
 
 }
