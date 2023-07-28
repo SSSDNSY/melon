@@ -73,6 +73,19 @@ public class SysDictData extends BaseEntity {
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
+    /**
+     * 备注
+     */
+    private String remark;
+
+    public SysDictData setRemark(String remark) {
+        this.remark = remark;
+        return this;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
     public Long getDictCode() {
         return dictCode;
     }

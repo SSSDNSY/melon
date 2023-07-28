@@ -44,7 +44,18 @@ public class SysNotice extends BaseEntity {
      * 公告状态（0正常 1关闭）
      */
     private String status;
+    /**
+     * 备注
+     */
+    private String remark;
 
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
     public Long getNoticeId() {
         return noticeId;
     }

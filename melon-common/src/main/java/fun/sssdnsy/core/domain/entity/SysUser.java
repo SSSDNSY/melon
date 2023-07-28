@@ -1,6 +1,8 @@
 package fun.sssdnsy.core.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import fun.sssdnsy.annotation.Excel;
 import fun.sssdnsy.annotation.Excels;
@@ -86,6 +88,7 @@ public class SysUser extends BaseEntity {
     /**
      * 删除标志（0代表存在 2代表删除）
      */
+    @TableLogic
     private String delFlag;
 
     /**
@@ -107,30 +110,49 @@ public class SysUser extends BaseEntity {
             @Excel(name = "部门名称", targetAttr = "deptName", type = Excel.Type.EXPORT),
             @Excel(name = "部门负责人", targetAttr = "leader", type = Excel.Type.EXPORT)
     })
+    @TableField(exist = false)
     private SysDept dept;
 
     /**
      * 角色对象
      */
+    @TableField(exist = false)
     private List<SysRole> roles;
 
     /**
      * 角色组
      */
+    @TableField(exist = false)
     private Long[] roleIds;
 
     /**
      * 岗位组
      */
+    @TableField(exist = false)
     private Long[] postIds;
 
     /**
      * 角色ID
      */
+    @TableField(exist = false)
     private Long roleId;
 
     public SysUser() {
 
+    }
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+    public SysUser setRemark(String remark) {
+        this.remark = remark;
+        return this;
+    }
+
+    public String getRemark() {
+        return remark;
     }
 
     public SysUser(Long userId) {
@@ -296,6 +318,8 @@ public class SysUser extends BaseEntity {
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
+
+
 
     @Override
     public String toString() {

@@ -1,6 +1,8 @@
 package fun.sssdnsy.core.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import fun.sssdnsy.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -71,16 +73,19 @@ public class SysDept extends BaseEntity {
     /**
      * 删除标志（0代表存在 2代表删除）
      */
+    @TableLogic
     private String delFlag;
 
     /**
      * 父部门名称
      */
+    @TableField(exist = false)
     private String parentName;
 
     /**
      * 子部门
      */
+    @TableField(exist = false)
     private List<SysDept> children = new ArrayList<SysDept>();
 
     public Long getDeptId() {

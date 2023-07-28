@@ -56,19 +56,16 @@ public class BaseEntity implements Serializable {
     private Date updateTime;
 
     /**
-     * 备注
-     */
-    private String remark;
-
-    /**
      * 请求参数
      */
+    @TableField(exist = false)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private String searchKeyword;
 
     /**
      * 请求参数
      */
+    @TableField(exist = false)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Map<String, Object> params;
 
