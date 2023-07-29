@@ -1,14 +1,14 @@
 package fun.sssdnsy.encrypt.encryptor;
 
 
-import cn.hutool.core.codec.Base64;
 import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.SM2;
-import com.ruoyi.common.encrypt.EncryptContext;
-import com.ruoyi.common.enums.AlgorithmType;
-import com.ruoyi.common.enums.EncodeType;
-import com.ruoyi.common.utils.StringUtils;
+import fun.sssdnsy.encrypt.EncryptContext;
+import fun.sssdnsy.enums.AlgorithmType;
+import fun.sssdnsy.enums.EncodeType;
+import fun.sssdnsy.utils.StringUtils;
+import fun.sssdnsy.utils.sign.Base64;
 
 /**
  * sm2算法实现

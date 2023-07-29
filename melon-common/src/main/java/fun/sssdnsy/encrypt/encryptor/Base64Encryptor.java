@@ -1,9 +1,9 @@
 package fun.sssdnsy.encrypt.encryptor;
 
 import cn.hutool.core.codec.Base64;
-import com.ruoyi.common.encrypt.EncryptContext;
-import com.ruoyi.common.enums.AlgorithmType;
-import com.ruoyi.common.enums.EncodeType;
+import fun.sssdnsy.encrypt.EncryptContext;
+import fun.sssdnsy.enums.AlgorithmType;
+import fun.sssdnsy.enums.EncodeType;
 
 /**
  * Base64算法实现

@@ -4,9 +4,9 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.AES;
-import com.ruoyi.common.encrypt.EncryptContext;
-import com.ruoyi.common.enums.AlgorithmType;
-import com.ruoyi.common.enums.EncodeType;
+import fun.sssdnsy.encrypt.EncryptContext;
+import fun.sssdnsy.enums.AlgorithmType;
+import fun.sssdnsy.enums.EncodeType;
 
 import java.nio.charset.StandardCharsets;
 

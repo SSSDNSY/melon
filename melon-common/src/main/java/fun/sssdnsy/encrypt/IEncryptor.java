@@ -1,7 +1,8 @@
 package fun.sssdnsy.encrypt;
 
-import com.ruoyi.common.enums.AlgorithmType;
-import com.ruoyi.common.enums.EncodeType;
+
+import fun.sssdnsy.enums.AlgorithmType;
+import fun.sssdnsy.enums.EncodeType;
 
 /**
  * 加解者

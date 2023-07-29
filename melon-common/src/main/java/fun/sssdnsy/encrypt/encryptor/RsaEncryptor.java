@@ -1,14 +1,13 @@
 package fun.sssdnsy.encrypt.encryptor;
 
-import cn.hutool.core.codec.Base64;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
-import com.ruoyi.common.encrypt.EncryptContext;
-import com.ruoyi.common.enums.AlgorithmType;
-import com.ruoyi.common.enums.EncodeType;
-import com.ruoyi.common.utils.StringUtils;
-
+import fun.sssdnsy.encrypt.EncryptContext;
+import fun.sssdnsy.enums.AlgorithmType;
+import fun.sssdnsy.enums.EncodeType;
+import fun.sssdnsy.utils.StringUtils;
+import fun.sssdnsy.utils.sign.Base64;
 
 /**
  * RSA算法实现
@@ -56,7 +55,7 @@ public class RsaEncryptor extends AbstractEncryptor {
     /**
      * 解密
      *
-     * @param value      待加密字符串
+     * @param value 待加密字符串
      */
     @Override
     public String decrypt(String value) {

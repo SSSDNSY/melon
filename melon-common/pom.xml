@@ -164,6 +164,12 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
 
+        <!-- 加密包引入 -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15to18</artifactId>
+        </dependency>
+
         <!-- servlet包 -->
         <dependency>
             <groupId>javax.servlet</groupId>

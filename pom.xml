@@ -67,6 +67,7 @@
         <lock4j.version>2.2.3</lock4j.version>
         <easyexcel.version>3.2.1</easyexcel.version>
         <alibaba-ttl.version>2.14.2</alibaba-ttl.version>
+        <bouncycastle.version>1.72</bouncycastle.version>
     </properties>
 
     <!-- ==========================依赖声明========================== -->
@@ -260,6 +261,13 @@
                 <groupId>org.activiti</groupId>
                 <artifactId>activiti-json-converter</artifactId>
                 <version>${activiti.version}</version>
+            </dependency>
+
+            <!-- 加密包引入 -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15to18</artifactId>
+                <version>${bouncycastle.version}</version>
             </dependency>
 
             <!-- 定时任务-->
