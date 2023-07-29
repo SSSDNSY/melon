@@ -20,7 +20,7 @@ stages:
         mavenVersion: 3.3.9
         commands:
           - ''
-          - 'mvn -U -e -X  -B -T 1C clean package -Dmaven.test.skip=true '
+          - 'mvn -U -e -X  -B -T 1C clean resources:resources package  -Dmaven.test.skip=true'
         artifacts:
           - name: BUILD_ARTIFACT
             path:
