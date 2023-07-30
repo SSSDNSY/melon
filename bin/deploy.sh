@@ -20,7 +20,7 @@ mkdir -p ${HEALTH_CHECK_FILE_DIR}
 mkdir -p ${APP_HOME}
 mkdir -p ${APP_HOME}/logs
 usage() {
-    echo "Usage: $PROG_NAME {start|stop|restart}"
+    echo "Usage: $PROG_NAME {start|restart|health|stop}"
     exit 2
 }
 
@@ -83,6 +83,9 @@ start() {
     start_application
     health_check
 }
+health(){
+  health_check
+}
 stop() {
     stop_application
 }
@@ -90,12 +93,15 @@ case "$ACTION" in
     start)
         start
     ;;
-    stop)
-        stop
+    health)
+        health
     ;;
     restart)
         stop
         start
+    ;;
+    stop)
+        stop
     ;;
     *)
         usage
