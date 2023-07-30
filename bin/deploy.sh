@@ -6,10 +6,10 @@ APP_NAME=melon-admin
 
 PROG_NAME=$0
 ACTION=$1
-APP_START_TIMEOUT=200    # 等待应用启动的时间
+APP_START_TIMEOUT=60    # 等待应用启动的时间
 APP_PORT=8080         # 应用端口
 HEALTH_CHECK_URL=http://pengzh.fun:${APP_PORT}/melon/  # 应用健康检查URL
-HEALTH_CHECK_TEXT="欢迎使用Melon后台管理框架，当前版本：v1.0.0，请通过前端地址访问。"  # 应用健康检查URL
+HEALTH_CHECK_TEXT="欢迎使用melon-admin后台管理框架，当前版本：v1.0.0，请通过前端地址访问。"  # 应用健康检查URL
 HEALTH_CHECK_FILE_DIR=/root/jar/status   # 脚本会在这个目录下生成nginx-status文件
 APP_HOME=/root/jar/${APP_NAME}        # 从output.tar.gz中解压出来的jar包放到这个目录下
 JAR_NAME=${APP_HOME}/target/${APP_NAME}.jar    # jar包的名字
