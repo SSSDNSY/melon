@@ -6,7 +6,7 @@ APP_NAME=melon-admin
 
 PROG_NAME=$0
 ACTION=$1
-APP_START_TIMEOUT=30    # 等待应用启动的时间
+APP_START_TIMEOUT=60    # 等待应用启动的时间
 APP_PORT=8080         # 应用端口
 HEALTH_CHECK_URL=http://pengzh.fun:${APP_PORT}/melon/  # 应用健康检查URL
 HEALTH_CHECK_TEXT="欢迎使用Melon后台管理框架，当前版本：v1.0.0，请通过前端地址访问。"  # 应用健康检查URL
