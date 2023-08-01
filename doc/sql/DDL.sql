@@ -1,3 +1,21 @@
+DROP TABLE IF EXISTS `sys_message`;
+CREATE TABLE `sys_message`  (
+                                `id` bigint(19) UNSIGNED NOT NULL COMMENT '主键',
+                                `send_id` bigint(19) NOT NULL COMMENT '消息发送者id',
+                                `record_id` bigint(20) NOT NULL COMMENT '消息接收者id',
+                                `type` bigint(10) NOT NULL COMMENT '消息类型1：站内信，2：邮件，3：短信',
+                                `status` tinyint(1) NOT NULL COMMENT '阅读状态0：未读，1：已读',
+                                `message_content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '消息内容',
+                                `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+                                `update_time` datetime(0) NOT NULL COMMENT '修改时间',
+                                `create_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+                                `update_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+                                `read_time` datetime(0) NULL DEFAULT NULL COMMENT '阅读时间',
+                                `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
+                                PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消息通知' ROW_FORMAT = Dynamic;
+
+
 DROP TABLE IF EXISTS `flow_sort`;
 CREATE TABLE `flow_sort`
 (
