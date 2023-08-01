@@ -30,10 +30,6 @@ public class ActNodeAssigneeController extends BaseController {
 
     /**
      * @Description: 保存流程节点人员设置
-     * @param: actNodeAssignee
-     * @return: com.ruoyi.common.core.domain.R<com.ruoyi.workflow.ActNodeAssignee>
-     * @Author: gssong
-     * @Date: 2021/11/21
      */
     @Log(title = "流程节点人员设置管理", businessType = BusinessType.INSERT)
     @RepeatSubmit()
@@ -44,10 +40,6 @@ public class ActNodeAssigneeController extends BaseController {
 
     /**
      * @Description: 按照流程定义id和流程节点id查询流程节点人员设置
-     * @param: actNodeAssignee
-     * @return: com.ruoyi.common.core.domain.R<com.ruoyi.workflow.ActNodeAssignee>
-     * @Author: gssong
-     * @Date: 2021/11/21
      */
     @GetMapping("/{processDefinitionId}/{nodeId}")
     public AjaxResult getInfoSetting(@NotBlank(message = "流程定义id不能为空") @PathVariable String processDefinitionId,
@@ -58,10 +50,6 @@ public class ActNodeAssigneeController extends BaseController {
 
     /**
      * @Description: 删除流程节点人员设置
-     * @param: id
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Void>
-     * @Author: gssong
-     * @Date: 2021/11/21
      */
     @Log(title = "流程节点人员设置管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{id}")
@@ -71,11 +59,6 @@ public class ActNodeAssigneeController extends BaseController {
 
     /**
      * @Description: 复制给最新流程节点人员设置
-     * @param: id 流程定义id
-     * @param: key 流程定义key
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Void>
-     * @Author: gssong
-     * @Date: 2022/03/26
      */
     @Log(title = "流程节点人员设置管理", businessType = BusinessType.INSERT)
     @PostMapping("/copy/{id}/{key}")

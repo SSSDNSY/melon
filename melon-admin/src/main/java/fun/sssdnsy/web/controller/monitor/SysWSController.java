@@ -53,7 +53,7 @@ public class SysWSController {
      *
      * @throws Exception
      */
-    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedDelay = 20000)
     public void priceAutoConvert() throws Exception {
         server = new Server();
         server.copyTo();

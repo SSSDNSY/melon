@@ -55,11 +55,6 @@ public class ProcessDefinitionController extends BaseController {
 
     /**
      * @Description: 删除流程定义
-     * @param: deploymentId 流程部署id
-     * @param: definitionId 流程定义id
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Void>
-     * @Author: gssong
-     * @Date: 2021/10/7
      */
     @Log(title = "流程定义管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{deploymentId}/{definitionId}")
@@ -71,10 +66,6 @@ public class ProcessDefinitionController extends BaseController {
 
     /**
      * @Description: 通过zip或xml部署流程定义
-     * @param: file
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Void>
-     * @author: gssong
-     * @Date: 2022/4/12 13:32
      */
     @Log(title = "流程定义管理", businessType = BusinessType.INSERT)
     @PostMapping("/deployByFile")
@@ -85,12 +76,6 @@ public class ProcessDefinitionController extends BaseController {
 
     /**
      * @Description: 导出流程定义文件（xml,png)
-     * @param: type 类型 xml 或 png
-     * @param: definitionId 流程定义id
-     * @param: response
-     * @return: void
-     * @Author: gssong
-     * @Date: 2021/10/7
      */
     @GetMapping("/export/{type}/{definitionId}")
     public void exportFile(@NotBlank(message = "文件类型不能为空") @PathVariable String type,
@@ -101,10 +86,6 @@ public class ProcessDefinitionController extends BaseController {
 
     /**
      * @Description: 查看xml文件
-     * @param: definitionId
-     * @return: com.ruoyi.common.core.domain.R<java.lang.String>
-     * @author: gssong
-     * @Date: 2022/5/3 19:25
      */
     @GetMapping("/getXml/{definitionId}")
     public AjaxResult getXml(@NotBlank(message = "流程定义id不能为空") @PathVariable String definitionId) {
@@ -115,10 +96,6 @@ public class ProcessDefinitionController extends BaseController {
 
     /**
      * @Description: 激活或者挂起流程定义
-     * @param: data 参数
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Boolean>
-     * @Author: gssong
-     * @Date: 2021/10/10
      */
     @Log(title = "流程定义管理", businessType = BusinessType.UPDATE)
     @PutMapping("/updateProcDefState")
@@ -128,10 +105,6 @@ public class ProcessDefinitionController extends BaseController {
 
     /**
      * @Description: 查询流程环节
-     * @param: processDefinitionId
-     * @return: com.ruoyi.common.core.domain.R<java.util.List < com.ruoyi.workflow.ActProcessNodeVo>>
-     * @author: gssong
-     * @Date: 2021/11/19
      */
     @GetMapping("/setting/{processDefinitionId}")
     public AjaxResult setting(@NotBlank(message = "流程定义id不能为空") @PathVariable String processDefinitionId) {

@@ -110,10 +110,6 @@ public class SysMessageController extends BaseController {
 
     /**
      * @Description: 阅读消息
-     * @param: id
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Void>
-     * @author: gssong
-     * @Date: 2022/6/19 17:08
      */
     @Log(title = "消息通知", businessType = BusinessType.INSERT)
     @GetMapping("/readMessage/{id}")
@@ -123,9 +119,6 @@ public class SysMessageController extends BaseController {
 
     /**
      * @Description: 批量阅读消息
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Void>
-     * @author: gssong
-     * @Date: 2022/6/19 17:08
      */
     @Log(title = "消息通知", businessType = BusinessType.INSERT)
     @GetMapping("/batchReadMessage")

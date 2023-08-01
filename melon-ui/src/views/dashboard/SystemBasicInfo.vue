@@ -189,13 +189,13 @@
         // 断开重连机制,尝试发送消息,捕获异常发生时重连
         this.timer = setInterval(() => {
           try {
-            that.stompClient.send("/app/welcome",{},JSON.stringify({sender: '',chatType: 'JOIN'}),)   //用户加入接口
-            // console.log("******发送消息******")
+            that.stompClient.send("/app/welcome",{},JSON.stringify({sender: 'client',chatType: 'JOIN'}),)   //用户加入接口
+            console.log("******发送消息******")
           } catch (err) {
             console.log("断线了: " + err)
             that.connection()
           }
-        }, 5000);
+        }, 20000);
         //屏蔽消息打印
         that.stompClient.debug =  () => {};
 

@@ -35,10 +35,6 @@ public class ProcessInstanceController {
 
     /**
      * @Description: 提交申请，启动流程实例
-     * @param: startProcessBo
-     * @return: com.ruoyi.common.core.domain.R<java.util.Map < java.lang.String, java.lang.Object>>
-     * @author: gssong
-     * @Date: 2021/10/10
      */
     @Log(title = "流程实例管理", businessType = BusinessType.INSERT)
     @RepeatSubmit()
@@ -51,10 +47,6 @@ public class ProcessInstanceController {
 
     /**
      * @Description: 通过流程实例id查询流程审批记录
-     * @param: processInstanceId
-     * @return: com.ruoyi.common.core.domain.R<java.util.List < com.ruoyi.workflow.ActHistoryInfoVo>>
-     * @Author: gssong
-     * @Date: 2021/10/16
      */
     @GetMapping("/getHistoryInfoList/{processInstanceId}")
     public AjaxResult getHistoryInfoList(@NotBlank(message = "流程实例id不能为空") @PathVariable String processInstanceId) {
@@ -64,13 +56,7 @@ public class ProcessInstanceController {
 
     /**
      * @Description: 通过流程实例id获取历史流程图
-     * @param: processInstId
-     * @param: response
-     * @return: void
-     * @Author: gssong
-     * @Date: 2021/10/16
      */
-    
     @GetMapping("/getHistoryProcessImage")
     public void getHistoryProcessImage(@NotBlank(message = "流程实例id不能为空") @RequestParam String processInstanceId,
                                        HttpServletResponse response) {
@@ -79,10 +65,6 @@ public class ProcessInstanceController {
 
     /**
      * @Description: 查询正在运行的流程实例
-     * @param: req
-     * @return: com.ruoyi.common.core.page.TableDataInfo<com.ruoyi.workflow.ProcessInstRunningVo>
-     * @Author: gssong
-     * @Date: 2021/10/16
      */
     @GetMapping("/getProcessInstRunningByPage")
     public TableDataInfo getProcessInstRunningByPage(ProcessInstRunningBo req) {
@@ -91,10 +73,6 @@ public class ProcessInstanceController {
 
     /**
      * @Description: 挂起或激活流程实例
-     * @param: data
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Void>
-     * @Author: gssong
-     * @Date: 2021/10/16
      */
     @Log(title = "流程实例管理", businessType = BusinessType.UPDATE)
     @PutMapping("/state")
@@ -110,10 +88,6 @@ public class ProcessInstanceController {
 
     /**
      * @Description: 作废流程实例，不会删除历史记录
-     * @param: processInstId
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Boolean>
-     * @Author: gssong
-     * @Date: 2021/10/16
      */
     @Log(title = "流程实例管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/deleteRuntimeProcessInst/{processInstId}")
@@ -128,10 +102,6 @@ public class ProcessInstanceController {
 
     /**
      * @Description: 运行中的实例 删除程实例，删除历史记录，删除业务与流程关联信息
-     * @param: processInstId
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Void>
-     * @Author: gssong
-     * @Date: 2021/10/16
      */
     @Log(title = "流程实例管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/deleteRuntimeProcessAndHisInst/{processInstId}")
@@ -146,10 +116,6 @@ public class ProcessInstanceController {
 
     /**
      * @Description: 已完成的实例 删除程实例，删除历史记录，删除业务与流程关联信息
-     * @param: processInstId
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Void>
-     * @Author: gssong
-     * @Date: 2021/10/16
      */
     @Log(title = "流程实例管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/deleteFinishProcessAndHisInst/{processInstId}")
@@ -163,11 +129,7 @@ public class ProcessInstanceController {
     }
 
     /**
-     * @param processInstId
      * @Description: 撤销申请
-     * @return: com.ruoyi.common.core.domain.R<java.lang.Void>
-     * @author: gssong
-     * @Date: 2022/1/21
      */
     @Log(title = "流程实例管理", businessType = BusinessType.INSERT)
     @GetMapping("/cancelProcessApply/{processInstId}")
@@ -182,10 +144,6 @@ public class ProcessInstanceController {
 
     /**
      * @Description: 查询已结束的流程实例
-     * @param: req
-     * @return: com.ruoyi.common.core.page.TableDataInfo<com.ruoyi.workflow.ProcessInstFinishVo>
-     * @Author: gssong
-     * @Date: 2021/10/23
      */
     @GetMapping("/getProcessInstFinishByPage")
     public TableDataInfo getProcessInstFinishByPage(ProcessInstFinishBo req) {
