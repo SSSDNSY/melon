@@ -100,26 +100,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 // CSRF禁用，因为不使用session
-                .cors().and().csrf().disable()
+                .csrf().disable()
+                // 认证失败处理类
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 // 过滤请求
                 .authorizeRequests()
-                // 对于登录login 注册register 验证码captchaImage 第三方登录oauth 允许匿名访问
-                .antMatchers("/login", "/register", "/captchaImage").permitAll()
-                //websocket
+                // 对于登录login 注册register 验证码captcha 允许匿名访问
+                .antMatchers("/login", "/register", "/captcha/**").permitAll()
+                // 第三方登录 oauth 接口
+                .antMatchers("/oauth/**").permitAll()
+                // 通用接口 common 接口
+                .antMatchers("/common/getOneImg").permitAll()
+                // websocket
                 .antMatchers("/endpoint/**").permitAll()
-                //监控中心
+                // 监控中心
                 .antMatchers("/actuator/**").permitAll()
-                // 配置中心服务，可匿名访问
+                // 配置中心
                 .antMatchers("/find", "/monitor").permitAll()
                 // 静态资源，可匿名访问
                 .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/profile/**").permitAll()
+                // api文档
                 .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
-                .anyRequest().authenticated()
-                // 认证失败处理类
-                .and()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
-                .and()
+                .anyRequest().authenticated().and()
                 .headers().frameOptions().disable();
         // 添加Logout filter
         httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);

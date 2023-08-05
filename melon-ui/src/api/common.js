@@ -23,3 +23,11 @@ export function druidDatasource() {
     method: 'post',
   });
 }
+
+//获取druid 数据源信息
+export function getOneImg() {
+  return request({
+    url: '/common/getOneImg',
+    method: 'get',
+  });
+}

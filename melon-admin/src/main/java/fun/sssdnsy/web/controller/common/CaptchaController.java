@@ -11,6 +11,7 @@ import fun.sssdnsy.utils.sign.Base64;
 import fun.sssdnsy.utils.uuid.IdUtils;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -27,6 +28,7 @@ import java.time.temporal.ChronoUnit;
  * @author sssdnsy
  */
 @RestController
+@RequestMapping("/captcha")
 public class CaptchaController {
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
@@ -40,21 +42,21 @@ public class CaptchaController {
     /**
      * 生成验证码
      */
-    @GetMapping("/captchaImage")
-    public AjaxResult getCode(HttpServletResponse response) throws IOException {
-        AjaxResult ajax           = AjaxResult.success();
-        boolean    captchaEnabled = configService.selectCaptchaEnabled();
+    @GetMapping("/getCode")
+    public AjaxResult getCode(HttpServletResponse response) {
+        AjaxResult ajax = AjaxResult.success();
+        boolean captchaEnabled = configService.selectCaptchaEnabled();
         ajax.put("captchaEnabled", captchaEnabled);
         if (!captchaEnabled) {
             return ajax;
         }
 
         // 保存验证码信息
-        String uuid      = IdUtils.getSuid();
+        String uuid = IdUtils.getSuid();
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
 
-        String        capStr = null, code = null;
-        BufferedImage image  = null;
+        String capStr = null, code = null;
+        BufferedImage image = null;
 
         // 生成验证码
         String captchaType = Config.getCaptchaType();

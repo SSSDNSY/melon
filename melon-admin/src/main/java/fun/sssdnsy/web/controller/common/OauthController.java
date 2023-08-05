@@ -58,7 +58,6 @@ public class OauthController extends BaseController {
      */
 
     @ResponseBody
-    @Anonymous
     @GetMapping(value = "/gitee/getGiteeCode")
     public AjaxResult getGiteeCode() {
 

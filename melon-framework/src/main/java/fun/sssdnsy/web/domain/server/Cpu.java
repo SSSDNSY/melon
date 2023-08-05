@@ -2,6 +2,8 @@ package fun.sssdnsy.web.domain.server;
 
 import fun.sssdnsy.utils.Arith;
 
+import java.util.Objects;
+
 /**
  * CPU相关信息
  *
@@ -55,7 +57,7 @@ public class Cpu {
     }
 
     public double getSys() {
-        return Arith.round(Arith.mul(sys / total, 100), 2);
+        return (Objects.isNull(sys) || Objects.isNull(total)) ? 0 : Arith.round(Arith.mul(sys / total, 100), 2);
     }
 
     public void setSys(double sys) {

@@ -4,6 +4,7 @@ import fun.sssdnsy.config.Config;
 import fun.sssdnsy.config.ServerConfig;
 import fun.sssdnsy.constant.Constants;
 import fun.sssdnsy.core.domain.AjaxResult;
+import fun.sssdnsy.utils.BackgroudImageUtil;
 import fun.sssdnsy.utils.StringUtils;
 import fun.sssdnsy.utils.file.FileUploadUtils;
 import fun.sssdnsy.utils.file.FileUtils;
@@ -158,4 +159,13 @@ public class CommonController {
     public AjaxResult getAllDriver() {
         return AjaxResult.success(DriverUtil.getAllDrivers());
     }
+
+    /**
+     * 获取一张背景图
+     */
+    @GetMapping("/getOneImg")
+    public AjaxResult getOneImg() {
+        return AjaxResult.success(BackgroudImageUtil.getOneImg());
+    }
+
 }

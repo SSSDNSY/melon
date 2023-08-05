@@ -62,7 +62,7 @@ public class IdGenerator {
     public IdGenerator() throws UnknownHostException {
         this.datacenterId = getDatacenterId(maxDatacenterId);
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
-        log.info(" >>>>>>>>>>> 分布式自增长ID 初始化. ip:{}, machineId:{},  datacenterId:{}", InetAddress.getLocalHost().getHostAddress(), workerId, datacenterId);
+        log.info("Snowflake IdGenerator initiated. ip:{}, machineId:{},  datacenterId:{}", InetAddress.getLocalHost().getHostAddress(), workerId, datacenterId);
     }
 
     /**

@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login"  v-bind:style="{ backgroundImage: 'url(' + backgroundImage + ')' }">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">MELON</h3>
       <el-form-item prop="username">
@@ -34,7 +34,7 @@
           <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon"/>
         </el-input>
         <div class="login-code">
-          <img :src="codeUrl" @click="getCode" class="login-code-img"/>
+          <img :src="codeUrl" @click="getCaptcha" class="login-code-img"/>
         </div>
       </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
@@ -88,7 +88,8 @@
 </template>
 
 <script>
-import {getCodeImg, getGiteeCode} from "@/api/login";
+  import { getCaptchaCode, getGiteeCode} from "@/api/login";
+import {getOneImg} from "@/api/common";
 import Cookies from "js-cookie";
 import {decrypt, encrypt} from '@/utils/jsencrypt'
 
@@ -98,6 +99,7 @@ export default {
     return {
       codeUrl: "",
       oauthUrl: "",
+      backgroundImage:"../assets/images/login-background.jpg",
       loginForm: {
         username: "admin",
         password: "admin123",
@@ -135,16 +137,17 @@ export default {
   },
   created() {
     this.getAuthCookies("created")
-    this.getCode();
+    this.getCaptcha();
     this.getOauthUrl();
     this.getCookie();
+    this.getBackgroundImg();
   },
   updated(){
     this.getOauth2Token("updated");
   },
   methods: {
-    getCode() {
-      getCodeImg().then(res => {
+    getCaptcha() {
+      getCaptchaCode().then(res => {
         this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled;
         if (this.captchaEnabled) {
           this.codeUrl = "data:image/gif;base64," + res.img;
@@ -212,8 +215,12 @@ export default {
       }).catch(() => {
 
       });
+    },
+    getBackgroundImg(){
+      getOneImg().then(res => {
+          this.backgroundImage = res.data;
+      });
     }
-
   }
 };
 </script>
@@ -224,7 +231,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url("../assets/images/login-background.jpg");
   background-size: cover;
 }
 
