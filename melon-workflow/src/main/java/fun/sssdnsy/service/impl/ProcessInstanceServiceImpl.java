@@ -104,6 +104,7 @@ public class ProcessInstanceServiceImpl extends WorkflowService implements IProc
         Authentication.setAuthenticatedUserId(SecurityUtils.getUserId().toString());
         // 启动流程实例（提交申请）
         Map<String, Object> variables = startProcessBo.getVariables();
+        //startProcessInstanceById
         ProcessInstance     pi        = runtimeService.startProcessInstanceByKey(startProcessBo.getProcessKey(), startProcessBo.getBusinessKey(), variables);
         // 将流程定义名称 作为 流程实例名称
         runtimeService.setProcessInstanceName(pi.getProcessInstanceId(), pi.getProcessDefinitionName());
